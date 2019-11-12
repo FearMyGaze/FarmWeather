@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/custom_background"
+    android:padding="25sp">
+
+    <ImageView
+        android:layout_width="200sp"
+        android:layout_height="200sp"
+        android:src="@drawable/main_icon"
+        android:layout_gravity="center">
+
+    </ImageView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="FarmWeather"
+        android:textSize="40sp"
+        android:textColor="@color/White"
+        android:gravity="center">
+    </TextView>
+
+    <Space
+        android:layout_width="380sp"
+        android:layout_height="50sp">
+    </Space>
+
+    <EditText
+        android:id="@+id/GetTown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Καταχωρήστε πόλη"
+        android:textColor="@color/White"
+        android:textSize="35sp"
+        android:background="@color/transparent">
+
+    </EditText>
+
+    <ImageView
+        android:id="@+id/enter"
+        android:layout_width="100sp"
+        android:layout_height="100sp"
+        android:layout_gravity="center"
+        android:src="@drawable/arrow96">
+
+    </ImageView>
+
+</LinearLayout>
