@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.text.SimpleDateFormat;
@@ -19,6 +21,8 @@ import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity {
+    //db
+    DatabaseHandler DB = new DatabaseHandler(this);
 
     //DHLWSH METABLHTWN GIA PERISOTERES PLHROFORIES
     String LowUV = "Χαμηλός";
@@ -61,8 +65,8 @@ public class MainActivity extends AppCompatActivity {
     TextView JLocation,JTime,JTemp,JTemp_min,JTemp_max,JSunrise,JSunset,JWind_speed,JWind_Deg,JPressure,JHumidity,JStatus;
     TextView Town,Weather,TextForUV,TextForRain,TextForAnimals,TextForDrive,TextForPlants,Temperature,CelsiusIcon,Feel;
     ImageView ImageWeather;
+    ImageView Row_Add,Row_Delete;
     int currentHour;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
         currentHour = rightNow.get(Calendar.HOUR_OF_DAY);
 
         //DHLWSH JASON ANTIKEIMENA
+        Row_Add = findViewById(R.id.Row_add);
+        Row_Delete = findViewById(R.id.Row_delete);
         JLocation = findViewById(R.id.location);
         JTime = findViewById(R.id.updated_time);
         JTemp = findViewById(R.id.temperature);
@@ -129,11 +135,8 @@ public class MainActivity extends AppCompatActivity {
                 //APO EDW KAI KATW GIA PROSTHKH KWDIKA STO SWIPE
 
 
-
-
             }
         });//TELOS KWDIKA SWIPE
-
 
         Temperature.setOnClickListener(new View.OnClickListener() { //KWDIKAS GIA METATROPH BATHMWN C & F
             @Override
@@ -197,8 +200,21 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    }//TELOS ONCREATE
 
+        addData();
+    }//TELOS ONCREATE
+    public void addData(){
+        Row_Add.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        boolean isInserted = DB.insertData(JTime.getText().toString(), JTemp.getText().toString(),Weather.getText().toString(), JWind_speed.getText().toString(), JHumidity.getText().toString());
+                        if (isInserted == false){
+                            Toast.makeText(MainActivity.this, "Data cannot be inserted ", Toast.LENGTH_LONG).show();                        }
+                    }
+                }
+        );
+    }
     class weatherTask extends AsyncTask<String, Void, String> {
 
         String City = Town.getText().toString();
