@@ -289,22 +289,22 @@ public class MainActivity extends AppCompatActivity {
                 Weather.setText(Clear);
             }
             if(WeatherGR.equals("Drizzle") ||
-                WeatherGR.equals("Rain")){
+                    WeatherGR.equals("Rain")){
                 Weather.setText(RainSky);
             }
             if(WeatherGR.equals("Thunderstorm")){
                 Weather.setText(Storm);
             }
             if((WeatherGR.equals("Clear") ||
-                WeatherGR.equals("Mist") ||
-                WeatherGR.equals("Fog") ||
-                WeatherGR.equals("Haze")) && (currentHour >= 19 || currentHour < 6)){
+                    WeatherGR.equals("Mist") ||
+                    WeatherGR.equals("Fog") ||
+                    WeatherGR.equals("Haze")) && (currentHour >= 19 || currentHour < 6)){
                 Weather.setText(Clear);
             }
             if((WeatherGR.equals("Clear") ||
-                WeatherGR.equals("Mist")||
-                WeatherGR.equals("Fog") ||
-                WeatherGR.equals("Haze"))&& (currentHour >= 6 && currentHour < 19)) {
+                    WeatherGR.equals("Mist")||
+                    WeatherGR.equals("Fog") ||
+                    WeatherGR.equals("Haze"))&& (currentHour >= 6 && currentHour < 19)) {
                 Weather.setText(Sun);
             }
             if(WeatherGR.equals("Snow")){
@@ -322,7 +322,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             //KWDIKAS GIA HLIO
-             if (Weather.getText().toString() == Sun) {
+            if (Weather.getText().toString() == Sun) {
                 TextForUV.setText(UV);
                 TextForRain.setText(LowRain);
                 TextForAnimals.setText(Animals);
@@ -332,7 +332,29 @@ public class MainActivity extends AppCompatActivity {
                 Feel.setText(Feels);
                 ImageWeather.setImageDrawable(getDrawable(R.drawable.sunny));
             }
-            
+            //KWDIKAS GIA KATHARO BRADY
+            if (Weather.getText().toString() == Clear && (currentHour >= 19 || currentHour < 6)) {
+                TextForUV.setText(LowUV);
+                TextForRain.setText(Rain);
+                TextForAnimals.setText(Animals);
+                TextForDrive.setText(SafeDrive);
+                TextForPlants.setText(Plant);
+                String Feels = String.valueOf(maxTemp-1);
+                Feel.setText(Feels);
+                ImageWeather.setImageDrawable(getDrawable(R.drawable.moon));
+            }
+            //KWDIKAS GIA KATHARO PRWI
+            if (Weather.getText().toString() == Clear && (currentHour >= 6 && currentHour < 19)) {
+                TextForUV.setText(LowUV);
+                TextForRain.setText(Rain);
+                TextForAnimals.setText(Animals);
+                TextForDrive.setText(SafeDrive);
+                TextForPlants.setText(Plant);
+                String Feels = String.valueOf(maxTemp+1);
+                Feel.setText(Feels);
+                ImageWeather.setImageDrawable(getDrawable(R.drawable.clear));
+
+            }
             //KWDIKAS GIA KAYSWNNA
             if (Weather.getText().toString() == Heat) {
                 TextForUV.setText(HighUV);
@@ -344,11 +366,55 @@ public class MainActivity extends AppCompatActivity {
                 Feel.setText(Feels);
                 ImageWeather.setImageDrawable(getDrawable(R.drawable.sunny));
             }
-            
-          
-            
+            //KWDIKAS GIA KATAIGIDA BRADU
+            if (Weather.getText().toString() == Storm && (currentHour >= 19 || currentHour < 6)) {
+                TextForUV.setText(LowUV);
+                TextForRain.setText(HighRain);
+                TextForAnimals.setText(DangerAnimals);
+                TextForDrive.setText(RiskDrive);
+                TextForPlants.setText(WaterPlant);
+                String Feels = String.valueOf(maxTemp-1);
+                Feel.setText(Feels);
+                ImageWeather.setImageDrawable(getDrawable(R.drawable.night_storm));
+            }
+
+            //KWDIKAS GIA KATAGIDA PRWI
+            if (Weather.getText().toString() == Storm && (currentHour >= 6 && currentHour < 19)) {
+                TextForUV.setText(LowUV);
+                TextForRain.setText(HighRain);
+                TextForAnimals.setText(DangerAnimals);
+                TextForDrive.setText(RiskDrive);
+                TextForPlants.setText(WaterPlant);
+                String Feels = String.valueOf(maxTemp-1);
+                Feel.setText(Feels);;
+                ImageWeather.setImageDrawable(getDrawable(R.drawable.storm));
+            }
+            //KWDIKAS GIA BROXH BRADU
+            if (Weather.getText().toString() == RainSky && (currentHour >= 19 || currentHour < 6))
+            {
+                TextForUV.setText(LowUV);
+                TextForRain.setText(HighRain);
+                TextForAnimals.setText(Animals);
+                TextForDrive.setText(RiskDrive);
+                TextForPlants.setText(WaterPlant);
+                String Feels = String.valueOf(maxTemp-1);
+                Feel.setText(Feels);
+                ImageWeather.setImageDrawable(getDrawable(R.drawable.night_rain));
+            }
+            //KWDIKAS GIA BROXH PRWI
+            if (Weather.getText().toString() == RainSky && (currentHour >= 6 && currentHour < 19))
+            {
+                TextForUV.setText(LowUV);
+                TextForRain.setText(HighRain);
+                TextForAnimals.setText(Animals);
+                TextForDrive.setText(RiskDrive);
+                TextForPlants.setText(WaterPlant);
+                String Feels = String.valueOf(maxTemp+1);
+                Feel.setText(Feels);
+                ImageWeather.setImageDrawable(getDrawable(R.drawable.rain));
+            }
             //KWDIKAS GIA XIONI
-             if(Weather.getText().toString() == Snow){
+            if(Weather.getText().toString() == Snow){
                 TextForUV.setText(LowUV);
                 TextForRain.setText(Rain);
                 TextForAnimals.setText(Animals);
