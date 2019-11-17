@@ -1,8 +1,11 @@
 package com.example.farmweather;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -66,8 +69,7 @@ public class MainActivity extends AppCompatActivity {
     //DHLWSH ANTIKHMENWN GIA JSON
     TextView JLocation,JTime,JTemp,JTemp_min,JTemp_max,JSunrise,JSunset,JWind_speed,JWind_Deg,JPressure,JHumidity,JStatus;
     TextView Town,Weather,TextForUV,TextForRain,TextForAnimals,TextForDrive,TextForPlants,Temperature,CelsiusIcon,Feel;
-    ImageView ImageWeather;
-    ImageView Row_Add;
+    ImageView ImageWeather,Row_Add;
     int currentHour;
     
     @Override
@@ -80,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
         currentHour = rightNow.get(Calendar.HOUR_OF_DAY);
 
         //DHLWSH JASON ANTIKEIMENA
-        Row_Add = findViewById(R.id.Row_add);
         JLocation = findViewById(R.id.location);
         JTime = findViewById(R.id.updated_time);
         JTemp = findViewById(R.id.temperature);
@@ -117,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
         Town = findViewById(R.id.Town);
         Weather = findViewById(R.id.status);
         Feel = findViewById(R.id.temp_feel);
+        Row_Add = findViewById(R.id.Row_add);
 
 
 
@@ -214,9 +216,20 @@ public class MainActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        boolean isInserted = DB.insertData(JTime.getText().toString(), JTemp.getText().toString(),Weather.getText().toString(), JWind_speed.getText().toString(), JHumidity.getText().toString());
-                        if (isInserted == false){
-                            Toast.makeText(MainActivity.this, "Data cannot be inserted ", Toast.LENGTH_LONG).show();                        }
+                        new AlertDialog.Builder(MainActivity.this)
+                                .setIcon(android.R.drawable.ic_input_add)
+                                .setTitle("Προσθήκη εγγραφής;")
+                                .setMessage("Τα δεδομένα καιρού επρόκειτο να προσθεθούν στα παρελθονικά δεδομένα")
+                                .setPositiveButton("Ναι", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        boolean isInserted = DB.insertData(JTime.getText().toString(), JTemp.getText().toString(),Weather.getText().toString(), JWind_speed.getText().toString(), JHumidity.getText().toString());
+                                        if (isInserted == false){
+                                            Toast.makeText(MainActivity.this, "Data cannot be inserted ", Toast.LENGTH_LONG).show();}
+                                    }
+                                })
+                                .setNegativeButton("Άκυρο",null)
+                                .show();
                     }
                 }
         );
