@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView ImageWeather;
     ImageView Row_Add;
     int currentHour;
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
