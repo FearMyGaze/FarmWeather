@@ -32,7 +32,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Καταχωρήστε πόλη"
+        android:hint="Καταχωρήστε πόλη"
+        android:maxLength="15"
+        android:textColorHint="@color/White"
         android:textColor="@color/White"
         android:textSize="35sp"
         android:background="@color/transparent">
