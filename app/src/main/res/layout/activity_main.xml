@@ -157,6 +157,7 @@
                             android:textColor="@color/White">
 
                         </TextView> //min temp
+
                         <TextView
                             android:id="@+id/min_temperature"
                             android:layout_width="wrap_content"
@@ -166,6 +167,7 @@
                             android:textColor="@color/White">
 
                         </TextView>
+
                         <ImageView
                             android:layout_width="33sp"
                             android:layout_height="25sp"
@@ -198,6 +200,7 @@
                         </TextView>
 
                     </LinearLayout> // min-max temps
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="2.543210sp"
@@ -224,7 +227,9 @@
                                     android:layout_width="25sp"
                                     android:layout_height="33sp"
                                     android:src="@drawable/sunrise"
-                                    android:tint="@color/Gray_ish"/>
+                                    android:tint="@color/Gray_ish">
+                                </ImageView>
+
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -233,7 +238,8 @@
                                     android:width="200sp"
                                     android:textSize="23sp"
                                     android:text="Ανατολή"
-                                    android:textColor="@color/White" />
+                                    android:textColor="@color/White">
+                                </TextView>
 
                                 <TextView
                                     android:id="@+id/sunrise"
@@ -241,7 +247,9 @@
                                     android:layout_height="match_parent"
                                     android:text=""
                                     android:textColor="@color/White"
-                                    android:textSize="23sp"/>
+                                    android:textSize="23sp">
+                                </TextView>
+
                             </LinearLayout> //Sunrise
 
                             <LinearLayout
@@ -252,7 +260,9 @@
                                     android:layout_width="25sp"
                                     android:layout_height="33sp"
                                     android:src="@drawable/sunset"
-                                    android:tint="@color/Gray_ish"/>
+                                    android:tint="@color/Gray_ish">
+                                </ImageView>
+
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -261,7 +271,8 @@
                                     android:width="200sp"
                                     android:textSize="23sp"
                                     android:text="Δύση"
-                                    android:textColor="@color/White" />
+                                    android:textColor="@color/White">
+                                </TextView>
 
                                 <TextView
                                     android:id="@+id/sunset"
@@ -269,7 +280,8 @@
                                     android:layout_height="match_parent"
                                     android:text=""
                                     android:textColor="@color/White"
-                                    android:textSize="23sp"/>
+                                    android:textSize="23sp">
+                                </TextView>
                             </LinearLayout> //sunset
 
                             <LinearLayout
@@ -280,7 +292,8 @@
                                     android:layout_width="25sp"
                                     android:layout_height="33sp"
                                     android:src="@drawable/wind"
-                                    android:tint="@color/Gray_ish"/>
+                                    android:tint="@color/Gray_ish">
+                                </ImageView>
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -289,7 +302,8 @@
                                     android:width="200sp"
                                     android:textSize="23sp"
                                     android:text="Αέρας"
-                                    android:textColor="@color/White" />
+                                    android:textColor="@color/White">
+                                </TextView>
 
                                 <TextView
                                     android:id="@+id/wind"
@@ -297,7 +311,9 @@
                                     android:layout_height="match_parent"
                                     android:text=""
                                     android:textColor="@color/White"
-                                    android:textSize="23sp"/>
+                                    android:textSize="23sp">
+                                </TextView>
+
                             </LinearLayout> //Wind
 
                             <LinearLayout
@@ -308,7 +324,9 @@
                                     android:layout_width="25sp"
                                     android:layout_height="33sp"
                                     android:src="@drawable/pressure"
-                                    android:tint="@color/Gray_ish"/>
+                                    android:tint="@color/Gray_ish">
+                                </ImageView>
+
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -317,7 +335,8 @@
                                     android:width="200sp"
                                     android:textSize="23sp"
                                     android:text="Πίεση αέρα"
-                                    android:textColor="@color/White" />
+                                    android:textColor="@color/White">
+                                </TextView>
 
                                 <TextView
                                     android:id="@+id/pressure"
@@ -325,7 +344,9 @@
                                     android:layout_height="match_parent"
                                     android:text=""
                                     android:textColor="@color/White"
-                                    android:textSize="23sp"/>
+                                    android:textSize="23sp">
+                                </TextView>
+
                             </LinearLayout> //pressure
 
                             <LinearLayout
@@ -336,7 +357,9 @@
                                     android:layout_width="25sp"
                                     android:layout_height="33sp"
                                     android:src="@drawable/humidity"
-                                    android:tint="@color/Gray_ish"/>
+                                    android:tint="@color/Gray_ish">
+                                </ImageView>
+
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -345,7 +368,8 @@
                                     android:layout_marginLeft="5sp"
                                     android:textSize="23sp"
                                     android:text="Υγρασία"
-                                    android:textColor="@color/White" />
+                                    android:textColor="@color/White">
+                                </TextView>
 
                                 <TextView
                                     android:id="@+id/humidity"
@@ -353,13 +377,14 @@
                                     android:layout_height="match_parent"
                                     android:text=""
                                     android:textColor="@color/White"
-                                    android:textSize="23sp"/>
+                                    android:textSize="23sp">
+                                </TextView>
+
                             </LinearLayout> //humidity
 
                         </LinearLayout> //Scroll child
 
                     </LinearLayout> //Scroll 1
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -393,8 +418,6 @@
 
                     </LinearLayout> // more info
 
-
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -419,7 +442,8 @@
                                         android:layout_width="25sp"
                                         android:layout_height="25sp"
                                         android:src="@drawable/uv"
-                                        android:tint="@color/Gray_ish"/>
+                                        android:tint="@color/Gray_ish">
+                                    </ImageView>
 
                                     <TextView
                                         android:layout_width="wrap_content"
@@ -429,7 +453,8 @@
                                         android:width="200sp"
                                         android:textSize="23sp"
                                         android:text="Δείκτης UV"
-                                        android:textColor="@color/White" />
+                                        android:textColor="@color/White">
+                                    </TextView>
 
                                     <TextView
                                         android:id="@+id/uv_index"
@@ -437,7 +462,9 @@
                                         android:layout_height="match_parent"
                                         android:text=""
                                         android:textColor="@color/White"
-                                        android:textSize="23sp"/>
+                                        android:textSize="23sp">
+                                    </TextView>
+
                                 </LinearLayout> //Uv_Index
 
                                 <LinearLayout
@@ -448,7 +475,8 @@
                                         android:layout_width="25sp"
                                         android:layout_height="25sp"
                                         android:src="@drawable/air_where"
-                                        android:tint="@color/Gray_ish"/>
+                                        android:tint="@color/Gray_ish">
+                                    </ImageView>
 
                                     <TextView
                                         android:layout_width="wrap_content"
@@ -458,7 +486,8 @@
                                         android:width="200sp"
                                         android:textSize="23sp"
                                         android:text="Κατεύθυνση Αέρα"
-                                        android:textColor="@color/White" />
+                                        android:textColor="@color/White">
+                                    </TextView>
 
                                     <TextView
                                         android:id="@+id/wind_direct"
@@ -466,7 +495,8 @@
                                         android:layout_height="match_parent"
                                         android:text=""
                                         android:textColor="@color/White"
-                                        android:textSize="23sp" />
+                                        android:textSize="23sp">
+                                    </TextView>
 
                                 </LinearLayout> //Air_where
                                 <LinearLayout
@@ -477,7 +507,8 @@
                                         android:layout_width="25sp"
                                         android:layout_height="25sp"
                                         android:src="@drawable/ac_dc"
-                                        android:tint="@color/Gray_ish"/>
+                                        android:tint="@color/Gray_ish">
+                                    </ImageView>
 
                                     <TextView
                                         android:layout_width="wrap_content"
@@ -487,7 +518,9 @@
                                         android:width="200sp"
                                         android:textSize="23sp"
                                         android:text="Εμφάνιση βροχής"
-                                        android:textColor="@color/White" />
+                                        android:textColor="@color/White">
+
+                                    </TextView>
 
                                     <TextView
                                         android:id="@+id/rain_prob"
@@ -495,7 +528,8 @@
                                         android:layout_height="match_parent"
                                         android:text=""
                                         android:textColor="@color/White"
-                                        android:textSize="23sp"/>
+                                        android:textSize="23sp">
+                                    </TextView>
 
                                 </LinearLayout> //Rain_prop
 
@@ -507,7 +541,8 @@
                                         android:layout_width="25sp"
                                         android:layout_height="25sp"
                                         android:src="@drawable/real_feel"
-                                        android:tint="@color/Gray_ish"/>
+                                        android:tint="@color/Gray_ish">
+                                    </ImageView>
 
                                     <TextView
                                         android:layout_width="wrap_content"
@@ -517,7 +552,8 @@
                                         android:width="200sp"
                                         android:textSize="23sp"
                                         android:text="Αίσθηση"
-                                        android:textColor="@color/White" />
+                                        android:textColor="@color/White">
+                                    </TextView>
 
                                     <TextView
                                         android:id="@+id/temp_feel"
@@ -525,7 +561,8 @@
                                         android:layout_height="match_parent"
                                         android:text=""
                                         android:textColor="@color/White"
-                                        android:textSize="23sp"/>
+                                        android:textSize="23sp">
+                                    </TextView>
 
                                 </LinearLayout> //Real_feel
 
@@ -537,7 +574,9 @@
                                         android:layout_width="25sp"
                                         android:layout_height="25sp"
                                         android:src="@drawable/stayros"
-                                        android:tint="@color/Gray_ish"/>
+                                        android:tint="@color/Gray_ish">
+                                    </ImageView>
+
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
@@ -546,7 +585,8 @@
                                         android:width="200sp"
                                         android:textSize="23sp"
                                         android:text="Προφύλαξη ζώων"
-                                        android:textColor="@color/White" />
+                                        android:textColor="@color/White">
+                                    </TextView>
 
                                     <TextView
                                         android:id="@+id/animal"
@@ -554,7 +594,8 @@
                                         android:layout_height="match_parent"
                                         android:text=""
                                         android:textColor="@color/White"
-                                        android:textSize="23sp"/>
+                                        android:textSize="23sp">
+                                    </TextView>
 
                                 </LinearLayout> //Animal
 
@@ -566,7 +607,8 @@
                                         android:layout_width="25sp"
                                         android:layout_height="25sp"
                                         android:src="@drawable/duffy"
-                                        android:tint="@color/Gray_ish"/>
+                                        android:tint="@color/Gray_ish">
+                                    </ImageView>
 
                                     <TextView
                                         android:layout_width="wrap_content"
@@ -576,7 +618,8 @@
                                         android:width="200sp"
                                         android:textSize="23sp"
                                         android:text="Συνθήκη οδήγησης"
-                                        android:textColor="@color/White" />
+                                        android:textColor="@color/White">
+                                    </TextView>
 
                                     <TextView
                                         android:id="@+id/drive"
@@ -584,7 +627,8 @@
                                         android:layout_height="match_parent"
                                         android:text=""
                                         android:textColor="@color/White"
-                                        android:textSize="23sp"/>
+                                        android:textSize="23sp">
+                                    </TextView>
 
                                 </LinearLayout> //Drive
 
@@ -596,7 +640,9 @@
                                         android:layout_width="25sp"
                                         android:layout_height="25sp"
                                         android:src="@drawable/plants"
-                                        android:tint="@color/Gray_ish"/>
+                                        android:tint="@color/Gray_ish">
+                                    </ImageView>
+
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
@@ -605,7 +651,8 @@
                                         android:width="200sp"
                                         android:textSize="23sp"
                                         android:text="Πότισμα"
-                                        android:textColor="@color/White" />
+                                        android:textColor="@color/White" >
+                                    </TextView>
 
                                     <TextView
                                         android:id="@+id/water_plants"
@@ -613,7 +660,8 @@
                                         android:layout_height="match_parent"
                                         android:text=""
                                         android:textColor="@color/White"
-                                        android:textSize="23sp"/>
+                                        android:textSize="23sp">
+                                    </TextView>
 
                                 </LinearLayout> //Plants
                                 //add more buttons here
@@ -657,438 +705,6 @@
 
                     </TextView> //easter egg
 
-                    <ScrollView
-                        android:layout_height="match_parent"
-                        android:scrollbars="horizontal|vertical"
-                        android:layout_width="match_parent"
-                        android:layout_marginTop="5sp"
-                        android:scrollbarStyle="outsideInset"
-                        android:fillViewport="true">
-
-
-
-                        <HorizontalScrollView
-                            android:layout_height="wrap_content"
-                            android:scrollbars="horizontal|vertical"
-                            android:layout_width="wrap_content"
-                            android:layout_marginTop="5sp"
-                            android:scrollbarThumbHorizontal="@drawable/scrollbar"
-                            android:scrollbarThumbVertical="@drawable/scrollbar"
-                            android:scrollbarFadeDuration="999999999">
-
-
-
-                            <TableLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-
-                                <TableRow
-                                    android:background="@color/Border">
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:width="120sp"
-                                        android:height="20sp"
-                                        android:gravity="center"
-                                        android:text="Ημερ/νία"
-                                        android:textSize="15sp"
-                                        android:textStyle="bold"
-                                        android:textColor="@color/Light_black">
-
-                                    </TextView> //Date
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:width="120sp"
-                                        android:height="20sp"
-                                        android:gravity="center"
-                                        android:text="Θερμ/σία"
-                                        android:textSize="15sp"
-                                        android:textStyle="bold"
-                                        android:textColor="@color/Light_black">
-
-                                    </TextView>
-                                    //temperature
-
-                                    //weather
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:width="120sp"
-                                        android:height="20sp"
-                                        android:gravity="center"
-                                        android:text="Καιρός"
-                                        android:textColor="@color/Light_black"
-                                        android:textSize="15sp"
-                                        android:textStyle="bold">
-
-                                    </TextView>
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:width="120sp"
-                                        android:height="20sp"
-                                        android:gravity="center"
-                                        android:text="Αέρας"
-                                        android:textSize="15sp"
-                                        android:textStyle="bold"
-                                        android:textColor="@color/Light_black">
-
-                                    </TextView>//air
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:width="120sp"
-                                        android:height="20sp"
-                                        android:gravity="center"
-                                        android:text="Υγρασία"
-                                        android:textSize="15sp"
-                                        android:textStyle="bold"
-                                        android:textColor="@color/Light_black">
-
-                                    </TextView> //humidity
-
-                                </TableRow> //Row titles
-
-                                <TableRow
-                                    android:id="@+id/Row_1"
-                                    android:background="@color/transparent">
-                                    <TextView
-                                        android:id="@+id/Row_1_date"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:width="120sp"
-                                        android:height="20sp"
-                                        android:gravity="center"
-                                        android:textSize="15sp"
-                                        android:textColor="@color/White">
-
-                                    </TextView> //Date
-
-                                    <TextView
-                                        android:id="@+id/Row_1_temp"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:width="120sp"
-                                        android:height="20sp"
-                                        android:gravity="center"
-                                        android:textSize="15sp"
-                                        android:textColor="@color/White">
-
-                                    </TextView> //temperature
-
-                                    <TextView
-                                        android:id="@+id/Row_1_weather"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:width="120sp"
-                                        android:height="20sp"
-                                        android:gravity="center"
-                                        android:textSize="15sp"
-                                        android:textColor="@color/White">
-
-                                    </TextView> //weather
-
-                                    <TextView
-                                        android:id="@+id/Row_1_air"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:width="120sp"
-                                        android:height="20sp"
-                                        android:gravity="center"
-                                        android:textSize="15sp"
-                                        android:textColor="@color/White">
-
-                                    </TextView>//air
-
-                                    <TextView
-                                        android:id="@+id/Row_1_humidity"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:width="120sp"
-                                        android:height="20sp"
-                                        android:gravity="center"
-                                        android:textSize="15sp"
-                                        android:textColor="@color/White">
-
-                                    </TextView> //humidity
-                                </TableRow> //Row 1 items
-
-                                <TableRow
-                                    android:id="@+id/Row_2"
-                                    android:background="@color/transparent">
-                                    <TextView
-                                        android:id="@+id/Row_2_date"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:width="120sp"
-                                        android:height="20sp"
-                                        android:gravity="center"
-                                        android:textSize="15sp"
-                                        android:textColor="@color/White">
-
-                                    </TextView> //Date
-
-                                    <TextView
-                                        android:id="@+id/Row_2_temp"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:width="120sp"
-                                        android:height="20sp"
-                                        android:gravity="center"
-                                        android:textSize="15sp"
-                                        android:textColor="@color/White">
-
-                                    </TextView> //temperature
-
-                                    <TextView
-                                        android:id="@+id/Row_2_weather"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:width="120sp"
-                                        android:height="20sp"
-                                        android:gravity="center"
-                                        android:textSize="15sp"
-                                        android:textColor="@color/White">
-
-                                    </TextView> //weather
-
-                                    <TextView
-                                        android:id="@+id/Row_2_air"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:width="120sp"
-                                        android:height="20sp"
-                                        android:gravity="center"
-                                        android:textSize="15sp"
-                                        android:textColor="@color/White">
-
-                                    </TextView>//air
-
-                                    <TextView
-                                        android:id="@+id/Row_2_humidity"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:width="120sp"
-                                        android:height="20sp"
-                                        android:gravity="center"
-                                        android:textSize="15sp"
-                                        android:textColor="@color/White">
-
-                                    </TextView> //humidity
-                                </TableRow> //Row 2 items
-
-                                <TableRow
-                                    android:id="@+id/Row_3"
-                                    android:background="@color/transparent">
-                                    <TextView
-                                        android:id="@+id/Row_3_date"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:width="120sp"
-                                        android:height="20sp"
-                                        android:gravity="center"
-                                        android:textSize="15sp"
-                                        android:textColor="@color/White">
-
-                                    </TextView> //Date
-
-                                    <TextView
-                                        android:id="@+id/Row_3_temp"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:width="120sp"
-                                        android:height="20sp"
-                                        android:gravity="center"
-                                        android:textSize="15sp"
-                                        android:textColor="@color/White">
-
-                                    </TextView> //temperature
-
-                                    <TextView
-                                        android:id="@+id/Row_3_weather"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:width="120sp"
-                                        android:height="20sp"
-                                        android:gravity="center"
-                                        android:textSize="15sp"
-                                        android:textColor="@color/White">
-
-                                    </TextView> //weather
-
-                                    <TextView
-                                        android:id="@+id/Row_3_air"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:width="120sp"
-                                        android:height="20sp"
-                                        android:gravity="center"
-                                        android:textSize="15sp"
-                                        android:textColor="@color/White">
-
-                                    </TextView>//air
-
-                                    <TextView
-                                        android:id="@+id/Row_3_humidity"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:width="120sp"
-                                        android:height="20sp"
-                                        android:gravity="center"
-                                        android:textSize="15sp"
-                                        android:textColor="@color/White">
-
-                                    </TextView> //humidity
-                                </TableRow> //Row 3 items
-
-                                <TableRow
-                                    android:id="@+id/Row_4"
-                                    android:background="@color/transparent">
-                                    <TextView
-                                        android:id="@+id/Row_4_date"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:width="120sp"
-                                        android:height="20sp"
-                                        android:gravity="center"
-                                        android:textSize="15sp"
-                                        android:textColor="@color/White">
-
-                                    </TextView> //Date
-
-                                    <TextView
-                                        android:id="@+id/Row_4_temp"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:width="120sp"
-                                        android:height="20sp"
-                                        android:gravity="center"
-                                        android:textSize="15sp"
-                                        android:textColor="@color/White">
-
-                                    </TextView> //temperature
-
-                                    <TextView
-                                        android:id="@+id/Row_4_weather"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:width="120sp"
-                                        android:height="20sp"
-                                        android:gravity="center"
-                                        android:textSize="15sp"
-                                        android:textColor="@color/White">
-
-                                    </TextView> //weather
-
-                                    <TextView
-                                        android:id="@+id/Row_4_air"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:width="120sp"
-                                        android:height="20sp"
-                                        android:gravity="center"
-                                        android:textSize="15sp"
-                                        android:textColor="@color/White">
-
-                                    </TextView>//air
-
-                                    <TextView
-                                        android:id="@+id/Row_4_humidity"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:width="120sp"
-                                        android:height="20sp"
-                                        android:gravity="center"
-                                        android:textSize="15sp"
-                                        android:textColor="@color/White">
-
-                                    </TextView> //humidity
-                                </TableRow> //Row 4 items
-
-                                <TableRow
-                                    android:id="@+id/Row_5"
-                                    android:background="@color/transparent">
-                                    <TextView
-                                        android:id="@+id/Row_5_date"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:width="120sp"
-                                        android:height="20sp"
-                                        android:gravity="center"
-                                        android:textSize="15sp"
-                                        android:textColor="@color/White">
-
-                                    </TextView> //Date
-
-                                    <TextView
-                                        android:id="@+id/Row_5_temp"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:width="120sp"
-                                        android:height="20sp"
-                                        android:gravity="center"
-                                        android:textSize="15sp"
-                                        android:textColor="@color/White">
-
-                                    </TextView> //temperature
-
-                                    <TextView
-                                        android:id="@+id/Row_5_weather"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:width="120sp"
-                                        android:height="20sp"
-                                        android:gravity="center"
-                                        android:textSize="15sp"
-                                        android:textColor="@color/White">
-
-                                    </TextView> //weather
-
-                                    <TextView
-                                        android:id="@+id/Row_5_air"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:width="120sp"
-                                        android:height="20sp"
-                                        android:gravity="center"
-                                        android:textSize="15sp"
-                                        android:textColor="@color/White">
-
-                                    </TextView>//air
-
-                                    <TextView
-                                        android:id="@+id/Row_5_humidity"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:width="120sp"
-                                        android:height="20sp"
-                                        android:gravity="center"
-                                        android:textSize="15sp"
-                                        android:textColor="@color/White">
-
-                                    </TextView> //humidity
-                                </TableRow> //Row 5 items
-
-                            </TableLayout>
-
-                        </HorizontalScrollView>
-
-                    </ScrollView>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="2.543210sp"
-                        android:layout_marginTop="2sp"
-                        android:layout_marginBottom="5sp"
-                        android:background="@drawable/divider">
-
-                    </TextView>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -1096,21 +712,6 @@
                         android:orientation="horizontal"
                         android:gravity="right"
                         android:layout_gravity="right">
-
-                        <ImageView
-                            android:id="@+id/Row_delete"
-                            android:layout_width="25sp"
-                            android:layout_height="25sp"
-                            android:src="@drawable/delete"
-                            android:tint="@color/Gray_ish">
-
-                        </ImageView>
-
-                        <Space
-                            android:layout_width="15sp"
-                            android:layout_height="15sp">
-
-                        </Space>
 
                         <ImageView
                             android:id="@+id/Row_add"
@@ -1144,7 +745,9 @@
                                 android:layout_width="25sp"
                                 android:layout_height="20sp"
                                 android:src="@drawable/copyright"
-                                android:tint="@color/Gray_ish"/>
+                                android:tint="@color/Gray_ish">
+                            </ImageView>
+
                             <TextView
                                 android:id="@+id/info"
                                 android:layout_width="wrap_content"
@@ -1154,15 +757,19 @@
                                 android:width="100sp"
                                 android:textSize="15sp"
                                 android:text="L.A.M.P.S &#8482;"
-                                android:textColor="@color/White" />
+                                android:textColor="@color/White" >
+                            </TextView>
+
                         </LinearLayout> // easter egg zombie
+
                         <TextView
                             android:id="@+id/Town"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/White"
                             android:visibility="invisible"
-                            android:textSize="3sp"></TextView>
+                            android:textSize="3sp">
+                        </TextView>
                     </LinearLayout>
                 </LinearLayout> //Main Linear
             </LinearLayout>

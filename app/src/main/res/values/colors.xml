@@ -9,4 +9,6 @@
     <color name="Border">#a8adb2</color>
     <color name="Blue">#0000ff</color> //link
     <color name="Light_black">#262626</color>
+    <color name="Black">#000000</color>
+    <color name="AdapterColor">#3FA8AE</color>
 </resources>

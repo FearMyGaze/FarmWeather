@@ -15,17 +15,19 @@
             android:name=".start"
             android:theme="@style/CustomTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN" ></action>
+                <category android:name="android.intent.category.LAUNCHER" ></category>
             </intent-filter>
         </activity>
         <activity
             android:name=".info_activity"
-            android:theme="@style/CustomTheme">
-        </activity>
+            android:theme="@style/CustomTheme"></activity>
         <activity
             android:name=".MainActivity"
-            android:theme="@style/CustomTheme">
-        </activity>
+            android:theme="@style/CustomTheme"></activity>
+        <activity
+            android:name="Old_Weather"
+            android:theme="@style/CustomTheme"></activity>
     </application>
+
 </manifest>
