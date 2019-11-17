@@ -66,30 +66,8 @@
 
             </LinearLayout> //Second row
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Thank you NesCafe for the coffee"
-                    android:textColor="@color/White">
-                </TextView>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="15sp"
-                    android:text="www.nescafe.com/gr/"
-                    android:autoLink="web"
-                    android:textColorLink="@color/Blue">
-                </TextView>
-
-            </LinearLayout> //Third row
-
         </LinearLayout>
+
     </ScrollView>
 
 </LinearLayout>
