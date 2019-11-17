@@ -9,19 +9,21 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity {
-    //db
+
     DatabaseHandler DB = new DatabaseHandler(this);
 
     //DHLWSH METABLHTWN GIA PERISOTERES PLHROFORIES
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     TextView JLocation,JTime,JTemp,JTemp_min,JTemp_max,JSunrise,JSunset,JWind_speed,JWind_Deg,JPressure,JHumidity,JStatus;
     TextView Town,Weather,TextForUV,TextForRain,TextForAnimals,TextForDrive,TextForPlants,Temperature,CelsiusIcon,Feel;
     ImageView ImageWeather;
-    ImageView Row_Add,Row_Delete;
+    ImageView Row_Add;
     int currentHour;
 
     @Override
@@ -73,14 +75,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         //PAIRNEI THN WRA
         Calendar rightNow = Calendar.getInstance();
         currentHour = rightNow.get(Calendar.HOUR_OF_DAY);
 
         //DHLWSH JASON ANTIKEIMENA
         Row_Add = findViewById(R.id.Row_add);
-        Row_Delete = findViewById(R.id.Row_delete);
         JLocation = findViewById(R.id.location);
         JTime = findViewById(R.id.updated_time);
         JTemp = findViewById(R.id.temperature);
@@ -137,6 +137,14 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });//TELOS KWDIKA SWIPE
+
+        list_town.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,Old_Weather.class);
+                startActivity(intent);
+            }
+        });
 
         Temperature.setOnClickListener(new View.OnClickListener() { //KWDIKAS GIA METATROPH BATHMWN C & F
             @Override
@@ -198,11 +206,9 @@ public class MainActivity extends AppCompatActivity {
         list_town.setText("Για "+Town.getText().toString().substring(0,1).toUpperCase()+ Town.getText().toString().substring(1));
         new weatherTask().execute();
 
-
-
-
         addData();
     }//TELOS ONCREATE
+
     public void addData(){
         Row_Add.setOnClickListener(
                 new View.OnClickListener() {
@@ -215,6 +221,7 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
     }
+
     class weatherTask extends AsyncTask<String, Void, String> {
 
         String City = Town.getText().toString();
@@ -229,6 +236,7 @@ public class MainActivity extends AppCompatActivity {
             String response = HttpRequest.excuteGet("https://api.openweathermap.org/data/2.5/weather?q=" + City + "&units=metric&appid=" + API);
             return response;
         }
+
         //DHLWSH ANTIKEIMENWN TYPOU JASON
         @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         @Override
@@ -284,9 +292,11 @@ public class MainActivity extends AppCompatActivity {
                 WeatherGR = weatherDescription;
 
                 System.out.println("OnPostExecute");
+
             } catch (JSONException e) {
                 System.out.println(e);
             }
+
             //KWDIKAS GIA YPOLOGISMOS KATEYTHYNSH AERA!
             degree = Double.parseDouble(JWind_Deg.getText().toString());
             if (degree>337.5) JWind_Deg.setText("Βόρεια");
