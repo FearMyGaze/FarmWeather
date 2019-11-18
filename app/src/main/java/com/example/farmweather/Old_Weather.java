@@ -11,12 +11,18 @@ import java.util.ArrayList;
 
 public class Old_Weather extends AppCompatActivity {
 
+    String getTown;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_old__weather);
+        getTown = (getIntent().getStringExtra("GetTown"));
+
 
         final ListView MyList = findViewById(R.id.ListView);
+
 
         //BGALE TA // GIA NA DEIS TI MAGIA TIS DISNEY
 

@@ -4,7 +4,6 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -12,14 +11,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -77,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         //PAIRNEI THN WRA
         Calendar rightNow = Calendar.getInstance();
         currentHour = rightNow.get(Calendar.HOUR_OF_DAY);
@@ -120,9 +117,10 @@ public class MainActivity extends AppCompatActivity {
         Feel = findViewById(R.id.temp_feel);
         Row_Add = findViewById(R.id.Row_add);
 
-
-
         Town.setText(getIntent().getStringExtra("Town"));
+
+
+
 
         //KWDIKAS GIA ELEXOUS PLHROFORIWN
         Swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() { //KWDIKAS SWIPE
@@ -144,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,Old_Weather.class);
+                intent.putExtra("GetTown" , JLocation.getText().toString());
                 startActivity(intent);
             }
         });
@@ -204,9 +203,9 @@ public class MainActivity extends AppCompatActivity {
                 openActivity2();
             }
         });
-
         list_town.setText("Για "+Town.getText().toString().substring(0,1).toUpperCase()+ Town.getText().toString().substring(1));
         new weatherTask().execute();
+
 
         addData();
     }//TELOS ONCREATE
