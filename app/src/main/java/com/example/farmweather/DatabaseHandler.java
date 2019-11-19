@@ -2,7 +2,6 @@ package com.example.farmweather;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -22,10 +21,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     //Columns
     private static final String RequestID = "RequestID";
     private static final String City = "City";
+    private static final String Area = "Area";
+    private static final String MinTemp = "MinTemp";
+    private static final String MaxTemp = "MaxTemp";
     private static final String CurTemp = "CurTemp";
     private static final String Weather = "Weather";
     private static final String Wind = "Wind";
+    private static final String Pressure = "Pressure";
     private static final String Humidity = "Humidity";
+    private static final String TimeDate = "TimeDate";
     private static final String SearchDate = "SearchDate";
 
 
@@ -37,7 +41,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("CREATE TABLE "+TABLE_NAME+" ( "+RequestID+" INTEGER PRIMARY KEY, "+City+"" +
-                " TEXT, "+CurTemp+" TEXT, "+Weather+" TEXT, "+Wind+" TEXT, "+Humidity+" TEXT, "+SearchDate+" TEXT);");
+                " TEXT, "+MinTemp+" TEXT, "+MaxTemp+" TEXT, "+CurTemp+" TEXT, "+Weather+" TEXT, "+Wind+" TEXT, "+Pressure+"" +
+                " TEXT, "+Humidity+" TEXT, "+TimeDate+" TEXT, "+Area+" TEXT, "+SearchDate+" TEXT);");
     }
 
     @Override
@@ -45,10 +50,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
-   public boolean insertData(String Ci,String Date,String Temp,String Wea,String Wi,String Hu){
-        database = this.getWritableDatabase();
+   public boolean insertData(String Date,String Temp,String Wea,String Wi,String Hu){
+        database = getWritableDatabase();
         ContentValues CV = new ContentValues();
-        CV.put(City,Ci);
         CV.put(SearchDate,Date);
         CV.put(CurTemp,Temp);
         CV.put(Weather,Wea);
@@ -61,14 +65,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         else {
             return true;
         }
-    }
-
-
-    public Cursor getData(String SELECTION){
-        database = this.getWritableDatabase();
-        String sql0="SELECT * FROM Cities_Areas WHERE City = '"+SELECTION+"'";
-        Cursor cursor = database.rawQuery(sql0,null);
-        return cursor;
     }
 }
    /* public boolean checkDataBase() {
