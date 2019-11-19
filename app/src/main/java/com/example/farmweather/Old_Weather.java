@@ -3,21 +3,28 @@ package com.example.farmweather;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 public class Old_Weather extends AppCompatActivity {
 
+<<<<<<< Updated upstream
     String getTown;
 
+=======
+>>>>>>> Stashed changes
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_old__weather);
+<<<<<<< Updated upstream
         getTown = (getIntent().getStringExtra("GetTown"));
 
 
@@ -30,10 +37,13 @@ public class Old_Weather extends AppCompatActivity {
         //WeatherList day2 = new WeatherList("12/1/20","29C","Καθαρός","0.66","56%");
 
 
-        final ArrayList<WeatherList> weatherList = new ArrayList<>();
-        //weatherList.add(day1);
-        //weatherList.add(day2);
+=======
+        final ListView MyList = findViewById(R.id.ListView);
 
+        WeatherList History = new WeatherList("1","2","3","4","5");
+>>>>>>> Stashed changes
+        final ArrayList<WeatherList> weatherList = new ArrayList<>();
+        weatherList.add(History);
         //KWDIKAS GIA DIAGRAFH ANTIKEIMENOY APO LISTA AN PATHSEIS SYNEXOMENA
         final CustomAdapter adapter = new CustomAdapter(this , R.layout.adapter_view_layout, weatherList);
         MyList.setAdapter(adapter);

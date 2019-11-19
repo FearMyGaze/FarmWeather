@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,7 +24,6 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    DatabaseHandler DB = new DatabaseHandler(this);
 
     //DHLWSH METABLHTWN GIA PERISOTERES PLHROFORIES
     String LowUV = "Χαμηλός";
@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     String WaterPlant = "Όχι";
     String DryPlant = "Ναι";
     String Plant = "Κανονικό";
+    String Da="0",Te="0",We="0",Wi="0",Hu="0";
 
     //DHLWSH METABLHTWN GIA ELEXO KAIROU
     String Clear = "Καθαρός";
@@ -54,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
     int maxTemp;
     Double degree;
 
-
     //ANOIGMA DEUTERHS FORMAS
     private void openActivity2() {
         Intent intent = new Intent(this,info_activity.class);
@@ -67,7 +67,10 @@ public class MainActivity extends AppCompatActivity {
     TextView Town,Weather,TextForUV,TextForRain,TextForAnimals,TextForDrive,TextForPlants,Temperature,CelsiusIcon,Feel;
     ImageView ImageWeather,Row_Add;
     int currentHour;
-    
+    DatabaseHandler DB;
+    Cursor cursor;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,10 +110,12 @@ public class MainActivity extends AppCompatActivity {
         final SwipeRefreshLayout Swipe = findViewById(R.id.refresh);
         final TextView info = findViewById(R.id.info); // Lamps
 
+
         //ALLES DHLWSEIS ANTIKEIMENWN
         final TextView list_town = findViewById(R.id.list_town);
         final TextView TempMin = findViewById(R.id.min_temperature);
         final TextView TempMax = findViewById(R.id.max_temperature);
+
 
         Town = findViewById(R.id.Town);
         Weather = findViewById(R.id.status);
@@ -118,9 +123,12 @@ public class MainActivity extends AppCompatActivity {
         Row_Add = findViewById(R.id.Row_add);
 
         Town.setText(getIntent().getStringExtra("Town"));
+<<<<<<< Updated upstream
 
 
 
+=======
+>>>>>>> Stashed changes
 
         //KWDIKAS GIA ELEXOUS PLHROFORIWN
         Swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() { //KWDIKAS SWIPE
@@ -144,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this,Old_Weather.class);
                 intent.putExtra("GetTown" , JLocation.getText().toString());
                 startActivity(intent);
+
             }
         });
 
@@ -205,9 +214,15 @@ public class MainActivity extends AppCompatActivity {
         });
         list_town.setText("Για "+Town.getText().toString().substring(0,1).toUpperCase()+ Town.getText().toString().substring(1));
         new weatherTask().execute();
+<<<<<<< Updated upstream
 
 
+=======
+        DB = new DatabaseHandler(this);
+        cursor = DB.getData(JLocation.getText().toString());//JLocation.getText().toString());
+>>>>>>> Stashed changes
         addData();
+        viewData();
     }//TELOS ONCREATE
 
     public void addData(){
@@ -222,9 +237,10 @@ public class MainActivity extends AppCompatActivity {
                                 .setPositiveButton("Ναι", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        boolean isInserted = DB.insertData(JTime.getText().toString(), JTemp.getText().toString(),Weather.getText().toString(), JWind_speed.getText().toString(), JHumidity.getText().toString());
+                                        boolean isInserted = DB.insertData(JLocation.getText().toString(),JTime.getText().toString(), JTemp.getText().toString(),Weather.getText().toString(), JWind_speed.getText().toString(), JHumidity.getText().toString());
                                         if (isInserted == false){
-                                            Toast.makeText(MainActivity.this, "Data cannot be inserted ", Toast.LENGTH_LONG).show();}
+                                            Toast.makeText(MainActivity.this, "Data cannot be inserted ", Toast.LENGTH_LONG).show();
+                                        }
                                     }
                                 })
                                 .setNegativeButton("Άκυρο",null)
@@ -233,6 +249,28 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
     }
+    public void viewData(){
+        if(cursor.getCount() == 0){
+            Toast.makeText(getApplicationContext(),"NO DATA TO PREVIEW ",Toast.LENGTH_SHORT).show();
+        }
+        else{
+            while(cursor.moveToNext()){
+                this.Da = cursor.getString(6);
+                Toast.makeText(MainActivity.this, Da, Toast.LENGTH_LONG).show();
+                this.Te = cursor.getString(2);
+                this.We = cursor.getString(3);
+                this.Wi = cursor.getString(4);
+                this.Hu = cursor.getString(5);
+            }
+            Toast.makeText(MainActivity.this, Da, Toast.LENGTH_LONG).show();
+
+            // WeatherList history = new WeatherList("1","@","#","4","%");
+         //   final ArrayList<WeatherList> weatherList = new ArrayList<>();
+           // weatherList.add(history);
+        }
+    }
+
+
 
     class weatherTask extends AsyncTask<String, Void, String> {
 
@@ -253,7 +291,6 @@ public class MainActivity extends AppCompatActivity {
         @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         @Override
         protected void onPostExecute(String result) {
-
 
             try {
                 JSONObject jsonObj = new JSONObject(result);

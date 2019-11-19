@@ -1,20 +1,23 @@
 package com.example.farmweather;
 
-public class WeatherList {
+public class WeatherList extends MainActivity{
     private String date;
     private String temp;
     private String weather;
     private String wind;
     private String humidity;
 
-    public WeatherList(String date, String temp, String weather, String wind, String humidity) {
-        this.date = date;
-        this.temp = temp;
-        this.weather = weather;
-        this.wind = wind;
-        this.humidity = humidity;
-    }
 
+    public WeatherList(String Date,String Temp,String Weather,String Wind,String Humidity){
+        this.date = Date;
+        this.temp = Temp;
+        this.weather = Weather;
+        this.wind = Wind;
+        this.humidity = Humidity;
+    }
+    public String getLoc(){
+        return JLocation.getText().toString();
+    }
     public String getDate() {
         return date;
     }
