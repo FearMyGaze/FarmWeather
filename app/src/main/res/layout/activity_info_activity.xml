@@ -4,11 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:background="@drawable/custom_background">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
-        android:background="@color/transparent">
+        android:background="@color/transparent"
+        android:padding="25sp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,16 +24,24 @@
                 android:text="Sponsors of this app was the following : ">
             </TextView>
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10sp">
+
+            </Space>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Thank you for providing the icons"
                     android:textColor="@color/White">
                 </TextView>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -42,6 +52,12 @@
                 </TextView>
 
             </LinearLayout> // First row
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10sp">
+
+            </Space>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -65,6 +81,108 @@
                 </TextView>
 
             </LinearLayout> //Second row
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20sp">
+
+            </Space>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Η εφαρμογή φτιάχτηκε απο τα ακόλουθα άτομα :"
+                    android:textColor="@color/White">
+
+                </TextView>
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="15sp">
+
+            </Space>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Γιώργος Παπούλιας : 4229  GUI Design"
+                    android:textColor="@color/White">
+
+                </TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Ηλίας Αβράμογλου : 4363  Databases"
+                    android:textColor="@color/White">
+
+                </TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Βασίλης Αγγελόπουλος : 4194 General Programmer"
+                    android:textColor="@color/White">
+
+                </TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Σταύρος - Γεώργιος Ταχμαζίδης : 4300 Manager / Http "
+                android:textColor="@color/White">
+
+            </TextView>
+
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Τριαντάφυλλος Μάντσιος : 4301 General Programmer"
+                    android:textColor="@color/White">
+
+                </TextView>
+
+            </LinearLayout>
 
         </LinearLayout>
 
