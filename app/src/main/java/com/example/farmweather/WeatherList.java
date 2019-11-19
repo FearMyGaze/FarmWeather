@@ -19,38 +19,46 @@ public class WeatherList {
         return date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
 
     public String getTemp() {
         return temp;
     }
 
-    public void setTemp(String temp) {
-        this.temp = temp;
-    }
 
     public String getWeather() {
         return weather;
     }
 
-    public void setWeather(String weather) {
-        this.weather = weather;
-    }
 
     public String getWind() {
         return wind;
     }
 
-    public void setWind(String wind) {
-        this.wind = wind;
-    }
 
     public String getHumidity() {
         return humidity;
     }
 
+    public void setter(String a,String b,String c,String d,String e){
+        this.date = a;
+        this.temp = b;
+        this.weather = c;
+        this.wind = d;
+        this.humidity = e;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+    public void setTemp(String temp) {
+        this.date = temp;
+    }
+    public void setWeather(String weather) {
+        this.date = weather;
+    }
+    public void setWind(String wind) {
+        this.date = wind;
+    }
     public void setHumidity(String humidity) {
         this.humidity = humidity;
     }

@@ -4,7 +4,6 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -12,14 +11,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -28,7 +24,6 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
     DatabaseHandler DB = new DatabaseHandler(this);
-
     //DHLWSH METABLHTWN GIA PERISOTERES PLHROFORIES
     String LowUV = "Χαμηλός";
     String HighUV = "Υψηλός";
@@ -71,11 +66,12 @@ public class MainActivity extends AppCompatActivity {
     TextView Town,Weather,TextForUV,TextForRain,TextForAnimals,TextForDrive,TextForPlants,Temperature,CelsiusIcon,Feel;
     ImageView ImageWeather,Row_Add;
     int currentHour;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         //PAIRNEI THN WRA
         Calendar rightNow = Calendar.getInstance();
@@ -120,9 +116,10 @@ public class MainActivity extends AppCompatActivity {
         Feel = findViewById(R.id.temp_feel);
         Row_Add = findViewById(R.id.Row_add);
 
-
-
         Town.setText(getIntent().getStringExtra("Town"));
+
+
+
 
         //KWDIKAS GIA ELEXOUS PLHROFORIWN
         Swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() { //KWDIKAS SWIPE
@@ -144,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,Old_Weather.class);
+                intent.putExtra("GetTown" , JLocation.getText().toString());
                 startActivity(intent);
             }
         });
@@ -204,7 +202,6 @@ public class MainActivity extends AppCompatActivity {
                 openActivity2();
             }
         });
-
         list_town.setText("Για "+Town.getText().toString().substring(0,1).toUpperCase()+ Town.getText().toString().substring(1));
         new weatherTask().execute();
 
@@ -223,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
                                 .setPositiveButton("Ναι", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        boolean isInserted = DB.insertData(JTime.getText().toString(), JTemp.getText().toString(),Weather.getText().toString(), JWind_speed.getText().toString(), JHumidity.getText().toString());
+                                        boolean isInserted = DB.insertData(JLocation.getText().toString(),JTime.getText().toString(), JTemp.getText().toString(),Weather.getText().toString(), JWind_speed.getText().toString(), JHumidity.getText().toString());
                                         if (isInserted == false){
                                             Toast.makeText(MainActivity.this, "Data cannot be inserted ", Toast.LENGTH_LONG).show();}
                                     }
@@ -234,6 +231,8 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
     }
+
+
 
     class weatherTask extends AsyncTask<String, Void, String> {
 
