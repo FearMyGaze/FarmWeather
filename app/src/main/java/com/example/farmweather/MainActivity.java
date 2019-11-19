@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     String Sun = "Λιακάδα";
     String Heat = "Καύσωνας";
     String Snow = "Χιόνι";
+    String Smoke = "Σκόνη";
 
     //ALLES DHLWSEIS METABLHTWN
     String API = "360443d882c3a8260a2d10ba6a086b9f";
@@ -319,7 +320,7 @@ public class MainActivity extends AppCompatActivity {
             else if(degree>122.5) JWind_Deg.setText("NA");
             else if(degree>67.5) JWind_Deg.setText("Ανατολικά");
             else if(degree>22.5)JWind_Deg.setText("ΒΑ");
-
+            else JWind_Deg.setText("ΒΑ");
 
             //METATROPH KAIROU APO AGGLIKA SE ELLHNIKA
 
@@ -347,6 +348,9 @@ public class MainActivity extends AppCompatActivity {
             }
             if(WeatherGR.equals("Snow")){
                 Weather.setText(Snow);
+            }
+            if(WeatherGR.equals("Smoke")){
+                Weather.setText(Smoke);
             }
             //METATROPH THERMOKRASIAS SE AKERAIO GIA XRHSH KAYSWNA
             maxTemp = Integer.parseInt(Temperature.getText().toString());
@@ -461,6 +465,29 @@ public class MainActivity extends AppCompatActivity {
                 String Feels = String.valueOf(maxTemp-2);
                 Feel.setText(Feels);
                 ImageWeather.setImageDrawable(getDrawable(R.drawable.snowing));
+            }
+            //KWDIKAS GIA KAPNO BRADY
+            if (Weather.getText().toString() == Smoke && (currentHour >= 19 || currentHour < 6)) {
+                TextForUV.setText(LowUV);
+                TextForRain.setText(Rain);
+                TextForAnimals.setText(Animals);
+                TextForDrive.setText(SafeDrive);
+                TextForPlants.setText(Plant);
+                String Feels = String.valueOf(maxTemp-1);
+                Feel.setText(Feels);
+                ImageWeather.setImageDrawable(getDrawable(R.drawable.smoke));
+            }
+            //KWDIKAS GIA KAPNO PRWI
+            if (Weather.getText().toString() == Smoke && (currentHour >= 6 && currentHour < 19)) {
+                TextForUV.setText(LowUV);
+                TextForRain.setText(Rain);
+                TextForAnimals.setText(Animals);
+                TextForDrive.setText(SafeDrive);
+                TextForPlants.setText(Plant);
+                String Feels = String.valueOf(maxTemp+1);
+                Feel.setText(Feels);
+                ImageWeather.setImageDrawable(getDrawable(R.drawable.smoke));
+
             }
 
         }
