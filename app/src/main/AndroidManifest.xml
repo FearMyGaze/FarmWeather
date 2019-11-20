@@ -27,7 +27,8 @@
             android:theme="@style/CustomTheme"></activity>
         <activity
             android:name="Old_Weather"
-            android:theme="@style/CustomTheme"></activity>
+            android:theme="@style/ListTheme"
+            android:label=" "></activity>
     </application>
 
 </manifest>

@@ -404,7 +404,7 @@
                             android:layout_marginTop="5sp"
                             android:layout_marginBottom="10sp"
                             android:textAlignment="center"
-                            android:text="Περισότερες πληροφορίες"
+                            android:text="Περισσότερες πληροφορίες"
                             android:textSize="25sp"
                             android:textColor="@color/Gray_ish">
                         </TextView>//Information

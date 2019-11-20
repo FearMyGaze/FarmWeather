@@ -3,15 +3,17 @@ package com.example.farmweather;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-
+import android.widget.Switch;
 
 
 public class start extends AppCompatActivity {
-    EditText GetTown;
+    EditText GetTown,Latitude,Longtitude;
+    Switch VisibilityChanger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,8 +21,27 @@ public class start extends AppCompatActivity {
         setContentView(R.layout.activity_start);
 
         final ImageView enter = findViewById(R.id.enter);
-        GetTown = (EditText) findViewById(R.id.GetTown);
+        GetTown =  findViewById(R.id.GetTown);
+        Latitude = findViewById(R.id.Latitude);
+        Longtitude = findViewById(R.id.Longitude);
+        VisibilityChanger = findViewById(R.id.VisibilityChanger);
 
+
+        VisibilityChanger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (VisibilityChanger.isChecked()) {
+                    GetTown.setVisibility(View.GONE);
+                    Latitude.setVisibility(View.VISIBLE);
+                    Longtitude.setVisibility(View.VISIBLE);
+                }
+                else {
+                    GetTown.setVisibility(View.VISIBLE);
+                    Latitude.setVisibility(View.GONE);
+                    Longtitude.setVisibility(View.GONE);
+                }
+            }
+        });
 
         enter.setOnClickListener(new View.OnClickListener() {
             @Override

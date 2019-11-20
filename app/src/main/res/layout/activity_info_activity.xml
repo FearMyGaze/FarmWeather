@@ -170,22 +170,22 @@
         </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Τριαντάφυλλος Μάντσιος : 4301 General Programmer"
-                    android:textColor="@color/White">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Τριαντάφυλλος Μάντσιος : 4301 General Programmer"
+                android:textColor="@color/White">
 
-                </TextView>
+            </TextView>
 
-            </LinearLayout>
+        </LinearLayout>
 
         </LinearLayout>
 
     </ScrollView>
-
+//BGALE TA // GIA NA DEIS TIN MAGIA TIS DISNEY
 </LinearLayout>

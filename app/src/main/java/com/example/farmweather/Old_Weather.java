@@ -4,24 +4,28 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import java.util.ArrayList;
-import java.util.List;
 
 
 import android.database.Cursor;
+import android.widget.Switch;
 import android.widget.Toast;
 
 public class Old_Weather extends AppCompatActivity {
+
     int i = 0,j = 0;
     String getTown;
     String[] a;
     Cursor cursor;
     String Da = "0", Te = "0", We = "0", Wi = "0", Hu = "0";
     DatabaseHandler DB = new DatabaseHandler(this);
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +66,28 @@ public class Old_Weather extends AppCompatActivity {
         // Toast.makeText(getApplicationContext(),a[2],Toast.LENGTH_LONG).show();
     }
 
-    public void setData(String d,String t,String we,String wi,String h){
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.list_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        // DILOSI ANTIKEIMENON GIA TIN LISTA STO OLD_WEATHER MENU
+
+        switch(item.getItemId()){
+            case R.id.Clear:
+                    Toast.makeText(this,"This is a message from a far far away universe",Toast.LENGTH_SHORT).show();//ADEFRFE AFTO THA TO GAMIS KAI THA BALS TO SELECT S
+                return true;
+
+            default:return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void setData(String d, String t, String we, String wi, String h){
         this.Da = d;
         this.Te = t;
         this.We = we;
