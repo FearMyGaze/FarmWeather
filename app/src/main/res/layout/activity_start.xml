@@ -103,7 +103,7 @@
             android:id="@+id/Latitude"
             android:layout_width="160sp"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
+            android:layout_gravity="center"
             android:inputType="numberDecimal"
             android:maxLines="1"
             android:digits="0123456789.-"
@@ -117,8 +117,9 @@
             android:visibility="gone">
 
         </EditText>
+
         <Space
-            android:layout_width="40sp"
+            android:layout_width="15sp"
             android:layout_height="5sp">
 
         </Space>
@@ -127,7 +128,7 @@
             android:id="@+id/Longitude"
             android:layout_width="160sp"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
+            android:layout_gravity="center"
             android:inputType="numberDecimal"
             android:maxLines="1"
             android:digits="0123456789.-"

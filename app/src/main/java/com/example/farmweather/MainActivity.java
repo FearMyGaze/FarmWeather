@@ -282,9 +282,11 @@ public class MainActivity extends AppCompatActivity {
                 double tempD = Double.parseDouble(temp);
                 double minD = Double.parseDouble(tempMin);
                 double maxD = Double.parseDouble(tempMax);
+                double speed = Double.parseDouble(windSpeed);
                 float tempF = (float) tempD;
                 float minF = (float) minD;
                 float maxF = (float) maxD;
+                float speedF = (float) speed;
 
 
                 //EMFANISH TWN JSON ANTIKEIMENWN STA ANTIKEIMENA MAS
@@ -295,7 +297,7 @@ public class MainActivity extends AppCompatActivity {
                 JTemp_max.setText(String.format("%.0f",maxF));
                 JSunrise.setText(new SimpleDateFormat("hh:mm", Locale.ENGLISH).format(new Date(sunrise * 1000)));
                 JSunset.setText(new SimpleDateFormat("k:mm ", Locale.ENGLISH).format(new Date(sunset * 1000)));
-                JWind_speed.setText(windSpeed+"m/s");
+                JWind_speed.setText(String.format("%.0f",speedF*3.6)+"Km/h");
                 JWind_Deg.setText(windDeg);
                 JPressure.setText(pressure+"hPa");
                 JHumidity.setText(humidity+"%");

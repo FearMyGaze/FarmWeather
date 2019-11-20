@@ -10,10 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import java.util.ArrayList;
-
-
 import android.database.Cursor;
-import android.widget.Switch;
 import android.widget.Toast;
 
 public class Old_Weather extends AppCompatActivity {
@@ -38,6 +35,24 @@ public class Old_Weather extends AppCompatActivity {
         //KWDIKAS GIA DIAGRAFH ANTIKEIMENOY APO LISTA AN PATHSEIS SYNEXOMENA
         final CustomAdapter adapter = new CustomAdapter(this, R.layout.adapter_view_layout, weatherList);
         MyList.setAdapter(adapter);
+
+        MyList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final int item = position;
+
+                new AlertDialog.Builder(Old_Weather.this)
+                        .setIcon(android.R.drawable.ic_menu_info_details)
+                        .setTitle("Πληροφορίες")
+                        .setMessage("Ημερομηνία: " + weatherList.get(item).getDate() +
+                                " Θερμοκρασία: " + weatherList.get(item).getTemp() +
+                                " Περιγραφή: " + weatherList.get(item).getWeather() +
+                                " Αέρας: " + weatherList.get(item).getWind() +
+                                " Υγρασία: " + weatherList.get(item).getHumidity() + ". Για διαγραφή πιέστε συνεχόμενα την εγγραφή!")
+                        .setNegativeButton("Ok" ,null)
+                        .show();
+            }
+        });
 
         MyList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override

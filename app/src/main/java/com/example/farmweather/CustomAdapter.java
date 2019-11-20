@@ -29,7 +29,6 @@ class CustomAdapter extends ArrayAdapter<WeatherList> {
         String wind = getItem(position).getWind();
         String humidity = getItem(position).getHumidity();
 
-        WeatherList weatherList = new WeatherList(date,temp,weather,wind,humidity);
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent , false);
 
