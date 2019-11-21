@@ -45,19 +45,38 @@ public class start extends AppCompatActivity {
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(GetTown.getText().toString().equals("")){
+                if(GetTown.getText().toString().isEmpty() && VisibilityChanger.isChecked()==false){
                     new AlertDialog.Builder(start.this)
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .setTitle("Προσοχή!!")
                             .setMessage("Παρακαλώ καταχωρήστε πόλη")
                             .setNegativeButton("Ok",null)
                             .show();
-                }else {
+                }else if(GetTown.getText().toString()!="" && VisibilityChanger.isChecked()==false) {
                     String GetGud = GetTown.getText().toString().trim();
                     Intent intent = new Intent(start.this, MainActivity.class);
                     intent.putExtra("Town", GetGud);
                     startActivity(intent);
                     GetTown.setText("");}
+
+               else if((Latitude.getText().toString().isEmpty() || Longtitude.getText().toString().isEmpty()) && VisibilityChanger.isChecked()){
+                    new AlertDialog.Builder(start.this)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setTitle("Προσοχή!!")
+                            .setMessage("Παρακαλώ καταχωρήστε συντεταγμένες")
+                            .setNegativeButton("Ok",null)
+                            .show();
+
+                }else{
+                    String GetLat = Latitude.getText().toString();
+                    String GetLong = Longtitude.getText().toString();
+                    Intent intent = new Intent(start.this , MainActivity.class);
+                    intent.putExtra("Lat",GetLat);
+                    intent.putExtra("Long",GetLong);
+                    startActivity(intent);
+                    Latitude.setText("");
+                    Longtitude.setText("");
+                }
             }
 
         });

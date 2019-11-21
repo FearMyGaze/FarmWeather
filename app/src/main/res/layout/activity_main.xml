@@ -761,15 +761,6 @@
                             </TextView>
 
                         </LinearLayout> // easter egg zombie
-
-                        <TextView
-                            android:id="@+id/Town"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/White"
-                            android:visibility="invisible"
-                            android:textSize="3sp">
-                        </TextView>
                     </LinearLayout>
                 </LinearLayout> //Main Linear
             </LinearLayout>

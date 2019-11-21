@@ -48,10 +48,10 @@ public class Old_Weather extends AppCompatActivity {
                         .setIcon(android.R.drawable.ic_menu_info_details)
                         .setTitle("Πληροφορίες")
                         .setMessage("Ημερομηνία: " + weatherList.get(item).getDate() +
-                                " Θερμοκρασία: " + weatherList.get(item).getTemp() +
-                                " Περιγραφή: " + weatherList.get(item).getWeather() +
-                                " Αέρας: " + weatherList.get(item).getWind() +
-                                " Υγρασία: " + weatherList.get(item).getHumidity() + ". Για διαγραφή πιέστε συνεχόμενα την εγγραφή!")
+                                " , Θερμοκρασία: " + weatherList.get(item).getTemp() +
+                                " , Περιγραφή: " + weatherList.get(item).getWeather() +
+                                " , Αέρας: " + weatherList.get(item).getWind() +
+                                " , Υγρασία: " + weatherList.get(item).getHumidity() + " .  Για διαγραφή πιέστε συνεχόμενα την εγγραφή!")
                         .setNegativeButton("Ok" ,null)
                         .show();
             }
@@ -71,10 +71,10 @@ public class Old_Weather extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 Integer deleteRows = DB.deleteDate(getTown,weatherList.get(item).getTemp(),weatherList.get(item).getWeather(),weatherList.get(item).getWind(),weatherList.get(item).getHumidity(),weatherList.get(item).getDate());
                                 if(deleteRows > 0){
-                                    Toast.makeText(getApplicationContext(),"Deleted",Toast.LENGTH_LONG).show();
+                                    Toast.makeText(Old_Weather.this, "Η εγγραφή διαγράφτηκε", Toast.LENGTH_SHORT).show();
                                 }
                                 else{
-                                    Toast.makeText(getApplicationContext(),"Cannot delete data",Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(),"Δεν βρέθηκαν παρελθοντικά δεδομένα",Toast.LENGTH_SHORT).show();
                                 }
                                 weatherList.remove(item);
                                 adapter.notifyDataSetChanged();
@@ -113,14 +113,14 @@ public class Old_Weather extends AppCompatActivity {
     public void mergeIconRows(int ID, int iconID){
         isUpdated = DB.updateIconID(ID,iconID);
         if(isUpdated == false) {
-            Toast.makeText(getApplicationContext(), "Error while updating data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Σφάλμα κατά την ενημέρωση", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void viewData(ArrayList<WeatherList> lista){
         int i = 0;
         if(cursor.getCount() == 0){
-            Toast.makeText(getApplicationContext(),"NO DATA TO PREVIEW ",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Δεν υπάρχουν δεδομένα για προβολή ",Toast.LENGTH_SHORT).show();
         }
         else{
             while (cursor.moveToNext() ) {
