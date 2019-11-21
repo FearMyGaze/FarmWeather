@@ -26,6 +26,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String Wind = "Wind";
     private static final String Humidity = "Humidity";
     private static final String SearchDate = "SearchDate";
+    private static final String IconID = "IconID";
 
 
     SQLiteDatabase database;
@@ -36,7 +37,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("CREATE TABLE "+TABLE_NAME+" ( "+RequestID+" INTEGER PRIMARY KEY, "+City+" TEXT, "+CurTemp+" TEXT, " +
-                ""+Weather+" TEXT, "+Wind+ " TEXT, "+Humidity+" TEXT, "+SearchDate+" TEXT);");
+                ""+Weather+" TEXT, "+Wind+ " TEXT, "+Humidity+" TEXT, "+SearchDate+" TEXT, "+IconID+" INTEGER);");
     }
 
     @Override
@@ -62,13 +63,33 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
-    public Cursor getData(String SELECTION){
+    public boolean updateIconID(int pKey,int item){
         database = this.getWritableDatabase();
-        String sql0="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+SELECTION+"'";
+        ContentValues CV = new ContentValues();
+        CV.put(IconID,item);
+        long result = database.update(TABLE_NAME,CV,"RequestID = ?",new String[]{String.valueOf(pKey)});
+        if(result == (-1)){
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    public Cursor getData(String CITY){
+        database = this.getWritableDatabase();
+        String sql0="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+CITY+"' ORDER BY RequestID DESC";
         Cursor cursor = database.rawQuery(sql0,null);
         return cursor;
     }
 
+
+    public Integer deleteDate(String area,String temp,String weather,String wind,String humidity,String date){
+        database = this.getWritableDatabase();
+        return database.delete(TABLE_NAME,"City = ? AND CurTemp = ?" +
+                " AND Weather = ? AND Wind = ? AND  Humidity = ? AND SearchDate = ? ",new String[] {area,temp,weather,wind,humidity,date});
+    }
+//"City = '"+area+"' AND SearchDate = '"+date+"' AND CurTemp = '"+temp+"' AND Weather = '"+we+"' AND Wind = '"+wi+"' AND  Humidity = '"+Hu+"'"
 }
 
    /* public boolean checkDataBase() {

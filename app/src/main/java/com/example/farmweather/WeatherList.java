@@ -1,13 +1,16 @@
 package com.example.farmweather;
 
 public class WeatherList {
+    private int id,oldweatherID;
     private String date;
     private String temp;
     private String weather;
     private String wind;
     private String humidity;
 
-    public WeatherList(String date, String temp, String weather, String wind, String humidity) {
+    public WeatherList(int id,int oldweatherID, String date, String temp, String weather, String wind, String humidity) {
+        this.id = id;
+        this.oldweatherID = oldweatherID;
         this.date = date;
         this.temp = temp;
         this.weather = weather;
@@ -15,36 +18,40 @@ public class WeatherList {
         this.humidity = humidity;
     }
 
+    public int getId(){
+        return id;
+    }
+
+    public int getOldweatherID(){
+        return oldweatherID;
+    }
+
     public String getDate() {
         return date;
     }
-
 
     public String getTemp() {
         return temp;
     }
 
-
     public String getWeather() {
         return weather;
     }
-
 
     public String getWind() {
         return wind;
     }
 
-
     public String getHumidity() {
         return humidity;
     }
 
-    public void setter(String a,String b,String c,String d,String e){
-        this.date = a;
-        this.temp = b;
-        this.weather = c;
-        this.wind = d;
-        this.humidity = e;
+    public void setId(int id){
+        this.id = id;
+    }
+
+    public int setOldweatherID(int oldweatherID){
+        return oldweatherID;
     }
 
     public void setDate(String date) {

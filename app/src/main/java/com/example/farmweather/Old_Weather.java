@@ -2,6 +2,8 @@ package com.example.farmweather;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.ClipData;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,13 +17,14 @@ import android.widget.Toast;
 
 public class Old_Weather extends AppCompatActivity {
 
-    int i = 0,j = 0;
     String getTown;
-    String[] a;
     Cursor cursor;
-    String Da = "0", Te = "0", We = "0", Wi = "0", Hu = "0";
-    DatabaseHandler DB = new DatabaseHandler(this);
+    String Date = "0", Temp = "0", Weather = "0", Wind = "0", Humidity = "0";
+    int item = 0,Id = 0;
+    WeatherList history;
 
+    DatabaseHandler DB = new DatabaseHandler(this);
+    boolean isUpdated;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +60,7 @@ public class Old_Weather extends AppCompatActivity {
         MyList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                final int item = position;
+                item = position;
 
                 new AlertDialog.Builder(Old_Weather.this)
                         .setIcon(android.R.drawable.ic_delete)
@@ -66,6 +69,13 @@ public class Old_Weather extends AppCompatActivity {
                         .setPositiveButton("Ναι", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                Integer deleteRows = DB.deleteDate(getTown,weatherList.get(item).getTemp(),weatherList.get(item).getWeather(),weatherList.get(item).getWind(),weatherList.get(item).getHumidity(),weatherList.get(item).getDate());
+                                if(deleteRows > 0){
+                                    Toast.makeText(getApplicationContext(),"Deleted",Toast.LENGTH_LONG).show();
+                                }
+                                else{
+                                    Toast.makeText(getApplicationContext(),"Cannot delete data",Toast.LENGTH_LONG).show();
+                                }
                                 weatherList.remove(item);
                                 adapter.notifyDataSetChanged();
                             }
@@ -76,9 +86,7 @@ public class Old_Weather extends AppCompatActivity {
             }
         });
         cursor = DB.getData(getTown);
-        a = new String[cursor.getCount() * 5];
         viewData(weatherList);
-        // Toast.makeText(getApplicationContext(),a[2],Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -102,37 +110,39 @@ public class Old_Weather extends AppCompatActivity {
         }
     }
 
-    public void setData(String d, String t, String we, String wi, String h){
-        this.Da = d;
-        this.Te = t;
-        this.We = we;
-        this.Wi = wi;
-        this.Hu = h;
+    public void mergeIconRows(int ID, int iconID){
+        isUpdated = DB.updateIconID(ID,iconID);
+        if(isUpdated == false) {
+            Toast.makeText(getApplicationContext(), "Error while updating data", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void viewData(ArrayList<WeatherList> lista){
+        int i = 0;
         if(cursor.getCount() == 0){
             Toast.makeText(getApplicationContext(),"NO DATA TO PREVIEW ",Toast.LENGTH_SHORT).show();
         }
         else{
             while (cursor.moveToNext() ) {
-                a[i] = cursor.getString(6);
-                a[i+1] = cursor.getString(2);
-                a[i+2] = cursor.getString(3);
-                a[i+3] = cursor.getString(4);
-                a[i+4] = cursor.getString(5);
-                setData(a[i],a[i+1],a[i+2],a[i+3],a[i+4]);
-                i+=5;
+                Id = Integer.valueOf(cursor.getString(0));
+                Date = cursor.getString(6);
+                Temp = cursor.getString(2);
+                Weather = cursor.getString(3);
+                Wind = cursor.getString(4);
+                Humidity = cursor.getString(5);
                 addPins(lista);
+                mergeIconRows(Id,item+i);
+                i++;
             }
-
         }
+
     }
 
     public void addPins(ArrayList<WeatherList> list){
-        WeatherList history = new WeatherList(Da,Te,We,Wi,Hu);
+        history = new WeatherList(Id,item,Date,Temp,Weather,Wind,Humidity);
         list.add(history);
     }
+
 }
 
 
