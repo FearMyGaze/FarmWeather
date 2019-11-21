@@ -84,10 +84,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
 
-    public Integer deleteDate(String area,String temp,String weather,String wind,String humidity,String date){
+    public Integer deleteDate(String rID,String area,String temp,String weather,String wind,String humidity,String date){
         database = this.getWritableDatabase();
-        return database.delete(TABLE_NAME,"City = ? AND CurTemp = ?" +
-                " AND Weather = ? AND Wind = ? AND  Humidity = ? AND SearchDate = ? ",new String[] {area,temp,weather,wind,humidity,date});
+        return database.delete(TABLE_NAME,"RequestID = ? AND City = ? AND CurTemp = ?" +
+                " AND Weather = ? AND Wind = ? AND  Humidity = ? AND SearchDate = ? ",new String[] {rID,area,temp,weather,wind,humidity,date});
     }
 //"City = '"+area+"' AND SearchDate = '"+date+"' AND CurTemp = '"+temp+"' AND Weather = '"+we+"' AND Wind = '"+wi+"' AND  Humidity = '"+Hu+"'"
 }

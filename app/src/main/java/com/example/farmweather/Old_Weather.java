@@ -69,7 +69,7 @@ public class Old_Weather extends AppCompatActivity {
                         .setPositiveButton("Ναι", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Integer deleteRows = DB.deleteDate(getTown,weatherList.get(item).getTemp(),weatherList.get(item).getWeather(),weatherList.get(item).getWind(),weatherList.get(item).getHumidity(),weatherList.get(item).getDate());
+                                Integer deleteRows = DB.deleteDate(String.valueOf(weatherList.get(item).getId()),getTown,weatherList.get(item).getTemp(),weatherList.get(item).getWeather(),weatherList.get(item).getWind(),weatherList.get(item).getHumidity(),weatherList.get(item).getDate());
                                 if(deleteRows > 0){
                                     Toast.makeText(Old_Weather.this, "Η εγγραφή διαγράφτηκε", Toast.LENGTH_SHORT).show();
                                 }
