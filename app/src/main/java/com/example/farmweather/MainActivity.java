@@ -230,6 +230,7 @@ public class MainActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         boolean isInserted = DB.insertData(JLocation.getText().toString(),JTime.getText().toString(), JTemp.getText().toString(),Weather.getText().toString(), JWind_speed.getText().toString(), JHumidity.getText().toString());
+                                        Toast.makeText(MainActivity.this, "Η εγγραφή προσθέθηκε", Toast.LENGTH_SHORT).show();
                                         if (isInserted == false){
                                             Toast.makeText(MainActivity.this, "Αδύνατη η προσθήκη δεδομένων ", Toast.LENGTH_LONG).show();}
                                     }

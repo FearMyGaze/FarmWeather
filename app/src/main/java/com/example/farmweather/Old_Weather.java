@@ -2,8 +2,6 @@ package com.example.farmweather;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.ClipData;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
