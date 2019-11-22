@@ -195,4 +195,9 @@
 
     </item> //List 4
 
+    <item
+        android:id="@+id/DeleteItemList"
+        android:title="Καθαρισμός όλων">
+    </item>//List 5
+
 </menu>

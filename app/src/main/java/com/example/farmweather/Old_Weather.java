@@ -104,6 +104,18 @@ public class Old_Weather extends AppCompatActivity {
         switch(item.getItemId()){
             case R.id.Clear:
                     Toast.makeText(this,"This is a message from a far far away universe",Toast.LENGTH_SHORT).show();//ADEFRFE AFTO THA TO GAMIS KAI THA BALS TO SELECT S
+            case R.id.DeleteItemList:
+                new AlertDialog.Builder(Old_Weather.this)
+                        .setIcon(android.R.drawable.ic_delete)
+                        .setTitle("ΠΡΟΣΟΧΗ !!")
+                        .setMessage("Θέλετε να διαγράψετε ολα τα αντικείμενα ;")
+                        .setNegativeButton("ΟΧΙ",null)
+                        .setPositiveButton("ΝΑΙ", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //EDW MPAINEI H LEITOYRGEIA GIA TIN OLIKI DIAGRAFH
+                            }
+                        }).show();
                 return true;
 
             default:return super.onOptionsItemSelected(item);
