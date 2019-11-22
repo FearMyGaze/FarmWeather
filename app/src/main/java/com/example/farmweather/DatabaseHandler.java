@@ -89,6 +89,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return database.delete(TABLE_NAME,"RequestID = ? AND City = ? AND CurTemp = ?" +
                 " AND Weather = ? AND Wind = ? AND  Humidity = ? AND SearchDate = ? ",new String[] {rID,area,temp,weather,wind,humidity,date});
     }
+
+    public Integer clearall(String area){
+        database = this.getWritableDatabase();
+        return database.delete(TABLE_NAME,"City = ?",new String[] {area});
+    }
 //"City = '"+area+"' AND SearchDate = '"+date+"' AND CurTemp = '"+temp+"' AND Weather = '"+we+"' AND Wind = '"+wi+"' AND  Humidity = '"+Hu+"'"
 }
 

@@ -20,7 +20,7 @@ public class Old_Weather extends AppCompatActivity {
     String Date = "0", Temp = "0", Weather = "0", Wind = "0", Humidity = "0";
     int item = 0,Id = 0;
     WeatherList history;
-
+    ArrayList<WeatherList> passinglist;
     DatabaseHandler DB = new DatabaseHandler(this);
     boolean isUpdated;
 
@@ -112,6 +112,13 @@ public class Old_Weather extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 //EDW MPAINEI H LEITOYRGEIA GIA TIN OLIKI DIAGRAFH
+                                //λεγε ρε ντρελε εε σε πιανει μια αηδια
+                                Integer deleteall = DB.clearall(getTown);
+                                if(deleteall > 0) {
+                                    Toast.makeText(getApplicationContext(), "Η διαγραφή του ιστορικού ολοκληρώθηκε", Toast.LENGTH_SHORT).show();
+                                }
+                                else
+                                    Toast.makeText(getApplicationContext(), "Αδυναμία διαγραφής ιστορικού", Toast.LENGTH_SHORT).show();
                             }
                         }).show();
                 return true;
@@ -144,6 +151,7 @@ public class Old_Weather extends AppCompatActivity {
                 mergeIconRows(Id,item+i);
                 i++;
             }
+            pass(lista);
         }
 
     }
@@ -151,6 +159,13 @@ public class Old_Weather extends AppCompatActivity {
     public void addPins(ArrayList<WeatherList> list){
         history = new WeatherList(Id,item,Date,Temp,Weather,Wind,Humidity);
         list.add(history);
+    }
+
+    public void pass(ArrayList<WeatherList> lista){
+        passinglist = new ArrayList<>();
+        for(int i=0;i<lista.size();i++){
+            passinglist.add(lista.get(i));
+        }
     }
 
 }
