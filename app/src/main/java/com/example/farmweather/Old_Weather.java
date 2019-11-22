@@ -18,11 +18,11 @@ public class Old_Weather extends AppCompatActivity {
     String getTown;
     Cursor cursor;
     String Date = "0", Temp = "0", Weather = "0", Wind = "0", Humidity = "0";
-    int item = 0,Id = 0;
+    int item = 0,Id = 0,choice = 0;
     WeatherList history;
     ArrayList<WeatherList> passinglist;
     DatabaseHandler DB = new DatabaseHandler(this);
-    boolean isUpdated;
+    boolean isUpdated,flag=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,8 +100,6 @@ public class Old_Weather extends AppCompatActivity {
         // DILOSI ANTIKEIMENON GIA TIN LISTA STO OLD_WEATHER MENU
 
         switch(item.getItemId()){
-            case R.id.Clear:
-                    Toast.makeText(this,"This is a message from a far far away universe",Toast.LENGTH_SHORT).show();//ADEFRFE AFTO THA TO GAMIS KAI THA BALS TO SELECT S
             case R.id.DeleteItemList:
                 new AlertDialog.Builder(Old_Weather.this)
                         .setIcon(android.R.drawable.ic_delete)
@@ -113,14 +111,26 @@ public class Old_Weather extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 //EDW MPAINEI H LEITOYRGEIA GIA TIN OLIKI DIAGRAFH
                                 //λεγε ρε ντρελε εε σε πιανει μια αηδια
-                                Integer deleteall = DB.clearall(getTown);
-                                if(deleteall > 0) {
-                                    Toast.makeText(getApplicationContext(), "Η διαγραφή του ιστορικού ολοκληρώθηκε", Toast.LENGTH_SHORT).show();
+                                flag=true;
+                                if(flag==true) {
+                                    Integer deleteall = DB.clearall(getTown);
+                                    if (deleteall > 0) {
+                                        Toast.makeText(getApplicationContext(), "Η διαγραφή του ιστορικού ολοκληρώθηκε", Toast.LENGTH_SHORT).show();
+                                        flag=false;
+                                    } else
+                                        Toast.makeText(getApplicationContext(), "Αδυναμία διαγραφής ιστορικού", Toast.LENGTH_SHORT).show();
                                 }
-                                else
-                                    Toast.makeText(getApplicationContext(), "Αδυναμία διαγραφής ιστορικού", Toast.LENGTH_SHORT).show();
                             }
                         }).show();
+                return true;
+
+            case R.id.Clear:
+                choice=1;
+                Toast.makeText(getApplicationContext(),String.valueOf(choice), Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.RainSky:
+                choice=2;
+                Toast.makeText(getApplicationContext(),String.valueOf(choice) , Toast.LENGTH_SHORT).show();
                 return true;
 
             default:return super.onOptionsItemSelected(item);
