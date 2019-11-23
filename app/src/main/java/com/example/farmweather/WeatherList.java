@@ -1,16 +1,16 @@
 package com.example.farmweather;
 
 public class WeatherList {
-    private int id,oldweatherID;
+    private int id,oldWeatherID;
     private String date;
     private String temp;
     private String weather;
     private String wind;
     private String humidity;
 
-    public WeatherList(int id,int oldweatherID, String date, String temp, String weather, String wind, String humidity) {
+    public WeatherList(int id,int oldWeatherID, String date, String temp, String weather, String wind, String humidity) {
         this.id = id;
-        this.oldweatherID = oldweatherID;
+        this.oldWeatherID = oldWeatherID;
         this.date = date;
         this.temp = temp;
         this.weather = weather;
@@ -22,8 +22,8 @@ public class WeatherList {
         return id;
     }
 
-    public int getOldweatherID(){
-        return oldweatherID;
+    public int getOldWeatherID(){
+        return oldWeatherID;
     }
 
     public String getDate() {
@@ -50,8 +50,8 @@ public class WeatherList {
         this.id = id;
     }
 
-    public int setOldweatherID(int oldweatherID){
-        return oldweatherID;
+    public int setOldWeatherID(int oldWeatherID){
+        return oldWeatherID;
     }
 
     public void setDate(String date) {

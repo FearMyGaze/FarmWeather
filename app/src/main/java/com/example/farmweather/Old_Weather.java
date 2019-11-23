@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 public class Old_Weather extends AppCompatActivity {
 
+
     String getTown,choice;
     Cursor cursor,cursor1,cursor2;
     String Date = "0", Temp = "0", Weather = "0", Wind = "0", Humidity = "0";
@@ -28,10 +29,11 @@ public class Old_Weather extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_old__weather);
+
         getTown = (getIntent().getStringExtra("GetTown"));
+
         final ListView MyList = findViewById(R.id.ListView);
         final ArrayList<WeatherList> weatherList = new ArrayList<>();
-
 
         //KWDIKAS GIA DIAGRAFH ANTIKEIMENOY APO LISTA AN PATHSEIS SYNEXOMENA
         final CustomAdapter adapter = new CustomAdapter(this, R.layout.adapter_view_layout, weatherList);
@@ -46,10 +48,10 @@ public class Old_Weather extends AppCompatActivity {
                         .setIcon(android.R.drawable.ic_menu_info_details)
                         .setTitle("Πληροφορίες")
                         .setMessage("Ημερομηνία: " + weatherList.get(item).getDate() +
-                                " , Θερμοκρασία: " + weatherList.get(item).getTemp() +
-                                " , Περιγραφή: " + weatherList.get(item).getWeather() +
-                                " , Αέρας: " + weatherList.get(item).getWind() +
-                                " , Υγρασία: " + weatherList.get(item).getHumidity() + " .  Για διαγραφή πιέστε συνεχόμενα την εγγραφή!")
+                                "\nΘερμοκρασία: " + weatherList.get(item).getTemp() +
+                                "\nΠεριγραφή: " + weatherList.get(item).getWeather() +
+                                "\nΑέρας: " + weatherList.get(item).getWind() +
+                                "\nΥγρασία: " + weatherList.get(item).getHumidity() + "\nΓια διαγραφή πιέστε συνεχόμενα την εγγραφή!")
                         .setNegativeButton("Ok" ,null)
                         .show();
             }
@@ -89,8 +91,6 @@ public class Old_Weather extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
-
         getMenuInflater().inflate(R.menu.list_menu,menu);
         return true;
     }
@@ -111,8 +111,6 @@ public class Old_Weather extends AppCompatActivity {
                         .setPositiveButton("ΝΑΙ", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                //EDW MPAINEI H LEITOYRGEIA GIA TIN OLIKI DIAGRAFH
-                                //λεγε ρε ντρελε εε σε πιανει μια αηδια
                                     Integer deleteall = DB.clearall(getTown);
                                     if (deleteall > 0) {
                                         Toast.makeText(getApplicationContext(), "Η διαγραφή του ιστορικού ολοκληρώθηκε", Toast.LENGTH_SHORT).show();
@@ -374,9 +372,6 @@ public class Old_Weather extends AppCompatActivity {
         history = new WeatherList(Id,item,Date,Temp,Weather,Wind,Humidity);
         list.add(history);
     }
-
-
-
 }
 
 

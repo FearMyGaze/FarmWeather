@@ -11,7 +11,7 @@ import android.widget.Switch;
 
 
 public class start extends AppCompatActivity {
-    EditText GetTown,Latitude,Longtitude;
+    EditText GetTown,Latitude,Longitude;
     Switch VisibilityChanger;
 
     @Override
@@ -22,7 +22,7 @@ public class start extends AppCompatActivity {
         final ImageView enter = findViewById(R.id.enter);
         GetTown =  findViewById(R.id.GetTown);
         Latitude = findViewById(R.id.Latitude);
-        Longtitude = findViewById(R.id.Longitude);
+        Longitude = findViewById(R.id.Longitude);
         VisibilityChanger = findViewById(R.id.VisibilityChanger);
 
 
@@ -32,12 +32,12 @@ public class start extends AppCompatActivity {
                 if (VisibilityChanger.isChecked()) {
                     GetTown.setVisibility(View.GONE);
                     Latitude.setVisibility(View.VISIBLE);
-                    Longtitude.setVisibility(View.VISIBLE);
+                    Longitude.setVisibility(View.VISIBLE);
                 }
                 else {
                     GetTown.setVisibility(View.VISIBLE);
                     Latitude.setVisibility(View.GONE);
-                    Longtitude.setVisibility(View.GONE);
+                    Longitude.setVisibility(View.GONE);
                 }
             }
         });
@@ -59,7 +59,7 @@ public class start extends AppCompatActivity {
                     startActivity(intent);
                     GetTown.setText("");}
 
-               else if((Latitude.getText().toString().isEmpty() || Longtitude.getText().toString().isEmpty()) && VisibilityChanger.isChecked()){
+               else if((Latitude.getText().toString().isEmpty() || Longitude.getText().toString().isEmpty()) && VisibilityChanger.isChecked()){
                     new AlertDialog.Builder(start.this)
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .setTitle("Προσοχή!!")
@@ -69,13 +69,13 @@ public class start extends AppCompatActivity {
 
                 }else{
                     String GetLat = Latitude.getText().toString();
-                    String GetLong = Longtitude.getText().toString();
+                    String GetLong = Longitude.getText().toString();
                     Intent intent = new Intent(start.this , MainActivity.class);
                     intent.putExtra("Lat",GetLat);
                     intent.putExtra("Long",GetLong);
                     startActivity(intent);
                     Latitude.setText("");
-                    Longtitude.setText("");
+                    Longitude.setText("");
                 }
             }
 

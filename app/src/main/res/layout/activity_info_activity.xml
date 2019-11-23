@@ -9,8 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
-        android:background="@color/transparent"
-        android:padding="25sp">
+        android:background="@color/transparent">
 
         <LinearLayout
             android:layout_width="match_parent"
