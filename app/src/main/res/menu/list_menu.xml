@@ -201,7 +201,7 @@
     </item>//List 5
 
     <item
-        android:id="ShowAllItemList"
+        android:id="@+id/ShowAllItemList"
         android:title="Εμφάνιση όλων">
     </item>
 
