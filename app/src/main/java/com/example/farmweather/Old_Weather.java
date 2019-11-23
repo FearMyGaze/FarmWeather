@@ -15,12 +15,12 @@ import android.widget.Toast;
 
 public class Old_Weather extends AppCompatActivity {
 
-    String getTown;
-    Cursor cursor;
+    String getTown,choice;
+    Cursor cursor,cursor1,cursor2;
     String Date = "0", Temp = "0", Weather = "0", Wind = "0", Humidity = "0";
     int item = 0,Id = 0;
     WeatherList history;
-    ArrayList<WeatherList> passinglist;
+    ArrayList<WeatherList> monthList;
     DatabaseHandler DB = new DatabaseHandler(this);
     boolean isUpdated;
 
@@ -90,6 +90,7 @@ public class Old_Weather extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
+
         getMenuInflater().inflate(R.menu.list_menu,menu);
         return true;
     }
@@ -98,10 +99,9 @@ public class Old_Weather extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         // DILOSI ANTIKEIMENON GIA TIN LISTA STO OLD_WEATHER MENU
-
+        CustomAdapter adaptori;
+        final ListView list = findViewById(R.id.ListView);
         switch(item.getItemId()){
-            case R.id.Clear:
-                    Toast.makeText(this,"This is a message from a far far away universe",Toast.LENGTH_SHORT).show();//ADEFRFE AFTO THA TO GAMIS KAI THA BALS TO SELECT S
             case R.id.DeleteItemList:
                 new AlertDialog.Builder(Old_Weather.this)
                         .setIcon(android.R.drawable.ic_delete)
@@ -113,14 +113,184 @@ public class Old_Weather extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 //EDW MPAINEI H LEITOYRGEIA GIA TIN OLIKI DIAGRAFH
                                 //λεγε ρε ντρελε εε σε πιανει μια αηδια
-                                Integer deleteall = DB.clearall(getTown);
-                                if(deleteall > 0) {
-                                    Toast.makeText(getApplicationContext(), "Η διαγραφή του ιστορικού ολοκληρώθηκε", Toast.LENGTH_SHORT).show();
-                                }
-                                else
-                                    Toast.makeText(getApplicationContext(), "Αδυναμία διαγραφής ιστορικού", Toast.LENGTH_SHORT).show();
+                                    Integer deleteall = DB.clearall(getTown);
+                                    if (deleteall > 0) {
+                                        Toast.makeText(getApplicationContext(), "Η διαγραφή του ιστορικού ολοκληρώθηκε", Toast.LENGTH_SHORT).show();
+                                    } else
+                                        Toast.makeText(getApplicationContext(), "Αδυναμία διαγραφής ιστορικού", Toast.LENGTH_SHORT).show();
                             }
                         }).show();
+                return true;
+
+            case R.id.Clear:
+                choice = "Καθαρός";
+                monthList = new ArrayList<>();
+                viewSortedBwData(monthList);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                list.setAdapter(adaptori);
+                adaptori.notifyDataSetChanged();
+                return true;
+
+            case R.id.RainSky:
+                choice = "Βροχερός";
+                monthList = new ArrayList<>();
+                viewSortedBwData(monthList);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                list.setAdapter(adaptori);
+                adaptori.notifyDataSetChanged();
+                return true;
+
+            case R.id.Storm:
+                choice = "Καταιγίδα";
+                monthList = new ArrayList<>();
+                viewSortedBwData(monthList);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                list.setAdapter(adaptori);
+                adaptori.notifyDataSetChanged();
+                return true;
+
+            case R.id.Sun:
+                choice = "Λιακάδα";
+                monthList = new ArrayList<>();
+                viewSortedBwData(monthList);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                list.setAdapter(adaptori);
+                adaptori.notifyDataSetChanged();
+                return true;
+
+            case R.id.Heat:
+                choice = "Καύσωνας";
+                monthList = new ArrayList<>();
+                viewSortedBwData(monthList);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                list.setAdapter(adaptori);
+                adaptori.notifyDataSetChanged();
+                return true;
+
+            case R.id.Snow:
+                choice = "Χιόνι";
+                monthList = new ArrayList<>();
+                viewSortedBwData(monthList);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                list.setAdapter(adaptori);
+                adaptori.notifyDataSetChanged();
+                return true;
+
+            case R.id.Smoke:
+                choice = "Σκόνη";
+                monthList = new ArrayList<>();
+                viewSortedBwData(monthList);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                list.setAdapter(adaptori);
+                adaptori.notifyDataSetChanged();
+                return true;
+
+            case R.id.Month_1:
+                choice = "Jan";
+                monthList = new ArrayList<>();
+                viewSortedBmData(monthList);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                list.setAdapter(adaptori);
+                adaptori.notifyDataSetChanged();
+                return true;
+
+            case R.id.Month_2:
+                choice = "Feb";
+                monthList = new ArrayList<>();
+                viewSortedBmData(monthList);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                list.setAdapter(adaptori);
+                adaptori.notifyDataSetChanged();
+                return true;
+
+            case R.id.Month_3:
+                choice = "Mar";
+                monthList = new ArrayList<>();
+                viewSortedBmData(monthList);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                list.setAdapter(adaptori);
+                adaptori.notifyDataSetChanged();
+                return true;
+
+            case R.id.Month_4:
+                choice = "Apr";
+                monthList = new ArrayList<>();
+                viewSortedBmData(monthList);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                list.setAdapter(adaptori);
+                adaptori.notifyDataSetChanged();
+                return true;
+
+            case R.id.Month_5:
+                choice = "May";
+                monthList = new ArrayList<>();
+                viewSortedBmData(monthList);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                list.setAdapter(adaptori);
+                adaptori.notifyDataSetChanged();
+                return true;
+
+            case R.id.Month_6:
+                choice = "Jun";
+                monthList = new ArrayList<>();
+                viewSortedBmData(monthList);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                list.setAdapter(adaptori);
+                adaptori.notifyDataSetChanged();
+                return true;
+
+            case R.id.Month_7:
+                choice = "Jul";
+                monthList = new ArrayList<>();
+                viewSortedBmData(monthList);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                list.setAdapter(adaptori);
+                adaptori.notifyDataSetChanged();
+                return true;
+
+            case R.id.Month_8:
+                choice = "Aug";
+                monthList = new ArrayList<>();
+                viewSortedBmData(monthList);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                list.setAdapter(adaptori);
+                adaptori.notifyDataSetChanged();
+                return true;
+
+            case R.id.Month_9:
+                choice = "Sep";
+                monthList = new ArrayList<>();
+                viewSortedBmData(monthList);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                list.setAdapter(adaptori);
+                adaptori.notifyDataSetChanged();
+                return true;
+
+            case R.id.Month_10:
+                choice = "Oct";
+                monthList = new ArrayList<>();
+                viewSortedBmData(monthList);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                list.setAdapter(adaptori);
+                adaptori.notifyDataSetChanged();
+                return true;
+
+            case R.id.Month_11:
+                choice = "Nov";
+                monthList = new ArrayList<>();
+                viewSortedBmData(monthList);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                list.setAdapter(adaptori);
+                adaptori.notifyDataSetChanged();
+                return true;
+
+            case R.id.Month_12:
+                choice = "Dec";
+                monthList = new ArrayList<>();
+                viewSortedBmData(monthList);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                list.setAdapter(adaptori);
+                adaptori.notifyDataSetChanged();
                 return true;
 
             default:return super.onOptionsItemSelected(item);
@@ -151,9 +321,53 @@ public class Old_Weather extends AppCompatActivity {
                 mergeIconRows(Id,item+i);
                 i++;
             }
-            pass(lista);
+            cursor.close();
         }
 
+    }
+
+    public void viewSortedBwData(ArrayList<WeatherList> lista){
+        cursor1 = DB.sortByWeatherStatus(getTown,choice);
+        int i = 0;
+        if(cursor1.getCount() == 0){
+            Toast.makeText(getApplicationContext(),"Δεν υπάρχουν δεδομένα για προβολή ",Toast.LENGTH_SHORT).show();
+        }
+        else{
+            while (cursor1.moveToNext() ) {
+                Id = Integer.valueOf(cursor1.getString(0));
+                Date = cursor1.getString(6);
+                Temp = cursor1.getString(2);
+                Weather = cursor1.getString(3);
+                Wind = cursor1.getString(4);
+                Humidity = cursor1.getString(5);
+                addPins(lista);
+                mergeIconRows(Id,item+i);
+                i++;
+            }
+            cursor1.close();
+        }
+    }
+
+    public void viewSortedBmData(ArrayList<WeatherList> lista){
+        cursor2 = DB.sortByMonthStatus(getTown,choice);
+        int i = 0;
+        if(cursor2.getCount() == 0){
+            Toast.makeText(getApplicationContext(),"Δεν υπάρχουν δεδομένα για προβολή ",Toast.LENGTH_SHORT).show();
+        }
+        else{
+            while (cursor2.moveToNext() ) {
+                Id = Integer.valueOf(cursor2.getString(0));
+                Date = cursor2.getString(6);
+                Temp = cursor2.getString(2);
+                Weather = cursor2.getString(3);
+                Wind = cursor2.getString(4);
+                Humidity = cursor2.getString(5);
+                addPins(lista);
+                mergeIconRows(Id,item+i);
+                i++;
+            }
+            cursor2.close();
+        }
     }
 
     public void addPins(ArrayList<WeatherList> list){
@@ -161,12 +375,7 @@ public class Old_Weather extends AppCompatActivity {
         list.add(history);
     }
 
-    public void pass(ArrayList<WeatherList> lista){
-        passinglist = new ArrayList<>();
-        for(int i=0;i<lista.size();i++){
-            passinglist.add(lista.get(i));
-        }
-    }
+
 
 }
 

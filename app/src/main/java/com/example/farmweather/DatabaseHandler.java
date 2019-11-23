@@ -78,8 +78,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public Cursor getData(String CITY){
         database = this.getWritableDatabase();
-        String sql0="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+CITY+"' ORDER BY RequestID DESC";
-        Cursor cursor = database.rawQuery(sql0,null);
+        String sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+CITY+"' ORDER BY RequestID DESC";
+        Cursor cursor = database.rawQuery(sql,null);
         return cursor;
     }
 
@@ -94,6 +94,24 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         database = this.getWritableDatabase();
         return database.delete(TABLE_NAME,"City = ?",new String[] {area});
     }
+
+    public Cursor sortByWeatherStatus(String area,String weather){
+        database = this.getWritableDatabase();
+        String sql;
+        sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+area+"' AND Weather = '"+weather+"' ORDER BY RequestID DESC";
+        Cursor cursor = database.rawQuery(sql,null);
+        return cursor;
+    }
+
+    public Cursor sortByMonthStatus(String area,String date){
+        database = this.getWritableDatabase();
+        String sql;
+        sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+area+"' AND SearchDate LIKE '%"+date+"%' ORDER BY RequestID DESC";
+        Cursor cursor = database.rawQuery(sql,null);
+        return cursor;
+    }
+
+
 //"City = '"+area+"' AND SearchDate = '"+date+"' AND CurTemp = '"+temp+"' AND Weather = '"+we+"' AND Wind = '"+wi+"' AND  Humidity = '"+Hu+"'"
 }
 
