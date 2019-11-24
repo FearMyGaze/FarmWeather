@@ -2,15 +2,17 @@ package com.example.farmweather;
 
 public class WeatherList {
     private int id,oldWeatherID;
+    private String city;
     private String date;
     private String temp;
     private String weather;
     private String wind;
     private String humidity;
 
-    public WeatherList(int id,int oldWeatherID, String date, String temp, String weather, String wind, String humidity) {
+    public WeatherList(int id,int oldWeatherID,String city, String date, String temp, String weather, String wind, String humidity) {
         this.id = id;
         this.oldWeatherID = oldWeatherID;
+        this.city = city;
         this.date = date;
         this.temp = temp;
         this.weather = weather;
@@ -25,6 +27,8 @@ public class WeatherList {
     public int getOldWeatherID(){
         return oldWeatherID;
     }
+
+    public String getCity(){ return city; }
 
     public String getDate() {
         return date;

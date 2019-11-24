@@ -11,18 +11,19 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import java.util.ArrayList;
 import android.database.Cursor;
+import android.widget.Switch;
 import android.widget.Toast;
 
 public class Old_Weather extends AppCompatActivity {
 
-    String getTown,choice;
+    String getTown,choice,city;
     Cursor cursor,cursor1,cursor2,cursor3;
     String Date = "0", Temp = "0", Weather = "0", Wind = "0", Humidity = "0", sort = "DESC";
     int item = 0,Id = 0,switcher = 0;
     WeatherList history;
     ArrayList<WeatherList> balander,boomer = new ArrayList<>();
     DatabaseHandler DB = new DatabaseHandler(this);
-    boolean isUpdated;
+    boolean isUpdated,flag = true;
 
 
     @Override
@@ -95,7 +96,7 @@ public class Old_Weather extends AppCompatActivity {
         return true;
     }
 
-    public void deleteall(){
+    public void deleteAll(){
         Integer clearall = DB.clearall(getTown);
         if (clearall > 0) {
             Toast.makeText(getApplicationContext(), "Η διαγραφή του ιστορικού ολοκληρώθηκε", Toast.LENGTH_SHORT).show();
@@ -125,7 +126,7 @@ public class Old_Weather extends AppCompatActivity {
                         .setPositiveButton("ΝΑΙ", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                    deleteall();
+                                    deleteAll();
                             }
                         }).show();
                 return true;
@@ -346,13 +347,17 @@ public class Old_Weather extends AppCompatActivity {
                 adaptori.notifyDataSetChanged();
                 return true;
 
-            case R.id.MaxItemList:
-                sort = "ASC";
+
+            case R.id.ShowAllItemList:
+                if(switcher != 1) {
+                    balander = new ArrayList<>();
+                    swap(switcher, sort, balander, flag);
+                    adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
+                    list.setAdapter(adaptori);
+                    adaptori.notifyDataSetChanged();
+                }
                 return true;
 
-            case R.id.MinItemList:
-                sort = "DESC";
-                return true;
             default:return super.onOptionsItemSelected(item);
         }
     }
@@ -373,6 +378,7 @@ public class Old_Weather extends AppCompatActivity {
         else{
             while (cursor.moveToNext() ) {
                 Id = Integer.valueOf(cursor.getString(0));
+                city = getTown;
                 Date = cursor.getString(6);
                 Temp = cursor.getString(2);
                 Weather = cursor.getString(3);
@@ -381,7 +387,6 @@ public class Old_Weather extends AppCompatActivity {
                 addPins(lista);
                 mergeIconRows(Id,item+i);
                 i++;
-                pass(boomer);
             }
             cursor.close();
         }
@@ -398,6 +403,7 @@ public class Old_Weather extends AppCompatActivity {
         else{
             while (cursor1.moveToNext() ) {
                 Id = Integer.valueOf(cursor1.getString(0));
+                city = getTown;
                 Date = cursor1.getString(6);
                 Temp = cursor1.getString(2);
                 Weather = cursor1.getString(3);
@@ -406,7 +412,6 @@ public class Old_Weather extends AppCompatActivity {
                 addPins(lista);
                 mergeIconRows(Id,item+i);
                 i++;
-                pass(boomer);
             }
             cursor1.close();
         }
@@ -422,6 +427,7 @@ public class Old_Weather extends AppCompatActivity {
         else{
             while (cursor2.moveToNext() ) {
                 Id = Integer.valueOf(cursor2.getString(0));
+                city = getTown;
                 Date = cursor2.getString(6);
                 Temp = cursor2.getString(2);
                 Weather = cursor2.getString(3);
@@ -430,7 +436,6 @@ public class Old_Weather extends AppCompatActivity {
                 addPins(lista);
                 mergeIconRows(Id,item+i);
                 i++;
-                pass(boomer);
             }
             cursor2.close();
         }
@@ -446,6 +451,7 @@ public class Old_Weather extends AppCompatActivity {
         else{
             while (cursor3.moveToNext() ) {
                 Id = Integer.valueOf(cursor3.getString(0));
+                city = getTown;
                 Date = cursor3.getString(6);
                 Temp = cursor3.getString(2);
                 Weather = cursor3.getString(3);
@@ -454,46 +460,35 @@ public class Old_Weather extends AppCompatActivity {
                 addPins(lista);
                 mergeIconRows(Id,item+i);
                 i++;
-                pass(boomer);
             }
             cursor3.close();
         }
     }
 
     public void addPins(ArrayList<WeatherList> list){
-        history = new WeatherList(Id,item,Date,Temp,Weather,Wind,Humidity);
+        history = new WeatherList(Id,item,city,Date,Temp,Weather,Wind,Humidity);
         list.add(history);
     }
 
-    public void pass(ArrayList<WeatherList> list){
+    public void swap(int switcher,String sort,ArrayList<WeatherList> list,boolean flag){
+        this.sort = sort;
 
-        for(int i=0;i<list.size();i++){
-            boomer.remove(i);
-        }
-
-        for(int i=0;i<list.size();i++){
-            boomer.add(list.get(i));
-        }
+            switch(switcher){
+                case 2:
+                    getTown = "*";
+                    viewSortedBwData(list);
+                    break;
+                case 3:
+                    getTown = "*";
+                    viewSortedBmData(list);
+                    break;
+                case 4:
+                    getTown = "*";
+                    viewSortedBtData(list);
+                    break;
+            }
 
     }
-
-//    public void swap(int switcher,String sort){
-//        this.sort = sort;
-//        switch(switcher){
-//            case 1:
-//                viewSortedBwData(balander);
-//                break;
-//            case 2:
-//                viewSortedBmData(balander);
-//                break;
-//            case 3:
-//                viewSortedBtData(balander);
-//                break;
-//            case 4:
-//                viewData(balander);
-//                break;
-//        }
-//    }
 
 }
 
