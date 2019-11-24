@@ -174,35 +174,13 @@
     </item> //List 3
 
     <item
-        android:id="@+id/ViewItemList"
-        android:title="Ταξινόμηση">
-
-        <menu>
-
-            <item
-                android:id="@+id/MaxItemList"
-                android:title="Αύξουσα">
-
-            </item>
-
-            <item
-                android:id="@+id/MinItemList"
-                android:title="Φθήνουσα">
-
-            </item>
-
-        </menu>
-
-    </item> //List 4
-
-    <item
         android:id="@+id/DeleteItemList"
         android:title="Καθαρισμός όλων">
-    </item>//List 5
+    </item>//List 4
 
     <item
         android:id="@+id/ShowAllItemList"
         android:title="Εμφάνιση όλων">
-    </item>
+    </item>//List 5
 
 </menu>
