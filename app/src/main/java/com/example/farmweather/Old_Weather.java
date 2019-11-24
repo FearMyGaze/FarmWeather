@@ -20,7 +20,7 @@ public class Old_Weather extends AppCompatActivity {
     String Date = "0", City = "0", Temp = "0", Weather = "0", Wind = "0", Humidity = "0", sort = "DESC";
     int item = 0,Id = 0,switcher = 0;
     WeatherList history;
-    ArrayList<WeatherList> balander;
+    ArrayList<WeatherList> balander,PAPARLIST;
     DatabaseHandler DB = new DatabaseHandler(this);
     boolean isUpdated,flag = false;
 
@@ -35,10 +35,12 @@ public class Old_Weather extends AppCompatActivity {
         final ListView MyList = findViewById(R.id.ListView);
 
         final ArrayList<WeatherList> weatherList = new ArrayList<>();
-        final ArrayList<WeatherList> balist = new ArrayList<>();
+
+
 
         //KWDIKAS GIA DIAGRAFH ANTIKEIMENOY APO LISTA AN PATHSEIS SYNEXOMENA
-        final CustomAdapter adapter = new CustomAdapter(this, R.layout.adapter_view_layout, weatherList);
+
+        final CustomAdapter adapter = new CustomAdapter(this, R.layout.adapter_view_layout, weatherList, balander);
         MyList.setAdapter(adapter);
 
         MyList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -46,22 +48,33 @@ public class Old_Weather extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final int item = position;
                 if(isTF()){
-                    passapassashoot(weatherList,balist);
+                    new AlertDialog.Builder(Old_Weather.this)
+                            .setIcon(android.R.drawable.ic_menu_info_details)
+                            .setTitle("Πληροφορίες")
+                            .setMessage("Ημερομηνία: " + weatherList.get(item).getDate() +
+                                    "\nΘερμοκρασία: " + weatherList.get(item).getTemp() +
+                                    "\nΠεριγραφή: " + weatherList.get(item).getWeather() +
+                                    "\nΑέρας: " + weatherList.get(item).getWind() +
+                                    "\nΥγρασία: " + weatherList.get(item).getHumidity() +
+                                    "\nΠόλη: " + weatherList.get(item).getCity() + "\nΓια διαγραφή πιέστε συνεχόμενα την εγγραφή!")
+                            .setNegativeButton("Ok" ,null)
+                            .show();
                 }
                 else{
-                    passapassashoot(balander,balist);
+
+                    new AlertDialog.Builder(Old_Weather.this)
+                            .setIcon(android.R.drawable.ic_menu_info_details)
+                            .setTitle("Πληροφορίες")
+                            .setMessage("Ημερομηνία: " + balander.get(item).getDate() +
+                                    "\nΘερμοκρασία: " + balander.get(item).getTemp() +
+                                    "\nΠεριγραφή: " + balander.get(item).getWeather() +
+                                    "\nΑέρας: " + balander.get(item).getWind() +
+                                    "\nΥγρασία: " + balander.get(item).getHumidity() +
+                                    "\nΠόλη: " + balander.get(item).getCity() + "\nΓια διαγραφή πιέστε συνεχόμενα την εγγραφή!")
+                            .setNegativeButton("Ok" ,null)
+                            .show();
                 }
-                new AlertDialog.Builder(Old_Weather.this)
-                        .setIcon(android.R.drawable.ic_menu_info_details)
-                        .setTitle("Πληροφορίες")
-                        .setMessage("Ημερομηνία: " + balist.get(item).getDate() +
-                                "\nΘερμοκρασία: " + balist.get(item).getTemp() +
-                                "\nΠεριγραφή: " + balist.get(item).getWeather() +
-                                "\nΑέρας: " + balist.get(item).getWind() +
-                                "\nΥγρασία: " + balist.get(item).getHumidity() +
-                                "\nΠόλη: " + balist.get(item).getCity() + "\nΓια διαγραφή πιέστε συνεχόμενα την εγγραφή!")
-                        .setNegativeButton("Ok" ,null)
-                        .show();
+
             }
         });
 
@@ -118,8 +131,9 @@ public class Old_Weather extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         // DILOSI ANTIKEIMENON GIA TIN LISTA STO OLD_WEATHER MENU
+
         balander = new ArrayList<>();
-        final CustomAdapter adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
+        final SubAdapter adaptori = new SubAdapter(this, R.layout.adapter_view_layout,balander);
         final ListView list = findViewById(R.id.ListView);
         switch(item.getItemId()){
             case R.id.DeleteItemList:
@@ -141,10 +155,12 @@ public class Old_Weather extends AppCompatActivity {
                                  if(getTown != "*"){
                                     deleteAll();
                                     Toast.makeText(getApplicationContext(),"Η διαγραφή του ιστορικού ολοκληρώθηκε",Toast.LENGTH_SHORT).show();
+                                    list.setAdapter(adaptori);
+                                    adaptori.notifyDataSetChanged();
                                  }else{
                                     Toast.makeText(getApplicationContext(),"Παρακαλώ επαναφέρετε το ιστορικό μιας πόλης",Toast.LENGTH_SHORT).show();
                                     viewData(balander);
-                                     list.setAdapter(adaptori);
+                                    list.setAdapter(adaptori);
                                     adaptori.notifyDataSetChanged();
                                  }
                             }
@@ -493,13 +509,6 @@ public class Old_Weather extends AppCompatActivity {
             }
 
     }
-
-    public void passapassashoot(ArrayList<WeatherList> list,ArrayList<WeatherList> boomer){
-        for(int i=0;i<list.size();i++){
-            boomer.add(list.get(i));
-        }
-    }
-
 }
 
 

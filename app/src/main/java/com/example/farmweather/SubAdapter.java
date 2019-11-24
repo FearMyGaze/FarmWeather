@@ -9,11 +9,11 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 
-class CustomAdapter extends ArrayAdapter<WeatherList> {
+class SubAdapter extends ArrayAdapter<WeatherList> {
     private Context mContext;
     int mResource;
 
-    public CustomAdapter(Context context, int resource, ArrayList<WeatherList> objects, ArrayList<WeatherList> objects1) {
+    public SubAdapter(Context context, int resource, ArrayList<WeatherList> objects) {
         super(context, resource, objects);
         mContext = context;
         mResource = resource;

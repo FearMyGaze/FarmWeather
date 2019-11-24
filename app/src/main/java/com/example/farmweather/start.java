@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.Toast;
 
 
 public class start extends AppCompatActivity {
@@ -67,7 +68,15 @@ public class start extends AppCompatActivity {
                             .setNegativeButton("Ok",null)
                             .show();
 
-                }else{
+                }else if(Latitude.getText().toString().contains("."))
+                {
+                    Toast.makeText(getApplicationContext(),"Παρακαλώ εισάγετε μονή τελεία",Toast.LENGTH_SHORT).show();
+                }
+               else if(Longitude.getText().toString().contains("."))
+               {
+                    Toast.makeText(getApplicationContext(),"Παρακαλώ εισάγετε μονή τελεία",Toast.LENGTH_SHORT).show();
+               }
+               else {
                     String GetLat = Latitude.getText().toString();
                     String GetLong = Longitude.getText().toString();
                     Intent intent = new Intent(start.this , MainActivity.class);
