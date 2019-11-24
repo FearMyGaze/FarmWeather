@@ -22,7 +22,7 @@ public class Old_Weather extends AppCompatActivity {
     WeatherList history;
     ArrayList<WeatherList> balander;
     DatabaseHandler DB = new DatabaseHandler(this);
-    boolean isUpdated,flag = true;
+    boolean isUpdated,flag = false;
 
 
     @Override
@@ -35,6 +35,7 @@ public class Old_Weather extends AppCompatActivity {
         final ListView MyList = findViewById(R.id.ListView);
 
         final ArrayList<WeatherList> weatherList = new ArrayList<>();
+        final ArrayList<WeatherList> balist = new ArrayList<>();
 
         //KWDIKAS GIA DIAGRAFH ANTIKEIMENOY APO LISTA AN PATHSEIS SYNEXOMENA
         final CustomAdapter adapter = new CustomAdapter(this, R.layout.adapter_view_layout, weatherList);
@@ -44,16 +45,21 @@ public class Old_Weather extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final int item = position;
-
+                if(isTF()){
+                    passapassashoot(weatherList,balist);
+                }
+                else{
+                    passapassashoot(balander,balist);
+                }
                 new AlertDialog.Builder(Old_Weather.this)
                         .setIcon(android.R.drawable.ic_menu_info_details)
                         .setTitle("Πληροφορίες")
-                        .setMessage("Ημερομηνία: " + balander.get(item).getDate() +
-                                "\nΘερμοκρασία: " + balander.get(item).getTemp() +
-                                "\nΠεριγραφή: " + balander.get(item).getWeather() +
-                                "\nΑέρας: " + balander.get(item).getWind() +
-                                "\nΥγρασία: " + balander.get(item).getHumidity() +
-                                "\nΠόλη: " + balander.get(item).getCity() + "\nΓια διαγραφή πιέστε συνεχόμενα την εγγραφή!")
+                        .setMessage("Ημερομηνία: " + balist.get(item).getDate() +
+                                "\nΘερμοκρασία: " + balist.get(item).getTemp() +
+                                "\nΠεριγραφή: " + balist.get(item).getWeather() +
+                                "\nΑέρας: " + balist.get(item).getWind() +
+                                "\nΥγρασία: " + balist.get(item).getHumidity() +
+                                "\nΠόλη: " + balist.get(item).getCity() + "\nΓια διαγραφή πιέστε συνεχόμενα την εγγραφή!")
                         .setNegativeButton("Ok" ,null)
                         .show();
             }
@@ -146,6 +152,7 @@ public class Old_Weather extends AppCompatActivity {
                 return true;
 
             case R.id.Clear:
+                flag = true;
                 choice = "Καθαρός";
                 viewSortedBwData(balander);
                 list.setAdapter(adaptori);
@@ -153,6 +160,7 @@ public class Old_Weather extends AppCompatActivity {
                 return true;
 
             case R.id.RainSky:
+                flag = true;
                 choice = "Βροχερός";
                 viewSortedBwData(balander);
                 list.setAdapter(adaptori);
@@ -160,6 +168,7 @@ public class Old_Weather extends AppCompatActivity {
                 return true;
 
             case R.id.Storm:
+                flag = true;
                 choice = "Καταιγίδα";
                 viewSortedBwData(balander);
                 list.setAdapter(adaptori);
@@ -167,6 +176,7 @@ public class Old_Weather extends AppCompatActivity {
                 return true;
 
             case R.id.Sun:
+                flag = true;
                 choice = "Λιακάδα";
                 viewSortedBwData(balander);
                 list.setAdapter(adaptori);
@@ -174,6 +184,7 @@ public class Old_Weather extends AppCompatActivity {
                 return true;
 
             case R.id.Heat:
+                flag = true;
                 choice = "Καύσωνας";
                 viewSortedBwData(balander);
                 list.setAdapter(adaptori);
@@ -181,6 +192,7 @@ public class Old_Weather extends AppCompatActivity {
                 return true;
 
             case R.id.Snow:
+                flag = true;
                 choice = "Χιόνι";
                 viewSortedBwData(balander);
                 list.setAdapter(adaptori);
@@ -188,6 +200,7 @@ public class Old_Weather extends AppCompatActivity {
                 return true;
 
             case R.id.Smoke:
+                flag = true;
                 choice = "Σκόνη";
                 viewSortedBwData(balander);
                 list.setAdapter(adaptori);
@@ -195,6 +208,7 @@ public class Old_Weather extends AppCompatActivity {
                 return true;
 
             case R.id.Month_1:
+                flag = true;
                 choice = "Jan";
                 viewSortedBmData(balander);
                 list.setAdapter(adaptori);
@@ -202,6 +216,7 @@ public class Old_Weather extends AppCompatActivity {
                 return true;
 
             case R.id.Month_2:
+                flag = true;
                 choice = "Feb";
                 viewSortedBmData(balander);
                 list.setAdapter(adaptori);
@@ -209,6 +224,7 @@ public class Old_Weather extends AppCompatActivity {
                 return true;
 
             case R.id.Month_3:
+                flag = true;
                 choice = "Mar";
                 viewSortedBmData(balander);
                 list.setAdapter(adaptori);
@@ -216,6 +232,7 @@ public class Old_Weather extends AppCompatActivity {
                 return true;
 
             case R.id.Month_4:
+                flag = true;
                 choice = "Apr";
                 viewSortedBmData(balander);
                 list.setAdapter(adaptori);
@@ -223,6 +240,7 @@ public class Old_Weather extends AppCompatActivity {
                 return true;
 
             case R.id.Month_5:
+                flag = true;
                 choice = "May";
                 viewSortedBmData(balander);
                 list.setAdapter(adaptori);
@@ -230,6 +248,7 @@ public class Old_Weather extends AppCompatActivity {
                 return true;
 
             case R.id.Month_6:
+                flag = true;
                 choice = "Jun";
                 viewSortedBmData(balander);
                 list.setAdapter(adaptori);
@@ -237,6 +256,7 @@ public class Old_Weather extends AppCompatActivity {
                 return true;
 
             case R.id.Month_7:
+                flag = true;
                 choice = "Jul";
                 viewSortedBmData(balander);
                 list.setAdapter(adaptori);
@@ -244,6 +264,7 @@ public class Old_Weather extends AppCompatActivity {
                 return true;
 
             case R.id.Month_8:
+                flag = true;
                 choice = "Aug";
                 viewSortedBmData(balander);
                 list.setAdapter(adaptori);
@@ -251,6 +272,7 @@ public class Old_Weather extends AppCompatActivity {
                 return true;
 
             case R.id.Month_9:
+                flag = true;
                 choice = "Sep";
                 viewSortedBmData(balander);
                 list.setAdapter(adaptori);
@@ -258,6 +280,7 @@ public class Old_Weather extends AppCompatActivity {
                 return true;
 
             case R.id.Month_10:
+                flag = true;
                 choice = "Oct";
                 viewSortedBmData(balander);
                 list.setAdapter(adaptori);
@@ -265,6 +288,7 @@ public class Old_Weather extends AppCompatActivity {
                 return true;
 
             case R.id.Month_11:
+                flag = true;
                 choice = "Nov";
                 viewSortedBmData(balander);
                 list.setAdapter(adaptori);
@@ -272,6 +296,7 @@ public class Old_Weather extends AppCompatActivity {
                 return true;
 
             case R.id.Month_12:
+                flag = true;
                 choice = "Dec";
                 viewSortedBmData(balander);
                 list.setAdapter(adaptori);
@@ -279,6 +304,7 @@ public class Old_Weather extends AppCompatActivity {
                 return true;
 
             case R.id.TempList_0_10:
+                flag = true;
                 choice = "1";
                 viewSortedBtData(balander);
                 list.setAdapter(adaptori);
@@ -286,6 +312,7 @@ public class Old_Weather extends AppCompatActivity {
                 return true;
 
             case R.id.TempList_11_25:
+                flag = true;
                 choice = "2";
                 viewSortedBtData(balander);
                 list.setAdapter(adaptori);
@@ -293,6 +320,7 @@ public class Old_Weather extends AppCompatActivity {
                 return true;
 
             case R.id.TempList26_40:
+                flag = true;
                 choice = "3";
                 viewSortedBtData(balander);
                 list.setAdapter(adaptori);
@@ -300,6 +328,7 @@ public class Old_Weather extends AppCompatActivity {
                 return true;
 
             case R.id.TempListUnder0:
+                flag = true;
                 choice = "4";
                 viewSortedBtData(balander);
                 list.setAdapter(adaptori);
@@ -307,15 +336,16 @@ public class Old_Weather extends AppCompatActivity {
                 return true;
 
             case R.id.TempListUpper40:
+                flag = true;
                 choice = "5";
                 viewSortedBtData(balander);
                 list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
-
             case R.id.ShowAllItemList:
-                    swap(switcher, sort, balander, flag);
+                flag = true;
+                    swap(switcher, sort, balander);
                     list.setAdapter(adaptori);
                     adaptori.notifyDataSetChanged();
                 return true;
@@ -328,6 +358,14 @@ public class Old_Weather extends AppCompatActivity {
         isUpdated = DB.updateIconID(ID,iconID);
         if(isUpdated == false) {
             Toast.makeText(getApplicationContext(), "Σφάλμα κατά την ενημέρωση", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public boolean isTF(){
+        if(flag == false){
+            return true;
+        }else{
+            return false;
         }
     }
 
@@ -433,9 +471,8 @@ public class Old_Weather extends AppCompatActivity {
         list.add(history);
     }
 
-    public void swap(int switcher,String sort,ArrayList<WeatherList> list,boolean flag){
+    public void swap(int switcher,String sort,ArrayList<WeatherList> list){
         this.sort = sort;
-
             switch(switcher){
                 case 1:
                     getTown = "*";
