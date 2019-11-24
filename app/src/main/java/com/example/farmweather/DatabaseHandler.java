@@ -101,14 +101,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public Cursor sortByWeatherStatus(String area,String weather,String sort){
         database = this.getWritableDatabase();
         String sql;
-        if(area != "*"){
-            sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+area+"' AND Weather = '"+weather+"' ORDER BY RequestID "+sort+"";
-        }
-        else
-        {
-            sql="SELECT * FROM Cities_Areas WHERE Weather = '"+weather+"' ORDER BY RequestID "+sort+"";
-
-        }
+        sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+area+"' AND Weather = '"+weather+"' ORDER BY RequestID "+sort+"";
         Cursor cursor = database.rawQuery(sql,null);
         return cursor;
     }
@@ -116,14 +109,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public Cursor sortByMonthStatus(String area,String date,String sort){
         database = this.getWritableDatabase();
         String sql;
-        if(area != "*"){
-            sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+area+"' AND SearchDate LIKE '%"+date+"%' ORDER BY RequestID "+sort+"";
-        }
-        else
-        {
-            sql="SELECT * FROM Cities_Areas WHERE SearchDate LIKE '%"+date+"%' ORDER BY RequestID "+sort+"";
-
-        }
+        sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+area+"' AND SearchDate LIKE '%"+date+"%' ORDER BY RequestID "+sort+"";
         Cursor cursor = database.rawQuery(sql,null);
         return cursor;
     }
@@ -133,53 +119,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+area+"' AND CurTemp = '"+temp+"' ORDER BY RequestID "+sort+"";
         switch (temp){
             case "1":
-                if(area != "*"){
-                    sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+area+"' AND CurTemp BETWEEN 0 AND 10 ORDER BY RequestID "+sort+"";
-                }
-                else
-                {
-                    sql="SELECT * FROM Cities_Areas WHERE CurTemp BETWEEN 0 AND 10 ORDER BY RequestID "+sort+"";
-
-                }
+                sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+area+"' AND CurTemp BETWEEN 0 AND 10 ORDER BY RequestID "+sort+"";
                 break;
             case "2":
-                if(area != "*"){
-                    sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+area+"' AND CurTemp BETWEEN 11 AND 25 ORDER BY RequestID "+sort+"";
-                }
-                else
-                {
-                    sql="SELECT * FROM Cities_Areas WHERE CurTemp BETWEEN 11 AND 25 ORDER BY RequestID "+sort+"";
-
-                }                break;
+                sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+area+"' AND CurTemp BETWEEN 11 AND 25 ORDER BY RequestID "+sort+"";
+                break;
             case "3":
-                if(area != "*"){
-                    sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+area+"' AND CurTemp BETWEEN 26 AND 40 ORDER BY RequestID "+sort+"";
-                }
-                else
-                {
-                    sql="SELECT * FROM Cities_Areas WHERE CurTemp BETWEEN 26 AND 40 ORDER BY RequestID "+sort+"";
-
-                }
+                sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+area+"' AND CurTemp BETWEEN 26 AND 40 ORDER BY RequestID "+sort+"";
                 break;
             case "4":
-                if(area != "*"){
-                    sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+area+"' AND CurTemp < 0 ORDER BY RequestID "+sort+"";
-                }
-                else
-                {
-                    sql="SELECT * FROM Cities_Areas WHERE CurTemp < 0 ORDER BY RequestID "+sort+"";
-
-                }
+                sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+area+"' AND CurTemp < 0 ORDER BY RequestID "+sort+"";
                 break;
             case "5":
-                if(area != "*"){
-                    sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+area+"' AND CurTemp > 40 ORDER BY RequestID "+sort+"";
-                }
-                else
-                {
-                    sql="SELECT * FROM Cities_Areas WHERE CurTemp > 40 ORDER BY RequestID "+sort+"";
-
-                }
+                sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+area+"' AND CurTemp > 40 ORDER BY RequestID "+sort+"";
                 break;
         }
         database = this.getWritableDatabase();
@@ -187,3 +139,24 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return cursor;
     }
 }
+
+   /* public boolean checkDataBase() {
+        SQLiteDatabase checkDB = null;
+        try {
+            checkDB = SQLiteDatabase.openDatabase("/data/data/com.example.farmweather/databases/WeaFa.db", null,
+                    SQLiteDatabase.OPEN_READONLY);
+            checkDB.close();
+        } catch (SQLiteException e) {
+            //Error DB does not exist restart the app to create the DB
+        }
+        return checkDB != null;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        if (!checkDataBase() == true) {
+            DatabaseHandler databaseHandler = new DatabaseHandler(this);
+        }
+    }*/
