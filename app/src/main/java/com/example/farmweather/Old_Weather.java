@@ -21,7 +21,7 @@ public class Old_Weather extends AppCompatActivity {
     String Date = "0", Temp = "0", Weather = "0", Wind = "0", Humidity = "0", sort = "DESC";
     int item = 0,Id = 0,switcher = 0;
     WeatherList history;
-    ArrayList<WeatherList> balander,boomer = new ArrayList<>();
+    ArrayList<WeatherList> balander;
     DatabaseHandler DB = new DatabaseHandler(this);
     boolean isUpdated,flag = true;
 
