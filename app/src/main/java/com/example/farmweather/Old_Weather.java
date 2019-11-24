@@ -11,14 +11,13 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import java.util.ArrayList;
 import android.database.Cursor;
-import android.widget.Switch;
 import android.widget.Toast;
 
 public class Old_Weather extends AppCompatActivity {
 
-    String getTown,choice,city;
+    String getTown,choice;
     Cursor cursor,cursor1,cursor2,cursor3;
-    String Date = "0", Temp = "0", Weather = "0", Wind = "0", Humidity = "0", sort = "DESC";
+    String Date = "0", City = "0", Temp = "0", Weather = "0", Wind = "0", Humidity = "0", sort = "DESC";
     int item = 0,Id = 0,switcher = 0;
     WeatherList history;
     ArrayList<WeatherList> balander;
@@ -34,6 +33,7 @@ public class Old_Weather extends AppCompatActivity {
         getTown = (getIntent().getStringExtra("GetTown"));
 
         final ListView MyList = findViewById(R.id.ListView);
+
         final ArrayList<WeatherList> weatherList = new ArrayList<>();
 
         //KWDIKAS GIA DIAGRAFH ANTIKEIMENOY APO LISTA AN PATHSEIS SYNEXOMENA
@@ -48,11 +48,12 @@ public class Old_Weather extends AppCompatActivity {
                 new AlertDialog.Builder(Old_Weather.this)
                         .setIcon(android.R.drawable.ic_menu_info_details)
                         .setTitle("Πληροφορίες")
-                        .setMessage("Ημερομηνία: " + weatherList.get(item).getDate() +
-                                "\nΘερμοκρασία: " + weatherList.get(item).getTemp() +
-                                "\nΠεριγραφή: " + weatherList.get(item).getWeather() +
-                                "\nΑέρας: " + weatherList.get(item).getWind() +
-                                "\nΥγρασία: " + weatherList.get(item).getHumidity() + "\nΓια διαγραφή πιέστε συνεχόμενα την εγγραφή!")
+                        .setMessage("Ημερομηνία: " + balander.get(item).getDate() +
+                                "\nΘερμοκρασία: " + balander.get(item).getTemp() +
+                                "\nΠεριγραφή: " + balander.get(item).getWeather() +
+                                "\nΑέρας: " + balander.get(item).getWind() +
+                                "\nΥγρασία: " + balander.get(item).getHumidity() +
+                                "\nΠόλη: " + balander.get(item).getCity() + "\nΓια διαγραφή πιέστε συνεχόμενα την εγγραφή!")
                         .setNegativeButton("Ok" ,null)
                         .show();
             }
@@ -70,15 +71,18 @@ public class Old_Weather extends AppCompatActivity {
                         .setPositiveButton("Ναι", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Integer deleteRows = DB.deleteDate(String.valueOf(weatherList.get(item).getId()),getTown,weatherList.get(item).getTemp(),weatherList.get(item).getWeather(),weatherList.get(item).getWind(),weatherList.get(item).getHumidity(),weatherList.get(item).getDate());
-                                if(deleteRows > 0){
-                                    Toast.makeText(Old_Weather.this, "Η εγγραφή διαγράφτηκε", Toast.LENGTH_SHORT).show();
+                                if(getTown != "*") {
+                                    Integer deleteRows = DB.deleteDate(String.valueOf(weatherList.get(item).getId()), getTown, weatherList.get(item).getTemp(), weatherList.get(item).getWeather(), weatherList.get(item).getWind(), weatherList.get(item).getHumidity(), weatherList.get(item).getDate());
+                                    if (deleteRows > 0) {
+                                        Toast.makeText(Old_Weather.this, "Η εγγραφή διαγράφτηκε", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "Δεν βρέθηκαν παρελθοντικά δεδομένα", Toast.LENGTH_SHORT).show();
+                                    }
+                                    weatherList.remove(item);
+                                    adapter.notifyDataSetChanged();
+                                }else{
+                                    Toast.makeText(getApplicationContext(),"Παρακαλώ επαναφέρετε το ιστορικό μιας πόλης",Toast.LENGTH_SHORT).show();
                                 }
-                                else{
-                                    Toast.makeText(getApplicationContext(),"Δεν βρέθηκαν παρελθοντικά δεδομένα",Toast.LENGTH_SHORT).show();
-                                }
-                                weatherList.remove(item);
-                                adapter.notifyDataSetChanged();
                             }
                         })
                         .setNegativeButton("Όχι", null)
@@ -102,11 +106,6 @@ public class Old_Weather extends AppCompatActivity {
         } else{
             Toast.makeText(getApplicationContext(), "Αδυναμία διαγραφής ιστορικού", Toast.LENGTH_SHORT).show();
         }
-        balander = new ArrayList<>();
-        final CustomAdapter adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
-        final ListView list = findViewById(R.id.ListView);
-        list.setAdapter(adaptori);
-        adaptori.notifyDataSetChanged();
     }
 
     @Override
@@ -116,18 +115,32 @@ public class Old_Weather extends AppCompatActivity {
         balander = new ArrayList<>();
         final CustomAdapter adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
         final ListView list = findViewById(R.id.ListView);
-        list.setAdapter(adaptori);
         switch(item.getItemId()){
             case R.id.DeleteItemList:
                 new AlertDialog.Builder(Old_Weather.this)
                         .setIcon(android.R.drawable.ic_delete)
                         .setTitle("ΠΡΟΣΟΧΗ !!")
                         .setMessage("Θέλετε να διαγράψετε ολα τα αντικείμενα ;")
-                        .setNegativeButton("ΟΧΙ",null)
+                        .setNegativeButton("ΟΧΙ", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                viewData(balander);
+                                list.setAdapter(adaptori);
+                                adaptori.notifyDataSetChanged();
+                            }
+                        })
                         .setPositiveButton("ΝΑΙ", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                 if(getTown != "*"){
                                     deleteAll();
+                                    Toast.makeText(getApplicationContext(),"Η διαγραφή του ιστορικού ολοκληρώθηκε",Toast.LENGTH_SHORT).show();
+                                 }else{
+                                    Toast.makeText(getApplicationContext(),"Παρακαλώ επαναφέρετε το ιστορικό μιας πόλης",Toast.LENGTH_SHORT).show();
+                                    viewData(balander);
+                                     list.setAdapter(adaptori);
+                                    adaptori.notifyDataSetChanged();
+                                 }
                             }
                         }).show();
                 return true;
@@ -135,151 +148,175 @@ public class Old_Weather extends AppCompatActivity {
             case R.id.Clear:
                 choice = "Καθαρός";
                 viewSortedBwData(balander);
+                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.RainSky:
                 choice = "Βροχερός";
                 viewSortedBwData(balander);
+                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Storm:
                 choice = "Καταιγίδα";
-
                 viewSortedBwData(balander);
+                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Sun:
                 choice = "Λιακάδα";
                 viewSortedBwData(balander);
+                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Heat:
                 choice = "Καύσωνας";
                 viewSortedBwData(balander);
+                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Snow:
                 choice = "Χιόνι";
                 viewSortedBwData(balander);
+                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Smoke:
                 choice = "Σκόνη";
                 viewSortedBwData(balander);
+                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_1:
                 choice = "Jan";
                 viewSortedBmData(balander);
+                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_2:
                 choice = "Feb";
                 viewSortedBmData(balander);
+                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_3:
                 choice = "Mar";
                 viewSortedBmData(balander);
+                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_4:
                 choice = "Apr";
                 viewSortedBmData(balander);
+                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_5:
                 choice = "May";
                 viewSortedBmData(balander);
+                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_6:
                 choice = "Jun";
                 viewSortedBmData(balander);
+                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_7:
                 choice = "Jul";
                 viewSortedBmData(balander);
+                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_8:
                 choice = "Aug";
                 viewSortedBmData(balander);
+                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_9:
                 choice = "Sep";
                 viewSortedBmData(balander);
+                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_10:
                 choice = "Oct";
                 viewSortedBmData(balander);
+                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_11:
                 choice = "Nov";
                 viewSortedBmData(balander);
+                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_12:
                 choice = "Dec";
                 viewSortedBmData(balander);
+                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.TempList_0_10:
                 choice = "1";
                 viewSortedBtData(balander);
+                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.TempList_11_25:
                 choice = "2";
                 viewSortedBtData(balander);
+                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.TempList26_40:
                 choice = "3";
                 viewSortedBtData(balander);
+                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.TempListUnder0:
                 choice = "4";
                 viewSortedBtData(balander);
+                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.TempListUpper40:
                 choice = "5";
                 viewSortedBtData(balander);
+                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
 
             case R.id.ShowAllItemList:
                     swap(switcher, sort, balander, flag);
+                    list.setAdapter(adaptori);
                     adaptori.notifyDataSetChanged();
                 return true;
 
@@ -304,7 +341,7 @@ public class Old_Weather extends AppCompatActivity {
         else{
             while (cursor.moveToNext() ) {
                 Id = Integer.valueOf(cursor.getString(0));
-                city = getTown;
+                City = cursor.getString(1);
                 Date = cursor.getString(6);
                 Temp = cursor.getString(2);
                 Weather = cursor.getString(3);
@@ -329,7 +366,7 @@ public class Old_Weather extends AppCompatActivity {
         else{
             while (cursor1.moveToNext() ) {
                 Id = Integer.valueOf(cursor1.getString(0));
-                city = getTown;
+                City = cursor1.getString(1);
                 Date = cursor1.getString(6);
                 Temp = cursor1.getString(2);
                 Weather = cursor1.getString(3);
@@ -353,7 +390,7 @@ public class Old_Weather extends AppCompatActivity {
         else{
             while (cursor2.moveToNext() ) {
                 Id = Integer.valueOf(cursor2.getString(0));
-                city = getTown;
+                City = cursor2.getString(1);
                 Date = cursor2.getString(6);
                 Temp = cursor2.getString(2);
                 Weather = cursor2.getString(3);
@@ -377,7 +414,7 @@ public class Old_Weather extends AppCompatActivity {
         else{
             while (cursor3.moveToNext() ) {
                 Id = Integer.valueOf(cursor3.getString(0));
-                city = getTown;
+                City = cursor3.getString(1);
                 Date = cursor3.getString(6);
                 Temp = cursor3.getString(2);
                 Weather = cursor3.getString(3);
@@ -392,7 +429,7 @@ public class Old_Weather extends AppCompatActivity {
     }
 
     public void addPins(ArrayList<WeatherList> list){
-        history = new WeatherList(Id,item,city,Date,Temp,Weather,Wind,Humidity);
+        history = new WeatherList(Id,item,City,Date,Temp,Weather,Wind,Humidity);
         list.add(history);
     }
 
@@ -418,6 +455,12 @@ public class Old_Weather extends AppCompatActivity {
                     break;
             }
 
+    }
+
+    public void passapassashoot(ArrayList<WeatherList> list,ArrayList<WeatherList> boomer){
+        for(int i=0;i<list.size();i++){
+            boomer.add(list.get(i));
+        }
     }
 
 }
