@@ -79,9 +79,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
-    public Cursor getData(String CITY,String sort){
+    public Cursor getData(String area,String sort){
         database = this.getWritableDatabase();
-        String sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+CITY+"' ORDER BY RequestID "+sort+"";
+        String sql;
+        if(area != "*"){
+            sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+area+"' ORDER BY RequestID "+sort+"";
+        }
+        else
+        {
+            sql="SELECT * FROM Cities_Areas ORDER BY RequestID "+sort+"";
+        }
         Cursor cursor = database.rawQuery(sql,null);
         return cursor;
     }

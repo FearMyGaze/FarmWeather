@@ -86,7 +86,6 @@ public class Old_Weather extends AppCompatActivity {
                 return true;
             }
         });
-        cursor = DB.getData(getTown,sort);
         viewData(weatherList);
     }
 
@@ -114,8 +113,10 @@ public class Old_Weather extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         // DILOSI ANTIKEIMENON GIA TIN LISTA STO OLD_WEATHER MENU
-        CustomAdapter adaptori;
+        balander = new ArrayList<>();
+        final CustomAdapter adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
         final ListView list = findViewById(R.id.ListView);
+        list.setAdapter(adaptori);
         switch(item.getItemId()){
             case R.id.DeleteItemList:
                 new AlertDialog.Builder(Old_Weather.this)
@@ -133,229 +134,153 @@ public class Old_Weather extends AppCompatActivity {
 
             case R.id.Clear:
                 choice = "Καθαρός";
-                balander = new ArrayList<>();
                 viewSortedBwData(balander);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
-                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.RainSky:
                 choice = "Βροχερός";
-                balander = new ArrayList<>();
                 viewSortedBwData(balander);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
-                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Storm:
                 choice = "Καταιγίδα";
-                balander = new ArrayList<>();
+
                 viewSortedBwData(balander);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
-                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Sun:
                 choice = "Λιακάδα";
-                balander = new ArrayList<>();
                 viewSortedBwData(balander);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
-                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Heat:
                 choice = "Καύσωνας";
-                balander = new ArrayList<>();
                 viewSortedBwData(balander);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
-                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Snow:
                 choice = "Χιόνι";
-                balander = new ArrayList<>();
                 viewSortedBwData(balander);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
-                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Smoke:
                 choice = "Σκόνη";
-                balander = new ArrayList<>();
                 viewSortedBwData(balander);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
-                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_1:
                 choice = "Jan";
-                balander = new ArrayList<>();
                 viewSortedBmData(balander);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
-                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_2:
                 choice = "Feb";
-                balander = new ArrayList<>();
                 viewSortedBmData(balander);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
-                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_3:
                 choice = "Mar";
-                balander = new ArrayList<>();
                 viewSortedBmData(balander);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
-                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_4:
                 choice = "Apr";
-                balander = new ArrayList<>();
                 viewSortedBmData(balander);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
-                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_5:
                 choice = "May";
-                balander = new ArrayList<>();
                 viewSortedBmData(balander);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
-                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_6:
                 choice = "Jun";
-                balander = new ArrayList<>();
                 viewSortedBmData(balander);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
-                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_7:
                 choice = "Jul";
-                balander = new ArrayList<>();
                 viewSortedBmData(balander);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
-                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_8:
                 choice = "Aug";
-                balander = new ArrayList<>();
                 viewSortedBmData(balander);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
-                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_9:
                 choice = "Sep";
-                balander = new ArrayList<>();
                 viewSortedBmData(balander);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
-                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_10:
                 choice = "Oct";
-                balander = new ArrayList<>();
                 viewSortedBmData(balander);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
-                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_11:
                 choice = "Nov";
-                balander = new ArrayList<>();
                 viewSortedBmData(balander);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
-                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_12:
                 choice = "Dec";
-                balander = new ArrayList<>();
                 viewSortedBmData(balander);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
-                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.TempList_0_10:
                 choice = "1";
-                balander = new ArrayList<>();
                 viewSortedBtData(balander);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
-                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.TempList_11_25:
                 choice = "2";
-                balander = new ArrayList<>();
                 viewSortedBtData(balander);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
-                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.TempList26_40:
                 choice = "3";
-                balander = new ArrayList<>();
                 viewSortedBtData(balander);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
-                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.TempListUnder0:
                 choice = "4";
-                balander = new ArrayList<>();
                 viewSortedBtData(balander);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
-                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.TempListUpper40:
                 choice = "5";
-                balander = new ArrayList<>();
                 viewSortedBtData(balander);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
-                list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
 
             case R.id.ShowAllItemList:
-                if(switcher != 1) {
-                    balander = new ArrayList<>();
                     swap(switcher, sort, balander, flag);
-                    adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
-                    list.setAdapter(adaptori);
                     adaptori.notifyDataSetChanged();
-                }
                 return true;
 
             default:return super.onOptionsItemSelected(item);
@@ -370,6 +295,7 @@ public class Old_Weather extends AppCompatActivity {
     }
 
     public void viewData(ArrayList<WeatherList> lista){
+        cursor = DB.getData(getTown,sort);
         int i = 0;
         switcher = 1;
         if(cursor.getCount() == 0){
@@ -474,6 +400,10 @@ public class Old_Weather extends AppCompatActivity {
         this.sort = sort;
 
             switch(switcher){
+                case 1:
+                    getTown = "*";
+                    viewData(list);
+                    break;
                 case 2:
                     getTown = "*";
                     viewSortedBwData(list);
