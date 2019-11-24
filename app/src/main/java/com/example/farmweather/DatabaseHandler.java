@@ -5,6 +5,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.Cursor;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 
 public class DatabaseHandler extends SQLiteOpenHelper {
@@ -45,15 +48,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
-    public boolean insertData(String Ci,String Date,String Temp,String Wea,String Wi,String Hu){
+    public boolean insertData(String city,String date,String temp,String weather,String wind,String humidity){
         database = this.getWritableDatabase();
         ContentValues CV = new ContentValues();
-        CV.put(City,Ci);
-        CV.put(SearchDate,Date);
-        CV.put(CurTemp,Temp);
-        CV.put(Weather,Wea);
-        CV.put(Wind,Wi);
-        CV.put(Humidity,Hu);
+        CV.put(City,city);
+        CV.put(SearchDate,date);
+        CV.put(CurTemp,temp);
+        CV.put(Weather,weather);
+        CV.put(Wind,wind);
+        CV.put(Humidity,humidity);
         long result = database.insert(TABLE_NAME,null ,CV);
         if(result == (-1)){
             return false;
@@ -76,9 +79,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
-    public Cursor getData(String CITY){
+    public Cursor getData(String CITY,String sort){
         database = this.getWritableDatabase();
-        String sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+CITY+"' ORDER BY RequestID DESC";
+        String sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+CITY+"' ORDER BY RequestID "+sort+"";
         Cursor cursor = database.rawQuery(sql,null);
         return cursor;
     }
@@ -95,24 +98,46 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return database.delete(TABLE_NAME,"City = ?",new String[] {area});
     }
 
-    public Cursor sortByWeatherStatus(String area,String weather){
+    public Cursor sortByWeatherStatus(String area,String weather,String sort){
         database = this.getWritableDatabase();
         String sql;
-        sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+area+"' AND Weather = '"+weather+"' ORDER BY RequestID DESC";
+        sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+area+"' AND Weather = '"+weather+"' ORDER BY RequestID "+sort+"";
         Cursor cursor = database.rawQuery(sql,null);
         return cursor;
     }
 
-    public Cursor sortByMonthStatus(String area,String date){
+    public Cursor sortByMonthStatus(String area,String date,String sort){
         database = this.getWritableDatabase();
         String sql;
-        sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+area+"' AND SearchDate LIKE '%"+date+"%' ORDER BY RequestID DESC";
+        sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+area+"' AND SearchDate LIKE '%"+date+"%' ORDER BY RequestID "+sort+"";
         Cursor cursor = database.rawQuery(sql,null);
         return cursor;
     }
 
-
-//"City = '"+area+"' AND SearchDate = '"+date+"' AND CurTemp = '"+temp+"' AND Weather = '"+we+"' AND Wind = '"+wi+"' AND  Humidity = '"+Hu+"'"
+    public Cursor sortByTempStatus(String area,String temp,String sort){
+        String sql;
+        sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+area+"' AND CurTemp = '"+temp+"' ORDER BY RequestID "+sort+"";
+        switch (temp){
+            case "1":
+                sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+area+"' AND CurTemp BETWEEN 0 AND 10 ORDER BY RequestID "+sort+"";
+                break;
+            case "2":
+                sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+area+"' AND CurTemp BETWEEN 11 AND 25 ORDER BY RequestID "+sort+"";
+                break;
+            case "3":
+                sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+area+"' AND CurTemp BETWEEN 26 AND 40 ORDER BY RequestID "+sort+"";
+                break;
+            case "4":
+                sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+area+"' AND CurTemp < 0 ORDER BY RequestID "+sort+"";
+                break;
+            case "5":
+                sql="SELECT * FROM Cities_Areas WHERE Cities_Areas.City LIKE '"+area+"' AND CurTemp > 40 ORDER BY RequestID "+sort+"";
+                break;
+        }
+        database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery(sql,null);
+        return cursor;
+    }
 }
 
    /* public boolean checkDataBase() {

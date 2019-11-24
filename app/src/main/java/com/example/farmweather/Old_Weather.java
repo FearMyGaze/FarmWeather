@@ -15,15 +15,15 @@ import android.widget.Toast;
 
 public class Old_Weather extends AppCompatActivity {
 
-
     String getTown,choice;
-    Cursor cursor,cursor1,cursor2;
-    String Date = "0", Temp = "0", Weather = "0", Wind = "0", Humidity = "0";
-    int item = 0,Id = 0;
+    Cursor cursor,cursor1,cursor2,cursor3;
+    String Date = "0", Temp = "0", Weather = "0", Wind = "0", Humidity = "0", sort = "DESC";
+    int item = 0,Id = 0,switcher = 0;
     WeatherList history;
-    ArrayList<WeatherList> monthList;
+    ArrayList<WeatherList> balander,boomer = new ArrayList<>();
     DatabaseHandler DB = new DatabaseHandler(this);
     boolean isUpdated;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +85,7 @@ public class Old_Weather extends AppCompatActivity {
                 return true;
             }
         });
-        cursor = DB.getData(getTown);
+        cursor = DB.getData(getTown,sort);
         viewData(weatherList);
     }
 
@@ -93,6 +93,20 @@ public class Old_Weather extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.list_menu,menu);
         return true;
+    }
+
+    public void deleteall(){
+        Integer clearall = DB.clearall(getTown);
+        if (clearall > 0) {
+            Toast.makeText(getApplicationContext(), "Η διαγραφή του ιστορικού ολοκληρώθηκε", Toast.LENGTH_SHORT).show();
+        } else{
+            Toast.makeText(getApplicationContext(), "Αδυναμία διαγραφής ιστορικού", Toast.LENGTH_SHORT).show();
+        }
+        balander = new ArrayList<>();
+        final CustomAdapter adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
+        final ListView list = findViewById(R.id.ListView);
+        list.setAdapter(adaptori);
+        adaptori.notifyDataSetChanged();
     }
 
     @Override
@@ -111,186 +125,234 @@ public class Old_Weather extends AppCompatActivity {
                         .setPositiveButton("ΝΑΙ", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                    Integer deleteall = DB.clearall(getTown);
-                                    if (deleteall > 0) {
-                                        Toast.makeText(getApplicationContext(), "Η διαγραφή του ιστορικού ολοκληρώθηκε", Toast.LENGTH_SHORT).show();
-                                    } else
-                                        Toast.makeText(getApplicationContext(), "Αδυναμία διαγραφής ιστορικού", Toast.LENGTH_SHORT).show();
+                                    deleteall();
                             }
                         }).show();
                 return true;
 
             case R.id.Clear:
                 choice = "Καθαρός";
-                monthList = new ArrayList<>();
-                viewSortedBwData(monthList);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                balander = new ArrayList<>();
+                viewSortedBwData(balander);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
                 list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.RainSky:
                 choice = "Βροχερός";
-                monthList = new ArrayList<>();
-                viewSortedBwData(monthList);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                balander = new ArrayList<>();
+                viewSortedBwData(balander);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
                 list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Storm:
                 choice = "Καταιγίδα";
-                monthList = new ArrayList<>();
-                viewSortedBwData(monthList);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                balander = new ArrayList<>();
+                viewSortedBwData(balander);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
                 list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Sun:
                 choice = "Λιακάδα";
-                monthList = new ArrayList<>();
-                viewSortedBwData(monthList);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                balander = new ArrayList<>();
+                viewSortedBwData(balander);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
                 list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Heat:
                 choice = "Καύσωνας";
-                monthList = new ArrayList<>();
-                viewSortedBwData(monthList);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                balander = new ArrayList<>();
+                viewSortedBwData(balander);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
                 list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Snow:
                 choice = "Χιόνι";
-                monthList = new ArrayList<>();
-                viewSortedBwData(monthList);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                balander = new ArrayList<>();
+                viewSortedBwData(balander);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
                 list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Smoke:
                 choice = "Σκόνη";
-                monthList = new ArrayList<>();
-                viewSortedBwData(monthList);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                balander = new ArrayList<>();
+                viewSortedBwData(balander);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
                 list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_1:
                 choice = "Jan";
-                monthList = new ArrayList<>();
-                viewSortedBmData(monthList);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                balander = new ArrayList<>();
+                viewSortedBmData(balander);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
                 list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_2:
                 choice = "Feb";
-                monthList = new ArrayList<>();
-                viewSortedBmData(monthList);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                balander = new ArrayList<>();
+                viewSortedBmData(balander);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
                 list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_3:
                 choice = "Mar";
-                monthList = new ArrayList<>();
-                viewSortedBmData(monthList);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                balander = new ArrayList<>();
+                viewSortedBmData(balander);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
                 list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_4:
                 choice = "Apr";
-                monthList = new ArrayList<>();
-                viewSortedBmData(monthList);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                balander = new ArrayList<>();
+                viewSortedBmData(balander);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
                 list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_5:
                 choice = "May";
-                monthList = new ArrayList<>();
-                viewSortedBmData(monthList);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                balander = new ArrayList<>();
+                viewSortedBmData(balander);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
                 list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_6:
                 choice = "Jun";
-                monthList = new ArrayList<>();
-                viewSortedBmData(monthList);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                balander = new ArrayList<>();
+                viewSortedBmData(balander);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
                 list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_7:
                 choice = "Jul";
-                monthList = new ArrayList<>();
-                viewSortedBmData(monthList);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                balander = new ArrayList<>();
+                viewSortedBmData(balander);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
                 list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_8:
                 choice = "Aug";
-                monthList = new ArrayList<>();
-                viewSortedBmData(monthList);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                balander = new ArrayList<>();
+                viewSortedBmData(balander);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
                 list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_9:
                 choice = "Sep";
-                monthList = new ArrayList<>();
-                viewSortedBmData(monthList);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                balander = new ArrayList<>();
+                viewSortedBmData(balander);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
                 list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_10:
                 choice = "Oct";
-                monthList = new ArrayList<>();
-                viewSortedBmData(monthList);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                balander = new ArrayList<>();
+                viewSortedBmData(balander);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
                 list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_11:
                 choice = "Nov";
-                monthList = new ArrayList<>();
-                viewSortedBmData(monthList);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                balander = new ArrayList<>();
+                viewSortedBmData(balander);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
                 list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
             case R.id.Month_12:
                 choice = "Dec";
-                monthList = new ArrayList<>();
-                viewSortedBmData(monthList);
-                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, monthList);
+                balander = new ArrayList<>();
+                viewSortedBmData(balander);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
                 list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
                 return true;
 
+            case R.id.TempList_0_10:
+                choice = "1";
+                balander = new ArrayList<>();
+                viewSortedBtData(balander);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
+                list.setAdapter(adaptori);
+                adaptori.notifyDataSetChanged();
+                return true;
+
+            case R.id.TempList_11_25:
+                choice = "2";
+                balander = new ArrayList<>();
+                viewSortedBtData(balander);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
+                list.setAdapter(adaptori);
+                adaptori.notifyDataSetChanged();
+                return true;
+
+            case R.id.TempList26_40:
+                choice = "3";
+                balander = new ArrayList<>();
+                viewSortedBtData(balander);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
+                list.setAdapter(adaptori);
+                adaptori.notifyDataSetChanged();
+                return true;
+
+            case R.id.TempListUnder0:
+                choice = "4";
+                balander = new ArrayList<>();
+                viewSortedBtData(balander);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
+                list.setAdapter(adaptori);
+                adaptori.notifyDataSetChanged();
+                return true;
+
+            case R.id.TempListUpper40:
+                choice = "5";
+                balander = new ArrayList<>();
+                viewSortedBtData(balander);
+                adaptori = new CustomAdapter(this, R.layout.adapter_view_layout, balander);
+                list.setAdapter(adaptori);
+                adaptori.notifyDataSetChanged();
+                return true;
+
+            case R.id.MaxItemList:
+                sort = "ASC";
+                return true;
+
+            case R.id.MinItemList:
+                sort = "DESC";
+                return true;
             default:return super.onOptionsItemSelected(item);
         }
     }
@@ -304,6 +366,7 @@ public class Old_Weather extends AppCompatActivity {
 
     public void viewData(ArrayList<WeatherList> lista){
         int i = 0;
+        switcher = 1;
         if(cursor.getCount() == 0){
             Toast.makeText(getApplicationContext(),"Δεν υπάρχουν δεδομένα για προβολή ",Toast.LENGTH_SHORT).show();
         }
@@ -318,6 +381,7 @@ public class Old_Weather extends AppCompatActivity {
                 addPins(lista);
                 mergeIconRows(Id,item+i);
                 i++;
+                pass(boomer);
             }
             cursor.close();
         }
@@ -325,8 +389,9 @@ public class Old_Weather extends AppCompatActivity {
     }
 
     public void viewSortedBwData(ArrayList<WeatherList> lista){
-        cursor1 = DB.sortByWeatherStatus(getTown,choice);
+        cursor1 = DB.sortByWeatherStatus(getTown,choice,sort);
         int i = 0;
+        switcher = 2;
         if(cursor1.getCount() == 0){
             Toast.makeText(getApplicationContext(),"Δεν υπάρχουν δεδομένα για προβολή ",Toast.LENGTH_SHORT).show();
         }
@@ -341,14 +406,16 @@ public class Old_Weather extends AppCompatActivity {
                 addPins(lista);
                 mergeIconRows(Id,item+i);
                 i++;
+                pass(boomer);
             }
             cursor1.close();
         }
     }
 
     public void viewSortedBmData(ArrayList<WeatherList> lista){
-        cursor2 = DB.sortByMonthStatus(getTown,choice);
+        cursor2 = DB.sortByMonthStatus(getTown,choice,sort);
         int i = 0;
+        switcher = 3;
         if(cursor2.getCount() == 0){
             Toast.makeText(getApplicationContext(),"Δεν υπάρχουν δεδομένα για προβολή ",Toast.LENGTH_SHORT).show();
         }
@@ -363,8 +430,33 @@ public class Old_Weather extends AppCompatActivity {
                 addPins(lista);
                 mergeIconRows(Id,item+i);
                 i++;
+                pass(boomer);
             }
             cursor2.close();
+        }
+    }
+
+    public void viewSortedBtData(ArrayList<WeatherList> lista){
+        cursor3 = DB.sortByTempStatus(getTown,choice,sort);
+        int i = 0;
+        switcher = 4;
+        if(cursor3.getCount() == 0){
+            Toast.makeText(getApplicationContext(),"Δεν υπάρχουν δεδομένα για προβολή ",Toast.LENGTH_SHORT).show();
+        }
+        else{
+            while (cursor3.moveToNext() ) {
+                Id = Integer.valueOf(cursor3.getString(0));
+                Date = cursor3.getString(6);
+                Temp = cursor3.getString(2);
+                Weather = cursor3.getString(3);
+                Wind = cursor3.getString(4);
+                Humidity = cursor3.getString(5);
+                addPins(lista);
+                mergeIconRows(Id,item+i);
+                i++;
+                pass(boomer);
+            }
+            cursor3.close();
         }
     }
 
@@ -372,6 +464,37 @@ public class Old_Weather extends AppCompatActivity {
         history = new WeatherList(Id,item,Date,Temp,Weather,Wind,Humidity);
         list.add(history);
     }
+
+    public void pass(ArrayList<WeatherList> list){
+
+        for(int i=0;i<list.size();i++){
+            boomer.remove(i);
+        }
+
+        for(int i=0;i<list.size();i++){
+            boomer.add(list.get(i));
+        }
+
+    }
+
+//    public void swap(int switcher,String sort){
+//        this.sort = sort;
+//        switch(switcher){
+//            case 1:
+//                viewSortedBwData(balander);
+//                break;
+//            case 2:
+//                viewSortedBmData(balander);
+//                break;
+//            case 3:
+//                viewSortedBtData(balander);
+//                break;
+//            case 4:
+//                viewData(balander);
+//                break;
+//        }
+//    }
+
 }
 
 
