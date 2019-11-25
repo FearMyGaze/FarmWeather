@@ -96,22 +96,54 @@ public class MainTest {
 
     @Test
     public void testStateIfRainWeather(){
-
+        Espresso.onView(withId(R.id.GetTown)).perform(typeText(TownTest));
+        Espresso.closeSoftKeyboard();
+        Espresso.onView(withId(R.id.enter)).perform(click());
+        Espresso.onView(withId(R.id.status)).check(matches(withText(RainSky)));
+        Espresso.onView(withId(R.id.uv_index)).check(matches(withText(LowUV)));
+        Espresso.onView(withId(R.id.rain_prob)).check(matches(withText(HighRain)));
+        Espresso.onView(withId(R.id.animal)).check(matches(withText(Animals)));
+        Espresso.onView(withId(R.id.drive)).check(matches(withText(RiskDrive)));
+        Espresso.onView(withId(R.id.water_plants)).check(matches(withText(WaterPlant)));
     }
 
     @Test
     public void testStateIfSnowWeather(){
-
+        Espresso.onView(withId(R.id.GetTown)).perform(typeText(TownTest));
+        Espresso.closeSoftKeyboard();
+        Espresso.onView(withId(R.id.enter)).perform(click());
+        Espresso.onView(withId(R.id.status)).check(matches(withText(Snow)));
+        Espresso.onView(withId(R.id.uv_index)).check(matches(withText(LowUV)));
+        Espresso.onView(withId(R.id.rain_prob)).check(matches(withText(Rain)));
+        Espresso.onView(withId(R.id.animal)).check(matches(withText(Animals)));
+        Espresso.onView(withId(R.id.drive)).check(matches(withText(RiskDrive)));
+        Espresso.onView(withId(R.id.water_plants)).check(matches(withText(WaterPlant)));
     }
 
     @Test
     public void testStateIfSmokeWeather(){
-
+        Espresso.onView(withId(R.id.GetTown)).perform(typeText(TownTest));
+        Espresso.closeSoftKeyboard();
+        Espresso.onView(withId(R.id.enter)).perform(click());
+        Espresso.onView(withId(R.id.status)).check(matches(withText(Smoke)));
+        Espresso.onView(withId(R.id.uv_index)).check(matches(withText(LowUV)));
+        Espresso.onView(withId(R.id.rain_prob)).check(matches(withText(Rain)));
+        Espresso.onView(withId(R.id.animal)).check(matches(withText(Animals)));
+        Espresso.onView(withId(R.id.drive)).check(matches(withText(SafeDrive)));
+        Espresso.onView(withId(R.id.water_plants)).check(matches(withText(Plant)));
     }
 
     @Test
     public void testStateIfSunWeather(){
-
+        Espresso.onView(withId(R.id.GetTown)).perform(typeText(TownTest));
+        Espresso.closeSoftKeyboard();
+        Espresso.onView(withId(R.id.enter)).perform(click());
+        Espresso.onView(withId(R.id.status)).check(matches(withText(Sun)));
+        Espresso.onView(withId(R.id.uv_index)).check(matches(withText(LowUV)));
+        Espresso.onView(withId(R.id.rain_prob)).check(matches(withText(LowRain)));
+        Espresso.onView(withId(R.id.animal)).check(matches(withText(Animals)));
+        Espresso.onView(withId(R.id.drive)).check(matches(withText(SafeDrive)));
+        Espresso.onView(withId(R.id.water_plants)).check(matches(withText(Plant)));
     }
 
     @Test
