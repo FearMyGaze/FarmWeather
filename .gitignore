@@ -13,3 +13,4 @@
 .externalNativeBuild
 .cxx
 *.xml___jb_tmp___
+.idea/workspace.xml___jb_old___

@@ -87,7 +87,7 @@ public class Old_Weather extends AppCompatActivity {
                         .setIcon(android.R.drawable.ic_delete)
                         .setTitle("Είσαι σίγουρος;")
                         .setMessage("Πρόκειται να διαγραφεί αυτή η εγγραφή")
-                        .setPositiveButton("Ναι", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("ΝΑΙ", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 if(getTown != "*") {
@@ -104,7 +104,7 @@ public class Old_Weather extends AppCompatActivity {
                                 }
                             }
                         })
-                        .setNegativeButton("Όχι", null)
+                        .setNegativeButton("ΟΧΙ", null)
                         .show();
                 return true;
             }

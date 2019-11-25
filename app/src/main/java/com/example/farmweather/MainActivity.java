@@ -235,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
                                             Toast.makeText(MainActivity.this, "Αδύνατη η προσθήκη δεδομένων ", Toast.LENGTH_LONG).show();}
                                     }
                                 })
-                                .setNegativeButton("Άκυρο",null)
+                                .setNegativeButton("Ακυρο",null)
                                 .show();
                     }
                 }
