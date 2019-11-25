@@ -33,7 +33,7 @@ public class DatabaseHandlerTest {
 
     @Test
     public void testAddData(){
-        boolean input = mDataSource.insertData(Town + ", GR", "12/12/12", "29", "Καθαρός", "2", "79");
+        mDataSource.insertData(Town + ", GR", "12/12/12", "29", "Καθαρός", "2", "79");
         Espresso.onView(withId(R.id.GetTown)).perform(typeText(Town));
         Espresso.closeSoftKeyboard();
         Espresso.onView(withId(R.id.enter)).perform(click());

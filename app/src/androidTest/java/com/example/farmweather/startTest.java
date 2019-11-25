@@ -8,12 +8,14 @@ import org.junit.Rule;
 import org.junit.Test;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.longClick;
+import static androidx.test.espresso.action.ViewActions.pressBack;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.action.ViewActions.swipeDown;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.RootMatchers.isDialog;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
@@ -91,6 +93,45 @@ public class startTest {
         Espresso.onView(withText("ΟΧΙ")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
         Espresso.openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
         Espresso.onView(withText("Καθαρισμός όλων")).perform(click());
+        Espresso.onView(withText("ΝΑΙ")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
+        Espresso.openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        Espresso.onView(withText("Καθαρισμός όλων")).perform(click());
+    }
+
+    @Test
+    public void testShowItemsFromDifferentTowns(){
+        Espresso.onView(withId(R.id.GetTown)).perform(typeText(Town));
+        Espresso.closeSoftKeyboard();
+        Espresso.onView(withId(R.id.enter)).perform(click());
+        Espresso.onView(withId(R.id.Row_add)).perform(scrollTo(),click());
+        Espresso.onView(withText("ΝΑΙ")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
+        Espresso.onView(isRoot()).perform(pressBack());
+        Espresso.onView(withId(R.id.GetTown)).perform(typeText("Lamia"));
+        Espresso.closeSoftKeyboard();
+        Espresso.onView(withId(R.id.enter)).perform(click());
+        Espresso.onView(withId(R.id.Row_add)).perform(scrollTo(),click());
+        Espresso.onView(withText("ΝΑΙ")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
+        Espresso.onView(withId(R.id.list_town)).perform(click());
+        Espresso.openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        Espresso.onView(withText("Εμφάνιση όλων")).perform(click());
+        Espresso.onData(anything()).inAdapterView(withId(R.id.ListView)).atPosition(0).perform(click());
+        Espresso.onView(withText("OK")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
+        Espresso.onData(anything()).inAdapterView(withId(R.id.ListView)).atPosition(1).perform(click());
+        Espresso.onView(withText("OK")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
+        Espresso.openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
+        Espresso.onView(withText("Καθαρισμός όλων")).perform(click());
+        Espresso.onView(withText("ΝΑΙ")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
+        Espresso.onView(isRoot()).perform(pressBack());
+        Espresso.onView(withId(R.id.list_town)).perform(click());
+        Espresso.onData(anything()).inAdapterView(withId(R.id.ListView)).atPosition(0).perform(longClick());
+        Espresso.onView(withText("ΝΑΙ")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
+        Espresso.onView(isRoot()).perform(pressBack());
+        Espresso.onView(isRoot()).perform(pressBack());
+        Espresso.onView(withId(R.id.GetTown)).perform(typeText(Town));
+        Espresso.closeSoftKeyboard();
+        Espresso.onView(withId(R.id.enter)).perform(click());
+        Espresso.onView(withId(R.id.list_town)).perform(scrollTo(),click());
+        Espresso.onData(anything()).inAdapterView(withId(R.id.ListView)).atPosition(0).perform(longClick());
         Espresso.onView(withText("ΝΑΙ")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
     }
 
