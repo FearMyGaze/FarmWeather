@@ -3,6 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+    <item
+        android:id="@+id/HistoryItemList"
+        android:title="Ωριαια Προγνωση"
+        app:showAsAction="always">
+    </item>
+
     <item
         android:id="@+id/WeatherItemList"
         android:title="Καιρός"

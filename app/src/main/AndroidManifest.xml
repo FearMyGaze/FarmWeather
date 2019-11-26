@@ -15,20 +15,24 @@
             android:name=".start"
             android:theme="@style/CustomTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" ></action>
-                <category android:name="android.intent.category.LAUNCHER" ></category>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".info_activity"
-            android:theme="@style/CustomTheme"></activity>
+            android:theme="@style/CustomTheme" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/CustomTheme"></activity>
+            android:theme="@style/CustomTheme" />
         <activity
-            android:name="Old_Weather"
-            android:theme="@style/ListTheme"
-            android:label=" "></activity>
+            android:name=".Old_Weather"
+            android:label=" "
+            android:theme="@style/ListTheme" />
+        <activity
+            android:name=".WeatherDaily"
+            android:theme="@style/CustomTheme"/>
     </application>
 
 </manifest>

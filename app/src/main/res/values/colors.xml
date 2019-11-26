@@ -11,4 +11,5 @@
     <color name="Light_black">#262626</color>
     <color name="Black">#000000</color>
     <color name="AdapterColor">#3FA8AE</color>
+    <color name="AdapterDaily">#FFC0CB</color>
 </resources>

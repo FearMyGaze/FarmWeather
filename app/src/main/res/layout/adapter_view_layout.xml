@@ -138,7 +138,7 @@
                     <ImageView
                         android:layout_width="25sp"
                         android:layout_height="25sp"
-                        android:src="@drawable/adapter_weath">
+                        android:src="@drawable/adapter_weather">
 
                     </ImageView>
 
@@ -184,7 +184,7 @@
                         android:layout_width="69sp"
                         android:layout_height="30sp"
                         android:gravity="center"
-                        android:text="Καταιγίδα"
+                        android:text="TextView 4"
                         android:textColor="@color/Black">
 
                     </TextView>
