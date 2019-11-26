@@ -139,7 +139,7 @@ public class MainTest {
         Espresso.closeSoftKeyboard();
         Espresso.onView(withId(R.id.enter)).perform(click());
         Espresso.onView(withId(R.id.status)).check(matches(withText(Sun)));
-        Espresso.onView(withId(R.id.uv_index)).check(matches(withText(LowUV)));
+        Espresso.onView(withId(R.id.uv_index)).check(matches(withText(UV)));
         Espresso.onView(withId(R.id.rain_prob)).check(matches(withText(LowRain)));
         Espresso.onView(withId(R.id.animal)).check(matches(withText(Animals)));
         Espresso.onView(withId(R.id.drive)).check(matches(withText(SafeDrive)));

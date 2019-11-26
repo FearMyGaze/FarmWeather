@@ -1,13 +1,17 @@
 package com.example.farmweather;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import java.util.ArrayList;
 import android.database.Cursor;
@@ -119,14 +123,15 @@ public class Old_Weather extends AppCompatActivity {
     }
 
     public void deleteAll(){
-        Integer clearall = DB.clearall(getTown);
-        if (clearall > 0) {
+        Integer ClearAll = DB.clearall(getTown);
+        if (ClearAll > 0) {
             Toast.makeText(getApplicationContext(), "Η διαγραφή του ιστορικού ολοκληρώθηκε", Toast.LENGTH_SHORT).show();
         } else{
             Toast.makeText(getApplicationContext(), "Αδυναμία διαγραφής ιστορικού", Toast.LENGTH_SHORT).show();
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -135,6 +140,8 @@ public class Old_Weather extends AppCompatActivity {
         balander = new ArrayList<>();
         final SubAdapter adaptori = new SubAdapter(this, R.layout.adapter_view_layout,balander);
         final ListView list = findViewById(R.id.ListView);
+        final ImageView DailySummaryIcon = findViewById(R.id.DailySummaryIcon);
+
         switch(item.getItemId()){
             case R.id.DeleteItemList:
                 new AlertDialog.Builder(Old_Weather.this)
@@ -152,17 +159,17 @@ public class Old_Weather extends AppCompatActivity {
                         .setPositiveButton("ΝΑΙ", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                 if(getTown != "*"){
+                                if(getTown != "*"){
                                     deleteAll();
                                     Toast.makeText(getApplicationContext(),"Η διαγραφή του ιστορικού ολοκληρώθηκε",Toast.LENGTH_SHORT).show();
                                     list.setAdapter(adaptori);
                                     adaptori.notifyDataSetChanged();
-                                 }else{
+                                }else{
                                     Toast.makeText(getApplicationContext(),"Παρακαλώ επαναφέρετε το ιστορικό μιας πόλης",Toast.LENGTH_SHORT).show();
                                     viewData(balander);
                                     list.setAdapter(adaptori);
                                     adaptori.notifyDataSetChanged();
-                                 }
+                                }
                             }
                         }).show();
                 return true;
@@ -361,9 +368,13 @@ public class Old_Weather extends AppCompatActivity {
 
             case R.id.ShowAllItemList:
                 flag = true;
-                    swap(switcher, sort, balander);
-                    list.setAdapter(adaptori);
-                    adaptori.notifyDataSetChanged();
+                swap(switcher, sort, balander);
+                list.setAdapter(adaptori);
+                adaptori.notifyDataSetChanged();
+                return true;
+            case R.id.HistoryItemList:
+                Intent intent = new Intent(Old_Weather.this, WeatherDaily.class);
+                startActivity(intent);
                 return true;
 
             default:return super.onOptionsItemSelected(item);
@@ -489,24 +500,24 @@ public class Old_Weather extends AppCompatActivity {
 
     public void swap(int switcher,String sort,ArrayList<WeatherList> list){
         this.sort = sort;
-            switch(switcher){
-                case 1:
-                    getTown = "*";
-                    viewData(list);
-                    break;
-                case 2:
-                    getTown = "*";
-                    viewSortedBwData(list);
-                    break;
-                case 3:
-                    getTown = "*";
-                    viewSortedBmData(list);
-                    break;
-                case 4:
-                    getTown = "*";
-                    viewSortedBtData(list);
-                    break;
-            }
+        switch(switcher){
+            case 1:
+                getTown = "*";
+                viewData(list);
+                break;
+            case 2:
+                getTown = "*";
+                viewSortedBwData(list);
+                break;
+            case 3:
+                getTown = "*";
+                viewSortedBmData(list);
+                break;
+            case 4:
+                getTown = "*";
+                viewSortedBtData(list);
+                break;
+        }
 
     }
 }
