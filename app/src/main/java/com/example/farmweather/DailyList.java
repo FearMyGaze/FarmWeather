@@ -25,4 +25,7 @@ public class DailyList {
 
     public String getSummary() { return Summary;}
 
+    public String getCity() { return Summary;}
+
+
 }

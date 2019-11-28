@@ -18,6 +18,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     //Tables
     private static final String TABLE_NAME = "Cities_Areas";
     private static final String TABLE_NAME1 = "Predictions_Per_Hour";
+    private static final String TABLE_NAME2 = "CacheCities";
 
     //Columns
     private static final String RequestID = "RequestID";
@@ -35,6 +36,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String PMaxTemp = "MaxTemp";
     private static final String PSummary = "Summary";
     private static final String PIconID = "IconID";
+    private static final String CacheCity = "CacheCity";
+    private static final String CityID = "CityID";
 
 
     SQLiteDatabase database;
@@ -49,6 +52,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         sqLiteDatabase.execSQL("CREATE TABLE "+TABLE_NAME1+" ( "+PRequestID+" INTEGER PRIMARY KEY, "+PIconID+" TEXT, "+PTime+" TEXT, "+PMinTemp+" TEXT, " +
                 ""+PMaxTemp+" TEXT, "+PSummary+ " TEXT, "+PCity+" TEXT)");
+
+        sqLiteDatabase.execSQL("CREATE TABLE "+TABLE_NAME2+" ( "+CityID+" INTEGER PRIMARY KEY, "+CacheCity+" TEXT );");
     }
 
     @Override
@@ -91,17 +96,31 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
+    public boolean insertCData(String cacheCity){
+        database = this.getWritableDatabase();
+        ContentValues CV = new ContentValues();
+        CV.put(CacheCity,cacheCity);
+        long result = database.insert(TABLE_NAME2,null ,CV);
+        if(result == (-1)){
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    public Cursor getCData(String sort){
+        database = this.getWritableDatabase();
+        String sql;
+        sql="SELECT * FROM CacheCities ORDER BY CityID "+sort+"";
+        Cursor cursor = database.rawQuery(sql,null);
+        return cursor;
+    }
+
     public Cursor getPData(String sort){
         database = this.getWritableDatabase();
-        String area = "*";
         String sql;
-        if(area != "*"){
-            sql="SELECT * FROM Predictions_Per_Hour ORDER BY RequestID "+sort+"";
-        }
-        else
-        {
-            sql="SELECT * FROM Predictions_Per_Hour ORDER BY RequestID "+sort+"";
-        }
+        sql="SELECT * FROM Predictions_Per_Hour ORDER BY RequestID "+sort+"";
         Cursor cursor = database.rawQuery(sql,null);
         return cursor;
     }
