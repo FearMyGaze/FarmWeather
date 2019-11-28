@@ -5,9 +5,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.Cursor;
-import android.widget.Toast;
-
-import java.util.ArrayList;
 
 
 public class DatabaseHandler extends SQLiteOpenHelper {
@@ -20,6 +17,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     //Tables
     private static final String TABLE_NAME = "Cities_Areas";
+    private static final String TABLE_NAME1 = "Predictions_Per_Hour";
 
     //Columns
     private static final String RequestID = "RequestID";
@@ -30,6 +28,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String Humidity = "Humidity";
     private static final String SearchDate = "SearchDate";
     private static final String IconID = "IconID";
+    private static final String PRequestID = "RequestID";
+    private static final String PCity = "City";
+    private static final String PTime = "Time";
+    private static final String PMinTemp = "MinTemp";
+    private static final String PMaxTemp = "MaxTemp";
+    private static final String PSummary = "Summary";
+    private static final String PIconID = "IconID";
 
 
     SQLiteDatabase database;
@@ -41,6 +46,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("CREATE TABLE "+TABLE_NAME+" ( "+RequestID+" INTEGER PRIMARY KEY, "+City+" TEXT, "+CurTemp+" TEXT, " +
                 ""+Weather+" TEXT, "+Wind+ " TEXT, "+Humidity+" TEXT, "+SearchDate+" TEXT, "+IconID+" INTEGER);");
+
+        sqLiteDatabase.execSQL("CREATE TABLE "+TABLE_NAME1+" ( "+PRequestID+" INTEGER PRIMARY KEY, "+PIconID+" TEXT, "+PTime+" TEXT, "+PMinTemp+" TEXT, " +
+                ""+PMaxTemp+" TEXT, "+PSummary+ " TEXT, "+PCity+" TEXT)");
     }
 
     @Override
@@ -66,6 +74,38 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
+    public boolean insertPData(String ptime,String pmintemp,String pmaxtemp,String psummary,String pcity){
+        database = this.getWritableDatabase();
+        ContentValues CV = new ContentValues();
+        CV.put(PTime,ptime);
+        CV.put(PMinTemp,pmintemp);
+        CV.put(PMaxTemp,pmaxtemp);
+        CV.put(PSummary,psummary);
+        CV.put(PCity,pcity);
+        long result = database.insert(TABLE_NAME1,null ,CV);
+        if(result == (-1)){
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    public Cursor getPData(String sort){
+        database = this.getWritableDatabase();
+        String area = "*";
+        String sql;
+        if(area != "*"){
+            sql="SELECT * FROM Predictions_Per_Hour ORDER BY RequestID "+sort+"";
+        }
+        else
+        {
+            sql="SELECT * FROM Predictions_Per_Hour ORDER BY RequestID "+sort+"";
+        }
+        Cursor cursor = database.rawQuery(sql,null);
+        return cursor;
+    }
+
     public boolean updateIconID(int pKey,int item){
         database = this.getWritableDatabase();
         ContentValues CV = new ContentValues();
@@ -78,6 +118,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             return true;
         }
     }
+
 
     public Cursor getData(String area,String sort){
         database = this.getWritableDatabase();
