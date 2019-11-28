@@ -30,7 +30,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="50sp"
-                android:text="Ρυθμίσεις Καιρού  "
+                android:text="Ρυθμίσεις Καιρού    "
                 android:textSize="30sp"
                 android:textColor="@color/Black"
                 android:textAlignment="center"
@@ -82,15 +82,6 @@
 
         </LinearLayout> //RefreshRate + PopUpRefresh
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="2.543210sp"
-            android:layout_marginLeft="20sp"
-            android:layout_marginRight="20sp"
-            android:background="@drawable/divider">
-
-        </TextView> //easter egg
-
 
         <LinearLayout
             android:id="@+id/Gps"
@@ -122,19 +113,11 @@
 
         </LinearLayout> //Gps + PopUpGps
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="2.543210sp"
-            android:layout_marginLeft="20sp"
-            android:layout_marginRight="20sp"
-            android:background="@drawable/divider">
-
-        </TextView> //easter egg
 
         <LinearLayout
             android:id="@+id/AddTowns"
             android:layout_width="match_parent"
-            android:layout_height="60sp"
+            android:layout_height="75sp"
             android:orientation="vertical">
 
             <TextView
@@ -152,14 +135,14 @@
 
            <LinearLayout
                android:layout_width="match_parent"
-               android:layout_height="30sp"
+               android:layout_height="40sp"
                android:orientation="horizontal">
 
 
                <EditText
                    android:id="@+id/SettingsLat"
                    android:layout_width="130sp"
-                   android:layout_height="25sp"
+                   android:layout_height="30sp"
                    android:layout_gravity="center"
                    android:layout_marginLeft="30sp"
                    android:inputType="number"
@@ -169,14 +152,14 @@
                    android:textColorHint="@color/SettingsBlue"
                    android:textColor="@color/SettingsBlue"
                    android:textAlignment="center"
-                   android:textSize="18sp"
+                   android:textSize="15sp"
                    android:background="@color/SettingsWhite">
                </EditText>
 
                <EditText
                    android:id="@+id/SettingsLong"
                    android:layout_width="130sp"
-                   android:layout_height="25sp"
+                   android:layout_height="30sp"
                    android:layout_gravity="center"
                    android:layout_marginLeft="60sp"
                    android:inputType="number"
@@ -186,7 +169,7 @@
                    android:textColorHint="@color/SettingsBlue"
                    android:textColor="@color/SettingsBlue"
                    android:textAlignment="center"
-                   android:textSize="18sp"
+                   android:textSize="15sp"
                    android:background="@color/SettingsWhite">
                </EditText>
 
@@ -194,16 +177,6 @@
 
 
         </LinearLayout> //Gps + PopUpGps
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="2.543210sp"
-            android:layout_marginLeft="20sp"
-            android:layout_marginRight="20sp"
-            android:layout_marginTop="10sp"
-            android:background="@drawable/divider">
-
-        </TextView> //easter egg
 
     </LinearLayout>
 </LinearLayout>
