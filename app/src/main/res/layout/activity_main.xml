@@ -435,6 +435,7 @@
                                 android:orientation="vertical">
 
                                 <LinearLayout
+                                    android:id="@+id/Skata"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content">
 

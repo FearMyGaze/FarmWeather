@@ -12,4 +12,6 @@
     <color name="Black">#000000</color>
     <color name="AdapterColor">#3FA8AE</color>
     <color name="AdapterDaily">#FFC0CB</color>
+    <color name="SettingsWhite">#CCCCCC</color>
+    <color name="SettingsBlue">#00B1E6</color>
 </resources>

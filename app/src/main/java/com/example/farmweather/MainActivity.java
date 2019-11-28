@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import org.json.JSONException;
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
     //ALLES DHLWSEIS METABLHTWN
     String API = "360443d882c3a8260a2d10ba6a086b9f";
-    String WeatherGR,Town,Latitude,Longtitude;
+    String WeatherGR,Town,Latitude,Longitude;
     int maxTemp;
     Double degree;
 
@@ -72,6 +73,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        final LinearLayout Skata = findViewById(R.id.Skata);
+        Skata.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,Settings.class);
+                startActivity(intent);
+            }
+        });
 
 
         //PAIRNEI THN WRA
@@ -119,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
         //PARALABH METABLHTWN APO ARXIKH FORMA
         Town=(getIntent().getStringExtra("Town"));
         Latitude=(getIntent().getStringExtra("Lat"));
-        Longtitude=(getIntent().getStringExtra("Long"));
+        Longitude=(getIntent().getStringExtra("Long"));
 
 
 
@@ -206,10 +216,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         if(Town != null){
-        list_town.setText("Για "+Town.substring(0,1).toUpperCase()+ Town.substring(1));
+            list_town.setText("Για "+Town.substring(0,1).toUpperCase()+ Town.substring(1));
             new weatherTask().execute();}
         else{
-            list_town.setText("Για X: "+Latitude + " Y: "+Longtitude);
+            list_town.setText("Για X: "+Latitude + " Y: "+Longitude);
             new weatherTask().execute();
         }
         new weatherTask().execute();
@@ -260,7 +270,7 @@ public class MainActivity extends AppCompatActivity {
                 response = HttpRequest.excuteGet("https://api.openweathermap.org/data/2.5/weather?q=" + City + "&units=metric&appid=" + API);
                 return response;
             } else {
-                response = HttpRequest.excuteGet("https://api.openweathermap.org/data/2.5/weather?lat=" + Latitude + "&lon=" + Longtitude + "&units=metric&appid=" + API);
+                response = HttpRequest.excuteGet("https://api.openweathermap.org/data/2.5/weather?lat=" + Latitude + "&lon=" + Longitude + "&units=metric&appid=" + API);
                 return response;
             }
         }
@@ -305,24 +315,23 @@ public class MainActivity extends AppCompatActivity {
 
 
                 //EMFANISH TWN JSON ANTIKEIMENWN STA ANTIKEIMENA MAS
-                    JLocation.setText(address);
-                    JTime.setText(Time);
-                    JTemp.setText(String.format("%.0f",tempF));
-                    JTemp_min.setText(String.format("%.0f",minF));
-                    JTemp_max.setText(String.format("%.0f",maxF));
-                    JSunrise.setText(new SimpleDateFormat("hh:mm", Locale.ENGLISH).format(new Date(sunrise * 1000)));
-                    JSunset.setText(new SimpleDateFormat("k:mm ", Locale.ENGLISH).format(new Date(sunset * 1000)));
-                    JWind_speed.setText(String.format("%.0f",speedF*3.6)+"Km/h");
-                    JWind_Deg.setText(windDeg);
-                    JPressure.setText(pressure+"hPa");
-                    JHumidity.setText(humidity+"%");
-                    JStatus.setText(weatherDescription);
+                JLocation.setText(address);
+                JTime.setText(Time);
+                JTemp.setText(String.format("%.0f",tempF));
+                JTemp_min.setText(String.format("%.0f",minF));
+                JTemp_max.setText(String.format("%.0f",maxF));
+                JSunrise.setText(new SimpleDateFormat("hh:mm", Locale.ENGLISH).format(new Date(sunrise * 1000)));
+                JSunset.setText(new SimpleDateFormat("k:mm ", Locale.ENGLISH).format(new Date(sunset * 1000)));
+                JWind_speed.setText(String.format("%.0f",speedF*3.6)+"Km/h");
+                JWind_Deg.setText(windDeg);
+                JPressure.setText(pressure+"hPa");
+                JHumidity.setText(humidity+"%");
+                JStatus.setText(weatherDescription);
 
                 //METABLHTH GIA METATROPH KAIROU APO AGGLIKA SE ELLHNIKA
                 WeatherGR = weatherDescription;
 
                 System.out.println("OnPostExecute");
-
             } catch(JSONException e) {
                 System.out.println(e);
             }

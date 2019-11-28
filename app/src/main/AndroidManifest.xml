@@ -32,6 +32,9 @@
             android:theme="@style/ListTheme" />
         <activity
             android:name=".WeatherDaily"
+            android:theme="@style/CustomTheme" />
+        <activity
+            android:name=".Settings"
             android:theme="@style/CustomTheme"/>
     </application>
 

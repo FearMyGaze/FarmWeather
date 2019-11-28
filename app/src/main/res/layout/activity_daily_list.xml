@@ -5,33 +5,78 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Old_Weather">
+    tools:context=".Old_Weather"
+    android:background="@drawable/custom_background">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="30sp"
-        android:background="@color/Light_black"
-        android:text="This is my finger"
-        android:textColor="@color/White"
-        android:gravity="center|left"
-        android:textSize="17sp">
 
-    </TextView>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="2.543210sp"
-        android:background="@drawable/divider"
-        android:visibility="gone">
-
-    </TextView> //easter egg
-
-    <ListView
-        android:id="@+id/WeatherDayListView"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/Light_black">
+        android:padding="12sp"
+        android:fillViewport="true">
 
-    </ListView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30sp"
+                android:text="Οι πόλεις μου"
+                android:textColor="@color/White"
+                android:gravity="center|left"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textAlignment="center">
+
+            </TextView>
+
+            <Space
+                android:layout_width="30sp"
+                android:layout_height="12sp">
+            </Space>
+
+            <ListView
+                android:id="@+id/SelectTownListView"
+                android:layout_width="match_parent"
+                android:layout_height="187sp"
+                android:background="@color/transparent">
+
+            </ListView>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="12sp">
+            </Space>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30sp"
+                android:text="Ιστορικό"
+                android:textColor="@color/White"
+                android:gravity="center|left"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textAlignment="center">
+
+            </TextView>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="12sp">
+            </Space>
+
+            <ListView
+                android:id="@+id/HistoryListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent">
+
+            </ListView>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>
