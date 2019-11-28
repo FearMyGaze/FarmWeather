@@ -1,16 +1,21 @@
 package com.example.farmweather;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 
 public class Settings extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +27,9 @@ public class Settings extends AppCompatActivity {
         final TextView RefreshRateValue = findViewById(R.id.RefreshRateValue);
         final LinearLayout Gps = findViewById(R.id.Gps);
         final TextView GpsValue = findViewById(R.id.GpsValue);
+        final LinearLayout AddTowns = findViewById(R.id.AddTowns);
+        final EditText SettingsLat = findViewById(R.id.SettingsLat);
+        final EditText SettingsLong = findViewById(R.id.SettingsLong);
 
 
         BackArrow.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +103,33 @@ public class Settings extends AppCompatActivity {
             }
         });
 
+        SettingsLat.setText((getIntent().getStringExtra("Lat")));
+        SettingsLong.setText(getIntent().getStringExtra("Long"));
+        AddTowns.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (SettingsLat.getText().toString().isEmpty() || SettingsLong.getText().toString().isEmpty()){
+                    Toast.makeText(Settings.this, "Παρακαλώ καταχωρήστε συντεταγμένες", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                   final String Lat = SettingsLat.getText().toString();
+                   final String Long = SettingsLong.getText().toString();
+                   Toast.makeText(Settings.this, "Επιτυχής καταχώρηση", Toast.LENGTH_SHORT).show();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent intent = new Intent(Settings.this,MainActivity.class);
+                            intent.putExtra("Lat",Lat);
+                            intent.putExtra("Long",Long);
+                            intent.putExtra("Code","Adding Town");
+                            startActivity(intent);
+                        }
+                    }, 800);
+                    SettingsLat.setText("");
+                    SettingsLong.setText("");
+                    }
+            }
+        });
     }
 
 

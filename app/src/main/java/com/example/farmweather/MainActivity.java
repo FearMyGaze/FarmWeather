@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -51,7 +52,8 @@ public class MainActivity extends AppCompatActivity {
 
     //ALLES DHLWSEIS METABLHTWN
     String API = "360443d882c3a8260a2d10ba6a086b9f";
-    String WeatherGR,Town,Latitude,Longitude;
+    String API2 = "75a1a10887c7350764f93ad239553a90";
+    String WeatherGR,Town,Latitude,Longitude,AddTown,TownFromHistory;
     int maxTemp;
     Double degree;
 
@@ -79,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,Settings.class);
+                intent.putExtra("Lat",Latitude);
+                intent.putExtra("Long",Longitude);
                 startActivity(intent);
             }
         });
@@ -128,10 +132,10 @@ public class MainActivity extends AppCompatActivity {
 
         //PARALABH METABLHTWN APO ARXIKH FORMA
         Town=(getIntent().getStringExtra("Town"));
+        TownFromHistory=(getIntent().getStringExtra("SearchCity"));
         Latitude=(getIntent().getStringExtra("Lat"));
         Longitude=(getIntent().getStringExtra("Long"));
-
-
+        AddTown=(getIntent().getStringExtra("Code"));
 
 
         //KWDIKAS GIA ELEXOUS PLHROFORIWN
@@ -215,16 +219,37 @@ public class MainActivity extends AppCompatActivity {
                 openActivity2();
             }
         });
-        if(Town != null){
-            list_town.setText("Για "+Town.substring(0,1).toUpperCase()+ Town.substring(1));
-            new weatherTask().execute();}
-        else{
-            list_town.setText("Για X: "+Latitude + " Y: "+Longitude);
-            new weatherTask().execute();
-        }
+
         new weatherTask().execute();
 
+        if(Town != null){
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    list_town.setText("Για "+JLocation.getText().toString());
+                }
+            },800);
+        }else{
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    list_town.setText("Για "+JLocation.getText().toString());
+                }
+            },800);
+        }
+
+        if(AddTown != null){
+           new Handler().postDelayed(new Runnable() {
+               @Override
+               public void run() {
+                   DB.insertCData(JLocation.getText().toString());
+               }
+           },500);
+        }
+
+
         addData();
+
     }//TELOS ONCREATE
 
     public void addData(){
@@ -257,6 +282,7 @@ public class MainActivity extends AppCompatActivity {
     class weatherTask extends AsyncTask<String, Void, String> {
 
         String City = Town;
+        String AddCity = TownFromHistory;
 
         @Override
         protected void onPreExecute() {
@@ -269,7 +295,11 @@ public class MainActivity extends AppCompatActivity {
             if (City != null) {
                 response = HttpRequest.excuteGet("https://api.openweathermap.org/data/2.5/weather?q=" + City + "&units=metric&appid=" + API);
                 return response;
-            } else {
+            }else if(AddCity != null){
+                response = HttpRequest.excuteGet("https://api.openweathermap.org/data/2.5/weather?q=" + AddCity + "&units=metric&appid=" + API2);
+                return response;
+            }
+            else {
                 response = HttpRequest.excuteGet("https://api.openweathermap.org/data/2.5/weather?lat=" + Latitude + "&lon=" + Longitude + "&units=metric&appid=" + API);
                 return response;
             }
@@ -333,8 +363,28 @@ public class MainActivity extends AppCompatActivity {
 
                 System.out.println("OnPostExecute");
             } catch(JSONException e) {
-                System.out.println(e);
-            }
+                    System.out.println(e);
+                    new  AlertDialog.Builder(MainActivity.this)
+                            .setTitle("Παρουσιάστηκε σφάλμα!")
+                            .setIcon(android.R.drawable.ic_delete)
+                            .setMessage("Πρόβλημα στην εύρεση τοποθεσίας")
+                            .setNegativeButton("Επιστροφή", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent(MainActivity.this,start.class);
+                                    startActivity(intent);
+                                }
+                            })
+                            .show();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent intent = new Intent(MainActivity.this , start.class);
+                            startActivity(intent);
+                        }
+                    }, 2000);
+                return;
+           }
 
             //KWDIKAS GIA YPOLOGISMOS KATEYTHYNSH AERA!
             degree = Double.parseDouble(JWind_Deg.getText().toString());

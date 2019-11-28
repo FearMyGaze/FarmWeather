@@ -109,10 +109,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
-    public Cursor getCData(String sort){
+    public Cursor getCData(){
         database = this.getWritableDatabase();
         String sql;
-        sql="SELECT * FROM CacheCities ORDER BY CityID "+sort+"";
+        sql="SELECT * FROM CacheCities";
         Cursor cursor = database.rawQuery(sql,null);
         return cursor;
     }

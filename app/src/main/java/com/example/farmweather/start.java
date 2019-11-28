@@ -68,11 +68,11 @@ public class start extends AppCompatActivity {
                             .setNegativeButton("Ok",null)
                             .show();
 
-                }else if(Latitude.getText().toString().contains("."))
+                }else if(Latitude.getText().toString().contains(".."))
                 {
                     Toast.makeText(getApplicationContext(),"Παρακαλώ εισάγετε μονή τελεία",Toast.LENGTH_SHORT).show();
                 }
-               else if(Longitude.getText().toString().contains("."))
+               else if(Longitude.getText().toString().contains(".."))
                {
                     Toast.makeText(getApplicationContext(),"Παρακαλώ εισάγετε μονή τελεία",Toast.LENGTH_SHORT).show();
                }
