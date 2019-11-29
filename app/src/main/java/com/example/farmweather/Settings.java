@@ -1,6 +1,5 @@
 package com.example.farmweather;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -113,33 +112,24 @@ String load,gps;
             }
         });
 
-        SettingsLat.setText((getIntent().getStringExtra("Lat")));
-        SettingsLong.setText(getIntent().getStringExtra("Long"));
+
         AddTowns.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (SettingsLat.getText().toString().isEmpty() || SettingsLong.getText().toString().isEmpty()){
-                    Toast.makeText(Settings.this, "Παρακαλώ καταχωρήστε συντεταγμένες", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                   final String Lat = SettingsLat.getText().toString();
-                   final String Long = SettingsLong.getText().toString();
+                   final String TownForAdd = (getIntent().getStringExtra("TownForAdd"));
                    Toast.makeText(Settings.this, "Επιτυχής καταχώρηση", Toast.LENGTH_SHORT).show();
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             Intent intent = new Intent(Settings.this,MainActivity.class);
-                            intent.putExtra("Lat",Lat);
-                            intent.putExtra("Long",Long);
+                            intent.putExtra("Town",TownForAdd);
                             intent.putExtra("Code","Adding Town");
                             startActivity(intent);
                         }
                     }, 800);
-                    SettingsLat.setText("");
-                    SettingsLong.setText("");
                     }
-            }
         });
+
         loadData();
         updateData();
     }

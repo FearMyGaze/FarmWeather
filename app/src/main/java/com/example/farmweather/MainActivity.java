@@ -76,18 +76,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final LinearLayout Skata = findViewById(R.id.Skata);
-        Skata.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,Settings.class);
-                intent.putExtra("Lat",Latitude);
-                intent.putExtra("Long",Longitude);
-                startActivity(intent);
-            }
-        });
-
-
         //PAIRNEI THN WRA
         Calendar rightNow = Calendar.getInstance();
         currentHour = rightNow.get(Calendar.HOUR_OF_DAY);
@@ -137,6 +125,17 @@ public class MainActivity extends AppCompatActivity {
         Longitude=(getIntent().getStringExtra("Long"));
         AddTown=(getIntent().getStringExtra("Code"));
 
+
+
+        final LinearLayout Skata = findViewById(R.id.Skata);
+        Skata.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,Settings.class);
+                intent.putExtra("TownForAdd",JLocation.getText().toString());
+                startActivity(intent);
+            }
+        });
 
         //KWDIKAS GIA ELEXOUS PLHROFORIWN
         Swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() { //KWDIKAS SWIPE
@@ -244,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
                public void run() {
                    DB.insertCData(JLocation.getText().toString());
                }
-           },500);
+           },1000);
         }
 
 
