@@ -40,8 +40,7 @@
             <ListView
                 android:id="@+id/SelectTownListView"
                 android:layout_width="match_parent"
-                android:layout_height="187sp"
-                android:background="@color/transparent">
+                android:layout_height="187sp">
 
             </ListView>
 
@@ -70,8 +69,7 @@
             <ListView
                 android:id="@+id/HistoryListView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/transparent">
+                android:layout_height="wrap_content">
 
             </ListView>
 

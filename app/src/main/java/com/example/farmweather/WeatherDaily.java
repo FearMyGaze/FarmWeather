@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.database.Cursor;
 import java.util.ArrayList;
@@ -28,7 +27,6 @@ public class WeatherDaily extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_list);
-        final TextView addCity = findViewById(R.id.AddCity);
 
         final ListView addTownList = findViewById(R.id.SelectTownListView); //ListView ID For Cities
         final ListView MyDailyList1 = findViewById(R.id.HistoryListView); //ListView ID For History
@@ -72,10 +70,20 @@ public class WeatherDaily extends AppCompatActivity {
         addTownList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String SearchTheCity = addCity.getText().toString();
+                String SearchTheCity = addTown.get(position).getCity();
                 Intent intent = new Intent(WeatherDaily.this , MainActivity.class);
                 intent.putExtra("SearchCity",SearchTheCity);
                 startActivity(intent);
+            }
+        });
+
+        addTownList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                //KWDIKAS GIA DIAGRAFH METEPEITA!
+
+                return true;
             }
         });
     }
