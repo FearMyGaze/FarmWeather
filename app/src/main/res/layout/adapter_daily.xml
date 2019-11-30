@@ -30,6 +30,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="Date time hour"
+                android:textStyle="bold"
                 android:textColor="@color/Black">
 
             </TextView>
@@ -43,28 +44,34 @@
             android:gravity="center"
             android:layout_weight="50">
 
+            <Space
+                android:layout_width="180sp"
+                android:layout_height="match_parent">
+
+            </Space>
 
             <ImageView
                 android:id="@+id/DailySummaryIcon"
-                android:layout_width="25sp"
-                android:layout_height="25sp"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
                 android:src="@drawable/sunny">
             </ImageView>
 
             <Space
-                android:layout_width="5sp"
-                android:layout_height="5sp">
+                android:layout_width="10sp"
+                android:layout_height="match_parent">
 
             </Space>
 
             <TextView
-                android:id="@+id/DailySummary"
-                android:layout_width="0.01sp"
+                android:id="@+id/DailyTown"
+                android:layout_width="170sp"
                 android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="Summary"
-                android:textColor="@color/AdapterDaily"
-                android:visibility="invisible">
+                android:gravity="center|right"
+                android:text="Serres , GR"
+                android:textSize="12sp"
+                android:textStyle="bold|italic"
+                android:textColor="@color/Black">
 
             </TextView>
 
@@ -100,13 +107,14 @@
                         android:layout_height="30sp"
                         android:gravity="center"
                         android:text="MAX"
+                        android:textStyle="bold"
                         android:textColor="@color/Black">
 
                     </TextView>
 
                     <ImageView
-                        android:layout_width="25sp"
-                        android:layout_height="25sp"
+                        android:layout_width="30sp"
+                        android:layout_height="30sp"
                         android:src="@drawable/max">
 
                     </ImageView>
@@ -130,8 +138,8 @@
                     android:gravity="center">
 
                     <ImageView
-                        android:layout_width="25sp"
-                        android:layout_height="25sp"
+                        android:layout_width="30sp"
+                        android:layout_height="30sp"
                         android:src="@drawable/min">
 
                     </ImageView>
@@ -142,6 +150,7 @@
                         android:layout_height="30sp"
                         android:gravity="center"
                         android:text="MIN"
+                        android:textStyle="bold"
                         android:textColor="@color/Black">
 
                     </TextView>

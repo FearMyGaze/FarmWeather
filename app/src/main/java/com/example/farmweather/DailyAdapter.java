@@ -32,12 +32,12 @@ public class DailyAdapter extends ArrayAdapter<DailyList> {
         TextView tvTime = convertView.findViewById(R.id.DailyTime);
         TextView tvTempMax=  convertView.findViewById(R.id.DailyMax);
         TextView tvTempMin =  convertView.findViewById(R.id.DailyMin);
-        TextView tvSummary =  convertView.findViewById(R.id.DailySummary);
+        TextView tvTown =  convertView.findViewById(R.id.DailyTown);
 
         tvTime.setText(time);
         tvTempMax.setText(tempMax);
         tvTempMin.setText(tempMin);
-        tvSummary.setText(summary);
+        tvTown.setText(summary);
 
         return convertView;
     }
