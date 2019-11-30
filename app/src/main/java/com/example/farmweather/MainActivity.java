@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import org.json.JSONException;
@@ -56,14 +55,6 @@ public class MainActivity extends AppCompatActivity {
     String WeatherGR,Town,Latitude,Longitude,AddTown,TownFromHistory;
     int maxTemp;
     Double degree;
-
-
-    //ANOIGMA DEUTERHS FORMAS
-    private void openActivity2() {
-        Intent intent = new Intent(this,info_activity.class);
-        startActivity(intent);
-    }
-
 
     //DHLWSH ANTIKHMENWN GIA JSON
     TextView JLocation,JTime,JTemp,JTemp_min,JTemp_max,JSunrise,JSunset,JWind_speed,JWind_Deg,JPressure,JHumidity,JStatus;
@@ -127,8 +118,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        final LinearLayout Skata = findViewById(R.id.Skata);
-        Skata.setOnClickListener(new View.OnClickListener() {
+        final ImageView SettingsButton = findViewById(R.id.SettingsButton);
+        SettingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,Settings.class);
@@ -210,14 +201,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }); //TELOS KWDIKA METATROPHS
-
-        //KALESMA SYNARTHSHS GIA ANOIGMA FORMAS
-        info.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openActivity2();
-            }
-        });
 
         new weatherTask().execute();
 
@@ -435,8 +418,6 @@ public class MainActivity extends AppCompatActivity {
             if(maxTemp >=86 && CelsiusIcon.getText().toString().equals("F")){
                 Weather.setText(Heat);
             }
-
-
 
             //KWDIKAS GIA HLIO
             if (Weather.getText().toString() == Sun) {

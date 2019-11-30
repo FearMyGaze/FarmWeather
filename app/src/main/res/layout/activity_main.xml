@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:padding="25sp"
     android:background="@drawable/custom_background">
@@ -35,9 +35,19 @@
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:id="@+id/SettingsButton"
                             android:layout_width="32sp"
                             android:layout_height="25sp"
-                            android:layout_marginLeft="100sp"
+                            android:layout_marginTop="7sp"
+                            android:tint="@color/White"
+                            android:src="@drawable/settings">
+
+                        </ImageView>
+
+                        <ImageView
+                            android:layout_width="32sp"
+                            android:layout_height="25sp"
+                            android:layout_marginLeft="50sp"
                             android:layout_marginTop="7sp"
                             android:src="@drawable/location"
                             android:tint="@color/Gray_ish">
@@ -435,7 +445,6 @@
                                 android:orientation="vertical">
 
                                 <LinearLayout
-                                    android:id="@+id/Skata"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content">
 
@@ -749,7 +758,6 @@
                             </ImageView>
 
                             <TextView
-                                android:id="@+id/info"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5sp"
