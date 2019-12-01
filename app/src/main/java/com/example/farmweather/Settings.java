@@ -1,5 +1,6 @@
 package com.example.farmweather;
 
+import android.app.AlertDialog;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.ComponentName;
@@ -9,7 +10,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -32,12 +32,37 @@ JobScheduler scheduler;
 
         final ImageView BackArrow = findViewById(R.id.BackArrow);
         final LinearLayout RefreshRate = findViewById(R.id.RefreshRate);
-        RefreshRateValue = findViewById(R.id.RefreshRateValue);
-        final LinearLayout Gps = findViewById(R.id.Gps);
-        GpsValue = findViewById(R.id.GpsValue);
         final LinearLayout AddTowns = findViewById(R.id.AddTowns);
-        final EditText SettingsLat = findViewById(R.id.SettingsLat);
-        final EditText SettingsLong = findViewById(R.id.SettingsLong);
+        final LinearLayout Gps = findViewById(R.id.Gps);
+        final LinearLayout InfoBox = findViewById(R.id.SettingsInfo);
+
+        RefreshRateValue = findViewById(R.id.RefreshRateValue);
+        GpsValue = findViewById(R.id.GpsValue);
+
+
+
+
+        InfoBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        new AlertDialog.Builder(Settings.this)
+                                .setIcon(android.R.drawable.ic_dialog_info)
+                                .setTitle("Πληροφορίες")
+                                .setMessage("Η ομαδα αποτελείται από τους ακολουθους"
+                                        +"\n\nΣταύρος - Γεώργιος Ταχμαζίδης : 4300 Manager / Http"
+                                        +"\n\nΒασίλης Αγγελόπουλος : 4194 General Programmer"
+                                        +"\n\nΗλίας Αβράμογλου : 4363  Databases"
+                                        +"\n\nΓιώργος Παπούλιας : 4229  GUI Design"
+                                        +"\n\nΤριαντάφυλλος Μάντσιος : 4301 General Programmer"
+                                        +"\n\nL.A.M.P.S georgepapo@teiser.gr ")
+                                .show();
+                    }
+                },5000);
+            }
+        });
 
 
         BackArrow.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +127,6 @@ JobScheduler scheduler;
                                 scheduler.cancel(1);
                                 scheduler.cancel(3);
                                 scheduler.cancel(6);
-                                //WaitingTime=0;
                                 return true;
 
                         }

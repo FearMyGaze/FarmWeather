@@ -82,7 +82,6 @@
 
         </LinearLayout> //RefreshRate + PopUpRefresh
 
-
         <LinearLayout
             android:id="@+id/Gps"
             android:layout_width="match_parent"
@@ -113,16 +112,15 @@
 
         </LinearLayout> //Gps + PopUpGps
 
-
         <LinearLayout
             android:id="@+id/AddTowns"
             android:layout_width="match_parent"
-            android:layout_height="75sp"
+            android:layout_height="60sp"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="35sp"
+                android:layout_height="60sp"
                 android:paddingLeft="30sp"
                 android:paddingTop="10sp"
                 android:gravity="left"
@@ -133,50 +131,27 @@
 
             </TextView>
 
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="40sp"
-               android:orientation="horizontal">
+        </LinearLayout> //Town
 
+        <LinearLayout
+            android:id="@+id/SettingsInfo"
+            android:layout_width="match_parent"
+            android:layout_height="60sp"
+            android:orientation="vertical">
 
-               <EditText
-                   android:id="@+id/SettingsLat"
-                   android:layout_width="130sp"
-                   android:layout_height="30sp"
-                   android:layout_gravity="center"
-                   android:layout_marginLeft="30sp"
-                   android:inputType="number"
-                   android:maxLines="1"
-                   android:digits="0123456789.-"
-                   android:hint="Πλάτος"
-                   android:textColorHint="@color/SettingsBlue"
-                   android:textColor="@color/SettingsBlue"
-                   android:textAlignment="center"
-                   android:textSize="15sp"
-                   android:background="@color/SettingsWhite">
-               </EditText>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="30sp"
+                android:paddingTop="10sp"
+                android:gravity="left"
+                android:text="Πληροφορίες"
+                android:textColor="@color/Black"
+                android:textSize="18sp"
+                android:textStyle="bold">
+            </TextView>
 
-               <EditText
-                   android:id="@+id/SettingsLong"
-                   android:layout_width="130sp"
-                   android:layout_height="30sp"
-                   android:layout_gravity="center"
-                   android:layout_marginLeft="60sp"
-                   android:inputType="number"
-                   android:maxLines="1"
-                   android:digits="0123456789.-"
-                   android:hint="Μήκος"
-                   android:textColorHint="@color/SettingsBlue"
-                   android:textColor="@color/SettingsBlue"
-                   android:textAlignment="center"
-                   android:textSize="15sp"
-                   android:background="@color/SettingsWhite">
-               </EditText>
-
-           </LinearLayout>
-
-
-        </LinearLayout> //Gps + PopUpGps
+        </LinearLayout> //Info
 
     </LinearLayout>
 </LinearLayout>

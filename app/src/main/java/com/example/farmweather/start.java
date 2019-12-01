@@ -1,13 +1,18 @@
 package com.example.farmweather;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -34,11 +39,14 @@ public class start extends AppCompatActivity {
                     GetTown.setVisibility(View.GONE);
                     Latitude.setVisibility(View.VISIBLE);
                     Longitude.setVisibility(View.VISIBLE);
+                    GetTown.setText("");
                 }
                 else {
                     GetTown.setVisibility(View.VISIBLE);
                     Latitude.setVisibility(View.GONE);
                     Longitude.setVisibility(View.GONE);
+                    Latitude.setText("");
+                    Longitude.setText("");
                 }
             }
         });
@@ -88,6 +96,25 @@ public class start extends AppCompatActivity {
                 }
             }
 
+        });
+        Longitude.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    String GetLat = Latitude.getText().toString();
+                    String GetLong = Longitude.getText().toString();
+                    Intent intent = new Intent(start.this , MainActivity.class);
+                    intent.putExtra("Lat",GetLat);
+                    intent.putExtra("Long",GetLong);
+                    startActivity(intent);
+                    Latitude.setText("");
+                    Longitude.setText("");
+                    handled = true;
+                }
+                return handled;
+            }
         });
     }
 }
