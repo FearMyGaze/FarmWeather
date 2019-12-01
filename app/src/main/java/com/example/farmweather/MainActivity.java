@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
         Temperature = findViewById(R.id.temperature);
         CelsiusIcon = findViewById(R.id.temperatureC);
         final SwipeRefreshLayout Swipe = findViewById(R.id.refresh);
-        final TextView info = findViewById(R.id.info); // Lamps
 
         //ALLES DHLWSEIS ANTIKEIMENWN
         final TextView list_town = findViewById(R.id.list_town);

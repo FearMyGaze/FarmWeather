@@ -1,5 +1,8 @@
 package com.example.farmweather;
 
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,11 +17,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-
 public class Settings extends AppCompatActivity {
 
 TextView RefreshRateValue,GpsValue;
 String load,gps;
+ComponentName componentName;
+JobInfo info;
+JobScheduler scheduler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,24 +59,49 @@ String load,gps;
                             case R.id.OneHour:
                                 saveData1();
                                 RefreshRateValue.setText("Κάθε 1 ώρα");
-                                //WaitingTime=3600000;
+                                componentName = new ComponentName(Settings.this , BackgroundRequestAPI.class);
+                                info = new JobInfo.Builder(1, componentName)
+                                        .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+                                        .setPersisted(true)
+                                        .setPeriodic(3600000)
+                                        .build();
+                                scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+                                scheduler.schedule(info);
                                 return true;
 
                             case R.id.ThreeHours:
                                 saveData2();
                                 RefreshRateValue.setText("Κάθε 3 ώρες");
-                                //WaitingTime=10800000;
+                                componentName = new ComponentName(Settings.this , BackgroundRequestAPI.class);
+                                info = new JobInfo.Builder(3, componentName)
+                                        .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+                                        .setPersisted(true)
+                                        .setPeriodic(10800000)
+                                        .build();
+                                scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+                                scheduler.schedule(info);
                                 return true;
 
                             case R.id.SixHours:
                                 saveData3();
                                 RefreshRateValue.setText("Κάθε 6 ώρες");
-                                //WaitingTime=21600000;
+                                componentName = new ComponentName(Settings.this , BackgroundRequestAPI.class);
+                                info = new JobInfo.Builder(6, componentName)
+                                        .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+                                        .setPersisted(true)
+                                        .setPeriodic(21600000)
+                                        .build();
+                                scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+                                scheduler.schedule(info);
                                 return true;
 
                             case R.id.ZeroHours:
                                 saveDatanever();
                                 RefreshRateValue.setText("Ποτέ");
+                                scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+                                scheduler.cancel(1);
+                                scheduler.cancel(3);
+                                scheduler.cancel(6);
                                 //WaitingTime=0;
                                 return true;
 

@@ -23,6 +23,7 @@ public class WeatherDaily extends AppCompatActivity {
     CityAddList perHour1;
     String API= "e1ddb97838fe7ea715475061978bb3b4"; //DarkSky
     DatabaseHandler DataBase = new DatabaseHandler(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
