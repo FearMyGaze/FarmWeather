@@ -1,30 +1,22 @@
 package com.example.farmweather;
 
-<<<<<<< Updated upstream
 import androidx.annotation.RequiresApi;
-=======
 import androidx.annotation.NonNull;
->>>>>>> Stashed changes
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-<<<<<<< Updated upstream
 import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
-=======
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
-import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
->>>>>>> Stashed changes
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
@@ -32,7 +24,6 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -147,10 +138,6 @@ public class start extends AppCompatActivity {
             }
         });
     }
-<<<<<<< Updated upstream
-}
-=======
-
     @SuppressLint("MissingPermission")
         public void getLastLocation () {
             if (checkPermissions()) {
@@ -247,4 +234,3 @@ public class start extends AppCompatActivity {
 
         }
     }
->>>>>>> Stashed changes
