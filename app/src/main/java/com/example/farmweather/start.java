@@ -1,12 +1,30 @@
 package com.example.farmweather;
 
+<<<<<<< Updated upstream
 import androidx.annotation.RequiresApi;
+=======
+import androidx.annotation.NonNull;
+>>>>>>> Stashed changes
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+<<<<<<< Updated upstream
 import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
+=======
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
+import android.os.Bundle;
+import android.os.Looper;
+import android.provider.Settings;
+>>>>>>> Stashed changes
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
@@ -15,8 +33,18 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+
 
 public class start extends AppCompatActivity {
+    int PERMISSION_ID = 44;
+    FusedLocationProviderClient FusedLocation;
     EditText GetTown,Latitude,Longitude;
     Switch VisibilityChanger;
 
@@ -31,6 +59,8 @@ public class start extends AppCompatActivity {
         Longitude = findViewById(R.id.Longitude);
         VisibilityChanger = findViewById(R.id.VisibilityChanger);
 
+        FusedLocation = LocationServices.getFusedLocationProviderClient(this);
+        getLastLocation();
 
         VisibilityChanger.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,4 +147,104 @@ public class start extends AppCompatActivity {
             }
         });
     }
+<<<<<<< Updated upstream
 }
+=======
+
+    @SuppressLint("MissingPermission")
+        public void getLastLocation () {
+            if (checkPermissions()) {
+                if (isLocationEnabled()) {
+                    FusedLocation.getLastLocation().addOnCompleteListener(
+                            new OnCompleteListener<Location>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Location> task) {
+                                    Location location = task.getResult();
+                                    if (location == null) {
+                                        requestNewLocationData();
+                                    } else {
+                                        Latitude.setText(location.getLatitude() + "");
+                                        Longitude.setText(location.getLongitude() + "");
+                                    }
+                                }
+                            }
+                    );
+                } else {
+                    Toast.makeText(start.this, "Turn on location", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(intent);
+                }
+            } else {
+                requestPermissions();
+            }
+        }
+
+        @SuppressLint("MissingPermission")
+        public void requestNewLocationData () {
+
+            LocationRequest mLocationRequest = new LocationRequest();
+            mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+            mLocationRequest.setInterval(0);
+            mLocationRequest.setFastestInterval(0);
+            mLocationRequest.setNumUpdates(1);
+
+            FusedLocation = LocationServices.getFusedLocationProviderClient(start.this);
+            FusedLocation.requestLocationUpdates(
+                    mLocationRequest, mLocationCallback,
+                    Looper.myLooper());
+        }
+
+        public LocationCallback mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                Location mLastLocation = locationResult.getLastLocation();
+                Latitude.setText(mLastLocation.getLatitude() + "");
+                Longitude.setText(mLastLocation.getLongitude() + "");
+            }
+        };
+
+        //THIS METHOD CHECKS IF THE USER ENABLE PERMISSION FOR LOCATION
+        public boolean checkPermissions () {
+            if (ActivityCompat.checkSelfPermission(start.this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                    ActivityCompat.checkSelfPermission(start.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                return true;
+            }
+            return false;
+        }
+
+        //ASKS FOR PERMIRISIONS
+        public void requestPermissions () {
+            ActivityCompat.requestPermissions(
+                    start.this,
+                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_ID);
+        }
+
+        //CHECKS IF LOCATION IS ON
+        public boolean isLocationEnabled () {
+            LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
+                    LocationManager.NETWORK_PROVIDER
+            );
+        }
+
+        //WHEN A REQUEST IS ACCEPTED OR DENIED
+        @Override
+        public void onRequestPermissionsResult ( int requestCode, String[] permissions,
+                                                 int[] grantResults){
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+            if (requestCode == PERMISSION_ID) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    getLastLocation();
+                }
+            }
+        }
+        @Override
+        public void onResume () {
+            super.onResume();
+            if (checkPermissions()) {
+                getLastLocation();
+            }
+
+        }
+    }
+>>>>>>> Stashed changes
