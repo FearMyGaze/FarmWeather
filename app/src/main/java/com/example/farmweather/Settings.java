@@ -40,30 +40,22 @@ DatabaseHandler DB = new DatabaseHandler(this);
         GpsValue = findViewById(R.id.GpsValue);
 
 
-
-
         InfoBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
                         new AlertDialog.Builder(Settings.this)
                                 .setIcon(android.R.drawable.ic_dialog_info)
                                 .setTitle("Πληροφορίες")
+                                .setNegativeButton("OK",null)
                                 .setMessage("Η ομαδα αποτελείται από τους ακολουθους"
                                         +"\n\nΣταύρος - Γεώργιος Ταχμαζίδης : 4300 Manager / Http"
                                         +"\n\nΒασίλης Αγγελόπουλος : 4194 General Programmer"
                                         +"\n\nΗλίας Αβράμογλου : 4363  Databases"
                                         +"\n\nΓιώργος Παπούλιας : 4229  GUI Design"
                                         +"\n\nΤριαντάφυλλος Μάντσιος : 4301 General Programmer"
-                                        +"\n\nL.A.M.P.S georgepapo@teiser.gr ")
-                                .show();
-                    }
-                },5000);
-            }
+                                        +"\n\nL.A.M.P.S")
+                                .show(); }
         });
-
 
         BackArrow.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -18,6 +18,13 @@
             android:layout_weight="50"
             android:gravity="center">
 
+            <ImageView
+                android:layout_width="25sp"
+                android:layout_height="25sp"
+                android:src="@drawable/adapter_date"
+                android:visibility="invisible">
+            </ImageView>
+
             <Space
                 android:layout_width="5sp"
                 android:layout_height="5sp">
@@ -30,48 +37,8 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="Date time hour"
-                android:textStyle="bold"
-                android:textColor="@color/Black">
-
-            </TextView>
-
-        </LinearLayout> //Date + Icon
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="30sp"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_weight="50">
-
-            <Space
-                android:layout_width="180sp"
-                android:layout_height="match_parent">
-
-            </Space>
-
-            <ImageView
-                android:id="@+id/DailySummaryIcon"
-                android:layout_width="30sp"
-                android:layout_height="30sp"
-                android:src="@drawable/sunny">
-            </ImageView>
-
-            <Space
-                android:layout_width="10sp"
-                android:layout_height="match_parent">
-
-            </Space>
-
-            <TextView
-                android:id="@+id/DailyTown"
-                android:layout_width="170sp"
-                android:layout_height="match_parent"
-                android:gravity="center|right"
-                android:text="Serres , GR"
-                android:textSize="12sp"
-                android:textStyle="bold|italic"
-                android:textColor="@color/Black">
+                android:textColor="@color/Black"
+                android:textStyle="bold">
 
             </TextView>
 
@@ -79,16 +46,17 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30sp"
+            android:layout_height="60sp"
             android:orientation="horizontal"
             android:layout_weight="50">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30sp"
+                android:layout_height="60sp"
                 android:orientation="vertical"
-                android:gravity="right"
+                android:gravity="center"
                 android:layout_weight="25">
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -96,9 +64,50 @@
                     android:orientation="horizontal"
                     android:gravity="center">
 
+                    <ImageView
+                        android:layout_width="25sp"
+                        android:layout_height="25sp"
+                        android:src="@drawable/real_feel"
+                        android:visibility="invisible">
+
+                    </ImageView>
+
                     <Space
-                        android:layout_width="101sp"
-                        android:layout_height="20sp">
+                        android:layout_width="5sp"
+                        android:layout_height="5sp">
+
+                    </Space>
+
+                    <TextView
+                        android:id="@+id/DailySummaryIcon"
+                        android:layout_width="69sp"
+                        android:layout_height="30sp"
+                        android:gravity="center"
+                        android:text="TextView 1"
+                        android:textColor="@color/Black">
+
+                    </TextView>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30sp"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="25sp"
+                        android:layout_height="25sp"
+                        android:src="@drawable/max">
+
+                    </ImageView>
+
+                    <Space
+                        android:layout_width="5sp"
+                        android:layout_height="5sp">
+
                     </Space>
 
                     <TextView
@@ -106,28 +115,20 @@
                         android:layout_width="69sp"
                         android:layout_height="30sp"
                         android:gravity="center"
-                        android:text="MAX"
-                        android:textStyle="bold"
+                        android:text="TextView 2"
                         android:textColor="@color/Black">
 
                     </TextView>
 
-                    <ImageView
-                        android:layout_width="30sp"
-                        android:layout_height="30sp"
-                        android:src="@drawable/max">
+                </LinearLayout>
 
-                    </ImageView>
-
-                </LinearLayout> //Max + Icon
-
-            </LinearLayout> //Max + Icon
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30sp"
+                android:layout_height="60sp"
                 android:orientation="vertical"
-                android:gravity="right"
+                android:gravity="center"
                 android:layout_weight="25">
 
 
@@ -138,34 +139,68 @@
                     android:gravity="center">
 
                     <ImageView
-                        android:layout_width="30sp"
+                        android:layout_width="25sp"
+                        android:layout_height="25sp"
+                        android:src="@drawable/adapter_weather"
+                        android:visibility="invisible">
+
+                    </ImageView>
+
+                    <Space
+                        android:layout_width="5sp"
+                        android:layout_height="5sp">
+
+                    </Space>
+
+                    <TextView
+                        android:id="@+id/DailyTown"
+                        android:layout_width="69sp"
                         android:layout_height="30sp"
+                        android:gravity="center"
+                        android:text="TextView 3"
+                        android:textColor="@color/Black"
+                        android:textStyle="italic|bold"
+                        android:textSize="12sp">
+
+                    </TextView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30sp"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="25sp"
+                        android:layout_height="25sp"
                         android:src="@drawable/min">
 
                     </ImageView>
+
+                    <Space
+                        android:layout_width="5sp"
+                        android:layout_height="5sp">
+
+                    </Space>
 
                     <TextView
                         android:id="@+id/DailyMin"
                         android:layout_width="69sp"
                         android:layout_height="30sp"
                         android:gravity="center"
-                        android:text="MIN"
-                        android:textStyle="bold"
+                        android:text="TextView 4"
                         android:textColor="@color/Black">
 
                     </TextView>
 
-                    <Space
-                        android:layout_width="100sp"
-                        android:layout_height="20sp">
-                    </Space>
+                </LinearLayout>
 
-                </LinearLayout> //Max + Icon
+            </LinearLayout>
 
-            </LinearLayout> // Min + Max + Icon
+        </LinearLayout>
 
-        </LinearLayout> //Min + Humidity + Temp + Wind
-
-    </LinearLayout> //Design element 4 adapter
+    </LinearLayout>
 
 </LinearLayout>
