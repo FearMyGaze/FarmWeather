@@ -736,7 +736,7 @@
                         </TextView>
 
                         <Space
-                            android:layout_width="145sp"
+                            android:layout_width="130sp"
                             android:layout_height="30sp">
                         </Space>
 
