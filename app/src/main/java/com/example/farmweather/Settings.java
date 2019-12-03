@@ -170,7 +170,7 @@ DatabaseHandler DB = new DatabaseHandler(this);
         AddTowns.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DB.insertPData("1","1","1","1","1");
+                //DB.insertPData("1","1","1","1","1");
                    final String TownForAdd = (getIntent().getStringExtra("TownForAdd"));
                    Toast.makeText(Settings.this, "Επιτυχής καταχώρηση", Toast.LENGTH_SHORT).show();
                     new Handler().postDelayed(new Runnable() {
