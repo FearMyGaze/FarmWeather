@@ -4,7 +4,6 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -371,10 +370,6 @@ public class Old_Weather extends AppCompatActivity {
                 swap(switcher, sort, balander);
                 list.setAdapter(adaptori);
                 adaptori.notifyDataSetChanged();
-                return true;
-            case R.id.HistoryItemList:
-                Intent intent = new Intent(Old_Weather.this, WeatherDaily.class);
-                startActivity(intent);
                 return true;
 
             default:return super.onOptionsItemSelected(item);

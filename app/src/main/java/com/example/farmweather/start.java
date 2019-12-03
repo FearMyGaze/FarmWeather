@@ -45,6 +45,7 @@ public class start extends AppCompatActivity {
         setContentView(R.layout.activity_start);
 
         final ImageView enter = findViewById(R.id.enter);
+        final ImageView PassThrough = findViewById(R.id.PassThrough);
         GetTown =  findViewById(R.id.GetTown);
         Latitude = findViewById(R.id.Latitude);
         Longitude = findViewById(R.id.Longitude);
@@ -69,6 +70,13 @@ public class start extends AppCompatActivity {
                     Latitude.setText("");
                     Longitude.setText("");
                 }
+            }
+        });
+
+        PassThrough.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
 

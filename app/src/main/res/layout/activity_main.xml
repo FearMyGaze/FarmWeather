@@ -718,9 +718,27 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:gravity="right"
-                        android:layout_gravity="right">
+                        android:orientation="horizontal">
+
+                        <Space
+                            android:layout_width="5sp"
+                            android:layout_height="30sp">
+
+                        </Space>
+
+                        <TextView
+                            android:id="@+id/MainHistoryTowns"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30sp"
+                            android:text="Iστορικό πόλεων"
+                            android:textColor="@color/White"
+                            android:textSize="23sp">
+                        </TextView>
+
+                        <Space
+                            android:layout_width="145sp"
+                            android:layout_height="30sp">
+                        </Space>
 
                         <ImageView
                             android:id="@+id/Row_add"
@@ -731,11 +749,6 @@
 
                         </ImageView>
 
-                        <Space
-                            android:layout_width="5sp"
-                            android:layout_height="5sp">
-
-                        </Space>
 
                     </LinearLayout>
 

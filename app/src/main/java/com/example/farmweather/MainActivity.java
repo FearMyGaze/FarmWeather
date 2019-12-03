@@ -103,6 +103,8 @@ public class MainActivity extends AppCompatActivity {
         final TextView list_town = findViewById(R.id.list_town);
         final TextView TempMin = findViewById(R.id.min_temperature);
         final TextView TempMax = findViewById(R.id.max_temperature);
+        final ImageView SettingsButton = findViewById(R.id.SettingsButton);
+        final TextView MainHistoryTowns = findViewById(R.id.MainHistoryTowns);
 
         Weather = findViewById(R.id.status);
         Feel = findViewById(R.id.temp_feel);
@@ -117,12 +119,19 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        final ImageView SettingsButton = findViewById(R.id.SettingsButton);
         SettingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,Settings.class);
                 intent.putExtra("TownForAdd",JLocation.getText().toString());
+                startActivity(intent);
+            }
+        });
+
+        MainHistoryTowns.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, WeatherDaily.class);
                 startActivity(intent);
             }
         });
