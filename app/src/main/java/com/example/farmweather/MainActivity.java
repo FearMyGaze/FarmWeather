@@ -145,6 +145,12 @@ public class MainActivity extends AppCompatActivity {
                 Swipe.setRefreshing(false);
                 list_town.setText("Για "+JLocation.getText().toString());
                 new weatherTask().execute();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        ifExists(JLocation.getText().toString());
+                    }
+                },1000);
 
 
                 //APO EDW KAI KATW GIA PROSTHKH KWDIKA STO SWIPE
@@ -212,6 +218,12 @@ public class MainActivity extends AppCompatActivity {
         }); //TELOS KWDIKA METATROPHS
 
         new weatherTask().execute();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ifExists(JLocation.getText().toString());
+            }
+        },1000);
 
         if(Town != null){
             new Handler().postDelayed(new Runnable() {

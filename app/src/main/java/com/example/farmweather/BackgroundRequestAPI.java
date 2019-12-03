@@ -9,13 +9,16 @@ import androidx.annotation.RequiresApi;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class BackgroundRequestAPI extends JobService {
     private boolean jobCancelled;
     DatabaseHandler database = new DatabaseHandler(this);
+    List myList = new ArrayList<String>();
 
     Calendar rightNow = Calendar.getInstance();
     int currentHour = rightNow.get(Calendar.HOUR_OF_DAY);
@@ -58,33 +61,24 @@ public class BackgroundRequestAPI extends JobService {
         }
 
         protected String doInBackground(String... args) {
-            String response = null;
+            String response;
+
 
             cursor = database.getCData();
-            while (cursor.getCount() != 0) {
+            if (cursor.getCount() != 0) {
                 while (cursor.moveToNext()) {
-                    try {
-                        City = cursor.getString(1);
-                        response = HttpRequest.excuteGet("https://api.openweathermap.org/data/2.5/weather?q=" + City + "&units=metric&appid=" + API2);
-                        return response;
-                    }finally {
-                        while (cursor.moveToNext()) {
-                            City = cursor.getString(1);
-                            response = HttpRequest.excuteGet("https://api.openweathermap.org/data/2.5/weather?q=" + City + "&units=metric&appid=" + API2);
-                            return response;
-                        }
-                    }
+                    City = cursor.getString(1);
+                    response = HttpRequest.excuteGet("https://api.openweathermap.org/data/2.5/weather?q=" + City + "&units=metric&appid=" + API2);
+                    myList.add(response);
                 }
             }
-            return response;
+            return myList.toString();
         }
-
 
         //DHLWSH ANTIKEIMENWN TYPOU JASON
         @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         @Override
         protected void onPostExecute(String result) {
-
 
             try {
                 JSONObject jsonObj = new JSONObject(result);
@@ -137,9 +131,8 @@ public class BackgroundRequestAPI extends JobService {
                     WeatherGR = "Καπνός";
                 }
 
+
                 database.insertPData(Time,String.format("%.0f",minF),String.format("%.0f",maxF),WeatherGR,City);
-
-
                 System.out.println("OnPostExecute");
             } catch (JSONException e) {
                 System.out.println(e);
