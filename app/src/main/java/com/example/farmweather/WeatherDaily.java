@@ -170,23 +170,5 @@ public class WeatherDaily extends AppCompatActivity {
         perHour1 = new CityAddList(cCity,icId);
         list.add(perHour1);
     }
-    public boolean ifExists(String City){
-        cursor1 = DataBase.getCData();
-        String ColumnCity = "0";
-        int i = 0;
-        if(cursor1.getCount() == 0){
-            Toast.makeText(getApplicationContext(),"Δεν υπάρχουν δεδομένα για προβολή ",Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        else{
-            while (cursor1.moveToNext() ) {
-                ColumnCity = cursor1.getString(1);
-                if(ColumnCity.equals(City)){
-                    DataBase.insertPData("1","1","1","1","1");
-                }
-            }
-            cursor1.close();
-            return true;
-        }
-    }
+
 }

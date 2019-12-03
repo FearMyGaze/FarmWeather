@@ -20,7 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-
+import android.database.Cursor;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     String WeatherGR,Town,Latitude,Longitude,AddTown,TownFromHistory;
     int maxTemp;
     Double degree;
+    Cursor cursor;
 
     //DHLWSH ANTIKHMENWN GIA JSON
     TextView JLocation,JTime,JTemp,JTemp_min,JTemp_max,JSunrise,JSunset,JWind_speed,JWind_Deg,JPressure,JHumidity,JStatus;
@@ -241,6 +242,26 @@ public class MainActivity extends AppCompatActivity {
         addData();
 
     }//TELOS ONCREATE
+
+    public void ifExists(String City){
+        cursor = DB.getCData();
+        String ColumnCity = "0";
+        boolean flag=false;
+        int i = 0;
+        if(cursor.getCount() == 0){
+            Toast.makeText(getApplicationContext(),"Δεν υπάρχουν δεδομένα για προσθήκη ",Toast.LENGTH_SHORT).show();
+        }
+        else{
+            while (cursor.moveToNext() ) {
+                ColumnCity = cursor.getString(1);
+                if(ColumnCity.equals(City) && flag==false){
+                    DB.insertPData(JTime.getText().toString(),JTemp_min.getText().toString(),JTemp_max.getText().toString(),JStatus.getText().toString(),JLocation.getText().toString());
+                    flag=true;
+                }
+            }
+            cursor.close();
+        }
+    }
 
     public void addData(){
         Row_Add.setOnClickListener(
