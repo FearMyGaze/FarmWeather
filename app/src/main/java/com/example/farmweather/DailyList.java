@@ -2,14 +2,16 @@ package com.example.farmweather;
 
 public class DailyList {
     private Integer Id;
+    private Integer IconId;
     private String Time;
     private String TempMax;
     private String TempMin;
     private String Summary;
     private String City;
 
-    public DailyList(Integer id , String time , String tempMax , String tempMin , String summary , String city){
+    public DailyList(Integer id,Integer Iconid , String time , String tempMax , String tempMin , String summary , String city){
         this.Id = id;
+        this.IconId = Iconid;
         this.Time = time;
         this.TempMax = tempMax;
         this.TempMin = tempMin;
@@ -25,7 +27,7 @@ public class DailyList {
 
     public String getSummary() { return Summary;}
 
-    public String getCity() { return Summary;}
+    public String getCity() { return City;}
 
 
 }

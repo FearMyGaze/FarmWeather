@@ -10,7 +10,7 @@ import android.database.Cursor;
 public class DatabaseHandler extends SQLiteOpenHelper {
 
     //Version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     //DbName
     private static final String DATABASE_NAME = "WeaFa.db";
@@ -36,6 +36,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String PMaxTemp = "MaxTemp";
     private static final String PSummary = "Summary";
     private static final String PIconID = "IconID";
+    private static final String CIconID = "IconID";
     private static final String CacheCity = "CacheCity";
     private static final String CityID = "CityID";
 
@@ -53,12 +54,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("CREATE TABLE "+TABLE_NAME1+" ( "+PRequestID+" INTEGER PRIMARY KEY, "+PIconID+" TEXT, "+PTime+" TEXT, "+PMinTemp+" TEXT, " +
                 ""+PMaxTemp+" TEXT, "+PSummary+ " TEXT, "+PCity+" TEXT)");
 
-        sqLiteDatabase.execSQL("CREATE TABLE "+TABLE_NAME2+" ( "+CityID+" INTEGER PRIMARY KEY, "+CacheCity+" TEXT );");
+        sqLiteDatabase.execSQL("CREATE TABLE "+TABLE_NAME2+" ( "+CityID+" INTEGER PRIMARY KEY, "+CacheCity+" TEXT, "+CIconID+" TEXT);");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+        database.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME1+"");
+        database.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME2+"");
+        onCreate(database);
     }
 
     public boolean insertData(String city,String date,String temp,String weather,String wind,String humidity){
@@ -138,6 +141,32 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
+    public boolean updatePIconID(int pKey,int item){
+        database = this.getWritableDatabase();
+        ContentValues CV = new ContentValues();
+        CV.put(PIconID,item);
+        long result = database.update(TABLE_NAME1,CV,"RequestID = ?",new String[]{String.valueOf(pKey)});
+        if(result == (-1)){
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    public boolean updateCIconID(int pKey,int item){
+        database = this.getWritableDatabase();
+        ContentValues CV = new ContentValues();
+        CV.put(CIconID,item);
+        long result = database.update(TABLE_NAME2,CV,"CityID = ?",new String[]{String.valueOf(pKey)});
+        if(result == (-1)){
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
 
     public Cursor getData(String area,String sort){
         database = this.getWritableDatabase();
@@ -158,6 +187,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         database = this.getWritableDatabase();
         return database.delete(TABLE_NAME,"RequestID = ? AND City = ? AND CurTemp = ?" +
                 " AND Weather = ? AND Wind = ? AND  Humidity = ? AND SearchDate = ? ",new String[] {rID,area,temp,weather,wind,humidity,date});
+    }
+
+    public Integer deleteCData(String CIconID,String City){
+        database = this.getWritableDatabase();
+        return database.delete(TABLE_NAME2,"IconID = ? AND CacheCity = ?",new String[] {CIconID,City});
+    }
+
+    public Integer deletePData(String IconID,String City){
+        database = this.getWritableDatabase();
+        return database.delete(TABLE_NAME1,"IconID = ? AND City = ?",new String[] {IconID,City});
     }
 
     public Integer clearall(String area){

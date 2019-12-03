@@ -2,6 +2,8 @@ package com.example.farmweather;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,10 +15,10 @@ import java.util.ArrayList;
 
 public class WeatherDaily extends AppCompatActivity {
 
-    Boolean isPUpdated;
+    Boolean isPUpdated,isCUpdated;
     Cursor cursor,cursor1;
 
-    Integer switcher,Id=0,cId=0;
+    Integer switcher,Id=0,cId=0,icId=0,icPid = 0,isCDeleted,isPDeleted;
     String Time = "0",MinTemp = "0",MaxTemp = "0",Summary = "0",City = "0",sort = "DESC";
     String cCity="0";
     DailyList perHour;
@@ -45,27 +47,33 @@ public class WeatherDaily extends AppCompatActivity {
         MyDailyList1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                final int item = i;
-//                new AlertDialog.Builder(WeatherDaily.this)
-//                        .setIcon(android.R.drawable.ic_menu_info_details)
-//                        .setTitle("Πληροφορίες")
-//                        .setMessage("Πόλη: " + dailyList.get(item).getCity()+
-//                                "\nΕλάχιστη θερμοκρασία: " + dailyList.get(item).getTempMin() +
-//                                "\nΜέγιστη θερμοκρασία: " + dailyList.get(item).getTempMax() +
-//                                "\nΣύνοψη: " + dailyList.get(item).getSummary() +
-//                                "\nΗμ/νια και Ώρα: " + dailyList.get(item).getTime() + "\nΓια διαγραφή πιέστε συνεχόμενα την εγγραφή!")
-//                        .setNegativeButton("Ok" ,null)
-//                        .show();
+                new AlertDialog.Builder(WeatherDaily.this)
+                        .setIcon(android.R.drawable.ic_menu_info_details)
+                        .setTitle("Πληροφορίες")
+                        .setMessage("Πόλη: " + dailyList.get(i).getCity()+
+                                "\nΕλάχιστη θερμοκρασία: " + dailyList.get(i).getTempMin() +
+                                "\nΜέγιστη θερμοκρασία: " + dailyList.get(i).getTempMax() +
+                                "\nΣύνοψη: " + dailyList.get(i).getSummary() +
+                                "\nΗμ/νια και Ώρα: " + dailyList.get(i).getTime() + "\nΓια διαγραφή πιέστε συνεχόμενα την εγγραφή!")
+                        .setNegativeButton("Ok" ,null)
+                        .show();
             }
         });
-        MyDailyList1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        MyDailyList1.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                icPid = position;
+                isPDeleted = DataBase.deletePData(String.valueOf(icPid),dailyList.get(icPid).getCity());
+                if (isPDeleted > 0) {
+                    Toast.makeText(getApplicationContext(), "Η εγγραφή διαγράφτηκε", Toast.LENGTH_SHORT).show();
+                    dailyList.remove(icId);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Δεν βρέθηκαν παρελθοντικά δεδομένα", Toast.LENGTH_SHORT).show();
+                }
+                adapter.notifyDataSetChanged();
+                return true;
             }
         });
-        viewCity(addTown);
-        viewPData(dailyList);
 
         //Search The Weather For The Current City
         addTownList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -81,36 +89,55 @@ public class WeatherDaily extends AppCompatActivity {
         addTownList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-
-                //KWDIKAS GIA DIAGRAFH METEPEITA!
-
+                icId = position;
+                isCDeleted = DataBase.deleteCData(String.valueOf(icId),addTown.get(icId).getCity());
+                if (isCDeleted > 0) {
+                    Toast.makeText(getApplicationContext(), "Η εγγραφή διαγράφτηκε", Toast.LENGTH_SHORT).show();
+                    addTown.remove(icId);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Δεν βρέθηκαν παρελθοντικά δεδομένα", Toast.LENGTH_SHORT).show();
+                }
+                adapterTown.notifyDataSetChanged();
                 return true;
             }
         });
+
+        viewCity(addTown);
+        viewPData(dailyList);
     }
 
-    public void mergeIconRows(int ID, int iconID){
-        isPUpdated = DataBase.updateIconID(ID,iconID);
+    public void mergePIconRows(int ID, int iconID){
+        isPUpdated = DataBase.updatePIconID(ID,iconID);
         if(isPUpdated == false) {
             Toast.makeText(getApplicationContext(), "Σφάλμα κατά την ενημέρωση", Toast.LENGTH_SHORT).show();
         }
     }
 
+
     public void viewCity(ArrayList<CityAddList> list){
         cursor1 = DataBase.getCData();
+        int i = 0;
         if(cursor1.getCount() == 0){
             Toast.makeText(getApplicationContext(),"Δεν υπάρχουν δεδομένα για προβολή ",Toast.LENGTH_SHORT).show();
         }
         else{
             while (cursor1.moveToNext() ) {
-                //cId = Integer.valueOf(cursor1.getString(0));
+                cId = Integer.valueOf(cursor1.getString(0));
                 cCity = cursor1.getString(1);
                 addPins1(list);
+                mergeCIconRows(cId,icId+i);
+                i++;
             }
             cursor1.close();
         }
-
    }
+
+    public void mergeCIconRows(int ID, int iconID){
+        isCUpdated = DataBase.updateCIconID(ID,iconID);
+        if(isCUpdated == false) {
+            Toast.makeText(getApplicationContext(), "Σφάλμα κατά την ενημέρωση", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     public void viewPData(ArrayList<DailyList> lista){
         cursor = DataBase.getPData(sort);
@@ -128,19 +155,38 @@ public class WeatherDaily extends AppCompatActivity {
                 Summary = cursor.getString(5);
                 City = cursor.getString(6);
                 addPins(lista);
-                //mergeIconRows(Id,item+i);
-                //i++;
+                mergePIconRows(Id,icPid+i);
+                i++;
             }
             cursor.close();
         }
     }
 
     public void addPins(ArrayList<DailyList> list){
-        perHour = new DailyList(Id,Time,MinTemp,MaxTemp,Summary,City);
+        perHour = new DailyList(Id,icPid,Time,MinTemp,MaxTemp,Summary,City);
         list.add(perHour);
     }
     public void addPins1(ArrayList<CityAddList> list){
-        perHour1 = new CityAddList(cCity);
+        perHour1 = new CityAddList(cCity,icId);
         list.add(perHour1);
+    }
+    public boolean ifExists(String City){
+        cursor1 = DataBase.getCData();
+        String ColumnCity = "0";
+        int i = 0;
+        if(cursor1.getCount() == 0){
+            Toast.makeText(getApplicationContext(),"Δεν υπάρχουν δεδομένα για προβολή ",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else{
+            while (cursor1.moveToNext() ) {
+                ColumnCity = cursor1.getString(1);
+                if(ColumnCity.equals(City)){
+                    DataBase.insertPData("1","1","1","1","1");
+                }
+            }
+            cursor1.close();
+            return true;
+        }
     }
 }
