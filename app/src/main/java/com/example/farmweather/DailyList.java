@@ -9,7 +9,7 @@ public class DailyList {
     private String Summary;
     private String City;
 
-    public DailyList(Integer id,Integer Iconid , String time , String tempMax , String tempMin , String summary , String city){
+    public DailyList(Integer id,Integer Iconid ,String time ,String tempMax , String tempMin ,String city ,String summary ){
         this.Id = id;
         this.IconId = Iconid;
         this.Time = time;

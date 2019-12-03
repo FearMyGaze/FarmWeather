@@ -163,7 +163,7 @@ public class WeatherDaily extends AppCompatActivity {
     }
 
     public void addPins(ArrayList<DailyList> list){
-        perHour = new DailyList(Id,icPid,Time,MinTemp,MaxTemp,Summary,City);
+        perHour = new DailyList(Id,icPid,Time,MinTemp,MaxTemp,City,Summary);
         list.add(perHour);
     }
     public void addPins1(ArrayList<CityAddList> list){

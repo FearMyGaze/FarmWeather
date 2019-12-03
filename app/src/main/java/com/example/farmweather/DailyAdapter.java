@@ -24,20 +24,24 @@ public class DailyAdapter extends ArrayAdapter<DailyList> {
         String time = getItem(position).getTime();
         String tempMax = getItem(position).getTempMax();
         String tempMin = getItem(position).getTempMin();
+        String town = getItem(position).getCity();
         String summary = getItem(position).getSummary();
+
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent , false);
 
         TextView tvTime = convertView.findViewById(R.id.DailyTime);
+        TextView tvTown =  convertView.findViewById(R.id.DailyTown);
         TextView tvTempMax=  convertView.findViewById(R.id.DailyMax);
         TextView tvTempMin =  convertView.findViewById(R.id.DailyMin);
-        TextView tvTown =  convertView.findViewById(R.id.DailyTown);
+        TextView tvSummary = convertView.findViewById(R.id.DailySummaryIcon);
 
         tvTime.setText(time);
+        tvTown.setText(summary);
         tvTempMax.setText(tempMax);
         tvTempMin.setText(tempMin);
-        tvTown.setText(summary);
+        tvSummary.setText(town);
 
         return convertView;
     }
