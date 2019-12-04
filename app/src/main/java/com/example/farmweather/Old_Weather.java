@@ -10,10 +10,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 import java.util.ArrayList;
 import android.database.Cursor;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Old_Weather extends AppCompatActivity {
@@ -139,7 +139,7 @@ public class Old_Weather extends AppCompatActivity {
         balander = new ArrayList<>();
         final SubAdapter adaptori = new SubAdapter(this, R.layout.adapter_view_layout,balander);
         final ListView list = findViewById(R.id.ListView);
-        final ImageView DailySummaryIcon = findViewById(R.id.DailySummaryIcon);
+        final TextView DailySummaryIcon = findViewById(R.id.DailySummaryIcon);
 
         switch(item.getItemId()){
             case R.id.DeleteItemList:
