@@ -2,10 +2,10 @@ package com.example.farmweather;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -105,6 +105,32 @@ public class WeatherDaily extends AppCompatActivity {
         viewCity(addTown);
         viewPData(dailyList);
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.daily_menu,menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected (MenuItem item){
+
+        switch (item.getItemId()){
+
+            case R.id.DailyMenuMax:
+                return true;
+            case  R.id.DailyMenuMin:
+                return true;
+            case R.id.DailyMenuHeat:
+                return true;
+            case R.id.DailyMenuRain:
+                return true;
+            case R.id.DailyMenuSnow:
+                return true;
+        }
+     return true;
+    }
+
 
     public void mergePIconRows(int ID, int iconID){
         isPUpdated = DataBase.updatePIconID(ID,iconID);

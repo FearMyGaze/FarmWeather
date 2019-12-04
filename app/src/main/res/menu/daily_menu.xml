@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+    android:id="@+id/DailyMenuMax"
+    android:title="Υψυλότερη Θερμοκρασία"
+    app:showAsAction="never">
+    </item>
+
+    <item
+        android:id="@+id/DailyMenuMin"
+        android:title="Χαμηλότερη Θερμοκρασία"
+        app:showAsAction="never">
+    </item>
+    <item
+        android:id="@+id/DailyMenuHeat"
+        android:title="Κάυσωνας"
+        app:showAsAction="never">
+    </item>
+
+    <item
+        android:id="@+id/DailyMenuRain"
+        android:title="Καταιγίδα"
+        app:showAsAction="never">
+    </item>
+
+    <item
+        android:id="@+id/DailyMenuSnow"
+        android:title="Χιονόπτωση"
+        app:showAsAction="never">
+    </item>
+</menu>

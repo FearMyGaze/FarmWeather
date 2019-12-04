@@ -34,11 +34,13 @@
             android:theme="@style/ListTheme" />
         <activity
             android:name=".WeatherDaily"
-            android:theme="@style/CustomTheme" />
+            android:label=" "
+            android:theme="@style/ListTheme" />
         <activity
             android:name=".Settings"
             android:theme="@style/CustomTheme" />
-        <service android:name=".BackgroundRequestAPI"
+        <service
+            android:name=".BackgroundRequestAPI"
             android:permission="android.permission.BIND_JOB_SERVICE"/>
     </application>
 
