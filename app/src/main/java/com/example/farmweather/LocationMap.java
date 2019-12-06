@@ -18,7 +18,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -29,7 +28,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,82 +52,84 @@ public class LocationMap extends FragmentActivity implements OnMapReadyCallback 
         SearchBar = findViewById(R.id.SearchBar);
         FindLocation = findViewById(R.id.FindLocation);
 
-
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        //CHECK IF NETWORK PROVIDER IS ENABLED
-        if(locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, new LocationListener() {
-                @Override
-                public void onLocationChanged(Location location) {
-                    latitude =  location.getLatitude();
-                    longitude = location.getLongitude();
-                    LatLng latLng = new LatLng(latitude , longitude);
-                    Geocoder geocoder = new Geocoder(getApplicationContext());
-                    try {
-                        List <Address> myAddressList = geocoder.getFromLocation(latitude , longitude , 1);
-                        String markerLocation = myAddressList.get(0).getLocality()+", ";
-                        markerLocation += myAddressList.get(0).getCountryName();
-                        mMap.addMarker(new MarkerOptions().position(latLng).title(markerLocation));
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng , 10.2f));
-                    } catch (IOException e) {
-                        e.printStackTrace();
+            //CHECK IF NETWORK PROVIDER IS ENABLED
+            if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, new LocationListener() {
+                    @Override
+                    public void onLocationChanged(Location location) {
+                        latitude = location.getLatitude();
+                        longitude = location.getLongitude();
+                        LatLng latLng = new LatLng(latitude, longitude);
+                        Geocoder geocoder = new Geocoder(getApplicationContext());
+                        try {
+                            List<Address> myAddressList = geocoder.getFromLocation(latitude, longitude, 1);
+                            String markerLocation = myAddressList.get(0).getLocality() + ", ";
+                            markerLocation += myAddressList.get(0).getCountryName();
+                            mMap.clear();
+                            mMap.addMarker(new MarkerOptions().position(latLng).title(markerLocation));
+                            //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }
 
-                @Override
-                public void onStatusChanged(String provider, int status, Bundle extras) {
+                    @Override
+                    public void onStatusChanged(String provider, int status, Bundle extras) {
 
-                }
-
-                @Override
-                public void onProviderEnabled(String provider) {
-
-                }
-
-                @Override
-                public void onProviderDisabled(String provider) {
-
-                }
-            });
-        } //CHECK IF GPS PROVIDER IS ENABLED
-        else if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, new LocationListener() {
-                @Override
-                public void onLocationChanged(Location location) {
-                    latitude =  location.getLatitude();
-                    longitude = location.getLongitude();
-                    LatLng latLng = new LatLng(latitude , longitude);
-                    Geocoder geocoder = new Geocoder(getApplicationContext());
-                    try {
-                        List <Address> myAddressList = geocoder.getFromLocation(latitude , longitude , 1);
-                        String markerLocation = myAddressList.get(0).getLocality()+", ";
-                        markerLocation += myAddressList.get(0).getCountryName();
-                        mMap.addMarker(new MarkerOptions().position(latLng).title(markerLocation));
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng , 10.2f));
-                    } catch (IOException e) {
-                        e.printStackTrace();
                     }
-                }
 
-                @Override
-                public void onStatusChanged(String provider, int status, Bundle extras) {
+                    @Override
+                    public void onProviderEnabled(String provider) {
 
-                }
+                    }
 
-                @Override
-                public void onProviderEnabled(String provider) {
+                    @Override
+                    public void onProviderDisabled(String provider) {
 
-                }
+                    }
+                });
+            } //CHECK IF GPS PROVIDER IS ENABLED
+            else if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, new LocationListener() {
+                    @Override
+                    public void onLocationChanged(Location location) {
+                        latitude = location.getLatitude();
+                        longitude = location.getLongitude();
+                        LatLng latLng = new LatLng(latitude, longitude);
+                        Geocoder geocoder = new Geocoder(getApplicationContext());
+                        try {
+                            List<Address> myAddressList = geocoder.getFromLocation(latitude, longitude, 1);
+                            String markerLocation = myAddressList.get(0).getLocality() + ", ";
+                            markerLocation += myAddressList.get(0).getCountryName();
+                            mMap.clear();
+                            mMap.addMarker(new MarkerOptions().position(latLng).title(markerLocation));
+                            //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
 
-                @Override
-                public void onProviderDisabled(String provider) {
+                    @Override
+                    public void onStatusChanged(String provider, int status, Bundle extras) {
 
-                }
-            });
-        }
+                    }
+
+                    @Override
+                    public void onProviderEnabled(String provider) {
+
+                    }
+
+                    @Override
+                    public void onProviderDisabled(String provider) {
+
+                    }
+                });
+            }
+
         if(SearchBar.getText().toString() != ""){
             keyboardEnter();
         }
@@ -158,6 +158,7 @@ public class LocationMap extends FragmentActivity implements OnMapReadyCallback 
         FindLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SearchBar.setText("");
                 mMap.clear();
                 mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(LocationMap.this);
                 Task location = mFusedLocationProviderClient.getLastLocation();

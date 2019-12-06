@@ -63,7 +63,6 @@ public class BackgroundRequestAPI extends JobService {
         protected String doInBackground(String... args) {
             String response;
 
-
             cursor = database.getCData();
             if (cursor.getCount() != 0) {
                 while (cursor.moveToNext()) {
