@@ -18,7 +18,7 @@ import java.util.Locale;
 public class BackgroundRequestAPI extends JobService {
     private boolean jobCancelled;
     DatabaseHandler database = new DatabaseHandler(this);
-    List myList = new ArrayList<String>();
+    List<String> myList = new ArrayList<>();
 
     Calendar rightNow = Calendar.getInstance();
     int currentHour = rightNow.get(Calendar.HOUR_OF_DAY);
@@ -130,8 +130,6 @@ public class BackgroundRequestAPI extends JobService {
                 if(weatherDescription.equals("Smoke")){
                     WeatherGR = "Καπνός";
                 }
-
-
                 database.insertPData(Time,String.format("%.0f",minF),String.format("%.0f",maxF),WeatherGR,City);
                 System.out.println("OnPostExecute");
             } catch (JSONException e) {
