@@ -260,15 +260,12 @@ public class MainActivity extends AppCompatActivity {
         String ColumnCity = "0";
         boolean flag=false;
         int i = 0;
-        if(cursor.getCount() == 0){
-            Toast.makeText(getApplicationContext(),"Δεν υπάρχουν δεδομένα για προσθήκη ",Toast.LENGTH_SHORT).show();
-        }
-        else{
+        if(cursor.getCount() != 0){
             while (cursor.moveToNext() ) {
                 ColumnCity = cursor.getString(1);
-                if(ColumnCity.equals(City) && flag==false){
-                    DB.insertPData(JTime.getText().toString(),JTemp_min.getText().toString(),JTemp_max.getText().toString(),JStatus.getText().toString(),JLocation.getText().toString());
-                    flag=true;
+                if (ColumnCity.equals(City) && flag == false) {
+                    DB.insertPData(JTime.getText().toString(), JTemp_min.getText().toString(), JTemp_max.getText().toString(), JStatus.getText().toString(), JLocation.getText().toString());
+                    flag = true;
                 }
             }
             cursor.close();

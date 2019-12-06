@@ -38,7 +38,6 @@ public class start extends AppCompatActivity {
     FusedLocationProviderClient FusedLocation;
     EditText GetTown,Latitude,Longitude;
     Switch VisibilityChanger;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +49,7 @@ public class start extends AppCompatActivity {
         Latitude = findViewById(R.id.Latitude);
         Longitude = findViewById(R.id.Longitude);
         VisibilityChanger = findViewById(R.id.VisibilityChanger);
+
 
         FusedLocation = LocationServices.getFusedLocationProviderClient(this);
         getLastLocation();
@@ -76,7 +76,8 @@ public class start extends AppCompatActivity {
         PassThrough.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(start.this , LocationMap.class);
+                startActivity(intent);
             }
         });
 
