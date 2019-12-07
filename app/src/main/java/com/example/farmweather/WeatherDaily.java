@@ -2,6 +2,8 @@ package com.example.farmweather;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -18,7 +20,7 @@ public class WeatherDaily extends AppCompatActivity {
     Boolean isPUpdated,isCUpdated;
     Cursor cursor,cursor1;
 
-    Integer switcher,Id=0,cId=0,icId=0,icPid = 0,isCDeleted,isPDeleted;
+    Integer switcher,Id=0,cId=0,icId=0,icPid = 0;
     String Time = "0",MinTemp = "0",MaxTemp = "0",Summary = "0",City = "0",sort = "DESC";
     String cCity="0";
     DailyList perHour;
@@ -43,7 +45,6 @@ public class WeatherDaily extends AppCompatActivity {
         MyDailyList1.setAdapter(adapter); //Add Adapter History To ListView History
         addTownList.setAdapter(adapterTown); //Add Adapter Cities To ListView Cities
 
-
         MyDailyList1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -61,16 +62,27 @@ public class WeatherDaily extends AppCompatActivity {
         });
         MyDailyList1.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                icPid = position;
-                isPDeleted = DataBase.deletePData(String.valueOf(icPid),dailyList.get(icPid).getCity());
-                if (isPDeleted > 0) {
-                    Toast.makeText(getApplicationContext(), "Η εγγραφή διαγράφτηκε", Toast.LENGTH_SHORT).show();
-                    dailyList.remove(icId);
-                } else {
-                    Toast.makeText(getApplicationContext(), "Δεν βρέθηκαν παρελθοντικά δεδομένα", Toast.LENGTH_SHORT).show();
-                }
-                adapter.notifyDataSetChanged();
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                new AlertDialog.Builder(WeatherDaily.this)
+                        .setIcon(android.R.drawable.ic_delete)
+                        .setTitle("Είστε σίγουρος;")
+                        .setMessage("Πρόκειται να διαγραφεί αυτή η εγγραφή")
+                        .setPositiveButton("NAI", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                            Integer deletedHistory = DataBase.deletePData(String.valueOf(dailyList.get(position).getId()),dailyList.get(position).getCity());
+                            if (deletedHistory > 0) {
+                                Toast.makeText(getApplicationContext(), "Η εγγραφή διαγράφτηκε", Toast.LENGTH_SHORT).show();
+
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Δεν βρέθηκαν παρελθοντικά δεδομένα", Toast.LENGTH_SHORT).show();
+                            }
+                            dailyList.remove(position);
+                            adapter.notifyDataSetChanged();
+                            }
+                        })
+                        .setNegativeButton("OXI",null)
+                        .show();
                 return true;
             }
         });
@@ -88,20 +100,31 @@ public class WeatherDaily extends AppCompatActivity {
 
         addTownList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                icId = position;
-                isCDeleted = DataBase.deleteCData(String.valueOf(icId),addTown.get(icId).getCity());
-                if (isCDeleted > 0) {
-                    Toast.makeText(getApplicationContext(), "Η εγγραφή διαγράφτηκε", Toast.LENGTH_SHORT).show();
-                    addTown.remove(icId);
-                } else {
-                    Toast.makeText(getApplicationContext(), "Δεν βρέθηκαν παρελθοντικά δεδομένα", Toast.LENGTH_SHORT).show();
-                }
-                adapterTown.notifyDataSetChanged();
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                new AlertDialog.Builder(WeatherDaily.this)
+                        .setIcon(android.R.drawable.ic_delete)
+                        .setTitle("Είστε σίγουρος;")
+                        .setMessage("Πρόκειται να διαγραφεί αυτή η εγγραφή")
+                        .setPositiveButton("NAI", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        Integer deleteTown = DataBase.deleteCData(String.valueOf(addTown.get(position).getCityID()),addTown.get(position).getCity());
+                                        if (deleteTown > 0) {
+                                            Toast.makeText(getApplicationContext(), "Η εγγραφή διαγράφτηκε", Toast.LENGTH_SHORT).show();
+
+                                        } else {
+                                            Toast.makeText(getApplicationContext(), "Δεν βρέθηκαν παρελθοντικά δεδομένα", Toast.LENGTH_SHORT).show();
+                                        }
+                                        addTown.remove(position);
+                                        adapterTown.notifyDataSetChanged();
+                                    }
+                                }
+                        )
+                        .setNegativeButton("ΟΧΙ",null)
+                        .show();
                 return true;
             }
         });
-
         viewCity(addTown);
         viewPData(dailyList);
     }
@@ -193,7 +216,7 @@ public class WeatherDaily extends AppCompatActivity {
         list.add(perHour);
     }
     public void addPins1(ArrayList<CityAddList> list){
-        perHour1 = new CityAddList(cCity,icId);
+        perHour1 = new CityAddList(cId,cCity,icId);
         list.add(perHour1);
     }
 

@@ -29,5 +29,7 @@ public class DailyList {
 
     public String getCity() { return City;}
 
+    public int getIconId() {return IconId;}
 
+    public int getId() { return Id;}
 }

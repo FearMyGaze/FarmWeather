@@ -189,14 +189,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 " AND Weather = ? AND Wind = ? AND  Humidity = ? AND SearchDate = ? ",new String[] {rID,area,temp,weather,wind,humidity,date});
     }
 
-    public Integer deleteCData(String CIconID,String City){
+    public Integer deleteCData(String cID,String City){
         database = this.getWritableDatabase();
-        return database.delete(TABLE_NAME2,"IconID = ? AND CacheCity = ?",new String[] {CIconID,City});
+        return database.delete(TABLE_NAME2,"CityID = ? AND CacheCity = ?",new String[] {cID,City});
     }
 
-    public Integer deletePData(String IconID,String City){
+    public Integer deletePData(String id,String city){
         database = this.getWritableDatabase();
-        return database.delete(TABLE_NAME1,"IconID = ? AND City = ?",new String[] {IconID,City});
+        return database.delete(TABLE_NAME1,"RequestID = ? AND City = ?",new String[] {id,city});
     }
 
     public Integer clearall(String area){
