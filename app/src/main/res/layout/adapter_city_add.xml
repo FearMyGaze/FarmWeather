@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="50sp"
-    android:background="#5ac18e">
+    android:background="@color/AdapterCityAdd">
 
     <LinearLayout
         android:layout_width="match_parent"

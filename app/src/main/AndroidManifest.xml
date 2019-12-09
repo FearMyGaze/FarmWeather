@@ -17,7 +17,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
         <activity
             android:name=".LocationMap"
             android:theme="@style/CustomTheme"></activity>
@@ -26,7 +25,6 @@
             android:theme="@style/CustomTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -40,7 +38,7 @@
         <activity
             android:name=".WeatherDaily"
             android:label=" "
-            android:theme="@style/ListTheme" />
+            android:theme="@style/DailyListTheme" />
         <activity
             android:name=".Settings"
             android:theme="@style/CustomTheme" />
