@@ -144,6 +144,198 @@ public class WeatherDaily extends AppCompatActivity {
 
         switch (item.getItemId()){
 
+            case R.id.HighMoth_1:
+                month = "Jan";
+                type="max";
+                viewMaxMinTempData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.HighMoth_2:
+                month = "Feb";
+                type="max";
+                viewMaxMinTempData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.HighMoth_3:
+                month = "Mar";
+                type="max";
+                viewMaxMinTempData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.HighMoth_4:
+                month = "Apr";
+                type="max";
+                viewMaxMinTempData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.HighMoth_5:
+                month = "May";
+                type="max";
+                viewMaxMinTempData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.HighMoth_6:
+                month = "Jun";
+                type="max";
+                viewMaxMinTempData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.HighMoth_7:
+                month = "Jul";
+                type="max";
+                viewMaxMinTempData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.HighMoth_8:
+                month = "Aug";
+                type="max";
+                viewMaxMinTempData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.HighMoth_9:
+                month = "Sep";
+                type="max";
+                viewMaxMinTempData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.HighMoth_10:
+                month = "Oct";
+                type="max";
+                viewMaxMinTempData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.HighMoth_11:
+                month = "Nov";
+                type="max";
+                viewMaxMinTempData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.HighMoth_12:
+                month = "Dec";
+                type="max";
+                viewMaxMinTempData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.LowMonth_1:
+                month = "Jan";
+                type="min";
+                viewMaxMinTempData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.LowMonth_2:
+                month = "Feb";
+                type="min";
+                viewMaxMinTempData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.LowMonth_3:
+                month = "Mar";
+                type="min";
+                viewMaxMinTempData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.LowMonth_4:
+                month = "Apr";
+                type="min";
+                viewMaxMinTempData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.LowMonth_5:
+                month = "May";
+                type="min";
+                viewMaxMinTempData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.LowMonth_6:
+                month = "Jun";
+                type="min";
+                viewMaxMinTempData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.LowMonth_7:
+                month = "Jul";
+                type="min";
+                viewMaxMinTempData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.LowMonth_8:
+                month = "Aug";
+                type="min";
+                viewMaxMinTempData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.LowMonth_9:
+                month = "Sep";
+                type="min";
+                viewMaxMinTempData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.LowMonth_10:
+                month = "Oct";
+                type="min";
+                viewMaxMinTempData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.LowMonth_11:
+                month = "Nov";
+                type="min";
+                viewMaxMinTempData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.LowMonth_12:
+                month = "Dec";
+                type="min";
+                viewMaxMinTempData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
             case R.id.HeatMonth_1:
                 month = "Jan";
                 summary = "Καύσωνας";
