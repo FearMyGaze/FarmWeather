@@ -143,7 +143,103 @@ public class WeatherDaily extends AppCompatActivity {
         final DailyAdapter adapter = new DailyAdapter(this,R.layout.adapter_daily,balander);
 
         switch (item.getItemId()){
-            
+
+            case R.id.HeatMonth_1:
+                month = "Jan";
+                summary = "Καύσωνας";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.HeatMonth_2:
+                month = "Feb";
+                summary = "Καύσωνας";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.HeatMonth_3:
+                month = "Mar";
+                summary = "Καύσωνας";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.HeatMonth_4:
+                month = "Apr";
+                summary = "Καύσωνας";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.HeatMonth_5:
+                month = "May";
+                summary = "Καύσωνας";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.HeatMonth_6:
+                month = "Jun";
+                summary = "Καύσωνας";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.HeatMonth_7:
+                month = "Jul";
+                summary = "Καύσωνας";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.HeatMonth_8:
+                month = "Aug";
+                summary = "Καύσωνας";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.HeatMonth_9:
+                month = "Sep";
+                summary = "Καύσωνας";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.HeatMonth_10:
+                month = "Oct";
+                summary = "Καύσωνας";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.HeatMonth_11:
+                month = "Nov";
+                summary = "Καύσωνας";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.HeatMonth_12:
+                month = "Dec";
+                summary = "Καύσωνας";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+                
             case R.id.RainMonth_1:
                 month = "Jan";
                 summary = "Καταιγίδα";
