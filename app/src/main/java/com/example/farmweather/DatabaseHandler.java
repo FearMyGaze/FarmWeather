@@ -10,7 +10,7 @@ import android.database.Cursor;
 public class DatabaseHandler extends SQLiteOpenHelper {
 
     //Version
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     //DbName
     private static final String DATABASE_NAME = "WeaFa.db";
@@ -289,6 +289,45 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 break;
         }
         database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery(sql,null);
+        return cursor;
+    }
+
+    public Cursor extremeMonth(String area,String date,String summary,String sort){
+        database = this.getWritableDatabase();
+        String sql;
+        if(area != "*"){
+            sql="SELECT * FROM Predictions_Per_Hour WHERE Time LIKE '%"+date+"%' AND City LIKE '"+area+"' AND Summary LIKE '"+summary+"' ORDER BY RequestID "+sort;
+        }
+        else
+        {
+            sql="SELECT * FROM Predictions_Per_Hour WHERE Time LIKE '%"+date+"%' AND Summary LIKE '"+summary+"' ORDER BY RequestID "+sort+"";
+        }
+        Cursor cursor = database.rawQuery(sql,null);
+        return cursor;
+    }
+
+    public Cursor minMax(String area,String date,String type,String sort){
+        database = this.getWritableDatabase();
+        String sql;
+        if(type == "max"){
+            if(area != "*"){
+                sql="SELECT * FROM Predictions_Per_Hour WHERE Predictions_Per_Hour.City LIKE '"+area+"' AND Time LIKE '%"+date+"%' AND MaxTemp = (SELECT MAX(MaxTemp) FROM Predictions_Per_Hour) ORDER BY RequestID "+sort+"";
+            }
+            else
+            {
+             sql="SELECT * FROM Predictions_Per_Hour WHERE Time LIKE '%"+date+"%' AND MaxTemp = (SELECT MAX(MaxTemp) FROM Predictions_Per_Hour) ORDER BY RequestID "+sort+"";
+            }
+        }
+        else{
+            if(area != "*"){
+                sql="SELECT * FROM Predictions_Per_Hour WHERE Predictions_Per_Hour.City LIKE '"+area+"' AND Time LIKE '%"+date+"%' AND MinTemp = (SELECT MAX(MinTemp) FROM Predictions_Per_Hour) ORDER BY RequestID "+sort+"";
+            }
+            else
+            {
+                sql="SELECT * FROM Predictions_Per_Hour WHERE Time LIKE '%"+date+"%' AND MinTemp = (SELECT MAX(MinTemp) FROM Predictions_Per_Hour) ORDER BY RequestID "+sort+"";
+            }
+        }
         Cursor cursor = database.rawQuery(sql,null);
         return cursor;
     }

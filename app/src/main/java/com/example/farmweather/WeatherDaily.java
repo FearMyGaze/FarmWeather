@@ -18,15 +18,16 @@ import java.util.ArrayList;
 public class WeatherDaily extends AppCompatActivity {
 
     Boolean isPUpdated,isCUpdated;
-    Cursor cursor,cursor1;
+    Cursor cursor,cursor1,cursor2,cursor3;
 
     Integer switcher,Id=0,cId=0,icId=0,icPid = 0;
-    String Time = "0",MinTemp = "0",MaxTemp = "0",Summary = "0",City = "0",sort = "DESC";
+    String Time = "0",MinTemp = "0",MaxTemp = "0",Summary = "0",City = "0",sort = "DESC",month="*",searchcity="*",summary,type;
     String cCity="0";
     DailyList perHour;
     CityAddList perHour1;
     String API= "e1ddb97838fe7ea715475061978bb3b4"; //DarkSky
     DatabaseHandler DataBase = new DatabaseHandler(this);
+    ArrayList<DailyList> balander;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,21 +138,14 @@ public class WeatherDaily extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected (MenuItem item){
+        balander = new ArrayList<>();
+        final ListView list = findViewById(R.id.HistoryListView);
+        final DailyAdapter adapter = new DailyAdapter(this,R.layout.adapter_daily,balander);
 
         switch (item.getItemId()){
 
-            case R.id.DailyMenuMax:
-                return true;
-            case  R.id.DailyMenuMin:
-                return true;
-            case R.id.DailyMenuHeat:
-                return true;
-            case R.id.DailyMenuRain:
-                return true;
-            case R.id.DailyMenuSnow:
-                return true;
         }
-     return true;
+        return true;
     }
 
 
@@ -210,6 +204,9 @@ public class WeatherDaily extends AppCompatActivity {
             cursor.close();
         }
     }
+
+
+
 
     public void addPins(ArrayList<DailyList> list){
         perHour = new DailyList(Id,icPid,Time,MinTemp,MaxTemp,City,Summary);
