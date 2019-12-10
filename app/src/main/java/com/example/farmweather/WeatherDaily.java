@@ -143,9 +143,202 @@ public class WeatherDaily extends AppCompatActivity {
         final DailyAdapter adapter = new DailyAdapter(this,R.layout.adapter_daily,balander);
 
         switch (item.getItemId()){
+            
+            case R.id.RainMonth_1:
+                month = "Jan";
+                summary = "Καταιγίδα";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.RainMonth_2:
+                month = "Feb";
+                summary = "Καταιγίδα";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.RainMonth_3:
+                month = "Mar";
+                summary = "Καταιγίδα";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.RainMonth_4:
+                month = "Apr";
+                summary = "Καταιγίδα";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.RainMonth_5:
+                month = "May";
+                summary = "Καταιγίδα";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.RainMonth_6:
+                month = "Jun";
+                summary = "Καταιγίδα";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.RainMonth_7:
+                month = "Jul";
+                summary = "Καταιγίδα";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.RainMonth_8:
+                month = "Aug";
+                summary = "Καταιγίδα";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.RainMonth_9:
+                month = "Sep";
+                summary = "Καταιγίδα";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.RainMonth_10:
+                month = "Oct";
+                summary = "Καταιγίδα";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.RainMonth_11:
+                month = "Nov";
+                summary = "Καταιγίδα";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.RainMonth_12:
+                month = "Dec";
+                summary = "Καταιγίδα";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.SnowMonth_1:
+                month = "Jan";
+                summary = "Χιόνι";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.SnowMonth_2:
+                month = "Feb";
+                summary = "Χιόνι";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.SnowMonth_3:
+                month = "Mar";
+                summary = "Χιόνι";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.SnowMonth_4:
+                month = "Apr";
+                summary = "Χιόνι";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.SnowMonth_5:
+                month = "May";
+                summary = "Χιόνι";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.SnowMonth_6:
+                month = "Jun";
+                summary = "Χιόνι";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.SnowMonth_7:
+                month = "Jul";
+                summary = "Χιόνι";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.SnowMonth_8:
+                month = "Aug";
+                summary = "Χιόνι";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.SnowMonth_9:
+                month = "Sep";
+                summary = "Χιόνι";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.SnowMonth_10:
+                month = "Oct";
+                summary = "Χιόνι";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.SnowMonth_11:
+                month = "Nov";
+                summary = "Χιόνι";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.SnowMonth_12:
+                month = "Dec";
+                summary = "Χιόνι";
+                viewExtremeData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                return true;
+
+            default:return super.onOptionsItemSelected(item);
 
         }
-        return true;
     }
 
 
@@ -206,7 +399,49 @@ public class WeatherDaily extends AppCompatActivity {
     }
 
 
+    public void viewExtremeData(ArrayList<DailyList> lista){
+        int i=0;
+        cursor2 = DataBase.extremeMonth(searchcity,month,summary,sort);
+        if(cursor2.getCount() == 0){
+            Toast.makeText(getApplicationContext(),"Δεν υπάρχουν δεδομένα για προβολή ",Toast.LENGTH_SHORT).show();
+        }
+        else{
+            while (cursor2.moveToNext() ) {
+                Id = Integer.valueOf(cursor2.getString(0));
+                Time = cursor2.getString(2);
+                MinTemp = cursor2.getString(3);
+                MaxTemp = cursor2.getString(4);
+                Summary = cursor2.getString(5);
+                City = cursor2.getString(6);
+                addPins(lista);
+                mergePIconRows(Id,icPid+i);
+                i++;
+            }
+            cursor2.close();
+        }
+    }
 
+    public void viewMaxMinTempData(ArrayList<DailyList> lista){
+        int i=0;
+        cursor3 = DataBase.minMax(searchcity,month,type,sort);
+        if(cursor3.getCount() == 0){
+            Toast.makeText(getApplicationContext(),"Δεν υπάρχουν δεδομένα για προβολή ",Toast.LENGTH_SHORT).show();
+        }
+        else{
+            while (cursor3.moveToNext() ) {
+                Id = Integer.valueOf(cursor3.getString(0));
+                Time = cursor3.getString(2);
+                MinTemp = cursor3.getString(3);
+                MaxTemp = cursor3.getString(4);
+                Summary = cursor3.getString(5);
+                City = cursor3.getString(6);
+                addPins(lista);
+                mergePIconRows(Id,icPid+i);
+                i++;
+            }
+            cursor3.close();
+        }
+    }
 
     public void addPins(ArrayList<DailyList> list){
         perHour = new DailyList(Id,icPid,Time,MinTemp,MaxTemp,City,Summary);
