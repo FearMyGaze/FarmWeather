@@ -28,8 +28,9 @@ ComponentName componentName;
 JobInfo info;
 JobScheduler scheduler;
 DatabaseHandler DB = new DatabaseHandler(this);
-ArrayList<String> cities;
 Cursor c1;
+boolean switcher;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -166,8 +167,10 @@ Cursor c1;
         AddTowns.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                    final String TownForAdd = (getIntent().getStringExtra("TownForAdd"));
-                   if(doubleCities(TownForAdd)){
+                   doubleCities(TownForAdd);
+                   if(switcher == true){
                     Toast.makeText(getApplicationContext(), "Επιτυχής καταχώρηση", Toast.LENGTH_SHORT).show();
                         new Handler().postDelayed(new Runnable() {
                         @Override
@@ -241,35 +244,14 @@ Cursor c1;
 
     }
 
-    public boolean doubleCities(String city){
-        c1 = DB.dublicatecities();
-        int i=0;
-        boolean isDublicated = true;
+    public void doubleCities(String city){
+        c1 = DB.dublicatecities(city);
         if(c1.getCount() == 0){
-            Toast.makeText(getApplicationContext(),"Δεν υπάρχουν καταχωρημένες πόλεις προς καταγραφή",Toast.LENGTH_SHORT).show();
+            switcher = true;
         }
         else{
-            while(c1.moveToNext()) {
-                if(city != c1.getString(1))
-                {
-                    isDublicated = false;
-                }
-                else
-                {
-                    isDublicated = true;
-                }
-            }
+            switcher = false;
+        }
             c1.close();
         }
-//        for(i=0;i<cities.size();i++){
-//            if(cities.get(i) == city){
-//                isDublicated = false;
-//            }
-//            else{
-//                isDublicated = true;
-//            }
-//        }
-        return isDublicated;
-    }
-
 }

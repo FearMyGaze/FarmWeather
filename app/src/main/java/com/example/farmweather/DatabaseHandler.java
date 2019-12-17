@@ -332,10 +332,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public Cursor dublicatecities(){
+    public Cursor dublicatecities(String area){
         database = this.getWritableDatabase();
         String sql;
-        sql = "SELECT * FROM CacheCities";
+        sql = "SELECT * FROM CacheCities WHERE CacheCity LIKE '"+area+"'";
         Cursor cursor = database.rawQuery(sql,null);
         return cursor;
     }
