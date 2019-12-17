@@ -76,7 +76,7 @@ public class WeatherDaily extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "Η εγγραφή διαγράφτηκε", Toast.LENGTH_SHORT).show();
 
                             } else {
-                                Toast.makeText(getApplicationContext(), "Δεν βρέθηκαν παρελθοντικά δεδομένα", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Σφάλμα κατά τη διαγραφή", Toast.LENGTH_SHORT).show();
                             }
                             dailyList.remove(position);
                             adapter.notifyDataSetChanged();
@@ -114,7 +114,7 @@ public class WeatherDaily extends AppCompatActivity {
                                             Toast.makeText(getApplicationContext(), "Η εγγραφή διαγράφτηκε", Toast.LENGTH_SHORT).show();
 
                                         } else {
-                                            Toast.makeText(getApplicationContext(), "Δεν βρέθηκαν παρελθοντικά δεδομένα", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(), "Σφάλμα κατά τη διαγραφή", Toast.LENGTH_SHORT).show();
                                         }
                                         addTown.remove(position);
                                         adapterTown.notifyDataSetChanged();
@@ -642,7 +642,7 @@ public class WeatherDaily extends AppCompatActivity {
         cursor1 = DataBase.getCData();
         int i = 0;
         if(cursor1.getCount() == 0){
-            Toast.makeText(getApplicationContext(),"Δεν υπάρχουν δεδομένα για προβολή ",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Δεν υπάρχουν καταχωρημένες πόλεις προς καταγραφή",Toast.LENGTH_SHORT).show();
         }
         else{
             while (cursor1.moveToNext() ) {
@@ -668,7 +668,7 @@ public class WeatherDaily extends AppCompatActivity {
         int i = 0;
         switcher = 1;
         if(cursor.getCount() == 0){
-            Toast.makeText(getApplicationContext(),"Δεν υπάρχουν δεδομένα για προβολή ",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Δεν υπάρχει καταγεγραμμένο ιστορικό",Toast.LENGTH_SHORT).show();
         }
         else{
             while (cursor.moveToNext() ) {
@@ -694,7 +694,7 @@ public class WeatherDaily extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Δεν υπάρχουν δεδομένα για προβολή ",Toast.LENGTH_SHORT).show();
         }
         else{
-            while (cursor2.moveToNext() ) {
+            cursor2.moveToNext();
                 Id = Integer.valueOf(cursor2.getString(0));
                 Time = cursor2.getString(2);
                 MinTemp = cursor2.getString(3);
@@ -706,7 +706,6 @@ public class WeatherDaily extends AppCompatActivity {
                 i++;
             }
             cursor2.close();
-        }
     }
 
     public void viewMaxMinTempData(ArrayList<DailyList> lista){
@@ -716,7 +715,7 @@ public class WeatherDaily extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Δεν υπάρχουν δεδομένα για προβολή ",Toast.LENGTH_SHORT).show();
         }
         else{
-            while (cursor3.moveToNext() ) {
+            cursor3.moveToNext();
                 Id = Integer.valueOf(cursor3.getString(0));
                 Time = cursor3.getString(2);
                 MinTemp = cursor3.getString(3);
@@ -726,7 +725,7 @@ public class WeatherDaily extends AppCompatActivity {
                 addPins(lista);
                 mergePIconRows(Id,icPid+i);
                 i++;
-            }
+
             cursor3.close();
         }
     }

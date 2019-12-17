@@ -312,20 +312,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String sql;
         if(type == "max"){
             if(area != "*"){
-                sql="SELECT * FROM Predictions_Per_Hour WHERE Predictions_Per_Hour.City LIKE '"+area+"' AND Time LIKE '%"+date+"%' AND MaxTemp = (SELECT MAX(MaxTemp) FROM Predictions_Per_Hour) ORDER BY RequestID "+sort+"";
+                sql="SELECT DISTINCT * FROM Predictions_Per_Hour WHERE Predictions_Per_Hour.City LIKE '"+area+"' AND Time LIKE '%"+date+"%' AND MaxTemp = (SELECT MAX(MaxTemp) FROM Predictions_Per_Hour) ORDER BY RequestID "+sort+"";
             }
             else
             {
-             sql="SELECT * FROM Predictions_Per_Hour WHERE Time LIKE '%"+date+"%' AND MaxTemp = (SELECT MAX(MaxTemp) FROM Predictions_Per_Hour) ORDER BY RequestID "+sort+"";
+             sql="SELECT DISTINCT * FROM Predictions_Per_Hour WHERE Time LIKE '%"+date+"%' AND MaxTemp = (SELECT MAX(MaxTemp) FROM Predictions_Per_Hour) ORDER BY RequestID "+sort+"";
             }
         }
         else{
             if(area != "*"){
-                sql="SELECT * FROM Predictions_Per_Hour WHERE Predictions_Per_Hour.City LIKE '"+area+"' AND Time LIKE '%"+date+"%' AND MinTemp = (SELECT MAX(MinTemp) FROM Predictions_Per_Hour) ORDER BY RequestID "+sort+"";
+                sql="SELECT DISTINCT * FROM Predictions_Per_Hour WHERE Predictions_Per_Hour.City LIKE '"+area+"' AND Time LIKE '%"+date+"%' AND MinTemp = (SELECT MIN(MinTemp) FROM Predictions_Per_Hour) ORDER BY RequestID "+sort+"";
             }
             else
             {
-                sql="SELECT * FROM Predictions_Per_Hour WHERE Time LIKE '%"+date+"%' AND MinTemp = (SELECT MAX(MinTemp) FROM Predictions_Per_Hour) ORDER BY RequestID "+sort+"";
+                sql="SELECT DISTINCT * FROM Predictions_Per_Hour WHERE Time LIKE '%"+date+"%' AND MinTemp = (SELECT MIN(MinTemp) FROM Predictions_Per_Hour) ORDER BY RequestID "+sort+"";
             }
         }
         Cursor cursor = database.rawQuery(sql,null);
