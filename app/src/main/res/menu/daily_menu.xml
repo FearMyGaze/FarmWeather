@@ -415,4 +415,10 @@
         </menu>
 
     </item>
+
+    <item
+        android:id="@+id/DailyClear"
+        android:title="Επαναφορά">
+    </item>
+
 </menu>
