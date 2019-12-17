@@ -10,7 +10,7 @@ import android.database.Cursor;
 public class DatabaseHandler extends SQLiteOpenHelper {
 
     //Version
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     //DbName
     private static final String DATABASE_NAME = "WeaFa.db";
@@ -328,6 +328,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 sql="SELECT DISTINCT * FROM Predictions_Per_Hour WHERE Time LIKE '%"+date+"%' ORDER BY MinTemp ASC;";
             }
         }
+        Cursor cursor = database.rawQuery(sql,null);
+        return cursor;
+    }
+
+    public Cursor dublicatecities(){
+        database = this.getWritableDatabase();
+        String sql;
+        sql = "SELECT * FROM CacheCities";
         Cursor cursor = database.rawQuery(sql,null);
         return cursor;
     }

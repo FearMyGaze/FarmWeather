@@ -629,6 +629,10 @@ public class WeatherDaily extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
                 return true;
 
+            case R.id.DailyClear:
+                viewPData(balander);
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
             default:return super.onOptionsItemSelected(item);
 
         }

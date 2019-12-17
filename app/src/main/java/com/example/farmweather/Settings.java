@@ -6,6 +6,7 @@ import android.app.job.JobScheduler;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
@@ -17,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 public class Settings extends AppCompatActivity {
 
 TextView RefreshRateValue,GpsValue;
@@ -25,6 +28,8 @@ ComponentName componentName;
 JobInfo info;
 JobScheduler scheduler;
 DatabaseHandler DB = new DatabaseHandler(this);
+ArrayList<String> cities;
+Cursor c1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -158,23 +163,26 @@ DatabaseHandler DB = new DatabaseHandler(this);
             }
         });
 
-
         AddTowns.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //DB.insertPData("1","1","1","1","1");
                    final String TownForAdd = (getIntent().getStringExtra("TownForAdd"));
-                   Toast.makeText(Settings.this, "Επιτυχής καταχώρηση", Toast.LENGTH_SHORT).show();
-                    new Handler().postDelayed(new Runnable() {
+                   if(doubleCities(TownForAdd)){
+                    Toast.makeText(getApplicationContext(), "Επιτυχής καταχώρηση", Toast.LENGTH_SHORT).show();
+                        new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            Intent intent = new Intent(Settings.this,MainActivity.class);
-                            intent.putExtra("Town",TownForAdd);
-                            intent.putExtra("Code","Adding Town");
-                            startActivity(intent);
-                        }
+                                Intent intent = new Intent(Settings.this,MainActivity.class);
+                                intent.putExtra("Town",TownForAdd);
+                                intent.putExtra("Code","Adding Town");
+                                startActivity(intent);
+                            }
                     }, 800);
                     }
+                   else{
+                       Toast.makeText(getApplicationContext(), "Αυτή η πόλη υπάρχει ήδη καταχωρημένη στο ιστορικό", Toast.LENGTH_SHORT).show();
+                   }
+            }
         });
 
         loadData();
@@ -231,6 +239,37 @@ DatabaseHandler DB = new DatabaseHandler(this);
         RefreshRateValue.setText(load);
         GpsValue.setText(gps);
 
+    }
+
+    public boolean doubleCities(String city){
+        c1 = DB.dublicatecities();
+        int i=0;
+        boolean isDublicated = true;
+        if(c1.getCount() == 0){
+            Toast.makeText(getApplicationContext(),"Δεν υπάρχουν καταχωρημένες πόλεις προς καταγραφή",Toast.LENGTH_SHORT).show();
+        }
+        else{
+            while(c1.moveToNext()) {
+                if(city != c1.getString(1))
+                {
+                    isDublicated = false;
+                }
+                else
+                {
+                    isDublicated = true;
+                }
+            }
+            c1.close();
+        }
+//        for(i=0;i<cities.size();i++){
+//            if(cities.get(i) == city){
+//                isDublicated = false;
+//            }
+//            else{
+//                isDublicated = true;
+//            }
+//        }
+        return isDublicated;
     }
 
 }
