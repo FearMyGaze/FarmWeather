@@ -51,8 +51,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("CREATE TABLE "+TABLE_NAME+" ( "+RequestID+" INTEGER PRIMARY KEY, "+City+" TEXT, "+CurTemp+" TEXT, " +
                 ""+Weather+" TEXT, "+Wind+ " TEXT, "+Humidity+" TEXT, "+SearchDate+" TEXT, "+IconID+" INTEGER);");
 
-        sqLiteDatabase.execSQL("CREATE TABLE "+TABLE_NAME1+" ( "+PRequestID+" INTEGER PRIMARY KEY, "+PIconID+" TEXT, "+PTime+" TEXT, "+PMinTemp+" TEXT, " +
-                ""+PMaxTemp+" TEXT, "+PSummary+ " TEXT, "+PCity+" TEXT)");
+        sqLiteDatabase.execSQL("CREATE TABLE "+TABLE_NAME1+" ( "+PRequestID+" INTEGER PRIMARY KEY, "+PIconID+" TEXT, "+PTime+" TEXT, "+PMinTemp+" INTEGER, " +
+                ""+PMaxTemp+" INTEGER, "+PSummary+ " TEXT, "+PCity+" TEXT)");
 
         sqLiteDatabase.execSQL("CREATE TABLE "+TABLE_NAME2+" ( "+CityID+" INTEGER PRIMARY KEY, "+CacheCity+" TEXT, "+CIconID+" TEXT);");
     }
@@ -86,8 +86,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         database = this.getWritableDatabase();
         ContentValues CV = new ContentValues();
         CV.put(PTime,ptime);
-        CV.put(PMinTemp,pmintemp);
-        CV.put(PMaxTemp,pmaxtemp);
+        CV.put(PMinTemp,Integer.valueOf(pmintemp));
+        CV.put(PMaxTemp,Integer.valueOf(pmaxtemp));
         CV.put(PSummary,psummary);
         CV.put(PCity,pcity);
         long result = database.insert(TABLE_NAME1,null ,CV);
@@ -312,20 +312,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String sql;
         if(type == "max"){
             if(area != "*"){
-                sql="SELECT DISTINCT * FROM Predictions_Per_Hour WHERE Predictions_Per_Hour.City LIKE '"+area+"' AND Time LIKE '%"+date+"%' AND MaxTemp = (SELECT MAX(MaxTemp) FROM Predictions_Per_Hour) ORDER BY RequestID "+sort+"";
+                sql="SELECT DISTINCT * FROM Predictions_Per_Hour WHERE Predictions_Per_Hour.City LIKE '"+area+"' AND Time LIKE '%"+date+"%' AND MaxTemp = (SELECT MAX(MaxTemp) FROM Predictions_Per_Hour);";
             }
             else
             {
-             sql="SELECT DISTINCT * FROM Predictions_Per_Hour WHERE Time LIKE '%"+date+"%' AND MaxTemp = (SELECT MAX(MaxTemp) FROM Predictions_Per_Hour) ORDER BY RequestID "+sort+"";
+             sql="SELECT DISTINCT * FROM Predictions_Per_Hour WHERE Time LIKE '%"+date+"%' AND MaxTemp = (SELECT MAX(MaxTemp) FROM Predictions_Per_Hour);";
             }
         }
         else{
             if(area != "*"){
-                sql="SELECT DISTINCT * FROM Predictions_Per_Hour WHERE Predictions_Per_Hour.City LIKE '"+area+"' AND Time LIKE '%"+date+"%' AND MinTemp = (SELECT MIN(MinTemp) FROM Predictions_Per_Hour) ORDER BY RequestID "+sort+"";
+                sql="SELECT DISTINCT * FROM Predictions_Per_Hour WHERE Predictions_Per_Hour.City LIKE '"+area+"' AND Time LIKE '%"+date+"%' ORDER BY MinTemp ASC;";
             }
             else
             {
-                sql="SELECT DISTINCT * FROM Predictions_Per_Hour WHERE Time LIKE '%"+date+"%' AND MinTemp = (SELECT MIN(MinTemp) FROM Predictions_Per_Hour) ORDER BY RequestID "+sort+"";
+                sql="SELECT DISTINCT * FROM Predictions_Per_Hour WHERE Time LIKE '%"+date+"%' ORDER BY MinTemp ASC;";
             }
         }
         Cursor cursor = database.rawQuery(sql,null);

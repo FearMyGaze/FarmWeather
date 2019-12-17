@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class WeatherDaily extends AppCompatActivity {
 
-    Boolean isPUpdated,isCUpdated;
+    Boolean isPUpdated,isCUpdated,deletebug=true;
     Cursor cursor,cursor1,cursor2,cursor3;
 
     Integer switcher,Id=0,cId=0,icId=0,icPid = 0;
@@ -71,15 +71,20 @@ public class WeatherDaily extends AppCompatActivity {
                         .setPositiveButton("NAI", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                            Integer deletedHistory = DataBase.deletePData(String.valueOf(dailyList.get(position).getId()),dailyList.get(position).getCity());
-                            if (deletedHistory > 0) {
-                                Toast.makeText(getApplicationContext(), "Η εγγραφή διαγράφτηκε", Toast.LENGTH_SHORT).show();
+                            if(deletebug == true){
+                                Integer deletedHistory = DataBase.deletePData(String.valueOf(dailyList.get(position).getId()),dailyList.get(position).getCity());
+                                if (deletedHistory > 0) {
+                                    Toast.makeText(getApplicationContext(), "Η εγγραφή διαγράφτηκε", Toast.LENGTH_SHORT).show();
 
-                            } else {
-                                Toast.makeText(getApplicationContext(), "Σφάλμα κατά τη διαγραφή", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Σφάλμα κατά τη διαγραφή", Toast.LENGTH_SHORT).show();
+                                }
+                                dailyList.remove(position);
+                                adapter.notifyDataSetChanged();
                             }
-                            dailyList.remove(position);
-                            adapter.notifyDataSetChanged();
+                            else{
+                                Toast.makeText(getApplicationContext(), "Παρακαλώ επαναφέρετε το ιστορικό στην αρχική του μορφή για να πραγματοποιήσετε τη διαγραφή", Toast.LENGTH_SHORT).show();
+                            }
                             }
                         })
                         .setNegativeButton("OXI",null)
@@ -684,6 +689,7 @@ public class WeatherDaily extends AppCompatActivity {
             }
             cursor.close();
         }
+        deletebug = true;
     }
 
 
@@ -694,7 +700,7 @@ public class WeatherDaily extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Δεν υπάρχουν δεδομένα για προβολή ",Toast.LENGTH_SHORT).show();
         }
         else{
-            cursor2.moveToNext();
+            cursor2.moveToFirst();
                 Id = Integer.valueOf(cursor2.getString(0));
                 Time = cursor2.getString(2);
                 MinTemp = cursor2.getString(3);
@@ -706,6 +712,7 @@ public class WeatherDaily extends AppCompatActivity {
                 i++;
             }
             cursor2.close();
+        deletebug = false;
     }
 
     public void viewMaxMinTempData(ArrayList<DailyList> lista){
@@ -715,7 +722,7 @@ public class WeatherDaily extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Δεν υπάρχουν δεδομένα για προβολή ",Toast.LENGTH_SHORT).show();
         }
         else{
-            cursor3.moveToNext();
+            cursor3.moveToFirst();
                 Id = Integer.valueOf(cursor3.getString(0));
                 Time = cursor3.getString(2);
                 MinTemp = cursor3.getString(3);
@@ -728,6 +735,7 @@ public class WeatherDaily extends AppCompatActivity {
 
             cursor3.close();
         }
+        deletebug = false;
     }
 
     public void addPins(ArrayList<DailyList> list){
