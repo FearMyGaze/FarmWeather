@@ -11,10 +11,10 @@
 
     <!--New custom theme without the bar  -->
     <style name="CustomTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary" type="color"></item>
-        <item name="colorPrimaryDark" type="color"></item>
-        <item name="colorAccent" type="color"></item>
-        <item name="android:textColor" type="color"></item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColor" type="color">@color/Light_black</item>
     </style>
 
     <!--New custom theme for the ListMenu with the ActionBar  -->
