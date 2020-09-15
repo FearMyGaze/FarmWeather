@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.farmweather">
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.FearMyGaze.FarmWeather">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -19,7 +20,8 @@
             android:value="@string/google_maps_key" />
         <activity
             android:name=".LocationMap"
-            android:theme="@style/CustomTheme"></activity>
+            android:theme="@style/CustomTheme">
+        </activity>
         <activity
             android:name=".start"
             android:theme="@style/CustomTheme">
