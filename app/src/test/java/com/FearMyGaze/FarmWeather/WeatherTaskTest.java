@@ -1,7 +1,5 @@
 package com.FearMyGaze.FarmWeather;
 
-import com.FearMyGaze.FarmWeather.domain.TemperatureReading;
-
 import org.junit.Test;
 
 import java.util.ArrayList;

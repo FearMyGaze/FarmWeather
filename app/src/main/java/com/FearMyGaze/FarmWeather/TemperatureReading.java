@@ -1,4 +1,4 @@
-package com.FearMyGaze.FarmWeather.domain;
+package com.FearMyGaze.FarmWeather;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
