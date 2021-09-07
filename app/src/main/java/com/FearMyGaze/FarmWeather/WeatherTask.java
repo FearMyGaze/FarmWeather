@@ -6,8 +6,6 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import com.FearMyGaze.FarmWeather.domain.TemperatureReading;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 

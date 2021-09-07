@@ -1,9 +1,7 @@
 package com.FearMyGaze.FarmWeather;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,10 +9,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import java.util.ArrayList;
-import android.database.Cursor;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
 
 public class Old_Weather extends AppCompatActivity {
 
