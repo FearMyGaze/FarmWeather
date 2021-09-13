@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">FarmWeather</string>
     <string name="title_activity_location_map">Map</string>
+    <string name="SearchLocation">Search Location</string>
 </resources>

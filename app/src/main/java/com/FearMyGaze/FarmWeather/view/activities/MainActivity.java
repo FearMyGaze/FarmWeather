@@ -1,4 +1,4 @@
-package com.FearMyGaze.FarmWeather.view;
+package com.FearMyGaze.FarmWeather.view.activities;
 
 import android.os.Bundle;
 import android.view.View;

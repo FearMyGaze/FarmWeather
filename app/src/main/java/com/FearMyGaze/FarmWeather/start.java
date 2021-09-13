@@ -135,7 +135,7 @@ public class start extends AppCompatActivity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(start.this, com.FearMyGaze.FarmWeather.view.MainActivity.class);
+                Intent intent = new Intent(start.this, com.FearMyGaze.FarmWeather.view.activities.StartingScreen.class);
                 startActivity(intent);
             }
         });
