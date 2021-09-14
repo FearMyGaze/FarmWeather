@@ -62,7 +62,6 @@ public class WeatherSnapshotServiceAPI {
                     }
 
                 }, new Response.ErrorListener() {
-
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // TODO: Handle error

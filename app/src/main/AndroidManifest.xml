@@ -19,12 +19,12 @@
 
         <activity
             android:name=".LocationMap"
-            android:theme="@style/CustomTheme">
+            android:theme="@style/Theme.FarmWeather">
         </activity>
         <activity
             android:name=".start"
             android:exported="true"
-            android:theme="@style/CustomTheme">
+            android:theme="@style/Theme.FarmWeather">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,7 +33,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:theme="@style/CustomTheme" />
+            android:theme="@style/Theme.FarmWeather" />
         <activity
             android:name=".Old_Weather"
             android:label=" "
@@ -44,10 +44,10 @@
             android:theme="@style/DailyListTheme" />
         <activity
             android:name=".Settings"
-            android:theme="@style/CustomTheme" />
+            android:theme="@style/Theme.FarmWeather" />
         <activity
             android:name=".view.activities.MainActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/Theme.FarmWeather">
         </activity>
         <activity
             android:name=".view.activities.StartingScreen"

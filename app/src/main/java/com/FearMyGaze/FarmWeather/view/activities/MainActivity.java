@@ -31,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
         * TODO: We need to change the way we insert the data (make it with GUI)
         * */
 
+        /*
+        * TODO: MAYBE WE HAVE TO REMOVE MAIN BECAUSE THE STARTING SCREEN DOES EVERYTHING
+        * */
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

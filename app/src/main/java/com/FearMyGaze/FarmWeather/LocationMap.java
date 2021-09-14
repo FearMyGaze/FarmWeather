@@ -51,7 +51,7 @@ public class LocationMap extends FragmentActivity implements OnMapReadyCallback 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        final Button SearchButton = findViewById(R.id.SearchLocation);
+        final Button SearchButton = findViewById(R.id.SearchLocationMapButton);
         SearchBar = findViewById(R.id.SearchBar);
         FindLocation = findViewById(R.id.FindLocation);
 

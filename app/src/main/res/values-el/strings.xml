@@ -3,6 +3,6 @@
     <string name="app_name">FarmWeather</string>
     <string name="title_activity_location_map">Map</string>
 
-    <string name="SearchLocation">Αναζήτηση τοποθεσία </string>
-
+    <string name="EnterLocation">Τοποθέτησε τοποθεσία</string>
+    <string name="ManageCities">Διαχείριση πόλεων</string>
 </resources>
