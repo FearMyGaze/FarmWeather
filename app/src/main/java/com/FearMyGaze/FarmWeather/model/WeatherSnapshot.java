@@ -74,6 +74,8 @@ public class WeatherSnapshot {
         return mainTempMax;
     }
 
+    public String getMaxMin(){ return mainTempMax+'/'+mainTempMin; }
+
     public String getMainFeels_like() {
         return mainFeels_like;
     }
