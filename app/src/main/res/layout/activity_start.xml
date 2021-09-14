@@ -161,6 +161,15 @@
         android:layout_height="100sp"
         android:layout_gravity="center"
         android:src="@drawable/arrow96">
+    </ImageView>
+
+    <ImageView
+        android:id="@+id/NewAPI"
+        android:layout_width="100sp"
+        android:layout_height="100sp"
+        android:layout_gravity="center"
+        android:src="@drawable/arrow96"
+        android:tint="@color/Blue">
 
     </ImageView>
 

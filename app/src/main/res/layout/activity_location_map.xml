@@ -49,18 +49,18 @@
         android:src="@drawable/ic_gps"
         android:layout_marginTop="10dp"
         android:scaleType="centerCrop"/>
-    
+
     <Button
-        android:id="@+id/SearchLocation"
+        android:id="@+id/SearchLocationMapButton"
         android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
         android:layout_height="50dp"
-        android:layout_marginBottom="10sp"
+        android:layout_alignParentBottom="true"
         android:layout_marginLeft="10sp"
         android:layout_marginRight="10sp"
+        android:layout_marginBottom="10sp"
+        android:background="@drawable/settings_round"
         android:text="ΑΝΑΖΗΤΗΣΗ ΚΑΙΡΟΥ"
         android:textColor="@color/SettingsBlue"
-        android:background="@drawable/settings_round"
         android:textSize="30sp"
         android:textStyle="bold" />
     

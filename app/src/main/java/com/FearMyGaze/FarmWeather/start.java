@@ -52,6 +52,8 @@ public class start extends AppCompatActivity {
         Longitude = findViewById(R.id.Longitude);
         VisibilityChanger = findViewById(R.id.VisibilityChanger);
 
+        ImageView imageView = findViewById(R.id.NewAPI);
+
 
         FusedLocation = LocationServices.getFusedLocationProviderClient(this);
         getLastLocation();
@@ -129,6 +131,15 @@ public class start extends AppCompatActivity {
             }
 
         });
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(start.this, com.FearMyGaze.FarmWeather.view.activities.StartingScreen.class);
+                startActivity(intent);
+            }
+        });
+
         Longitude.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override

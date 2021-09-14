@@ -1,9 +1,10 @@
 package com.FearMyGaze.FarmWeather.service;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
-import com.FearMyGaze.FarmWeather.model.weatherSnapshot;
-import com.FearMyGaze.FarmWeather.model.weatherSnapshotSingletonRequest;
+import com.FearMyGaze.FarmWeather.model.WeatherSnapshot;
+import com.FearMyGaze.FarmWeather.model.WeatherSnapshotSingletonRequest;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -12,29 +13,34 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class weatherSnapshotServiceAPI {
-    private static String url ="https://api.openweathermap.org/data/2.5/weather?q=";
+public class WeatherSnapshotServiceAPI {
+
+    private static final String Location_URL ="https://api.openweathermap.org/data/2.5/weather?q=";
+    private static final String Language_URL="&lang=";
+    private static final String Measurement_URL="&units=";
+    private static final String API_URL ="&appid=";
+    @SuppressLint("StaticFieldLeak")
     private static Context context;
 
     public interface IWeatherSnapshot {
-        void onResponse(weatherSnapshot weatherSnapshot);
+        void onResponse(WeatherSnapshot weatherSnapshot);
         void onError(String message);
     }
 
-    public static void getWeatherSnapshot(String location, Context context , IWeatherSnapshot iWeatherSnapshotCall) {
-        weatherSnapshotServiceAPI.context = context;
-        url = url + location +"&units=metric&appid=75a1a10887c7350764f93ad239553a90";
-
+    public static void getWeatherSnapshot(String location ,  String language , String measurement , String API , Context context , IWeatherSnapshot iWeatherSnapshotCall) {
+        WeatherSnapshotServiceAPI.context = context;
+        String url;
+        url = Location_URL + location.trim() + Language_URL + language.trim() + Measurement_URL + measurement.trim() + API_URL + API.trim();
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, response -> {
 
                     try {
-                        weatherSnapshot weatherSnapshot;
+                        WeatherSnapshot weatherSnapshot;
                         JSONObject weather = response.getJSONArray("weather").getJSONObject(0);
                         JSONObject main = response.getJSONObject("main");
                         JSONObject wind = response.getJSONObject("wind");
                         JSONObject sys = response.getJSONObject("sys");
-                        weatherSnapshot = new weatherSnapshot(
+                        weatherSnapshot = new WeatherSnapshot(
                                 weather.getString("id"),
                                 weather.getString("description"),
                                 weather.getString("icon"),
@@ -51,11 +57,11 @@ public class weatherSnapshotServiceAPI {
 
                         iWeatherSnapshotCall.onResponse(weatherSnapshot);
                     } catch (JSONException e) {
+                        // TODO: Handle error
                         iWeatherSnapshotCall.onError("Well ....");
                     }
 
                 }, new Response.ErrorListener() {
-
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // TODO: Handle error
@@ -64,6 +70,9 @@ public class weatherSnapshotServiceAPI {
                 });
 
         // Access the RequestQueue through your singleton class.
-        weatherSnapshotSingletonRequest.getInstance(context).addToRequestQueue(jsonObjectRequest);
+        WeatherSnapshotSingletonRequest.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
+
+
+
 }

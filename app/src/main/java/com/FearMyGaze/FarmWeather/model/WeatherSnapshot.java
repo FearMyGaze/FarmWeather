@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class weatherSnapshot {
+public class WeatherSnapshot {
     private final String weatherId;
     private final String  weatherDescription;
     private final String  weatherIcon;
@@ -19,7 +19,7 @@ public class weatherSnapshot {
     private final String timestamp;
     private final String  address;
 
-    public weatherSnapshot(String weatherId,
+    public WeatherSnapshot(String weatherId,
                            String weatherDescription,
                            String weatherIcon,
                            String mainTemp,
@@ -41,9 +41,12 @@ public class weatherSnapshot {
         this.mainFeels_like = mainFeels_like;
         this.windSpeed = windSpeed;
         this.windDeg = windDeg;
-        this.sysSunrise = new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(sysSunrise * 1000));
-        this.sysSunset = new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(sysSunset * 1000));
-        this.timestamp = new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(dataCalculation * 1000));
+        String sunrise =  new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(sysSunrise * 1000));
+        this.sysSunrise = sunrise;
+        String sunset =  new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(sysSunset * 1000));
+        this.sysSunset = sunset;
+        String dt =  new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(dataCalculation * 1000));
+        this.timestamp = dt;
         this.address = address;
     }
 
@@ -70,6 +73,8 @@ public class weatherSnapshot {
     public String getMainTempMax() {
         return mainTempMax;
     }
+
+    public String getMaxMin(){ return mainTempMax+'/'+mainTempMin; }
 
     public String getMainFeels_like() {
         return mainFeels_like;

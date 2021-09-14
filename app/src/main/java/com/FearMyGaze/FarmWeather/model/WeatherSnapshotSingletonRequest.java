@@ -6,19 +6,20 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
-public class weatherSnapshotSingletonRequest {
-    private static weatherSnapshotSingletonRequest instance;
+public class WeatherSnapshotSingletonRequest {
+
+    private static WeatherSnapshotSingletonRequest instance;
     private static Context context;
     private RequestQueue requestQueue;
 
-    private weatherSnapshotSingletonRequest(Context context) {
-        weatherSnapshotSingletonRequest.context = context;
+    private WeatherSnapshotSingletonRequest(Context context) {
+        WeatherSnapshotSingletonRequest.context = context;
         requestQueue = getRequestQueue();
     }
 
-    public static synchronized weatherSnapshotSingletonRequest getInstance(Context context) {
+    public static synchronized WeatherSnapshotSingletonRequest getInstance(Context context) {
         if (instance == null) {
-            instance = new weatherSnapshotSingletonRequest(context);
+            instance = new WeatherSnapshotSingletonRequest(context);
         }
         return instance;
     }
