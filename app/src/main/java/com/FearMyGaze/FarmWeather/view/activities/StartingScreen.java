@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.FearMyGaze.FarmWeather.R;
 import com.FearMyGaze.FarmWeather.model.LocationRecyclerViewAdapter;
 import com.FearMyGaze.FarmWeather.model.WeatherSnapshot;
+import com.FearMyGaze.FarmWeather.service.AirQualityServiceAPI;
 import com.FearMyGaze.FarmWeather.service.WeatherSnapshotServiceAPI;
 
 import java.util.ArrayList;

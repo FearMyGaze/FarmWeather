@@ -58,9 +58,19 @@ public class WeatherSnapshotServiceAPI {
                                 Long.parseLong(response.getString("dt")),
                                 location+" "+sys.getString("country"));
 
+                        AirQualityServiceAPI.getAirQualitySnapshot(weatherSnapshot.getCoordLat(), weatherSnapshot.getCoordLon(), API, context, new AirQualityServiceAPI.InterfaceAirQualitySnapshot() {
+                            @Override
+                            public void onResponse(String result) {
+                                weatherSnapshot.setAirQuality(result);
+                                interfaceWeatherSnapshotCall.onResponse(weatherSnapshot);
+                            }
 
+                            @Override
+                            public void onError(String Message) {
+                                interfaceWeatherSnapshotCall.onError(Message);
+                            }
+                        });
 
-                        interfaceWeatherSnapshotCall.onResponse(weatherSnapshot);
                     } catch (JSONException e) {
                         // TODO: Handle error
                         interfaceWeatherSnapshotCall.onError("Well ....");

@@ -1,5 +1,7 @@
 package com.FearMyGaze.FarmWeather.model;
 
+import androidx.annotation.NonNull;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -123,6 +125,7 @@ public class WeatherSnapshot {
         this.airQuality = airQuality;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "WeatherSnapshot{" +
@@ -141,6 +144,7 @@ public class WeatherSnapshot {
                 ", sysSunset='" + sysSunset + '\'' +
                 ", timestamp='" + timestamp + '\'' +
                 ", address='" + address + '\'' +
+                ", airQuality='" + airQuality + '\'' +
                 '}';
     }
 }
