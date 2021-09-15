@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                WeatherSnapshotServiceAPI.getWeatherSnapshot(Town.getText().toString(), Language.getText().toString(), units.getText().toString(), "75a1a10887c7350764f93ad239553a90", MainActivity.this, new WeatherSnapshotServiceAPI.IWeatherSnapshot() {
+                WeatherSnapshotServiceAPI.getWeatherSnapshot(Town.getText().toString(), Language.getText().toString(), units.getText().toString(), "75a1a10887c7350764f93ad239553a90", MainActivity.this, new WeatherSnapshotServiceAPI.InterfaceWeatherSnapshot() {
                     @Override
                     public void onResponse(WeatherSnapshot weatherSnapshot) {
                         textView.setText(weatherSnapshot.toString());

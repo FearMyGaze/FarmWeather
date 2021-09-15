@@ -5,21 +5,26 @@ import java.util.Date;
 import java.util.Locale;
 
 public class WeatherSnapshot {
+    private final String coordLon;
+    private final String coordLat;
     private final String weatherId;
-    private final String  weatherDescription;
-    private final String  weatherIcon;
-    private final String  mainTemp;
-    private final String  mainTempMin;
-    private final String  mainTempMax;
-    private final String  mainFeels_like;
-    private final String  windSpeed;
-    private final String  windDeg;
-    private final String  sysSunrise;
-    private final String  sysSunset;
+    private final String weatherDescription;
+    private final String weatherIcon;
+    private final String mainTemp;
+    private final String mainTempMin;
+    private final String mainTempMax;
+    private final String mainFeels_like;
+    private final String windSpeed;
+    private final String windDeg;
+    private final String sysSunrise;
+    private final String sysSunset;
     private final String timestamp;
-    private final String  address;
+    private final String address;
+    private String airQuality;
 
-    public WeatherSnapshot(String weatherId,
+    public WeatherSnapshot(String coordLon,
+                           String coordLat,
+                           String weatherId,
                            String weatherDescription,
                            String weatherIcon,
                            String mainTemp,
@@ -32,6 +37,8 @@ public class WeatherSnapshot {
                            long sysSunset,
                            Long dataCalculation,
                            String address) {
+        this.coordLon = coordLon;
+        this.coordLat = coordLat;
         this.weatherId = weatherId;
         this.weatherDescription = weatherDescription;
         this.weatherIcon = weatherIcon;
@@ -48,6 +55,14 @@ public class WeatherSnapshot {
         String dt =  new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(dataCalculation * 1000));
         this.timestamp = dt;
         this.address = address;
+    }
+
+    public String getCoordLon() {
+        return coordLon;
+    }
+
+    public String getCoordLat() {
+        return coordLat;
     }
 
     public String getWeatherId() {
@@ -104,10 +119,16 @@ public class WeatherSnapshot {
         return address;
     }
 
+    public void setAirQuality(String airQuality){
+        this.airQuality = airQuality;
+    }
+
     @Override
     public String toString() {
         return "WeatherSnapshot{" +
-                "weatherId='" + weatherId + '\'' +
+                "coordLon='" + coordLon + '\'' +
+                ", coordLat='" + coordLat + '\'' +
+                ", weatherId='" + weatherId + '\'' +
                 ", weatherDescription='" + weatherDescription + '\'' +
                 ", weatherIcon='" + weatherIcon + '\'' +
                 ", mainTemp='" + mainTemp + '\'' +

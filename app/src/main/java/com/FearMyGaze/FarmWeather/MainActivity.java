@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView list_town = findViewById(R.id.list_town);
         final TextView TempMin = findViewById(R.id.min_temperature);
         final TextView TempMax = findViewById(R.id.max_temperature);
-        final ImageView SettingsButton = findViewById(R.id.SettingsButton);
+        final ImageView SettingsButton = findViewById(R.id.SettingsButtonMain);
         final TextView MainHistoryTowns = findViewById(R.id.MainHistoryTowns);
 
         Weather = findViewById(R.id.status);

@@ -12,39 +12,49 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.17"/>
+        app:layout_constraintGuide_percent="0.17" />
 
     <TextView
         android:id="@+id/ManageCities"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
         android:text="@string/ManageCities"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/SearchLocation"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/SettingsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:scaleType="centerCrop"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_baseline_settings_24"
+        app:layout_constraintBottom_toTopOf="@+id/SearchLocation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/SearchLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:queryHint="@string/EnterLocation"
+        android:layout_marginBottom="10dp"
         app:iconifiedByDefault="false"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/ManageCities"
+        app:layout_constraintBottom_toTopOf="@id/guideline_vertical_0.17"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:queryHint="@string/EnterLocation" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/LocationRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/guideline_vertical_0.17"
+        android:clipChildren="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:clipChildren="false"/>
-
-
+        app:layout_constraintTop_toBottomOf="@+id/guideline_vertical_0.17" />
 </androidx.constraintlayout.widget.ConstraintLayout>

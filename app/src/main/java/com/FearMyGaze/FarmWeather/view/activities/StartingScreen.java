@@ -5,19 +5,17 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.UiModeManager;
-import android.content.Context;
-import android.content.res.Configuration;
 import android.os.Bundle;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.FearMyGaze.FarmWeather.R;
 import com.FearMyGaze.FarmWeather.model.LocationRecyclerViewAdapter;
 import com.FearMyGaze.FarmWeather.model.WeatherSnapshot;
 import com.FearMyGaze.FarmWeather.service.WeatherSnapshotServiceAPI;
-import com.google.android.material.internal.ContextUtils;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class StartingScreen extends AppCompatActivity {
     @Override
@@ -25,10 +23,16 @@ public class StartingScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_starting_screen);
 
+        /*
+        * This is to get the Language from the device
+        * */
+        String deviceLocale = Locale.getDefault().getLanguage();
+
         ArrayList<WeatherSnapshot> weatherSnapshotArrayList = new ArrayList<>();
 
         SearchView SearchLocation = findViewById(R.id.SearchLocation);
         RecyclerView recyclerView = findViewById(R.id.LocationRecyclerView);
+        ImageButton imageButton = findViewById(R.id.SettingsButton);
 
         /*
         *
@@ -36,15 +40,16 @@ public class StartingScreen extends AppCompatActivity {
         *
         * */
 
-        weatherSnapshotArrayList.add(new WeatherSnapshot("1","1","1","1","1","1","1","1","1",1,1, 111111111L,"1"));
-        weatherSnapshotArrayList.add(new WeatherSnapshot("1","1","1","1","1","1","1","1","1",1,1, 111111111L,"1"));
-        weatherSnapshotArrayList.add(new WeatherSnapshot("1","1","1","1","1","1","1","1","1",1,1, 111111111L,"1"));
-        weatherSnapshotArrayList.add(new WeatherSnapshot("1","1","1","1","1","1","1","1","1",1,1, 111111111L,"1"));
-        weatherSnapshotArrayList.add(new WeatherSnapshot("1","1","1","1","1","1","1","1","1",1,1, 111111111L,"1"));
-        weatherSnapshotArrayList.add(new WeatherSnapshot("1","1","1","1","1","1","1","1","1",1,1, 111111111L,"1"));
+
         /*
-        * Set Weather DATA FOR SAMPLE
+        * TODO: Remove the Hardcoded insertion of data
         * */
+        weatherSnapshotArrayList.add(new WeatherSnapshot("1","1","1","1","1","1","1","1","1","1","1",1,1, 111111111L,"1"));
+        weatherSnapshotArrayList.add(new WeatherSnapshot("1","1","1","1","1","1","1","1","1","1","1",1,1, 111111111L,"1"));
+        weatherSnapshotArrayList.add(new WeatherSnapshot("1","1","1","1","1","1","1","1","1","1","1",1,1, 111111111L,"1"));
+        weatherSnapshotArrayList.add(new WeatherSnapshot("1","1","1","1","1","1","1","1","1","1","1",1,1, 111111111L,"1"));
+        weatherSnapshotArrayList.add(new WeatherSnapshot("1","1","1","1","1","1","1","1","1","1","1",1,1, 111111111L,"1"));
+
 
         LocationRecyclerViewAdapter adapter = new LocationRecyclerViewAdapter(weatherSnapshotArrayList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
@@ -54,21 +59,27 @@ public class StartingScreen extends AppCompatActivity {
         SearchLocation.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                WeatherSnapshotServiceAPI.getWeatherSnapshot(query,"el","metric","360443d882c3a8260a2d10ba6a086b9f",StartingScreen.this, new WeatherSnapshotServiceAPI.IWeatherSnapshot() {
+                WeatherSnapshotServiceAPI.getWeatherSnapshot(query,deviceLocale,"metric","360443d882c3a8260a2d10ba6a086b9f",StartingScreen.this, new WeatherSnapshotServiceAPI.InterfaceWeatherSnapshot() {
                     @Override
                     public void onResponse(WeatherSnapshot weatherSnapshot) {
+                        /*
+                        * TODO: WE need to change it from a toast to Make an object of the Location of our choosing and if the Location exist the make a toast (You already have that location)
+                        * */
                         Toast.makeText(StartingScreen.this, weatherSnapshot.toString(), Toast.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onError(String message) {
+
+                        /*
+                        * TODO: Handle better the errors
+                        * */
                         Toast.makeText(StartingScreen.this, message+"", Toast.LENGTH_SHORT).show();
                     }
                 });
 
                 return true;
             }
-
             @Override
             public boolean onQueryTextChange(String newText) {
                 return false;

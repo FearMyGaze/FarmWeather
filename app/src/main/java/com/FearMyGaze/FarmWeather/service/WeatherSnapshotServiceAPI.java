@@ -22,12 +22,12 @@ public class WeatherSnapshotServiceAPI {
     @SuppressLint("StaticFieldLeak")
     private static Context context;
 
-    public interface IWeatherSnapshot {
+    public interface InterfaceWeatherSnapshot {
         void onResponse(WeatherSnapshot weatherSnapshot);
         void onError(String message);
     }
 
-    public static void getWeatherSnapshot(String location ,  String language , String measurement , String API , Context context , IWeatherSnapshot iWeatherSnapshotCall) {
+    public static void getWeatherSnapshot(String location ,  String language , String measurement , String API , Context context , InterfaceWeatherSnapshot interfaceWeatherSnapshotCall) {
         WeatherSnapshotServiceAPI.context = context;
         String url;
         url = Location_URL + location.trim() + Language_URL + language.trim() + Measurement_URL + measurement.trim() + API_URL + API.trim();
@@ -36,11 +36,14 @@ public class WeatherSnapshotServiceAPI {
 
                     try {
                         WeatherSnapshot weatherSnapshot;
+                        JSONObject coord = response.getJSONObject("coord");
                         JSONObject weather = response.getJSONArray("weather").getJSONObject(0);
                         JSONObject main = response.getJSONObject("main");
                         JSONObject wind = response.getJSONObject("wind");
                         JSONObject sys = response.getJSONObject("sys");
                         weatherSnapshot = new WeatherSnapshot(
+                                coord.getString("lon"),
+                                coord.getString("lat"),
                                 weather.getString("id"),
                                 weather.getString("description"),
                                 weather.getString("icon"),
@@ -55,17 +58,19 @@ public class WeatherSnapshotServiceAPI {
                                 Long.parseLong(response.getString("dt")),
                                 location+" "+sys.getString("country"));
 
-                        iWeatherSnapshotCall.onResponse(weatherSnapshot);
+
+
+                        interfaceWeatherSnapshotCall.onResponse(weatherSnapshot);
                     } catch (JSONException e) {
                         // TODO: Handle error
-                        iWeatherSnapshotCall.onError("Well ....");
+                        interfaceWeatherSnapshotCall.onError("Well ....");
                     }
 
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // TODO: Handle error
-                        iWeatherSnapshotCall.onError("Ασταθης τοποθεσια/συνδεση");
+                        interfaceWeatherSnapshotCall.onError("Ασταθης τοποθεσια/συνδεση");
                     }
                 });
 
