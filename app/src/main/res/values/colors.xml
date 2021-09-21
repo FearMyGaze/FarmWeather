@@ -15,6 +15,7 @@
     <color name="SettingsBlue">#00B1E6</color>
     <color name="AdapterCityAdd">#5ac18e</color>
     <color name="AdapterDailyMenu">#122259</color>
+    <color name="text">#8980F5</color>
 
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>

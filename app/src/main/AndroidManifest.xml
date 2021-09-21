@@ -13,6 +13,10 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/main_icon"
         android:theme="@style/Theme.FarmWeather">
+        <activity
+            android:name=".view.activities.Locations"
+            android:exported="true" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -25,11 +29,6 @@
             android:name=".start"
             android:exported="true"
             android:theme="@style/Theme.FarmWeather">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
@@ -46,13 +45,19 @@
             android:name=".Settings"
             android:theme="@style/Theme.FarmWeather" />
         <activity
-            android:name=".view.activities.MainActivity"
-            android:theme="@style/Theme.FarmWeather">
+            android:name=".view.activities.StartingScreen"
+            android:theme="@style/Theme.FarmWeather"
+            android:windowSoftInputMode="adjustPan"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
-            android:name=".view.activities.StartingScreen"
-            android:theme="@style/Theme.FarmWeather">
-        </activity>
+            android:name=".view.activities.Settings"
+            android:exported="true" />
 
         <service
             android:name=".BackgroundRequestAPI"

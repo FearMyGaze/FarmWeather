@@ -35,7 +35,7 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:id="@+id/SettingsButton"
+                            android:id="@+id/SettingsButtonMain"
                             android:layout_width="32sp"
                             android:layout_height="25sp"
                             android:layout_marginTop="7sp"

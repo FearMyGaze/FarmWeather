@@ -4,4 +4,16 @@
 
     <string name="EnterLocation">Enter Location</string>
     <string name="ManageCities">Manage Cities</string>
+
+    <string name="sunrise">Sunrise</string>
+    <string name="sunset">Sunset</string>
+    <string name="air">Wind</string>
+    <string name="air_quality">Air Quality</string>
+    <string name="air_pressure">Atm. Pressure</string>
+    <string name="air_degrees">Air degrees</string>
+    <string name="humidity">Humidity</string>
+    <string name="uv_index">UV Index</string>
+    <string name="real_feel">Real feel</string>
+    <string name="temp_min">Minimum</string>
+    <string name="temp_max">Maximum</string>
 </resources>
