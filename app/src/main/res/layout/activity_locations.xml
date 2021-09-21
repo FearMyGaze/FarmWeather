@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vertical_0.05"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vertical_0.125"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.125"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vertical_0.50"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.50"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vertical_0.885"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.885"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vertical_0.95"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal_0.01"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.01"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal_0.075"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.075"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal_0.16"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.16"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal_0.20"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.20"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal_0.30"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.30"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal_0.36"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.36"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal_0.41"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.41"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal_0.46"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.46"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal_0.51"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.51"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal_0.56"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.56"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal_0.61"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.61"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal_0.66"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.66"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal_0.71"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.71"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/location_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_0.075"
+        app:layout_constraintTop_toTopOf="@id/guideline_horizontal_0.01"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/time_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="13sp"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_0.075"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/status_of_weather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_0.16"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/Weather_icon"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:scaleType="centerCrop"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_0.20"
+        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_0.30"
+        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_0.50"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/status_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:layout_marginStart="10dp"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_0.20"
+        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_0.30"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical_0.50"/>
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        app:layout_constraintStart_toStartOf="@id/guideline_vertical_0.125"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_0.30"
+        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_0.50">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:src="@drawable/ic_temperature_min" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/temp_min"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:layout_marginStart="9dp"
+            android:layout_marginEnd="9dp"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/temp_min_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical_0.50"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_0.30"
+        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_0.885">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:src="@drawable/ic_temperature_max" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/temp_max"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:layout_marginStart="9dp"
+            android:layout_marginEnd="9dp"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/temp_max_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center" />
+
+    </FrameLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/real_feel_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_real_feel"
+        app:layout_constraintTop_toTopOf="@id/guideline_horizontal_0.36"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_horizontal_0.41"
+        app:layout_constraintStart_toStartOf="@id/guideline_vertical_0.05"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/real_feel_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        app:layout_constraintTop_toTopOf="@id/guideline_horizontal_0.36"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_horizontal_0.41"
+        app:layout_constraintStart_toEndOf="@+id/real_feel_picture"
+        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_0.50"
+        android:text="@string/real_feel"
+        android:textSize="18sp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/real_feel_text_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        app:layout_constraintTop_toTopOf="@id/guideline_horizontal_0.36"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_horizontal_0.41"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical_0.50"
+        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_0.95"
+        android:textSize="18sp" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/sunrise_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_0.41"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_horizontal_0.46"
+        app:layout_constraintStart_toStartOf="@id/guideline_vertical_0.05"
+        android:src="@drawable/ic_sunrise"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/sunrise_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_0.41"
+        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_0.46"
+        app:layout_constraintStart_toEndOf="@+id/sunrise_picture"
+        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_0.50"
+        android:text="@string/sunrise"
+        android:textSize="18sp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/sunrise_text_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_0.41"
+        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_0.46"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical_0.50"
+        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_0.95"
+        android:textSize="18sp" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/sunset_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_0.46"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_horizontal_0.51"
+        app:layout_constraintStart_toStartOf="@id/guideline_vertical_0.05"
+        android:src="@drawable/ic_sunset"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/sunset_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_0.46"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_horizontal_0.51"
+        app:layout_constraintStart_toEndOf="@+id/sunset_picture"
+        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_0.50"
+        android:text="@string/sunset"
+        android:textSize="18sp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/sunset_text_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_0.46"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_horizontal_0.51"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical_0.50"
+        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_0.95"
+        android:textSize="18sp" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/wind_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_0.51"
+        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_0.56"
+        app:layout_constraintStart_toStartOf="@id/guideline_vertical_0.05"
+        android:src="@drawable/ic_wind"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/wind_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_0.51"
+        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_0.56"
+        app:layout_constraintStart_toEndOf="@+id/wind_picture"
+        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_0.50"
+        android:text="@string/air"
+        android:textSize="18sp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/wind_text_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_0.51"
+        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_0.56"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical_0.50"
+        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_0.95"
+        android:textSize="18sp" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/pressure_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_0.56"
+        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_0.61"
+        app:layout_constraintStart_toStartOf="@id/guideline_vertical_0.05"
+        android:src="@drawable/ic_pressure"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/pressure_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_0.56"
+        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_0.61"
+        app:layout_constraintStart_toEndOf="@+id/pressure_picture"
+        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_0.50"
+        android:text="@string/air_pressure"
+        android:textSize="18sp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/pressure_text_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_0.56"
+        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_0.61"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical_0.50"
+        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_0.95"
+        android:textSize="18sp" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/air_degrees_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_0.61"
+        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_0.66"
+        app:layout_constraintStart_toStartOf="@id/guideline_vertical_0.05"
+        android:src="@drawable/ic_air_location"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/air_degrees_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_0.61"
+        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_0.66"
+        app:layout_constraintStart_toEndOf="@+id/air_degrees_picture"
+        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_0.50"
+        android:text="@string/air_degrees"
+        android:textSize="18sp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/air_degrees_text_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_0.61"
+        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_0.66"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical_0.50"
+        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_0.95"
+        android:textSize="18sp" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/aqi_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_0.66"
+        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_0.71"
+        app:layout_constraintStart_toStartOf="@id/guideline_vertical_0.05"
+        android:src="@drawable/ic_air_quality"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/aqi_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_0.66"
+        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_0.71"
+        app:layout_constraintStart_toEndOf="@+id/aqi_picture"
+        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_0.50"
+        android:text="@string/air_quality"
+        android:textSize="18sp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/aqi_text_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_0.66"
+        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_0.71"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical_0.50"
+        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_0.95"
+        android:textSize="18sp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

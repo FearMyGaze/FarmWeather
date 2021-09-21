@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FarmWeather</string>
+
+    <string name="EnterLocation">Τοποθέτησε τοποθεσία</string>
+    <string name="ManageCities">Διαχείριση πόλεων</string>
+
+    <string name="sunrise">Ανατολή</string>
+    <string name="sunset">Δύση</string>
+    <string name="air">Αέρας</string>
+    <string name="air_quality">Ποιότητα Αέρα</string>
+    <string name="air_pressure">Πιέση Ατμ.</string>
+    <string name="air_degrees">Κατέυθηση Αέρα</string>
+    <string name="humidity">Υγρασία</string>
+    <string name="uv_index">Δείκτης UV</string>
+    <string name="real_feel">Αίσθηση</string>
+    <string name="temp_min">Ελάχιστη</string>
+    <string name="temp_max">Μέγιστη</string>
+
+</resources>

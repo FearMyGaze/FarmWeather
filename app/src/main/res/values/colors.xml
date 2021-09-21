@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
-    <color name="transparent">#55000000</color>
-    <color name="White">#f0f8ff</color>
-    <color name="Gray_ish">#FFFFFF</color>
-    <color name="Border">#a8adb2</color>
-    <color name="Blue">#0000ff</color> //link
-    <color name="Light_black">#262626</color>
-    <color name="Black">#000000</color>
-    <color name="AdapterColor">#3FA8AE</color>
-    <color name="AdapterDaily">#FFFF00</color>
-    <color name="SettingsWhite">#CCCCCC</color>
-    <color name="SettingsBlue">#00B1E6</color>
-    <color name="AdapterCityAdd">#5ac18e</color>
-    <color name="AdapterDailyMenu">#122259</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="White">#FFFFFFFF</color>
+    <color name="Yellow">#E8AF1C</color>
 </resources>
