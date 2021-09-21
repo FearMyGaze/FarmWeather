@@ -1,5 +1,6 @@
 package com.FearMyGaze.FarmWeather.model;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import com.android.volley.Request;
@@ -8,7 +9,9 @@ import com.android.volley.toolbox.Volley;
 
 public class WeatherSnapshotSingletonRequest {
 
+    @SuppressLint("StaticFieldLeak")
     private static WeatherSnapshotSingletonRequest instance;
+    @SuppressLint("StaticFieldLeak")
     private static Context context;
     private RequestQueue requestQueue;
 

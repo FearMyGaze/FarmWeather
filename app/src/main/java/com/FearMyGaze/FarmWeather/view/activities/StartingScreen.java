@@ -5,6 +5,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -12,7 +13,6 @@ import android.widget.Toast;
 import com.FearMyGaze.FarmWeather.R;
 import com.FearMyGaze.FarmWeather.model.LocationRecyclerViewAdapter;
 import com.FearMyGaze.FarmWeather.model.WeatherSnapshot;
-import com.FearMyGaze.FarmWeather.service.AirQualityServiceAPI;
 import com.FearMyGaze.FarmWeather.service.WeatherSnapshotServiceAPI;
 
 import java.util.ArrayList;
@@ -25,22 +25,22 @@ public class StartingScreen extends AppCompatActivity {
         setContentView(R.layout.activity_starting_screen);
 
         /*
-        * This is to get the Language from the device
+        * This is to get the Language from the device and if the device locale isn't en or el then set it to en
         * */
         String deviceLocale = Locale.getDefault().getLanguage();
-
+        if (!deviceLocale.equals("el")) {
+            deviceLocale = "en";
+        }
         ArrayList<WeatherSnapshot> weatherSnapshotArrayList = new ArrayList<>();
 
         SearchView SearchLocation = findViewById(R.id.SearchLocation);
         RecyclerView recyclerView = findViewById(R.id.LocationRecyclerView);
         ImageButton imageButton = findViewById(R.id.SettingsButton);
 
-        /*
-        *
-        * TODO: ADD AIR QUALITY API
-        *
-        * */
-
+       imageButton.setOnClickListener(view -> {
+           Intent intent = new Intent(StartingScreen.this , Settings.class);
+           startActivity(intent);
+       });
 
         /*
         * TODO: Remove the Hardcoded insertion of data
@@ -57,10 +57,11 @@ public class StartingScreen extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
+        String finalDeviceLocale = deviceLocale;
         SearchLocation.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                WeatherSnapshotServiceAPI.getWeatherSnapshot(query,deviceLocale,"metric","360443d882c3a8260a2d10ba6a086b9f",StartingScreen.this, new WeatherSnapshotServiceAPI.InterfaceWeatherSnapshot() {
+                WeatherSnapshotServiceAPI.getWeatherSnapshot(query, finalDeviceLocale,"metric","360443d882c3a8260a2d10ba6a086b9f",StartingScreen.this, new WeatherSnapshotServiceAPI.InterfaceWeatherSnapshot() {
                     @Override
                     public void onResponse(WeatherSnapshot weatherSnapshot) {
                         /*
@@ -71,10 +72,6 @@ public class StartingScreen extends AppCompatActivity {
 
                     @Override
                     public void onError(String message) {
-
-                        /*
-                        * TODO: Handle better the errors
-                        * */
                         Toast.makeText(StartingScreen.this, message+"", Toast.LENGTH_SHORT).show();
                     }
                 });

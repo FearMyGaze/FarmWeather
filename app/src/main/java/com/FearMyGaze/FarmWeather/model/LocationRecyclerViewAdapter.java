@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.FearMyGaze.FarmWeather.R;
@@ -21,13 +22,14 @@ public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<LocationRe
 
     protected static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView m_RecyclerLocation,m_RecyclerMainTemperature,m_RecyclerWeatherDescription,m_RecyclerMinMaxTemperature;
-
+        ConstraintLayout m_constraintLayout;
         public MyViewHolder(final View view){
             super(view);
             m_RecyclerLocation = view.findViewById(R.id.RecyclerLocation);
             m_RecyclerMainTemperature = view.findViewById(R.id.RecyclerMainTemperature);
             m_RecyclerWeatherDescription = view.findViewById(R.id.RecyclerWeatherDescription);
             m_RecyclerMinMaxTemperature = view.findViewById(R.id.RecyclerMinMaxTemperature);
+            m_constraintLayout = view.findViewById(R.id.item_recyclerview_locations);
         }
     }
 
@@ -49,6 +51,19 @@ public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<LocationRe
         holder.m_RecyclerMainTemperature.setText(RecyclerMainTemperature);
         holder.m_RecyclerWeatherDescription.setText(RecyclerWeatherDescription);
         holder.m_RecyclerMinMaxTemperature.setText(RecyclerMinMaxTemperature);
+
+        holder.m_constraintLayout.setOnClickListener(view -> {
+        /*
+        * TODO:Go to the next screen with the location appropriate values inside
+        * */
+        });
+
+        holder.m_constraintLayout.setOnLongClickListener(view -> {
+            /*
+            * TODO:Remove the object that is long pressed
+            * */
+            return false;
+        });
     }
 
     @Override

@@ -2,12 +2,12 @@ package com.FearMyGaze.FarmWeather.service;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.icu.text.UnicodeSetIterator;
 
+import com.FearMyGaze.FarmWeather.R;
 import com.FearMyGaze.FarmWeather.model.WeatherSnapshot;
 import com.FearMyGaze.FarmWeather.model.WeatherSnapshotSingletonRequest;
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONException;
@@ -70,21 +70,13 @@ public class WeatherSnapshotServiceAPI {
                                 interfaceWeatherSnapshotCall.onError(Message);
                             }
                         });
-
                     } catch (JSONException e) {
-                        // TODO: Handle error
-                        interfaceWeatherSnapshotCall.onError("Well ....");
+                        interfaceWeatherSnapshotCall.onError(" "+e);
                     }
-
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // TODO: Handle error
-                        interfaceWeatherSnapshotCall.onError("Ασταθης τοποθεσια/συνδεση");
-                    }
+                }, error -> {
+                    interfaceWeatherSnapshotCall.onError(" "+error);
                 });
 
-        // Access the RequestQueue through your singleton class.
         WeatherSnapshotSingletonRequest.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
 

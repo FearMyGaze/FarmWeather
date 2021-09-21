@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.17" />
+        app:layout_constraintGuide_percent="0.17"/>
 
     <TextView
         android:id="@+id/ManageCities"
@@ -24,7 +24,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/SearchLocation"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageButton
         android:id="@+id/SettingsButton"
@@ -37,7 +37,7 @@
         app:layout_constraintBottom_toTopOf="@+id/SearchLocation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+        tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck"/>
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/SearchLocation"
@@ -56,5 +56,5 @@
         android:layout_height="0dp"
         android:clipChildren="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline_vertical_0.17" />
+        app:layout_constraintTop_toBottomOf="@+id/guideline_vertical_0.17"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

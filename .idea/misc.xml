@@ -3,7 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/fearm/Documents/GitHub/FarmWeather/app/src/main/res/drawable/custom_item_recycler_view_location_pressed.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/fearm/Documents/GitHub/FarmWeather/app/src/main/res/drawable/custom_item_recycler_view_locations.xml" value="0.221875" />
         <entry key="..\:/Users/fearm/Documents/GitHub/FarmWeather/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.28072916666666664" />
+        <entry key="..\:/Users/fearm/Documents/GitHub/FarmWeather/app/src/main/res/drawable/ic_baseline_wb_sunny_24.xml" value="0.381025641025641" />
+        <entry key="..\:/Users/fearm/Documents/GitHub/FarmWeather/app/src/main/res/drawable/ic_real_feel.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/fearm/Documents/GitHub/FarmWeather/app/src/main/res/drawable/ic_sunset.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/fearm/Documents/GitHub/FarmWeather/app/src/main/res/drawable/item_recycler_view_animation.xml" value="0.221875" />
+        <entry key="..\:/Users/fearm/Documents/GitHub/FarmWeather/app/src/main/res/layout/activity_locations.xml" value="0.33" />
         <entry key="..\:/Users/fearm/Documents/GitHub/FarmWeather/app/src/main/res/layout/activity_main.xml" value="0.26458333333333334" />
         <entry key="..\:/Users/fearm/Documents/GitHub/FarmWeather/app/src/main/res/layout/activity_settings2.xml" value="0.37083333333333335" />
         <entry key="..\:/Users/fearm/Documents/GitHub/FarmWeather/app/src/main/res/layout/activity_starting_screen.xml" value="0.33" />

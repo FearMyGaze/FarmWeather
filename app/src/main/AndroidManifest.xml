@@ -14,7 +14,7 @@
         android:roundIcon="@drawable/main_icon"
         android:theme="@style/Theme.FarmWeather">
         <activity
-            android:name=".view.activities.Settings"
+            android:name=".view.activities.Locations"
             android:exported="true" />
 
         <meta-data
@@ -49,12 +49,12 @@
             android:name=".Settings"
             android:theme="@style/Theme.FarmWeather" />
         <activity
-            android:name=".view.activities.MainActivity"
-            android:theme="@style/Theme.FarmWeather"></activity>
-        <activity
             android:name=".view.activities.StartingScreen"
             android:theme="@style/Theme.FarmWeather"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.activities.Settings"
+            android:exported="true" />
 
         <service
             android:name=".BackgroundRequestAPI"

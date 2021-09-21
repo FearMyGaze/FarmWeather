@@ -50,12 +50,9 @@ public class WeatherSnapshot {
         this.mainFeels_like = mainFeels_like;
         this.windSpeed = windSpeed;
         this.windDeg = windDeg;
-        String sunrise =  new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(sysSunrise * 1000));
-        this.sysSunrise = sunrise;
-        String sunset =  new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(sysSunset * 1000));
-        this.sysSunset = sunset;
-        String dt =  new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(dataCalculation * 1000));
-        this.timestamp = dt;
+        this.sysSunrise = new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(sysSunrise * 1000));
+        this.sysSunset = new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(sysSunset * 1000));
+        this.timestamp = new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(dataCalculation * 1000));
         this.address = address;
     }
 

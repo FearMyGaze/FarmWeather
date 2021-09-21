@@ -5,12 +5,9 @@ import android.content.Context;
 
 import com.FearMyGaze.FarmWeather.model.WeatherSnapshotSingletonRequest;
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 public class AirQualityServiceAPI {
 
@@ -31,16 +28,13 @@ public class AirQualityServiceAPI {
         AirQualityServiceAPI.context = context;
         String url;
         url = Main_URL + Lat_URL + lat + Lon_URL + lon + API_URL + API.trim();
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    interfaceAirQualitySnapshot.onResponse(response.getJSONArray("list").getJSONObject(0).getJSONObject("main").getString("aqi"));
-                } catch (JSONException e) {
-                    interfaceAirQualitySnapshot.onError("Error during json conversion");
-                }
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
+            try {
+                interfaceAirQualitySnapshot.onResponse(response.getJSONArray("list").getJSONObject(0).getJSONObject("main").getString("aqi"));
+            } catch (JSONException e) {
+                interfaceAirQualitySnapshot.onError(" "+e);
             }
-        }, error -> interfaceAirQualitySnapshot.onError("volley error during AQI"));
+        }, error -> interfaceAirQualitySnapshot.onError(" "+error));
         WeatherSnapshotSingletonRequest.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
 }
