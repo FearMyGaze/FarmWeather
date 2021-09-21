@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activities.StartingScreen">
+    tools:context=".view.activities.MainActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_vertical_0.17"
@@ -26,19 +26,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <ImageButton
-        android:id="@+id/SettingsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:scaleType="centerCrop"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/ic_baseline_settings_24"
-        app:layout_constraintBottom_toTopOf="@+id/SearchLocation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck"/>
-
     <androidx.appcompat.widget.SearchView
         android:id="@+id/SearchLocation"
         android:layout_width="match_parent"
@@ -46,9 +33,9 @@
         android:layout_marginBottom="10dp"
         app:iconifiedByDefault="false"
         app:layout_constraintBottom_toTopOf="@id/guideline_vertical_0.17"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:queryHint="@string/EnterLocation" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:queryHint="@string/EnterLocation"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/LocationRecyclerView"

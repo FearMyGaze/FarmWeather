@@ -1,5 +1,6 @@
 package com.FearMyGaze.FarmWeather.model;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 
 public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<LocationRecyclerViewAdapter.MyViewHolder> {
     private final ArrayList<MiniWeatherSnapshot> miniWeatherSnapshots;
+    @SuppressLint("StaticFieldLeak")
     public static Context context;
     private String language;
 
@@ -32,6 +34,7 @@ public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<LocationRe
         this.language = language;
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void refreshMiniWeatherSnapshotsList() {
         miniWeatherSnapshots.clear();
         miniWeatherSnapshots.addAll(WeatherSnapshotDatabase.getInstance(context).locationWeatherSnapshotDAO().getAllLocationWeatherSnapshots());
@@ -58,13 +61,14 @@ public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<LocationRe
         return new MyViewHolder(WeatherItemView);
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onBindViewHolder(@NonNull LocationRecyclerViewAdapter.MyViewHolder holder, int position) {
         String RecyclerLocation = miniWeatherSnapshots.get(position).locationTitle;
-        String RecyclerMainTemperature = String.valueOf((int)miniWeatherSnapshots.get(position).temp);
+        String RecyclerMainTemperature = String.valueOf((int) miniWeatherSnapshots.get(position).temp);
         String RecyclerWeatherDescription = miniWeatherSnapshots.get(position).description;
-        String RecyclerMinTemperature = String.valueOf(miniWeatherSnapshots.get(position).min);
-        String RecyclerMaxTemperature = String.valueOf(miniWeatherSnapshots.get(position).max);
+        String RecyclerMinTemperature = (int) miniWeatherSnapshots.get(position).min + "℃";
+        String RecyclerMaxTemperature = (int) miniWeatherSnapshots.get(position).max + "℃";
 
         holder.m_RecyclerLocation.setText(RecyclerLocation);
         holder.m_RecyclerMainTemperature.setText(RecyclerMainTemperature);
@@ -72,9 +76,9 @@ public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<LocationRe
         holder.m_RecyclerMinMaxTemperature.setText(String.format("%s/%s", RecyclerMaxTemperature, RecyclerMinTemperature));
 
         holder.m_constraintLayout.setOnClickListener(view -> {
-            Intent intent = new Intent(context,Locations.class);
-            intent.putExtra("location",miniWeatherSnapshots.get(position).locationTitle);
-            intent.putExtra("language",language);
+            Intent intent = new Intent(context, Locations.class);
+            intent.putExtra("location", miniWeatherSnapshots.get(position).locationTitle);
+            intent.putExtra("language", language);
             context.startActivity(intent);
         });
 

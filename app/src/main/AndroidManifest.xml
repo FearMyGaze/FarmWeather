@@ -2,66 +2,27 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.FearMyGaze.FarmWeather">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="false"
-        android:icon="@drawable/main_icon"
+        android:icon="@drawable/ic_app"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/main_icon"
+        android:roundIcon="@drawable/ic_app"
         android:theme="@style/Theme.FarmWeather">
         <activity
             android:name=".view.activities.Locations"
             android:exported="true" />
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
-
         <activity
-            android:name=".LocationMap"
-            android:theme="@style/Theme.FarmWeather">
-        </activity>
-        <activity
-            android:name=".start"
             android:exported="true"
-            android:theme="@style/Theme.FarmWeather">
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:theme="@style/Theme.FarmWeather" />
-        <activity
-            android:name=".Old_Weather"
-            android:label=" "
-            android:theme="@style/ListTheme" />
-        <activity
-            android:name=".WeatherDaily"
-            android:label=" "
-            android:theme="@style/DailyListTheme" />
-        <activity
-            android:name=".Settings"
-            android:theme="@style/Theme.FarmWeather" />
-        <activity
-            android:name=".view.activities.StartingScreen"
+            android:name=".view.activities.MainActivity"
             android:theme="@style/Theme.FarmWeather"
-            android:windowSoftInputMode="adjustPan"
-            android:exported="true">
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".view.activities.Settings"
-            android:exported="true" />
-
-        <service
-            android:name=".BackgroundRequestAPI"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>
 
 </manifest>
