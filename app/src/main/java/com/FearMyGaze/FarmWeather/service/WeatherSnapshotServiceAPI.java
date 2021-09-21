@@ -27,7 +27,7 @@ public class WeatherSnapshotServiceAPI {
     /*
     * Add yours
     * */
-    private static final String API_KEY = "360443d882c3a8260a2d10ba6a086b9f";
+    private static final String API_KEY = "";
     private static final String Measurement= "metric";
 
 

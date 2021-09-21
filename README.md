@@ -14,6 +14,9 @@ The newer version is created by
 [@FearMyGaze](https://github.com/FearMyGaze "@FearMyGaze")
 [@Monsta](https://github.com/Mon5ta "@Monsta")
 
+**Before you use the app add new API key from https://openweathermap.org and if you don't want metric units change it to imperial.
+This changes have to be made in WeatherSnapshotServiceAPI file.**
+
 ------------
 Icons by https://icons8.com
 
