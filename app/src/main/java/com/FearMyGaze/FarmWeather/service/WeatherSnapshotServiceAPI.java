@@ -16,13 +16,20 @@ import java.util.List;
 
 public class WeatherSnapshotServiceAPI {
 
-    private static final String API_KEY = "360443d882c3a8260a2d10ba6a086b9f";
+
     private static final String Location_URL ="https://api.openweathermap.org/data/2.5/weather?q=";
     private static final String Language_URL="&lang=";
     private static final String Measurement_URL="&units=";
     private static final String API_URL ="&appid=";
     @SuppressLint("StaticFieldLeak")
     private static Context context;
+
+    /*
+    * Add yours
+    * */
+    private static final String API_KEY = "360443d882c3a8260a2d10ba6a086b9f";
+    private static final String Measurement= "metric";
+
 
     public interface InterfaceWeatherSnapshot {
         void onResponse(WeatherSnapshot weatherSnapshot);
@@ -32,7 +39,7 @@ public class WeatherSnapshotServiceAPI {
     public static void getWeatherSnapshot(String location ,  String language , Context context , InterfaceWeatherSnapshot interfaceWeatherSnapshotCall) {
         WeatherSnapshotServiceAPI.context = context;
         String url;
-        url = Location_URL + location.trim() + Language_URL + language.trim() + Measurement_URL + "metric" + API_URL + API_KEY;
+        url = Location_URL + location.trim() + Language_URL + language.trim() + Measurement_URL + Measurement + API_URL + API_KEY;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, response -> {
 

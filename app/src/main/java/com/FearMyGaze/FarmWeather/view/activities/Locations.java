@@ -1,15 +1,16 @@
 package com.FearMyGaze.FarmWeather.view.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.FearMyGaze.FarmWeather.R;
 import com.FearMyGaze.FarmWeather.model.WeatherSnapshot;
 import com.FearMyGaze.FarmWeather.service.WeatherSnapshotServiceAPI;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,17 +37,21 @@ public class Locations extends AppCompatActivity {
         TextView pressure_text_value =findViewById(R.id.pressure_text_value);
         TextView air_degrees_text_value =findViewById(R.id.air_degrees_text_value);
         TextView aqi_text_value =findViewById(R.id.aqi_text_value);
-        TextView uv_index_text_value =findViewById(R.id.uv_index_text_value);
-
+        
         WeatherSnapshotServiceAPI.getWeatherSnapshot(getIntent().getStringExtra("location"), getIntent().getStringExtra("language"), Locations.this, new WeatherSnapshotServiceAPI.InterfaceWeatherSnapshot() {
             @Override
             public void onResponse(WeatherSnapshot weatherSnapshot) {
                 location_text.setText(String.format("%s %s", weatherSnapshot.getAddress(), weatherSnapshot.getCountry()));
                 time_text.setText(new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(weatherSnapshot.getDt() * 1000)));
+                String iconUrl = "https://openweathermap.org/img/wn/" + weatherSnapshot.getWeatherIcon() +"@2x.png";
+                Picasso.get()
+                        .load(iconUrl)
+                        .error(R.drawable.ic_round_error_outline_24)
+                        .into(Weather_icon);
                 status_of_weather.setText(weatherSnapshot.getWeatherDescription());
-                status_temperature.setText(String.valueOf((int)weatherSnapshot.getMainTemp()));
-                temp_min_text.setText(String.valueOf(weatherSnapshot.getMainTempMin()));
-                temp_max_text.setText(String.valueOf(weatherSnapshot.getMainTempMax()));
+                status_temperature.setText(String.format("%s℃", (int) weatherSnapshot.getMainTemp()));
+                temp_min_text.setText(String.format("%s℃", (int) weatherSnapshot.getMainTempMin()));
+                temp_max_text.setText(String.format("%s℃", (int) weatherSnapshot.getMainTempMax()));
                 real_feel_text_value.setText(String.valueOf(weatherSnapshot.getMainFeels_like()));
                 sunrise_text_value.setText(new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(weatherSnapshot.getSysSunrise() * 1000)));
                 sunset_text_value.setText(new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(weatherSnapshot.getSysSunset() * 1000)));
@@ -54,6 +59,7 @@ public class Locations extends AppCompatActivity {
                 pressure_text_value.setText(String.valueOf(weatherSnapshot.getPressure()));
                 air_degrees_text_value.setText(String.valueOf(weatherSnapshot.getWindDeg()));
                 aqi_text_value.setText(String.valueOf(weatherSnapshot.getAirQuality()));
+                System.out.println(weatherSnapshot.getWeatherIcon());
             }
 
             @Override

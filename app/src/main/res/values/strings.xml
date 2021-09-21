@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">FarmWeather</string>
-    <string name="title_activity_location_map">Map</string>
 
     <string name="EnterLocation">Enter Location</string>
     <string name="ManageCities">Manage Cities</string>
