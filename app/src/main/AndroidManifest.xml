@@ -23,16 +23,12 @@
 
         <activity
             android:name=".LocationMap"
-            android:theme="@style/Theme.FarmWeather"></activity>
+            android:theme="@style/Theme.FarmWeather">
+        </activity>
         <activity
             android:name=".start"
             android:exported="true"
             android:theme="@style/Theme.FarmWeather">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
@@ -51,7 +47,14 @@
         <activity
             android:name=".view.activities.StartingScreen"
             android:theme="@style/Theme.FarmWeather"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".view.activities.Settings"
             android:exported="true" />

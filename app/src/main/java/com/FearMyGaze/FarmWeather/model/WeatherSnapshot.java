@@ -1,44 +1,46 @@
 package com.FearMyGaze.FarmWeather.model;
 
-import androidx.annotation.NonNull;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
 public class WeatherSnapshot {
-    private final String coordLon;
-    private final String coordLat;
-    private final String weatherId;
+    private final double coordLon;
+    private final double coordLat;
+    private final int weatherId;
     private final String weatherDescription;
     private final String weatherIcon;
-    private final String mainTemp;
-    private final String mainTempMin;
-    private final String mainTempMax;
-    private final String mainFeels_like;
-    private final String windSpeed;
-    private final String windDeg;
-    private final String sysSunrise;
-    private final String sysSunset;
-    private final String timestamp;
+    private final double mainTemp;
+    private final double mainTempMin;
+    private final double mainTempMax;
+    private final double mainFeels_like;
+    private final double windSpeed;
+    private final int windDeg;
+    private final long sysSunrise;
+    private final long sysSunset;
+    private final long dt;
     private final String address;
+    private final String country;
+    private final long pressure;
     private String airQuality;
 
-    public WeatherSnapshot(String coordLon,
-                           String coordLat,
-                           String weatherId,
+    public WeatherSnapshot(double coordLon,
+                           double coordLat,
+                           int weatherId,
                            String weatherDescription,
                            String weatherIcon,
-                           String mainTemp,
-                           String mainTempMin,
-                           String mainTempMax,
-                           String mainFeels_like,
-                           String windSpeed,
-                           String windDeg,
+                           double mainTemp,
+                           double mainTempMin,
+                           double mainTempMax,
+                           double mainFeels_like,
+                           double windSpeed,
+                           int windDeg,
                            long sysSunrise,
                            long sysSunset,
-                           Long dataCalculation,
-                           String address) {
+                           long dt,
+                           String address,
+                           String country,
+                           long pressure) {
         this.coordLon = coordLon;
         this.coordLat = coordLat;
         this.weatherId = weatherId;
@@ -50,21 +52,27 @@ public class WeatherSnapshot {
         this.mainFeels_like = mainFeels_like;
         this.windSpeed = windSpeed;
         this.windDeg = windDeg;
-        this.sysSunrise = new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(sysSunrise * 1000));
-        this.sysSunset = new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(sysSunset * 1000));
-        this.timestamp = new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(dataCalculation * 1000));
+        this.sysSunrise = sysSunrise;
+        this.sysSunset = sysSunset;
+        this.dt = dt;
         this.address = address;
+        this.country = country;
+        this.pressure = pressure;
     }
 
-    public String getCoordLon() {
+    public void setAirQuality(String airQuality) {
+        this.airQuality = airQuality;
+    }
+
+    public double getCoordLon() {
         return coordLon;
     }
 
-    public String getCoordLat() {
+    public double getCoordLat() {
         return coordLat;
     }
 
-    public String getWeatherId() {
+    public int getWeatherId() {
         return weatherId;
     }
 
@@ -76,72 +84,55 @@ public class WeatherSnapshot {
         return weatherIcon;
     }
 
-    public String getMainTemp() {
+    public double getMainTemp() {
         return mainTemp;
     }
 
-    public String getMainTempMin() {
+    public double getMainTempMin() {
         return mainTempMin;
     }
 
-    public String getMainTempMax() {
+    public double getMainTempMax() {
         return mainTempMax;
     }
 
-    public String getMaxMin(){ return mainTempMax+'/'+mainTempMin; }
-
-    public String getMainFeels_like() {
+    public double getMainFeels_like() {
         return mainFeels_like;
     }
 
-    public String getWindSpeed() {
+    public double getWindSpeed() {
         return windSpeed;
     }
 
-    public String getWindDeg() {
+    public int getWindDeg() {
         return windDeg;
     }
 
-    public String getSysSunrise() {
+    public long getSysSunrise() {
         return sysSunrise;
     }
 
-    public String getSysSunset() {
+    public long getSysSunset() {
         return sysSunset;
     }
 
-    public String getTimeOfDataCalculation() {
-        return timestamp;
+    public long getDt() {
+        return dt;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public void setAirQuality(String airQuality){
-        this.airQuality = airQuality;
+    public String getCountry() {
+        return country;
     }
 
-    @NonNull
-    @Override
-    public String toString() {
-        return "WeatherSnapshot{" +
-                "coordLon='" + coordLon + '\'' +
-                ", coordLat='" + coordLat + '\'' +
-                ", weatherId='" + weatherId + '\'' +
-                ", weatherDescription='" + weatherDescription + '\'' +
-                ", weatherIcon='" + weatherIcon + '\'' +
-                ", mainTemp='" + mainTemp + '\'' +
-                ", mainTempMin='" + mainTempMin + '\'' +
-                ", mainTempMax='" + mainTempMax + '\'' +
-                ", mainFeels_like='" + mainFeels_like + '\'' +
-                ", windSpeed='" + windSpeed + '\'' +
-                ", windDeg='" + windDeg + '\'' +
-                ", sysSunrise='" + sysSunrise + '\'' +
-                ", sysSunset='" + sysSunset + '\'' +
-                ", timestamp='" + timestamp + '\'' +
-                ", address='" + address + '\'' +
-                ", airQuality='" + airQuality + '\'' +
-                '}';
+    public long getPressure() {
+        return pressure;
+    }
+
+    public String getAirQuality() {
+        return airQuality;
     }
 }

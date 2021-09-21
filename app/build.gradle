@@ -32,6 +32,11 @@ dependencies {
 
     implementation 'com.android.volley:volley:1.2.1'
 
+    //storage
+    annotationProcessor "androidx.room:room-compiler:2.3.0"
+    implementation "androidx.room:room-rxjava3:2.3.0"
+    implementation "androidx.room:room-runtime:2.3.0"
+
     //Neumorphism Design
     implementation 'com.github.fornewid:neumorphism:0.3.0'
     implementation 'com.github.Borutsky:neumorphism-android:1.0.0-alpha01'

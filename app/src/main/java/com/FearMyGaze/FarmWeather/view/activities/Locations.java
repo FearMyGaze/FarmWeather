@@ -5,8 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.FearMyGaze.FarmWeather.R;
+import com.FearMyGaze.FarmWeather.model.WeatherSnapshot;
+import com.FearMyGaze.FarmWeather.service.WeatherSnapshotServiceAPI;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class Locations extends AppCompatActivity {
 
@@ -31,7 +38,30 @@ public class Locations extends AppCompatActivity {
         TextView aqi_text_value =findViewById(R.id.aqi_text_value);
         TextView uv_index_text_value =findViewById(R.id.uv_index_text_value);
 
+        WeatherSnapshotServiceAPI.getWeatherSnapshot(getIntent().getStringExtra("location"), getIntent().getStringExtra("language"), Locations.this, new WeatherSnapshotServiceAPI.InterfaceWeatherSnapshot() {
+            @Override
+            public void onResponse(WeatherSnapshot weatherSnapshot) {
+                location_text.setText(String.format("%s %s", weatherSnapshot.getAddress(), weatherSnapshot.getCountry()));
+                time_text.setText(new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(weatherSnapshot.getDt() * 1000)));
+                status_of_weather.setText(weatherSnapshot.getWeatherDescription());
+                status_temperature.setText(String.valueOf((int)weatherSnapshot.getMainTemp()));
+                temp_min_text.setText(String.valueOf(weatherSnapshot.getMainTempMin()));
+                temp_max_text.setText(String.valueOf(weatherSnapshot.getMainTempMax()));
+                real_feel_text_value.setText(String.valueOf(weatherSnapshot.getMainFeels_like()));
+                sunrise_text_value.setText(new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(weatherSnapshot.getSysSunrise() * 1000)));
+                sunset_text_value.setText(new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(weatherSnapshot.getSysSunset() * 1000)));
+                wind_text_value.setText(String.valueOf(weatherSnapshot.getWindSpeed()));
+                pressure_text_value.setText(String.valueOf(weatherSnapshot.getPressure()));
+                air_degrees_text_value.setText(String.valueOf(weatherSnapshot.getWindDeg()));
+                aqi_text_value.setText(String.valueOf(weatherSnapshot.getAirQuality()));
+            }
 
+            @Override
+            public void onError(String message) {
+                Toast.makeText(Locations.this, message, Toast.LENGTH_SHORT).show();
+                onBackPressed();
+            }
+        });
 
     }
 }

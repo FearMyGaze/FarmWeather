@@ -24,7 +24,7 @@ public class AirQualityServiceAPI {
         void onError(String Message);
     }
 
-    public static void getAirQualitySnapshot(String lat , String lon , String API , Context context , InterfaceAirQualitySnapshot interfaceAirQualitySnapshot){
+    public static void getAirQualitySnapshot(double lat , double lon , String API , Context context , InterfaceAirQualitySnapshot interfaceAirQualitySnapshot){
         AirQualityServiceAPI.context = context;
         String url;
         url = Main_URL + Lat_URL + lat + Lon_URL + lon + API_URL + API.trim();
