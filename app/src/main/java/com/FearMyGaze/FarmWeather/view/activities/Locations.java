@@ -30,13 +30,14 @@ public class Locations extends AppCompatActivity {
         TextView status_temperature = findViewById(R.id.status_temperature);
         TextView temp_min_text = findViewById(R.id.temp_min_text);
         TextView temp_max_text = findViewById(R.id.temp_max_text);
-        TextView real_feel_text_value =findViewById(R.id.real_feel_text_value);
-        TextView sunrise_text_value =findViewById(R.id.sunrise_text_value);
-        TextView sunset_text_value =findViewById(R.id.sunset_text_value);
-        TextView wind_text_value =findViewById(R.id.wind_text_value);
-        TextView pressure_text_value =findViewById(R.id.pressure_text_value);
-        TextView air_degrees_text_value =findViewById(R.id.air_degrees_text_value);
-        TextView aqi_text_value =findViewById(R.id.aqi_text_value);
+        TextView real_feel_text_value = findViewById(R.id.real_feel_text_value);
+        TextView sunrise_text_value = findViewById(R.id.sunrise_text_value);
+        TextView sunset_text_value = findViewById(R.id.sunset_text_value);
+        TextView wind_text_value = findViewById(R.id.wind_text_value);
+        TextView pressure_text_value = findViewById(R.id.pressure_text_value);
+        TextView air_degrees_text_value = findViewById(R.id.air_degrees_text_value);
+        TextView aqi_text_value = findViewById(R.id.aqi_text_value);
+        TextView humidity_text_value = findViewById(R.id.humidity_text_value);
         
         WeatherSnapshotServiceAPI.getWeatherSnapshot(getIntent().getStringExtra("location"), getIntent().getStringExtra("language"), Locations.this, new WeatherSnapshotServiceAPI.InterfaceWeatherSnapshot() {
             @Override
@@ -55,11 +56,11 @@ public class Locations extends AppCompatActivity {
                 real_feel_text_value.setText(String.valueOf(weatherSnapshot.getMainFeels_like()));
                 sunrise_text_value.setText(new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(weatherSnapshot.getSysSunrise() * 1000)));
                 sunset_text_value.setText(new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(weatherSnapshot.getSysSunset() * 1000)));
-                wind_text_value.setText(String.valueOf(weatherSnapshot.getWindSpeed()));
+                wind_text_value.setText(String.format("%s bft", (int) windSpeedFromMsToBeaufort(weatherSnapshot.getWindSpeed())));
                 pressure_text_value.setText(String.valueOf(weatherSnapshot.getPressure()));
-                air_degrees_text_value.setText(String.valueOf(weatherSnapshot.getWindDeg()));
+                air_degrees_text_value.setText(defineWindDirection(weatherSnapshot.getWindDeg(),getIntent().getStringExtra("language")));
                 aqi_text_value.setText(String.valueOf(weatherSnapshot.getAirQuality()));
-                System.out.println(weatherSnapshot.getWeatherIcon());
+                humidity_text_value.setText(String.format("%s%%", (int) weatherSnapshot.getHumidity()));
             }
 
             @Override
@@ -69,5 +70,19 @@ public class Locations extends AppCompatActivity {
             }
         });
 
+    }
+
+    private String defineWindDirection(double windDegrees, String language) {
+        String[] direction = {"Β", "ΒΑ", "Α", "ΝΑ", "Ν", "ΝΔ", "Δ", "ΒΔ", "Β"};
+
+        if (language.equals("en")){
+            direction = new String[]{"N", "NE", "E", "SE", "S", "SW", "W", "NW", "N"};
+        }
+
+        return direction[(int) Math.round((windDegrees % 360) / 45)];
+    }
+
+    private double windSpeedFromMsToBeaufort(double windSpeed) {
+        return Math.ceil(Math.cbrt(Math.pow(windSpeed / 0.836, 2)));
     }
 }

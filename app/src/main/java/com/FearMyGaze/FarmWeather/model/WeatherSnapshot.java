@@ -1,9 +1,5 @@
 package com.FearMyGaze.FarmWeather.model;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 public class WeatherSnapshot {
     private final double coordLon;
     private final double coordLat;
@@ -23,6 +19,7 @@ public class WeatherSnapshot {
     private final String country;
     private final long pressure;
     private String airQuality;
+    private double humidity;
 
     public WeatherSnapshot(double coordLon,
                            double coordLat,
@@ -40,7 +37,7 @@ public class WeatherSnapshot {
                            long dt,
                            String address,
                            String country,
-                           long pressure) {
+                           long pressure, double humidity) {
         this.coordLon = coordLon;
         this.coordLat = coordLat;
         this.weatherId = weatherId;
@@ -58,6 +55,7 @@ public class WeatherSnapshot {
         this.address = address;
         this.country = country;
         this.pressure = pressure;
+        this.humidity = humidity;
     }
 
     public void setAirQuality(String airQuality) {
@@ -134,5 +132,9 @@ public class WeatherSnapshot {
 
     public String getAirQuality() {
         return airQuality;
+    }
+
+    public double getHumidity() {
+        return humidity;
     }
 }

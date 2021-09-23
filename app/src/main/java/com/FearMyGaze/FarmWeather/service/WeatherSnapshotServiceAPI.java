@@ -3,7 +3,6 @@ package com.FearMyGaze.FarmWeather.service;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
-import com.FearMyGaze.FarmWeather.model.MiniWeatherSnapshot;
 import com.FearMyGaze.FarmWeather.model.WeatherSnapshot;
 import com.FearMyGaze.FarmWeather.model.WeatherSnapshotSingletonRequest;
 import com.android.volley.Request;
@@ -11,8 +10,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.List;
 
 public class WeatherSnapshotServiceAPI {
 
@@ -67,7 +64,8 @@ public class WeatherSnapshotServiceAPI {
                                 response.getLong("dt"),
                                 location,
                                 sys.getString("country"),
-                                main.getLong("pressure"));
+                                main.getLong("pressure"),
+                                main.getDouble("humidity"));
 
                         AirQualityServiceAPI.getAirQualitySnapshot(weatherSnapshot.getCoordLat(), weatherSnapshot.getCoordLon(), API_KEY, context, new AirQualityServiceAPI.InterfaceAirQualitySnapshot() {
                             @Override
