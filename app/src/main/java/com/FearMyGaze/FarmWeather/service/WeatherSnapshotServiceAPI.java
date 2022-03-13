@@ -24,7 +24,7 @@ public class WeatherSnapshotServiceAPI {
     /*
     * Add yours
     * */
-    private static final String API_KEY = "360443d882c3a8260a2d10ba6a086b9f";
+    private static final String API_KEY = "";
     private static final String Measurement= "metric";
 
 
@@ -64,7 +64,8 @@ public class WeatherSnapshotServiceAPI {
                                 response.getLong("dt"),
                                 location,
                                 sys.getString("country"),
-                                main.getLong("pressure"));
+                                main.getLong("pressure"),
+                                main.getDouble("humidity"));
 
                         AirQualityServiceAPI.getAirQualitySnapshot(weatherSnapshot.getCoordLat(), weatherSnapshot.getCoordLon(), API_KEY, context, new AirQualityServiceAPI.InterfaceAirQualitySnapshot() {
                             @Override
