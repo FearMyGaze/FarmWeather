@@ -3,6 +3,7 @@
 
     <string name="EnterLocation">Enter Location</string>
     <string name="ManageCities">Manage Cities</string>
+    <string name="cityAlreadyExists">City already exists</string>
 
     <string name="sunrise">Sunrise</string>
     <string name="sunset">Sunset</string>

@@ -73,7 +73,7 @@ public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<LocationRe
         holder.m_RecyclerLocation.setText(RecyclerLocation);
         holder.m_RecyclerMainTemperature.setText(RecyclerMainTemperature);
         holder.m_RecyclerWeatherDescription.setText(RecyclerWeatherDescription);
-        holder.m_RecyclerMinMaxTemperature.setText(String.format("%s/%s", RecyclerMaxTemperature, RecyclerMinTemperature));
+        holder.m_RecyclerMinMaxTemperature.setText(String.format("%s/%s", RecyclerMinTemperature, RecyclerMaxTemperature));
 
         holder.m_constraintLayout.setOnClickListener(view -> {
             Intent intent = new Intent(context, Locations.class);

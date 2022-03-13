@@ -4,6 +4,7 @@
 
     <string name="EnterLocation">Τοποθέτησε τοποθεσία</string>
     <string name="ManageCities">Διαχείριση πόλεων</string>
+    <string name="cityAlreadyExists">Η πόλη υπάρχει ήδη</string>
 
     <string name="sunrise">Ανατολή</string>
     <string name="sunset">Δύση</string>

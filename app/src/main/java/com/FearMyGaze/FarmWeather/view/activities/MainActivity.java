@@ -96,15 +96,15 @@ public class MainActivity extends AppCompatActivity {
                                 adapter.addNewMiniWeatherSnapshot(miniWeatherSnapshot);
                                 adapter.notifyDataSetChanged();
                             }
-                            else
-                                Toast.makeText(MainActivity.this, "You have already insert this location", Toast.LENGTH_SHORT).show();
+                            else {
+                                Toast.makeText(MainActivity.this, getResources().getText(R.string.cityAlreadyExists), Toast.LENGTH_LONG).show();
+                            }
                         }
-
                     }
 
                     @Override
                     public void onError(String message) {
-                        Toast.makeText(MainActivity.this, message+"", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, message+"", Toast.LENGTH_LONG).show();
                     }
                 });
 
