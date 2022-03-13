@@ -1,13 +1,13 @@
 package com.FearMyGaze.FarmWeather.view.activities;
 
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.annotation.SuppressLint;
-import android.os.Bundle;
-import android.widget.Toast;
 
 import com.FearMyGaze.FarmWeather.R;
 import com.FearMyGaze.FarmWeather.model.LocationRecyclerViewAdapter;
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_starting_screen);
+        setContentView(R.layout.activity_main);
 
         SearchView SearchLocation = findViewById(R.id.SearchLocation);
         RecyclerView recyclerView = findViewById(R.id.LocationRecyclerView);

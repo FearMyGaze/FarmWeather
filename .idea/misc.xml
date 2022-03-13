@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Monsta/Desktop/FarmWeather/app/src/main/res/layout/activity_locations.xml" value="0.3489583333333333" />
         <entry key="..\:/Users/fearm/Documents/GitHub/FarmWeather/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3216450216450216" />
         <entry key="..\:/Users/fearm/Documents/GitHub/FarmWeather/app/src/main/res/drawable/custom_item_recycler_view_location_pressed.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/fearm/Documents/GitHub/FarmWeather/app/src/main/res/drawable/custom_item_recycler_view_location_unpressed.xml" value="0.18903508771929825" />
@@ -21,6 +22,7 @@
         <entry key="..\:/Users/fearm/Documents/GitHub/FarmWeather/app/src/main/res/layout/activity_settings2.xml" value="0.37083333333333335" />
         <entry key="..\:/Users/fearm/Documents/GitHub/FarmWeather/app/src/main/res/layout/activity_starting_screen.xml" value="0.33" />
         <entry key="..\:/Users/fearm/Documents/GitHub/FarmWeather/app/src/main/res/layout/item_recyclerview_locations.xml" value="0.25" />
+        <entry key="..\:/Users/fearm/Documents/GitHub/FarmWeather/app/src/main/res/menu/main_toolbar.xml" value="0.371875" />
         <entry key="app/src/main/res/drawable/custom_adapter.xml" value="0.21354166666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3546875" />
         <entry key="app/src/main/res/layout/activity_start.xml" value="0.26403985507246375" />
