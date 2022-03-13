@@ -1,15 +1,15 @@
 package com.FearMyGaze.FarmWeather.view.activities;
 
 import android.os.Bundle;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
 
 import com.FearMyGaze.FarmWeather.R;
 import com.FearMyGaze.FarmWeather.model.WeatherSnapshot;
 import com.FearMyGaze.FarmWeather.service.WeatherSnapshotServiceAPI;
+import com.google.android.material.textview.MaterialTextView;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -18,26 +18,35 @@ import java.util.Locale;
 
 public class Locations extends AppCompatActivity {
 
+    AppCompatImageView Weather_icon;
+
+    MaterialTextView
+            location_text, time_text, status_of_weather, status_temperature, temp_min_text,
+            temp_max_text, real_feel_text_value, sunrise_text_value, sunset_text_value,
+            wind_text_value, pressure_text_value, air_degrees_text_value, aqi_text_value,
+            humidity_text_value;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_locations);
 
-        TextView location_text = findViewById(R.id.location_text);
-        TextView time_text = findViewById(R.id.time_text);
-        ImageView Weather_icon = findViewById(R.id.Weather_icon);
-        TextView status_of_weather = findViewById(R.id.status_of_weather);
-        TextView status_temperature = findViewById(R.id.status_temperature);
-        TextView temp_min_text = findViewById(R.id.temp_min_text);
-        TextView temp_max_text = findViewById(R.id.temp_max_text);
-        TextView real_feel_text_value = findViewById(R.id.real_feel_text_value);
-        TextView sunrise_text_value = findViewById(R.id.sunrise_text_value);
-        TextView sunset_text_value = findViewById(R.id.sunset_text_value);
-        TextView wind_text_value = findViewById(R.id.wind_text_value);
-        TextView pressure_text_value = findViewById(R.id.pressure_text_value);
-        TextView air_degrees_text_value = findViewById(R.id.air_degrees_text_value);
-        TextView aqi_text_value = findViewById(R.id.aqi_text_value);
-        TextView humidity_text_value = findViewById(R.id.humidity_text_value);
+        location_text = findViewById(R.id.location_text);
+        time_text = findViewById(R.id.time_text);
+        Weather_icon = findViewById(R.id.Weather_icon);
+        status_of_weather = findViewById(R.id.status_of_weather);
+        status_temperature = findViewById(R.id.status_temperature);
+        temp_min_text = findViewById(R.id.temp_min_text);
+        temp_max_text = findViewById(R.id.temp_max_text);
+        real_feel_text_value = findViewById(R.id.real_feel_text_value);
+        sunrise_text_value = findViewById(R.id.sunrise_text_value);
+        sunset_text_value = findViewById(R.id.sunset_text_value);
+        wind_text_value = findViewById(R.id.wind_text_value);
+        pressure_text_value = findViewById(R.id.pressure_text_value);
+        air_degrees_text_value = findViewById(R.id.air_degrees_text_value);
+        aqi_text_value = findViewById(R.id.aqi_text_value);
+        humidity_text_value = findViewById(R.id.humidity_text_value);
         
         WeatherSnapshotServiceAPI.getWeatherSnapshot(getIntent().getStringExtra("location"), getIntent().getStringExtra("language"), Locations.this, new WeatherSnapshotServiceAPI.InterfaceWeatherSnapshot() {
             @Override
