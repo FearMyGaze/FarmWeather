@@ -5,7 +5,7 @@ import android.content.Context;
 
 import com.FearMyGaze.FarmWeather.R;
 import com.FearMyGaze.FarmWeather.model.WeatherSnapshot;
-import com.FearMyGaze.FarmWeather.model.WeatherSnapshotSingletonRequest;
+import com.FearMyGaze.FarmWeather.model.RequestSingleton;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 
@@ -25,7 +25,7 @@ public class WeatherSnapshotServiceAPI {
     /*
     * Add yours
     * */
-    private static final String API_KEY = "";
+    private static final String API_KEY = "115eaf6aa03c5c69fad33e78c5c15eee";
     private static final String Measurement= "metric";
 
 
@@ -85,7 +85,7 @@ public class WeatherSnapshotServiceAPI {
                     }
                 }, error -> interfaceWeatherSnapshotCall.onError(context.getString(R.string.cityNotFound)));
 
-        WeatherSnapshotSingletonRequest.getInstance(context).addToRequestQueue(jsonObjectRequest);
+        RequestSingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
 
 }

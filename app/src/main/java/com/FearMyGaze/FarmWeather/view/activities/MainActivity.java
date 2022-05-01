@@ -8,10 +8,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.FearMyGaze.FarmWeather.R;
-import com.FearMyGaze.FarmWeather.model.LocationRecyclerViewAdapter;
 import com.FearMyGaze.FarmWeather.model.MiniWeatherSnapshot;
+import com.FearMyGaze.FarmWeather.view.adapter.LocationAdapter;
 import com.FearMyGaze.FarmWeather.model.WeatherSnapshot;
 import com.FearMyGaze.FarmWeather.repository.WeatherSnapshotDatabase;
 import com.FearMyGaze.FarmWeather.service.WeatherSnapshotServiceAPI;
@@ -26,7 +27,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         SearchView SearchLocation = findViewById(R.id.SearchLocation);
+        SwipeRefreshLayout refreshLayout = findViewById(R.id.refreshLayout);
         RecyclerView recyclerView = findViewById(R.id.LocationRecyclerView);
+
 
         /*
         * This is to get the Language from the device and if the device locale isn't en or el then set it to en
@@ -39,9 +42,11 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<MiniWeatherSnapshot> miniWeatherSnapshots = new ArrayList<>();
 
-        LocationRecyclerViewAdapter adapter = new LocationRecyclerViewAdapter(miniWeatherSnapshots, MainActivity.this);
+        LocationAdapter adapter = new LocationAdapter(miniWeatherSnapshots, MainActivity.this);
 
         String finalDeviceLocale = deviceLocale;
+
+        //TODO: add the function refresh layout
 
         if (miniWeatherSnapshots.size() != 0) {
             for (MiniWeatherSnapshot miniWeatherSnapshot : miniWeatherSnapshots) {

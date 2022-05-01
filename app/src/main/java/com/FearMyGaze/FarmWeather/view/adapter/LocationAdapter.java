@@ -1,4 +1,4 @@
-package com.FearMyGaze.FarmWeather.model;
+package com.FearMyGaze.FarmWeather.view.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -13,19 +13,20 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.FearMyGaze.FarmWeather.R;
+import com.FearMyGaze.FarmWeather.model.MiniWeatherSnapshot;
 import com.FearMyGaze.FarmWeather.repository.WeatherSnapshotDatabase;
 import com.FearMyGaze.FarmWeather.view.activities.Locations;
 
 import java.util.ArrayList;
 
-public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<LocationRecyclerViewAdapter.MyViewHolder> {
+public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.MyViewHolder> {
     private final ArrayList<MiniWeatherSnapshot> miniWeatherSnapshots;
     @SuppressLint("StaticFieldLeak")
     public static Context context;
     private String language;
 
-    public LocationRecyclerViewAdapter(ArrayList<MiniWeatherSnapshot> miniWeatherSnapshots, Context context){
-        LocationRecyclerViewAdapter.context = context;
+    public LocationAdapter(ArrayList<MiniWeatherSnapshot> miniWeatherSnapshots, Context context){
+        LocationAdapter.context = context;
         this.miniWeatherSnapshots = miniWeatherSnapshots;
         miniWeatherSnapshots.addAll(WeatherSnapshotDatabase.getInstance(context).locationWeatherSnapshotDAO().getAllLocationWeatherSnapshots());
     }
@@ -56,14 +57,14 @@ public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<LocationRe
 
     @NonNull
     @Override
-    public LocationRecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public LocationAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View WeatherItemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recyclerview_locations,parent,false);
         return new MyViewHolder(WeatherItemView);
     }
 
     @SuppressLint("NotifyDataSetChanged")
     @Override
-    public void onBindViewHolder(@NonNull LocationRecyclerViewAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull LocationAdapter.MyViewHolder holder, int position) {
         String RecyclerLocation = miniWeatherSnapshots.get(position).locationTitle;
         String RecyclerMainTemperature = String.valueOf((int) miniWeatherSnapshots.get(position).temp);
         String RecyclerWeatherDescription = miniWeatherSnapshots.get(position).description;

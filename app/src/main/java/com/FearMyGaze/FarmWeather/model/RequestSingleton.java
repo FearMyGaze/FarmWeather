@@ -7,22 +7,22 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
-public class WeatherSnapshotSingletonRequest {
+public class RequestSingleton {
 
     @SuppressLint("StaticFieldLeak")
-    private static WeatherSnapshotSingletonRequest instance;
+    private static RequestSingleton instance;
     @SuppressLint("StaticFieldLeak")
     private static Context context;
     private RequestQueue requestQueue;
 
-    private WeatherSnapshotSingletonRequest(Context context) {
-        WeatherSnapshotSingletonRequest.context = context;
+    private RequestSingleton(Context context) {
+        RequestSingleton.context = context;
         requestQueue = getRequestQueue();
     }
 
-    public static synchronized WeatherSnapshotSingletonRequest getInstance(Context context) {
+    public static synchronized RequestSingleton getInstance(Context context) {
         if (instance == null) {
-            instance = new WeatherSnapshotSingletonRequest(context);
+            instance = new RequestSingleton(context);
         }
         return instance;
     }
