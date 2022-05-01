@@ -1,9 +1,16 @@
 <resources>
     <string name="app_name">FarmWeather</string>
 
+    <!-- Main Activity -->
+
     <string name="EnterLocation">Enter Location</string>
     <string name="ManageCities">Manage Cities</string>
+
+    <!-- Error messages -->
+
     <string name="cityAlreadyExists">City already exists</string>
+
+    <!-- Locations Activity -->
 
     <string name="sunrise">Sunrise</string>
     <string name="sunset">Sunset</string>
@@ -16,4 +23,5 @@
     <string name="real_feel">Real feel</string>
     <string name="temp_min">Minimum</string>
     <string name="temp_max">Maximum</string>
+    <string name="icons8Link" translatable="false">All icons by Icons8</string>
 </resources>

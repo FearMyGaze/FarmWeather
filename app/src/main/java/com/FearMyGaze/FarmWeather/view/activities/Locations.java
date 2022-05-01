@@ -1,6 +1,9 @@
 package com.FearMyGaze.FarmWeather.view.activities;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +29,7 @@ public class Locations extends AppCompatActivity {
             wind_text_value, pressure_text_value, air_degrees_text_value, aqi_text_value,
             humidity_text_value;
 
+    TextView icon8Link;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +51,8 @@ public class Locations extends AppCompatActivity {
         air_degrees_text_value = findViewById(R.id.air_degrees_text_value);
         aqi_text_value = findViewById(R.id.aqi_text_value);
         humidity_text_value = findViewById(R.id.humidity_text_value);
-        
+        icon8Link = findViewById(R.id.icon8Link);
+
         WeatherSnapshotServiceAPI.getWeatherSnapshot(getIntent().getStringExtra("location"), getIntent().getStringExtra("language"), Locations.this, new WeatherSnapshotServiceAPI.InterfaceWeatherSnapshot() {
             @Override
             public void onResponse(WeatherSnapshot weatherSnapshot) {
@@ -56,6 +61,7 @@ public class Locations extends AppCompatActivity {
                 String iconUrl = "https://openweathermap.org/img/wn/" + weatherSnapshot.getWeatherIcon() +"@2x.png";
                 Picasso.get()
                         .load(iconUrl)
+                        .noPlaceholder()
                         .error(R.drawable.ic_round_error_outline_24)
                         .into(Weather_icon);
                 status_of_weather.setText(weatherSnapshot.getWeatherDescription());
@@ -78,6 +84,8 @@ public class Locations extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        icon8Link.setOnClickListener(view -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://icons8.com"))));
 
     }
 

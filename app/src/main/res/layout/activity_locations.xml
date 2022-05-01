@@ -559,4 +559,16 @@
         app:layout_constraintStart_toEndOf="@+id/humidity_text"
         app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_0.71" />
 
+    <TextView
+        android:id="@+id/icon8Link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="end"
+        android:text="@string/icons8Link"
+        android:textStyle="bold|italic"
+        android:background="?attr/selectableItemBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_0.95"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
