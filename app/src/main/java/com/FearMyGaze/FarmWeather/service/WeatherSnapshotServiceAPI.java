@@ -3,6 +3,7 @@ package com.FearMyGaze.FarmWeather.service;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
+import com.FearMyGaze.FarmWeather.R;
 import com.FearMyGaze.FarmWeather.model.WeatherSnapshot;
 import com.FearMyGaze.FarmWeather.model.WeatherSnapshotSingletonRequest;
 import com.android.volley.Request;
@@ -80,11 +81,9 @@ public class WeatherSnapshotServiceAPI {
                             }
                         });
                     } catch (JSONException e) {
-                        interfaceWeatherSnapshotCall.onError(" "+e);
+                        interfaceWeatherSnapshotCall.onError(e.getMessage());
                     }
-                }, error -> {
-                    interfaceWeatherSnapshotCall.onError(" "+error);
-                });
+                }, error -> interfaceWeatherSnapshotCall.onError(context.getString(R.string.cityNotFound)));
 
         WeatherSnapshotSingletonRequest.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }

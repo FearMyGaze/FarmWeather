@@ -3,16 +3,14 @@
     <string name="app_name">FarmWeather</string>
 
     <!-- Main Activity -->
-
     <string name="EnterLocation">Τοποθέτησε τοποθεσία</string>
     <string name="ManageCities">Διαχείριση πόλεων</string>
 
     <!-- Error messages -->
-
     <string name="cityAlreadyExists">Η πόλη υπάρχει ήδη</string>
+    <string name="cityNotFound">Η τοποθεσία δεν βρέθηκε</string>
 
     <!-- Locations Activity -->
-
     <string name="sunrise">Ανατολή</string>
     <string name="sunset">Δύση</string>
     <string name="air">Αέρας</string>

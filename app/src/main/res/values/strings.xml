@@ -2,16 +2,14 @@
     <string name="app_name">FarmWeather</string>
 
     <!-- Main Activity -->
-
     <string name="EnterLocation">Enter Location</string>
     <string name="ManageCities">Manage Cities</string>
 
     <!-- Error messages -->
-
     <string name="cityAlreadyExists">City already exists</string>
+    <string name="cityNotFound">Location Not Found</string>
 
     <!-- Locations Activity -->
-
     <string name="sunrise">Sunrise</string>
     <string name="sunset">Sunset</string>
     <string name="air">Wind</string>
