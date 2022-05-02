@@ -7,7 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.FearMyGaze.FarmWeather.model.MiniWeatherSnapshot;
-import com.FearMyGaze.FarmWeather.model.MiniWeatherSnapshotDAO;
+import com.FearMyGaze.FarmWeather.dao.MiniWeatherSnapshotDAO;
 
 @Database(entities = {MiniWeatherSnapshot.class},version = 1,exportSchema = false)
 public abstract class WeatherSnapshotDatabase extends RoomDatabase {

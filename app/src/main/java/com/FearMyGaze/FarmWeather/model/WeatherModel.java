@@ -1,6 +1,6 @@
 package com.FearMyGaze.FarmWeather.model;
 
-public class WeatherSnapshot {
+public class WeatherModel {
     private final double coordLon;
     private final double coordLat;
     private final int weatherId;
@@ -21,23 +21,23 @@ public class WeatherSnapshot {
     private String airQuality;
     private double humidity;
 
-    public WeatherSnapshot(double coordLon,
-                           double coordLat,
-                           int weatherId,
-                           String weatherDescription,
-                           String weatherIcon,
-                           double mainTemp,
-                           double mainTempMin,
-                           double mainTempMax,
-                           double mainFeels_like,
-                           double windSpeed,
-                           int windDeg,
-                           long sysSunrise,
-                           long sysSunset,
-                           long dt,
-                           String address,
-                           String country,
-                           long pressure, double humidity) {
+    public WeatherModel(double coordLon,
+                        double coordLat,
+                        int weatherId,
+                        String weatherDescription,
+                        String weatherIcon,
+                        double mainTemp,
+                        double mainTempMin,
+                        double mainTempMax,
+                        double mainFeels_like,
+                        double windSpeed,
+                        int windDeg,
+                        long sysSunrise,
+                        long sysSunset,
+                        long dt,
+                        String address,
+                        String country,
+                        long pressure, double humidity) {
         this.coordLon = coordLon;
         this.coordLat = coordLat;
         this.weatherId = weatherId;

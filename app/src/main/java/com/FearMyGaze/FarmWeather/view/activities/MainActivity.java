@@ -13,14 +13,18 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.FearMyGaze.FarmWeather.R;
 import com.FearMyGaze.FarmWeather.model.MiniWeatherSnapshot;
 import com.FearMyGaze.FarmWeather.view.adapter.LocationAdapter;
-import com.FearMyGaze.FarmWeather.model.WeatherSnapshot;
+import com.FearMyGaze.FarmWeather.model.WeatherModel;
 import com.FearMyGaze.FarmWeather.repository.WeatherSnapshotDatabase;
 import com.FearMyGaze.FarmWeather.service.WeatherSnapshotServiceAPI;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
+
+    String deviceLocale = Locale.getDefault().getLanguage();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,12 +33,6 @@ public class MainActivity extends AppCompatActivity {
         SearchView SearchLocation = findViewById(R.id.SearchLocation);
         SwipeRefreshLayout refreshLayout = findViewById(R.id.refreshLayout);
         RecyclerView recyclerView = findViewById(R.id.LocationRecyclerView);
-
-
-        /*
-        * This is to get the Language from the device and if the device locale isn't en or el then set it to en
-        * */
-        String deviceLocale = Locale.getDefault().getLanguage();
 
         if (!deviceLocale.equals("el")) {
             deviceLocale = "en";
@@ -46,32 +44,12 @@ public class MainActivity extends AppCompatActivity {
 
         String finalDeviceLocale = deviceLocale;
 
-        //TODO: add the function refresh layout
+        refreshLayout.setOnRefreshListener(() -> {
+            updateMiniWeatherListAndAdapter(miniWeatherSnapshots, adapter);
+            refreshLayout.setRefreshing(false);
+        });
 
-        if (miniWeatherSnapshots.size() != 0) {
-            for (MiniWeatherSnapshot miniWeatherSnapshot : miniWeatherSnapshots) {
-                WeatherSnapshotServiceAPI.getWeatherSnapshot(miniWeatherSnapshot.locationTitle, deviceLocale, MainActivity.this, new WeatherSnapshotServiceAPI.InterfaceWeatherSnapshot() {
-                    @Override
-                    public void onResponse(WeatherSnapshot weatherSnapshot) {
-                        WeatherSnapshotDatabase db = WeatherSnapshotDatabase.getInstance(MainActivity.this);
-                        MiniWeatherSnapshot miniWeatherSnapshot = new MiniWeatherSnapshot(
-                                weatherSnapshot.getAddress(),
-                                weatherSnapshot.getWeatherDescription(),
-                                weatherSnapshot.getMainTemp(),
-                                weatherSnapshot.getMainTempMin(),
-                                weatherSnapshot.getMainTempMax());
-
-                        db.locationWeatherSnapshotDAO().updateMiniWeatherSnapshot(miniWeatherSnapshot);
-                    }
-
-                    @Override
-                    public void onError(String message) {
-                        Toast.makeText(MainActivity.this, "Failed to update "+miniWeatherSnapshot.locationTitle, Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        }
-        adapter.refreshMiniWeatherSnapshotsList();
+        updateMiniWeatherListAndAdapter(miniWeatherSnapshots, adapter);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         adapter.setLanguage(deviceLocale);
@@ -84,19 +62,19 @@ public class MainActivity extends AppCompatActivity {
                 WeatherSnapshotServiceAPI.getWeatherSnapshot(query, finalDeviceLocale, MainActivity.this, new WeatherSnapshotServiceAPI.InterfaceWeatherSnapshot() {
                     @SuppressLint("NotifyDataSetChanged")
                     @Override
-                    public void onResponse(WeatherSnapshot weatherSnapshot) {
+                    public void onResponse(WeatherModel weatherModel) {
 
-                        String title = weatherSnapshot.getAddress();
+                        String title = weatherModel.getAddress();
                         if (!title.isEmpty()){
                             WeatherSnapshotDatabase db = WeatherSnapshotDatabase.getInstance(MainActivity.this);
-                            MiniWeatherSnapshot existingMiniWeatherSnapshot = db.locationWeatherSnapshotDAO().getMiniLocationWeatherSnapshotByAddress(weatherSnapshot.getAddress());
-                            if (existingMiniWeatherSnapshot==null){
+                            MiniWeatherSnapshot existingMiniWeatherSnapshot = db.locationWeatherSnapshotDAO().getMiniLocationWeatherSnapshotByAddress(weatherModel.getAddress());
+                            if (existingMiniWeatherSnapshot == null){
                                 MiniWeatherSnapshot miniWeatherSnapshot = new MiniWeatherSnapshot(
-                                        weatherSnapshot.getAddress(),
-                                        weatherSnapshot.getWeatherDescription(),
-                                        weatherSnapshot.getMainTemp(),
-                                        weatherSnapshot.getMainTempMin(),
-                                        weatherSnapshot.getMainTempMax());
+                                        weatherModel.getAddress(),
+                                        weatherModel.getWeatherDescription(),
+                                        weatherModel.getMainTemp(),
+                                        weatherModel.getMainTempMin(),
+                                        weatherModel.getMainTempMax());
 
                                 adapter.addNewMiniWeatherSnapshot(miniWeatherSnapshot);
                                 adapter.notifyDataSetChanged();
@@ -122,5 +100,31 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+    private void updateMiniWeatherListAndAdapter(List<MiniWeatherSnapshot> miniWeatherSnapshots, LocationAdapter adapter){
+        if (miniWeatherSnapshots.size() > 0) {
+            for (MiniWeatherSnapshot miniWeatherSnapshot : miniWeatherSnapshots) {
+                WeatherSnapshotServiceAPI.getWeatherSnapshot(miniWeatherSnapshot.locationTitle, deviceLocale, this, new WeatherSnapshotServiceAPI.InterfaceWeatherSnapshot() {
 
+                    @Override
+                    public void onResponse(WeatherModel weatherModel) {
+                        WeatherSnapshotDatabase db = WeatherSnapshotDatabase.getInstance(MainActivity.this);
+                        MiniWeatherSnapshot miniWeatherSnapshot = new MiniWeatherSnapshot(
+                                weatherModel.getAddress(),
+                                weatherModel.getWeatherDescription(),
+                                weatherModel.getMainTemp(),
+                                weatherModel.getMainTempMin(),
+                                weatherModel.getMainTempMax());
+
+                        db.locationWeatherSnapshotDAO().updateMiniWeatherSnapshot(miniWeatherSnapshot);
+                    }
+
+                    @Override
+                    public void onError(String message) {
+                        Toast.makeText(MainActivity.this, "Failed to update "+ miniWeatherSnapshot.locationTitle, Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+            adapter.refreshMiniWeatherSnapshotsList();
+        }
+    }
 }

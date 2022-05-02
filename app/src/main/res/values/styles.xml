@@ -2,18 +2,17 @@
     <!-- Base application theme. -->
     <style name="Theme.FarmWeather" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/black</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item> <!-- TODO: if not need it remove it -->
+        <item name="colorOnPrimary">@color/black</item> <!-- TODO: if not need it remove it -->
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/red_500</item> <!-- This is for Cursor -->
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/yellow_700</item> <!-- This is for Cursor -->
+        <item name="colorSecondaryVariant">@color/teal_200</item> <!-- TODO: if not need it remove it -->
+        <item name="colorOnSecondary">@color/black</item> <!-- TODO: if not need it remove it -->
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/black</item>
         <!-- Customize your theme here. -->
-        <item name="android:forceDarkAllowed" tools:targetApi="q">true</item>
-        <item name="android:navigationBarColor">@color/black</item>
+        <item name="android:navigationBarColor">@color/black</item> <!--TODO: Maybe remove it -->
     </style>
 
 </resources>

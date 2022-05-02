@@ -8,6 +8,15 @@
     <color name="black">#FF000000</color>
     <color name="White">#FFFFFFFF</color>
     <color name="Yellow">#E8AF1C</color>
-    <color name="red_500">#F44336</color>
-    <color name="red_700">#D32F2F</color>
+
+    <!-- Adapter colors -->
+    <color name="yellow_500">#FFFBC02D</color>
+    <color name="yellow_700">#FFA000</color>
+
+    <color name="primary">#1C2E46</color>
+    <color name="primaryDark">#142232</color>
+    <color name="primaryText">#212121</color>
+    <color name="secondaryText">#757575</color>
+    <color name="inputBackground">#ECECEC</color>
+    <color name="iconBackground">#20FFFFFF</color>
 </resources>
