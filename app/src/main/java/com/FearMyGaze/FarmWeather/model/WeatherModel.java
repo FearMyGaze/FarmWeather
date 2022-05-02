@@ -1,8 +1,8 @@
 package com.FearMyGaze.FarmWeather.model;
 
 public class WeatherModel {
-    private final double coordLon;
-    private final double coordLat;
+    private final double lon;
+    private final double lat;
     private final int weatherId;
     private final String weatherDescription;
     private final String weatherIcon;
@@ -15,14 +15,14 @@ public class WeatherModel {
     private final long sysSunrise;
     private final long sysSunset;
     private final long dt;
-    private final String address;
+    private final String location;
     private final String country;
     private final long pressure;
     private String airQuality;
-    private double humidity;
+    private final double humidity;
 
-    public WeatherModel(double coordLon,
-                        double coordLat,
+    public WeatherModel(double lon,
+                        double lat,
                         int weatherId,
                         String weatherDescription,
                         String weatherIcon,
@@ -35,11 +35,12 @@ public class WeatherModel {
                         long sysSunrise,
                         long sysSunset,
                         long dt,
-                        String address,
+                        String location,
                         String country,
-                        long pressure, double humidity) {
-        this.coordLon = coordLon;
-        this.coordLat = coordLat;
+                        long pressure,
+                        double humidity) {
+        this.lon = lon;
+        this.lat = lat;
         this.weatherId = weatherId;
         this.weatherDescription = weatherDescription;
         this.weatherIcon = weatherIcon;
@@ -52,7 +53,7 @@ public class WeatherModel {
         this.sysSunrise = sysSunrise;
         this.sysSunset = sysSunset;
         this.dt = dt;
-        this.address = address;
+        this.location = location;
         this.country = country;
         this.pressure = pressure;
         this.humidity = humidity;
@@ -62,12 +63,12 @@ public class WeatherModel {
         this.airQuality = airQuality;
     }
 
-    public double getCoordLon() {
-        return coordLon;
+    public double getLon() {
+        return lon;
     }
 
-    public double getCoordLat() {
-        return coordLat;
+    public double getLat() {
+        return lat;
     }
 
     public int getWeatherId() {
@@ -118,8 +119,8 @@ public class WeatherModel {
         return dt;
     }
 
-    public String getAddress() {
-        return address;
+    public String getLocation() {
+        return location;
     }
 
     public String getCountry() {

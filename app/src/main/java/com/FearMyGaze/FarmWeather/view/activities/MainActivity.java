@@ -64,13 +64,13 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(WeatherModel weatherModel) {
 
-                        String title = weatherModel.getAddress();
+                        String title = weatherModel.getLocation();
                         if (!title.isEmpty()){
                             WeatherSnapshotDatabase db = WeatherSnapshotDatabase.getInstance(MainActivity.this);
-                            MiniWeatherSnapshot existingMiniWeatherSnapshot = db.locationWeatherSnapshotDAO().getMiniLocationWeatherSnapshotByAddress(weatherModel.getAddress());
+                            MiniWeatherSnapshot existingMiniWeatherSnapshot = db.locationWeatherSnapshotDAO().getMiniLocationWeatherSnapshotByAddress(weatherModel.getLocation());
                             if (existingMiniWeatherSnapshot == null){
                                 MiniWeatherSnapshot miniWeatherSnapshot = new MiniWeatherSnapshot(
-                                        weatherModel.getAddress(),
+                                        weatherModel.getLocation(),
                                         weatherModel.getWeatherDescription(),
                                         weatherModel.getMainTemp(),
                                         weatherModel.getMainTempMin(),
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(WeatherModel weatherModel) {
                         WeatherSnapshotDatabase db = WeatherSnapshotDatabase.getInstance(MainActivity.this);
                         MiniWeatherSnapshot miniWeatherSnapshot = new MiniWeatherSnapshot(
-                                weatherModel.getAddress(),
+                                weatherModel.getLocation(),
                                 weatherModel.getWeatherDescription(),
                                 weatherModel.getMainTemp(),
                                 weatherModel.getMainTempMin(),

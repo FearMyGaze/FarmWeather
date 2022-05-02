@@ -56,7 +56,7 @@ public class Locations extends AppCompatActivity {
         WeatherSnapshotServiceAPI.getWeatherSnapshot(getIntent().getStringExtra("location"), getIntent().getStringExtra("language"), Locations.this, new WeatherSnapshotServiceAPI.InterfaceWeatherSnapshot() {
             @Override
             public void onResponse(WeatherModel weatherModel) {
-                location_text.setText(String.format("%s %s", weatherModel.getAddress(), weatherModel.getCountry()));
+                location_text.setText(String.format("%s %s", weatherModel.getLocation(), weatherModel.getCountry()));
                 time_text.setText(new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(weatherModel.getDt() * 1000)));
                 String iconUrl = "https://openweathermap.org/img/wn/" + weatherModel.getWeatherIcon() +"@2x.png";
                 Picasso.get()

@@ -68,7 +68,7 @@ public class WeatherSnapshotServiceAPI {
                                 main.getLong("pressure"),
                                 main.getDouble("humidity"));
 
-                        AirQualityServiceAPI.getAirQualitySnapshot(weatherModel.getCoordLat(), weatherModel.getCoordLon(), API_KEY, context, new AirQualityServiceAPI.InterfaceAirQualitySnapshot() {
+                        AirQualityServiceAPI.getAirQualitySnapshot(weatherModel.getLat(), weatherModel.getLon(), API_KEY, context, new AirQualityServiceAPI.InterfaceAirQualitySnapshot() {
                             @Override
                             public void onResponse(String result) {
                                 weatherModel.setAirQuality(result);
