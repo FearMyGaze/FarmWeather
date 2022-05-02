@@ -4,7 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 
 import com.FearMyGaze.FarmWeather.R;
-import com.FearMyGaze.FarmWeather.model.WeatherSnapshot;
+import com.FearMyGaze.FarmWeather.model.WeatherModel;
 import com.FearMyGaze.FarmWeather.model.RequestSingleton;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -25,12 +25,12 @@ public class WeatherSnapshotServiceAPI {
     /*
     * Add yours
     * */
-    private static final String API_KEY = "115eaf6aa03c5c69fad33e78c5c15eee";
+    private static final String API_KEY = "";
     private static final String Measurement= "metric";
 
 
     public interface InterfaceWeatherSnapshot {
-        void onResponse(WeatherSnapshot weatherSnapshot);
+        void onResponse(WeatherModel weatherModel);
         void onError(String message);
     }
 
@@ -42,13 +42,13 @@ public class WeatherSnapshotServiceAPI {
                 (Request.Method.GET, url, null, response -> {
 
                     try {
-                        WeatherSnapshot weatherSnapshot;
+                        WeatherModel weatherModel;
                         JSONObject coord = response.getJSONObject("coord");
                         JSONObject weather = response.getJSONArray("weather").getJSONObject(0);
                         JSONObject main = response.getJSONObject("main");
                         JSONObject wind = response.getJSONObject("wind");
                         JSONObject sys = response.getJSONObject("sys");
-                        weatherSnapshot = new WeatherSnapshot(
+                        weatherModel = new WeatherModel(
                                 coord.getDouble("lon"),
                                 coord.getDouble("lat"),
                                 weather.getInt("id"),
@@ -68,11 +68,11 @@ public class WeatherSnapshotServiceAPI {
                                 main.getLong("pressure"),
                                 main.getDouble("humidity"));
 
-                        AirQualityServiceAPI.getAirQualitySnapshot(weatherSnapshot.getCoordLat(), weatherSnapshot.getCoordLon(), API_KEY, context, new AirQualityServiceAPI.InterfaceAirQualitySnapshot() {
+                        AirQualityServiceAPI.getAirQualitySnapshot(weatherModel.getCoordLat(), weatherModel.getCoordLon(), API_KEY, context, new AirQualityServiceAPI.InterfaceAirQualitySnapshot() {
                             @Override
                             public void onResponse(String result) {
-                                weatherSnapshot.setAirQuality(result);
-                                interfaceWeatherSnapshotCall.onResponse(weatherSnapshot);
+                                weatherModel.setAirQuality(result);
+                                interfaceWeatherSnapshotCall.onResponse(weatherModel);
                             }
 
                             @Override
