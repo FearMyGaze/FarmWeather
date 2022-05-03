@@ -15,7 +15,7 @@ import com.FearMyGaze.FarmWeather.model.MiniWeatherSnapshot;
 import com.FearMyGaze.FarmWeather.view.adapter.LocationAdapter;
 import com.FearMyGaze.FarmWeather.model.WeatherModel;
 import com.FearMyGaze.FarmWeather.repository.WeatherSnapshotDatabase;
-import com.FearMyGaze.FarmWeather.service.WeatherSnapshotServiceAPI;
+import com.FearMyGaze.FarmWeather.service.WeatherServiceAPI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         SearchLocation.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                WeatherSnapshotServiceAPI.getWeatherSnapshot(query, finalDeviceLocale, MainActivity.this, new WeatherSnapshotServiceAPI.InterfaceWeatherSnapshot() {
+                WeatherServiceAPI.getWeatherSnapshot(query, finalDeviceLocale, MainActivity.this, new WeatherServiceAPI.InterfaceWeatherSnapshot() {
                     @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onResponse(WeatherModel weatherModel) {
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                         String title = weatherModel.getLocation();
                         if (!title.isEmpty()){
                             WeatherSnapshotDatabase db = WeatherSnapshotDatabase.getInstance(MainActivity.this);
-                            MiniWeatherSnapshot existingMiniWeatherSnapshot = db.locationWeatherSnapshotDAO().getMiniLocationWeatherSnapshotByAddress(weatherModel.getLocation());
+                            MiniWeatherSnapshot existingMiniWeatherSnapshot = db.locationWeatherSnapshotDAO().getMiniLocationWeatherSnapshotByLocation(weatherModel.getLocation());
                             if (existingMiniWeatherSnapshot == null){
                                 MiniWeatherSnapshot miniWeatherSnapshot = new MiniWeatherSnapshot(
                                         weatherModel.getLocation(),
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
     private void updateMiniWeatherListAndAdapter(List<MiniWeatherSnapshot> miniWeatherSnapshots, LocationAdapter adapter){
         if (miniWeatherSnapshots.size() > 0) {
             for (MiniWeatherSnapshot miniWeatherSnapshot : miniWeatherSnapshots) {
-                WeatherSnapshotServiceAPI.getWeatherSnapshot(miniWeatherSnapshot.locationTitle, deviceLocale, this, new WeatherSnapshotServiceAPI.InterfaceWeatherSnapshot() {
+                WeatherServiceAPI.getWeatherSnapshot(miniWeatherSnapshot.locationTitle, deviceLocale, this, new WeatherServiceAPI.InterfaceWeatherSnapshot() {
 
                     @Override
                     public void onResponse(WeatherModel weatherModel) {

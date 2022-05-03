@@ -11,7 +11,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 
 import com.FearMyGaze.FarmWeather.R;
 import com.FearMyGaze.FarmWeather.model.WeatherModel;
-import com.FearMyGaze.FarmWeather.service.WeatherSnapshotServiceAPI;
+import com.FearMyGaze.FarmWeather.service.WeatherServiceAPI;
 import com.google.android.material.textview.MaterialTextView;
 import com.squareup.picasso.Picasso;
 
@@ -53,7 +53,7 @@ public class Locations extends AppCompatActivity {
         humidity_text_value = findViewById(R.id.humidity_text_value);
         icon8Link = findViewById(R.id.icon8Link);
 
-        WeatherSnapshotServiceAPI.getWeatherSnapshot(getIntent().getStringExtra("location"), getIntent().getStringExtra("language"), Locations.this, new WeatherSnapshotServiceAPI.InterfaceWeatherSnapshot() {
+        WeatherServiceAPI.getWeatherSnapshot(getIntent().getStringExtra("location"), getIntent().getStringExtra("language"), Locations.this, new WeatherServiceAPI.InterfaceWeatherSnapshot() {
             @Override
             public void onResponse(WeatherModel weatherModel) {
                 location_text.setText(String.format("%s %s", weatherModel.getLocation(), weatherModel.getCountry()));

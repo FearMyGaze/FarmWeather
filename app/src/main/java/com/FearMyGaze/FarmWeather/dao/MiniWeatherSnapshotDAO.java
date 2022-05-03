@@ -15,8 +15,8 @@ public interface MiniWeatherSnapshotDAO {
     @Query("SELECT * FROM weather_reports")
     List<MiniWeatherSnapshot> getAllLocationWeatherSnapshots();
 
-    @Query("SELECT * FROM weather_reports WHERE locationTitle = :address")
-    MiniWeatherSnapshot getMiniLocationWeatherSnapshotByAddress(String address);
+    @Query("SELECT * FROM weather_reports WHERE locationTitle = :location")
+    MiniWeatherSnapshot getMiniLocationWeatherSnapshotByLocation(String location);
 
     @Insert
     void insertNewMiniWeatherSnapshot(MiniWeatherSnapshot miniWeatherSnapshot);

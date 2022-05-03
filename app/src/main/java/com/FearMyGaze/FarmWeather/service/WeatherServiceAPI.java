@@ -12,7 +12,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class WeatherSnapshotServiceAPI {
+public class WeatherServiceAPI {
 
 
     private static final String Location_URL ="https://api.openweathermap.org/data/2.5/weather?q=";
@@ -35,7 +35,7 @@ public class WeatherSnapshotServiceAPI {
     }
 
     public static void getWeatherSnapshot(String location ,  String language , Context context , InterfaceWeatherSnapshot interfaceWeatherSnapshotCall) {
-        WeatherSnapshotServiceAPI.context = context;
+        WeatherServiceAPI.context = context;
         String url;
         url = Location_URL + location.trim() + Language_URL + language.trim() + Measurement_URL + Measurement + API_URL + API_KEY;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
