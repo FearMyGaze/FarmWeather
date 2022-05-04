@@ -73,7 +73,7 @@ public class Locations extends AppCompatActivity {
         wind_text_value.setText(String.format("%s bft", (int) windSpeedFromMsToBeaufort(existingWeatherModel.getWindSpeed())));
         pressure_text_value.setText(String.valueOf(existingWeatherModel.getPressure()));
         air_degrees_text_value.setText(defineWindDirection(existingWeatherModel.getWindDeg()));
-        //aqi_text_value.setText(defineAirQuality(existingAirQualityModel.getAqi()));
+        aqi_text_value.setText(defineAirQuality(existingWeatherModel.getAirQuality()));
         humidity_text_value.setText(String.format("%s%%", (int) existingWeatherModel.getHumidity()));
 
         icon8Link.setOnClickListener(view -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://icons8.com"))));

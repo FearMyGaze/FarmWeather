@@ -1,7 +1,6 @@
 package com.FearMyGaze.FarmWeather.view.activities;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -58,21 +57,9 @@ public class MainActivity extends AppCompatActivity {
         searchLocation.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                WeatherServiceAPI.getWeatherSnapshot(query, finalDeviceLocale, MainActivity.this, new WeatherServiceAPI.InterfaceWeatherSnapshot() {
-                    @Override
-                    public void onResponse(WeatherModel weatherModel) {
-                        if (!weatherModel.getLocation().isEmpty()){
-                            insertSearchedLocation(weatherModel.getLocation(), finalDeviceLocale, MainActivity.this , adapter);
-                        }
-                        searchLocation.setQuery("",false);
-                    }
-
-                    @Override
-                    public void onError(String message) {
-                        showToast(message,1);
-                    }
-                });
-
+                if (!query.isEmpty())
+                    insertSearchedLocation(query, finalDeviceLocale, adapter);
+                searchLocation.setQuery("",false);
                 return true;
             }
 
@@ -84,81 +71,38 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void insertSearchedLocation(String location, String locale, Context context, LocationAdapter adapter){
-        WeatherServiceAPI.getWeatherSnapshot(location, locale, context, new WeatherServiceAPI.InterfaceWeatherSnapshot() {
-            @SuppressLint("NotifyDataSetChanged")
-            @Override
-            public void onResponse(WeatherModel weatherModel) {
+    private void insertSearchedLocation(String location, String locale, LocationAdapter adapter){
+        WeatherSnapshotDatabase database = WeatherSnapshotDatabase.getInstance(MainActivity.this);
+        WeatherModel existingWeatherModel = database.weatherDAO().getWeatherByLocation(location);
 
-                WeatherSnapshotDatabase database = WeatherSnapshotDatabase.getInstance(MainActivity.this);
-                WeatherModel existingWeatherModel = database.weatherDAO().getWeatherByLocation(location);
+        if (existingWeatherModel == null){
+            WeatherServiceAPI.getWeatherSnapshot(location, locale, MainActivity.this, new WeatherServiceAPI.InterfaceWeatherSnapshot() {
 
-                if (existingWeatherModel == null){
-                    WeatherModel newWeatherModel = new WeatherModel(
-                          weatherModel.getLon(),
-                          weatherModel.getLat(),
-                          weatherModel.getWeatherId(),
-                          weatherModel.getWeatherDescription(),
-                          weatherModel.getWeatherIcon(),
-                          weatherModel.getMainTemp(),
-                          weatherModel.getMainTempMin(),
-                          weatherModel.getMainTempMax(),
-                          weatherModel.getMainFeels_like(),
-                          weatherModel.getWindSpeed(),
-                          weatherModel.getWindDeg(),
-                          weatherModel.getSysSunrise(),
-                          weatherModel.getSysSunset(),
-                          weatherModel.getDt(),
-                          weatherModel.getLocation(),
-                          weatherModel.getCountry(),
-                          weatherModel.getPressure(),
-                          weatherModel.getHumidity()
-                    );
-                    adapter.addNewMiniWeatherSnapshot(newWeatherModel);
+                @SuppressLint("NotifyDataSetChanged")
+                @Override
+                public void onResponse(WeatherModel weatherModel) {
+                    adapter.addNewMiniWeatherSnapshot(weatherModel);
                     adapter.notifyDataSetChanged();
-
-                }else{
-                    showToast((String) getResources().getText(R.string.cityAlreadyExists), 1);
                 }
-            }
 
-            @Override
-            public void onError(String message) {
-                showToast(message,1);
-            }
-        });
+                @Override
+                public void onError(String message) {
+                    showToast(message,1);
+                }
+            });
+        }
 
     }
 
     private void updateWeatherListAdapter(List<WeatherModel> weatherModels, LocationAdapter adapter){
         if (weatherModels.size() > 0) {
+            WeatherSnapshotDatabase database = WeatherSnapshotDatabase.getInstance(MainActivity.this);
             for (WeatherModel weatherModel : weatherModels) {
                 WeatherServiceAPI.getWeatherSnapshot(weatherModel.getLocation(), deviceLocale, this, new WeatherServiceAPI.InterfaceWeatherSnapshot() {
 
                     @Override
                     public void onResponse(WeatherModel weatherModel) {
-                        WeatherSnapshotDatabase database = WeatherSnapshotDatabase.getInstance(MainActivity.this);
-                        WeatherModel newWeatherModel = new WeatherModel(
-                                weatherModel.getLon(),
-                                weatherModel.getLat(),
-                                weatherModel.getWeatherId(),
-                                weatherModel.getWeatherDescription(),
-                                weatherModel.getWeatherIcon(),
-                                weatherModel.getMainTemp(),
-                                weatherModel.getMainTempMin(),
-                                weatherModel.getMainTempMax(),
-                                weatherModel.getMainFeels_like(),
-                                weatherModel.getWindSpeed(),
-                                weatherModel.getWindDeg(),
-                                weatherModel.getSysSunrise(),
-                                weatherModel.getSysSunset(),
-                                weatherModel.getDt(),
-                                weatherModel.getLocation(),
-                                weatherModel.getCountry(),
-                                weatherModel.getPressure(),
-                                weatherModel.getHumidity()
-                        );
-                        database.weatherDAO().updateWeatherModel(newWeatherModel);
+                        database.weatherDAO().updateWeatherModel(weatherModel);
                     }
 
                     @Override

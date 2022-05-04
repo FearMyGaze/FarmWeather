@@ -22,17 +22,12 @@ import java.util.List;
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.MyViewHolder> {
 
     private final List<WeatherModel> weatherModels;
-//    private final ItemClickListener clickListener;
-//    private final ItemOnLongClickListener longClickListener;
-
 
     @SuppressLint("StaticFieldLeak")
     public static Context context;
 
     public LocationAdapter(List<WeatherModel> weatherModels, Context context){
         this.weatherModels = weatherModels;
-//        this.clickListener = clickListener;
-//        this.longClickListener = longClickListener;
         LocationAdapter.context = context;
         weatherModels.addAll(WeatherSnapshotDatabase.getInstance(context).weatherDAO().getAllWeathers());
     }
@@ -83,14 +78,6 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.MyView
             m_RecyclerMinMaxTemperature = view.findViewById(R.id.RecyclerMinMaxTemperature);
             m_constraintLayout = view.findViewById(R.id.item_recyclerview_locations);
         }
-    }
-
-    public interface ItemClickListener{
-        void onClick(LocationAdapter locationAdapter);
-    }
-
-    public interface ItemOnLongClickListener{
-        void onLongClick(LocationAdapter locationAdapter);
     }
 
     @Override

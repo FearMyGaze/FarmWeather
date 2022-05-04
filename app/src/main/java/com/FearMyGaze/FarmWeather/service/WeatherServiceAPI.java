@@ -75,7 +75,6 @@ public class WeatherServiceAPI {
                                 weatherModel.setAirQuality(result);
                                 interfaceWeatherSnapshotCall.onResponse(weatherModel);
                             }
-
                             @Override
                             public void onError(String Message) {
                                 interfaceWeatherSnapshotCall.onError(Message);
