@@ -4,8 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 
 import com.FearMyGaze.FarmWeather.R;
-import com.FearMyGaze.FarmWeather.model.WeatherModel;
 import com.FearMyGaze.FarmWeather.model.RequestSingleton;
+import com.FearMyGaze.FarmWeather.model.WeatherModel;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 
@@ -48,6 +48,7 @@ public class WeatherServiceAPI {
                         JSONObject main = response.getJSONObject("main");
                         JSONObject wind = response.getJSONObject("wind");
                         JSONObject sys = response.getJSONObject("sys");
+
                         weatherModel = new WeatherModel(
                                 coord.getDouble("lon"),
                                 coord.getDouble("lat"),

@@ -4,14 +4,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 
 import com.FearMyGaze.FarmWeather.R;
 import com.FearMyGaze.FarmWeather.model.WeatherModel;
-import com.FearMyGaze.FarmWeather.service.WeatherServiceAPI;
+import com.FearMyGaze.FarmWeather.repository.WeatherSnapshotDatabase;
 import com.google.android.material.textview.MaterialTextView;
 import com.squareup.picasso.Picasso;
 
@@ -53,50 +52,54 @@ public class Locations extends AppCompatActivity {
         humidity_text_value = findViewById(R.id.humidity_text_value);
         icon8Link = findViewById(R.id.icon8Link);
 
-        WeatherServiceAPI.getWeatherSnapshot(getIntent().getStringExtra("location"), getIntent().getStringExtra("language"), Locations.this, new WeatherServiceAPI.InterfaceWeatherSnapshot() {
-            @Override
-            public void onResponse(WeatherModel weatherModel) {
-                location_text.setText(String.format("%s %s", weatherModel.getLocation(), weatherModel.getCountry()));
-                time_text.setText(new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(weatherModel.getDt() * 1000)));
-                String iconUrl = "https://openweathermap.org/img/wn/" + weatherModel.getWeatherIcon() +"@2x.png";
-                Picasso.get()
-                        .load(iconUrl)
-                        .noPlaceholder()
-                        .error(R.drawable.ic_round_error_outline_24)
-                        .into(Weather_icon);
-                status_of_weather.setText(weatherModel.getWeatherDescription());
-                status_temperature.setText(String.format("%s℃", (int) weatherModel.getMainTemp()));
-                temp_min_text.setText(String.format("%s℃", (int) weatherModel.getMainTempMin()));
-                temp_max_text.setText(String.format("%s℃", (int) weatherModel.getMainTempMax()));
-                real_feel_text_value.setText(String.valueOf(weatherModel.getMainFeels_like()));
-                sunrise_text_value.setText(new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(weatherModel.getSysSunrise() * 1000)));
-                sunset_text_value.setText(new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(weatherModel.getSysSunset() * 1000)));
-                wind_text_value.setText(String.format("%s bft", (int) windSpeedFromMsToBeaufort(weatherModel.getWindSpeed())));
-                pressure_text_value.setText(String.valueOf(weatherModel.getPressure()));
-                air_degrees_text_value.setText(defineWindDirection(weatherModel.getWindDeg(),getIntent().getStringExtra("language")));
-                aqi_text_value.setText(String.valueOf(weatherModel.getAirQuality()));
-                humidity_text_value.setText(String.format("%s%%", (int) weatherModel.getHumidity()));
-            }
+        WeatherSnapshotDatabase database = WeatherSnapshotDatabase.getInstance(this);
+        WeatherModel existingWeatherModel = database.weatherDAO().getWeatherByLocation(getIntent().getStringExtra("location"));
 
-            @Override
-            public void onError(String message) {
-                Toast.makeText(Locations.this, message, Toast.LENGTH_SHORT).show();
-                onBackPressed();
-            }
-        });
+        location_text.setText(String.format("%s %s", existingWeatherModel.getLocation(), existingWeatherModel.getCountry()));
+        time_text.setText(new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(existingWeatherModel.getDt() * 1000)));
+        String iconUrl = "https://openweathermap.org/img/wn/" + existingWeatherModel.getWeatherIcon() +"@2x.png";
+        Picasso.get()
+                .load(iconUrl)
+                .noPlaceholder()
+                .error(R.drawable.ic_round_error_outline_24)
+                .into(Weather_icon);
+        status_of_weather.setText(existingWeatherModel.getWeatherDescription());
+        status_temperature.setText(String.format("%s℃", (int) existingWeatherModel.getMainTemp()));
+        temp_min_text.setText(String.format("%s℃", (int) existingWeatherModel.getMainTempMin()));
+        temp_max_text.setText(String.format("%s℃", (int) existingWeatherModel.getMainTempMax()));
+        real_feel_text_value.setText(String.valueOf(existingWeatherModel.getMainFeels_like()));
+        sunrise_text_value.setText(new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(existingWeatherModel.getSysSunrise() * 1000)));
+        sunset_text_value.setText(new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(existingWeatherModel.getSysSunset() * 1000)));
+        wind_text_value.setText(String.format("%s bft", (int) windSpeedFromMsToBeaufort(existingWeatherModel.getWindSpeed())));
+        pressure_text_value.setText(String.valueOf(existingWeatherModel.getPressure()));
+        air_degrees_text_value.setText(defineWindDirection(existingWeatherModel.getWindDeg()));
+        //aqi_text_value.setText(defineAirQuality(existingAirQualityModel.getAqi()));
+        humidity_text_value.setText(String.format("%s%%", (int) existingWeatherModel.getHumidity()));
 
         icon8Link.setOnClickListener(view -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://icons8.com"))));
 
     }
 
-    private String defineWindDirection(double windDegrees, String language) {
-        String[] direction = {"Β", "ΒΑ", "Α", "ΝΑ", "Ν", "ΝΔ", "Δ", "ΒΔ", "Β"};
-
-        if (language.equals("en")){
-            direction = new String[]{"N", "NE", "E", "SE", "S", "SW", "W", "NW", "N"};
-        }
-
+    private String defineWindDirection(double windDegrees) {
+        String[] direction = getResources().getStringArray(R.array.windDirection);
         return direction[(int) Math.round((windDegrees % 360) / 45)];
+    }
+
+    private String defineAirQuality(String aqi){
+        switch (aqi){
+            case "1":
+                return getResources().getString(R.string.airQuality1);
+            case "2":
+                return getResources().getString(R.string.airQuality2);
+            case "3":
+                return getResources().getString(R.string.airQuality3);
+            case "4":
+                return getResources().getString(R.string.airQuality4);
+            case "5":
+                return getResources().getString(R.string.airQuality5);
+            default:
+                return "NaN";
+        }
     }
 
     private double windSpeedFromMsToBeaufort(double windSpeed) {

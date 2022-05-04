@@ -1,24 +1,70 @@
 package com.FearMyGaze.FarmWeather.model;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "weather")
 public class WeatherModel {
+
+    @ColumnInfo(name = "lon")
     private final double lon;
+
+    @ColumnInfo(name = "lat")
     private final double lat;
+
+    @ColumnInfo(name = "weatherId")
     private final int weatherId;
+
+    @ColumnInfo(name = "weatherDescription")
     private final String weatherDescription;
+
+    @ColumnInfo(name = "weatherIcon")
     private final String weatherIcon;
+
+    @ColumnInfo(name = "mainTemp")
     private final double mainTemp;
+
+    @ColumnInfo(name = "mainTempMin")
     private final double mainTempMin;
+
+    @ColumnInfo(name = "mainTempMax")
     private final double mainTempMax;
+
+    @ColumnInfo(name = "mainFeels_like")
     private final double mainFeels_like;
+
+    @ColumnInfo(name = "windSpeed")
     private final double windSpeed;
+
+    @ColumnInfo(name = "windDeg")
     private final int windDeg;
+
+    @ColumnInfo(name = "sysSunrise")
     private final long sysSunrise;
+
+    @ColumnInfo(name = "sysSunset")
     private final long sysSunset;
+
+    @ColumnInfo(name = "dt")
     private final long dt;
+
+    @NonNull
+    @PrimaryKey
+    @ColumnInfo(name = "location")
     private final String location;
+
+    @ColumnInfo(name = "country")
     private final String country;
+
+    @ColumnInfo(name = "pressure")
     private final long pressure;
+
+    @ColumnInfo(name = "airQuality")
     private String airQuality;
+
+    @ColumnInfo(name = "humidity")
     private final double humidity;
 
     public WeatherModel(double lon,
@@ -35,7 +81,7 @@ public class WeatherModel {
                         long sysSunrise,
                         long sysSunset,
                         long dt,
-                        String location,
+                        @NonNull String location,
                         String country,
                         long pressure,
                         double humidity) {
@@ -119,6 +165,7 @@ public class WeatherModel {
         return dt;
     }
 
+    @NonNull
     public String getLocation() {
         return location;
     }

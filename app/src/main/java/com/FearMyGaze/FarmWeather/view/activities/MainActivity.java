@@ -1,6 +1,7 @@
 package com.FearMyGaze.FarmWeather.view.activities;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -11,11 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.FearMyGaze.FarmWeather.R;
-import com.FearMyGaze.FarmWeather.model.MiniWeatherSnapshot;
-import com.FearMyGaze.FarmWeather.view.adapter.LocationAdapter;
 import com.FearMyGaze.FarmWeather.model.WeatherModel;
 import com.FearMyGaze.FarmWeather.repository.WeatherSnapshotDatabase;
 import com.FearMyGaze.FarmWeather.service.WeatherServiceAPI;
+import com.FearMyGaze.FarmWeather.view.adapter.LocationAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,69 +30,52 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SearchView SearchLocation = findViewById(R.id.SearchLocation);
-        SwipeRefreshLayout refreshLayout = findViewById(R.id.refreshLayout);
-        RecyclerView recyclerView = findViewById(R.id.LocationRecyclerView);
-
         if (!deviceLocale.equals("el")) {
             deviceLocale = "en";
         }
 
-        ArrayList<MiniWeatherSnapshot> miniWeatherSnapshots = new ArrayList<>();
+        SearchView searchLocation = findViewById(R.id.SearchLocation);
+        SwipeRefreshLayout refreshLayout = findViewById(R.id.refreshLayout);
+        RecyclerView recyclerView = findViewById(R.id.LocationRecyclerView);
 
-        LocationAdapter adapter = new LocationAdapter(miniWeatherSnapshots, MainActivity.this);
+        List<WeatherModel> weatherModels = new ArrayList<>();
+
+        LocationAdapter adapter = new LocationAdapter(weatherModels, MainActivity.this);
 
         String finalDeviceLocale = deviceLocale;
 
         refreshLayout.setOnRefreshListener(() -> {
-            updateMiniWeatherListAndAdapter(miniWeatherSnapshots, adapter);
+            updateWeatherListAdapter(weatherModels, adapter);
             refreshLayout.setRefreshing(false);
         });
 
-        updateMiniWeatherListAndAdapter(miniWeatherSnapshots, adapter);
+        updateWeatherListAdapter(weatherModels, adapter);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        adapter.setLanguage(deviceLocale);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-        SearchLocation.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        searchLocation.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 WeatherServiceAPI.getWeatherSnapshot(query, finalDeviceLocale, MainActivity.this, new WeatherServiceAPI.InterfaceWeatherSnapshot() {
-                    @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onResponse(WeatherModel weatherModel) {
-
-                        String title = weatherModel.getLocation();
-                        if (!title.isEmpty()){
-                            WeatherSnapshotDatabase db = WeatherSnapshotDatabase.getInstance(MainActivity.this);
-                            MiniWeatherSnapshot existingMiniWeatherSnapshot = db.locationWeatherSnapshotDAO().getMiniLocationWeatherSnapshotByLocation(weatherModel.getLocation());
-                            if (existingMiniWeatherSnapshot == null){
-                                MiniWeatherSnapshot miniWeatherSnapshot = new MiniWeatherSnapshot(
-                                        weatherModel.getLocation(),
-                                        weatherModel.getWeatherDescription(),
-                                        weatherModel.getMainTemp(),
-                                        weatherModel.getMainTempMin(),
-                                        weatherModel.getMainTempMax());
-
-                                adapter.addNewMiniWeatherSnapshot(miniWeatherSnapshot);
-                                adapter.notifyDataSetChanged();
-                            }
-                            else {
-                                Toast.makeText(MainActivity.this, getResources().getText(R.string.cityAlreadyExists), Toast.LENGTH_LONG).show();
-                            }
+                        if (!weatherModel.getLocation().isEmpty()){
+                            insertSearchedLocation(weatherModel.getLocation(), finalDeviceLocale, MainActivity.this , adapter);
                         }
+                        searchLocation.setQuery("",false);
                     }
 
                     @Override
                     public void onError(String message) {
-                        Toast.makeText(MainActivity.this, message+"", Toast.LENGTH_LONG).show();
+                        showToast(message,1);
                     }
                 });
 
                 return true;
             }
+
             @Override
             public boolean onQueryTextChange(String newText) {
                 return false;
@@ -100,31 +83,95 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    private void updateMiniWeatherListAndAdapter(List<MiniWeatherSnapshot> miniWeatherSnapshots, LocationAdapter adapter){
-        if (miniWeatherSnapshots.size() > 0) {
-            for (MiniWeatherSnapshot miniWeatherSnapshot : miniWeatherSnapshots) {
-                WeatherServiceAPI.getWeatherSnapshot(miniWeatherSnapshot.locationTitle, deviceLocale, this, new WeatherServiceAPI.InterfaceWeatherSnapshot() {
+
+    private void insertSearchedLocation(String location, String locale, Context context, LocationAdapter adapter){
+        WeatherServiceAPI.getWeatherSnapshot(location, locale, context, new WeatherServiceAPI.InterfaceWeatherSnapshot() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onResponse(WeatherModel weatherModel) {
+
+                WeatherSnapshotDatabase database = WeatherSnapshotDatabase.getInstance(MainActivity.this);
+                WeatherModel existingWeatherModel = database.weatherDAO().getWeatherByLocation(location);
+
+                if (existingWeatherModel == null){
+                    WeatherModel newWeatherModel = new WeatherModel(
+                          weatherModel.getLon(),
+                          weatherModel.getLat(),
+                          weatherModel.getWeatherId(),
+                          weatherModel.getWeatherDescription(),
+                          weatherModel.getWeatherIcon(),
+                          weatherModel.getMainTemp(),
+                          weatherModel.getMainTempMin(),
+                          weatherModel.getMainTempMax(),
+                          weatherModel.getMainFeels_like(),
+                          weatherModel.getWindSpeed(),
+                          weatherModel.getWindDeg(),
+                          weatherModel.getSysSunrise(),
+                          weatherModel.getSysSunset(),
+                          weatherModel.getDt(),
+                          weatherModel.getLocation(),
+                          weatherModel.getCountry(),
+                          weatherModel.getPressure(),
+                          weatherModel.getHumidity()
+                    );
+                    adapter.addNewMiniWeatherSnapshot(newWeatherModel);
+                    adapter.notifyDataSetChanged();
+
+                }else{
+                    showToast((String) getResources().getText(R.string.cityAlreadyExists), 1);
+                }
+            }
+
+            @Override
+            public void onError(String message) {
+                showToast(message,1);
+            }
+        });
+
+    }
+
+    private void updateWeatherListAdapter(List<WeatherModel> weatherModels, LocationAdapter adapter){
+        if (weatherModels.size() > 0) {
+            for (WeatherModel weatherModel : weatherModels) {
+                WeatherServiceAPI.getWeatherSnapshot(weatherModel.getLocation(), deviceLocale, this, new WeatherServiceAPI.InterfaceWeatherSnapshot() {
 
                     @Override
                     public void onResponse(WeatherModel weatherModel) {
-                        WeatherSnapshotDatabase db = WeatherSnapshotDatabase.getInstance(MainActivity.this);
-                        MiniWeatherSnapshot miniWeatherSnapshot = new MiniWeatherSnapshot(
-                                weatherModel.getLocation(),
+                        WeatherSnapshotDatabase database = WeatherSnapshotDatabase.getInstance(MainActivity.this);
+                        WeatherModel newWeatherModel = new WeatherModel(
+                                weatherModel.getLon(),
+                                weatherModel.getLat(),
+                                weatherModel.getWeatherId(),
                                 weatherModel.getWeatherDescription(),
+                                weatherModel.getWeatherIcon(),
                                 weatherModel.getMainTemp(),
                                 weatherModel.getMainTempMin(),
-                                weatherModel.getMainTempMax());
-
-                        db.locationWeatherSnapshotDAO().updateMiniWeatherSnapshot(miniWeatherSnapshot);
+                                weatherModel.getMainTempMax(),
+                                weatherModel.getMainFeels_like(),
+                                weatherModel.getWindSpeed(),
+                                weatherModel.getWindDeg(),
+                                weatherModel.getSysSunrise(),
+                                weatherModel.getSysSunset(),
+                                weatherModel.getDt(),
+                                weatherModel.getLocation(),
+                                weatherModel.getCountry(),
+                                weatherModel.getPressure(),
+                                weatherModel.getHumidity()
+                        );
+                        database.weatherDAO().updateWeatherModel(newWeatherModel);
                     }
 
                     @Override
                     public void onError(String message) {
-                        Toast.makeText(MainActivity.this, "Failed to update "+ miniWeatherSnapshot.locationTitle, Toast.LENGTH_SHORT).show();
+                        showToast("Failed to update: "+ weatherModel.getLocation(),0);
                     }
                 });
             }
             adapter.refreshMiniWeatherSnapshotsList();
         }
+    }
+
+    private void showToast(String message, int duration){
+        Toast.makeText(this, message, duration).show();
     }
 }

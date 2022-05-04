@@ -13,33 +13,63 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.FearMyGaze.FarmWeather.R;
-import com.FearMyGaze.FarmWeather.model.MiniWeatherSnapshot;
+import com.FearMyGaze.FarmWeather.model.WeatherModel;
 import com.FearMyGaze.FarmWeather.repository.WeatherSnapshotDatabase;
 import com.FearMyGaze.FarmWeather.view.activities.Locations;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.MyViewHolder> {
-    private final ArrayList<MiniWeatherSnapshot> miniWeatherSnapshots;
+
+    private final List<WeatherModel> weatherModels;
+//    private final ItemClickListener clickListener;
+//    private final ItemOnLongClickListener longClickListener;
+
+
     @SuppressLint("StaticFieldLeak")
     public static Context context;
-    private String language;
 
-    public LocationAdapter(ArrayList<MiniWeatherSnapshot> miniWeatherSnapshots, Context context){
+    public LocationAdapter(List<WeatherModel> weatherModels, Context context){
+        this.weatherModels = weatherModels;
+//        this.clickListener = clickListener;
+//        this.longClickListener = longClickListener;
         LocationAdapter.context = context;
-        this.miniWeatherSnapshots = miniWeatherSnapshots;
-        miniWeatherSnapshots.addAll(WeatherSnapshotDatabase.getInstance(context).locationWeatherSnapshotDAO().getAllLocationWeatherSnapshots());
+        weatherModels.addAll(WeatherSnapshotDatabase.getInstance(context).weatherDAO().getAllWeathers());
     }
 
-    public void setLanguage(String language) {
-        this.language = language;
+    @NonNull
+    @Override
+    public LocationAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View WeatherItemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recyclerview_locations,parent,false);
+        return new MyViewHolder(WeatherItemView);
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public void refreshMiniWeatherSnapshotsList() {
-        miniWeatherSnapshots.clear();
-        miniWeatherSnapshots.addAll(WeatherSnapshotDatabase.getInstance(context).locationWeatherSnapshotDAO().getAllLocationWeatherSnapshots());
-        notifyDataSetChanged();
+    @Override
+    public void onBindViewHolder(@NonNull LocationAdapter.MyViewHolder holder, int position) {
+        String RecyclerLocation = weatherModels.get(position).getLocation();
+        String RecyclerMainTemperature = String.valueOf((int) weatherModels.get(position).getMainTemp());
+        String RecyclerWeatherDescription = weatherModels.get(position).getWeatherDescription();
+        String RecyclerMinTemperature = (int) weatherModels.get(position).getMainTempMin() + "℃";
+        String RecyclerMaxTemperature = (int) weatherModels.get(position).getMainTempMax() + "℃";
+
+        holder.m_RecyclerLocation.setText(RecyclerLocation);
+        holder.m_RecyclerMainTemperature.setText(RecyclerMainTemperature);
+        holder.m_RecyclerWeatherDescription.setText(RecyclerWeatherDescription);
+        holder.m_RecyclerMinMaxTemperature.setText(String.format("%s/%s", RecyclerMinTemperature, RecyclerMaxTemperature));
+
+        holder.m_constraintLayout.setOnClickListener(view -> {
+            Intent intent = new Intent(context, Locations.class);
+            intent.putExtra("location", weatherModels.get(position).getLocation());
+            context.startActivity(intent);
+        });
+
+        holder.m_constraintLayout.setOnLongClickListener(view -> {
+            WeatherSnapshotDatabase.getInstance(context).weatherDAO().deleteWeatherModel(weatherModels.get(position));
+            weatherModels.remove(position);
+            notifyDataSetChanged();
+            return true;
+        });
     }
 
     protected static class MyViewHolder extends RecyclerView.ViewHolder{
@@ -55,49 +85,28 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.MyView
         }
     }
 
-    @NonNull
-    @Override
-    public LocationAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View WeatherItemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recyclerview_locations,parent,false);
-        return new MyViewHolder(WeatherItemView);
+    public interface ItemClickListener{
+        void onClick(LocationAdapter locationAdapter);
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    @Override
-    public void onBindViewHolder(@NonNull LocationAdapter.MyViewHolder holder, int position) {
-        String RecyclerLocation = miniWeatherSnapshots.get(position).locationTitle;
-        String RecyclerMainTemperature = String.valueOf((int) miniWeatherSnapshots.get(position).temp);
-        String RecyclerWeatherDescription = miniWeatherSnapshots.get(position).description;
-        String RecyclerMinTemperature = (int) miniWeatherSnapshots.get(position).min + "℃";
-        String RecyclerMaxTemperature = (int) miniWeatherSnapshots.get(position).max + "℃";
-
-        holder.m_RecyclerLocation.setText(RecyclerLocation);
-        holder.m_RecyclerMainTemperature.setText(RecyclerMainTemperature);
-        holder.m_RecyclerWeatherDescription.setText(RecyclerWeatherDescription);
-        holder.m_RecyclerMinMaxTemperature.setText(String.format("%s/%s", RecyclerMinTemperature, RecyclerMaxTemperature));
-
-        holder.m_constraintLayout.setOnClickListener(view -> {
-            Intent intent = new Intent(context, Locations.class);
-            intent.putExtra("location", miniWeatherSnapshots.get(position).locationTitle);
-            intent.putExtra("language", language);
-            context.startActivity(intent);
-        });
-
-        holder.m_constraintLayout.setOnLongClickListener(view -> {
-            WeatherSnapshotDatabase.getInstance(context).locationWeatherSnapshotDAO().deleteMiniWeatherSnapshot(miniWeatherSnapshots.get(position));
-            miniWeatherSnapshots.remove(position);
-            notifyDataSetChanged();
-            return true;
-        });
+    public interface ItemOnLongClickListener{
+        void onLongClick(LocationAdapter locationAdapter);
     }
 
     @Override
     public int getItemCount() {
-        return miniWeatherSnapshots.size();
+        return weatherModels.size();
     }
 
-    public void addNewMiniWeatherSnapshot(MiniWeatherSnapshot miniWeatherSnapshot){
-        WeatherSnapshotDatabase.getInstance(context).locationWeatherSnapshotDAO().insertNewMiniWeatherSnapshot(miniWeatherSnapshot);
-        miniWeatherSnapshots.add(miniWeatherSnapshot);
+    @SuppressLint("NotifyDataSetChanged")
+    public void refreshMiniWeatherSnapshotsList() {
+        weatherModels.clear();
+        weatherModels.addAll(WeatherSnapshotDatabase.getInstance(context).weatherDAO().getAllWeathers());
+        notifyDataSetChanged();
+    }
+
+    public void addNewMiniWeatherSnapshot(WeatherModel weatherModel){
+        WeatherSnapshotDatabase.getInstance(context).weatherDAO().insertWeatherModel(weatherModel);
+        weatherModels.add(weatherModel);
     }
 }
