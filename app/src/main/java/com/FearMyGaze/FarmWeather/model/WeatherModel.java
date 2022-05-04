@@ -1,45 +1,92 @@
 package com.FearMyGaze.FarmWeather.model;
 
-public class WeatherSnapshot {
-    private final double coordLon;
-    private final double coordLat;
-    private final int weatherId;
-    private final String weatherDescription;
-    private final String weatherIcon;
-    private final double mainTemp;
-    private final double mainTempMin;
-    private final double mainTempMax;
-    private final double mainFeels_like;
-    private final double windSpeed;
-    private final int windDeg;
-    private final long sysSunrise;
-    private final long sysSunset;
-    private final long dt;
-    private final String address;
-    private final String country;
-    private final long pressure;
-    private String airQuality;
-    private double humidity;
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-    public WeatherSnapshot(double coordLon,
-                           double coordLat,
-                           int weatherId,
-                           String weatherDescription,
-                           String weatherIcon,
-                           double mainTemp,
-                           double mainTempMin,
-                           double mainTempMax,
-                           double mainFeels_like,
-                           double windSpeed,
-                           int windDeg,
-                           long sysSunrise,
-                           long sysSunset,
-                           long dt,
-                           String address,
-                           String country,
-                           long pressure, double humidity) {
-        this.coordLon = coordLon;
-        this.coordLat = coordLat;
+@Entity(tableName = "weather")
+public class WeatherModel {
+
+    @ColumnInfo(name = "lon")
+    private final double lon;
+
+    @ColumnInfo(name = "lat")
+    private final double lat;
+
+    @ColumnInfo(name = "weatherId")
+    private final int weatherId;
+
+    @ColumnInfo(name = "weatherDescription")
+    private final String weatherDescription;
+
+    @ColumnInfo(name = "weatherIcon")
+    private final String weatherIcon;
+
+    @ColumnInfo(name = "mainTemp")
+    private final double mainTemp;
+
+    @ColumnInfo(name = "mainTempMin")
+    private final double mainTempMin;
+
+    @ColumnInfo(name = "mainTempMax")
+    private final double mainTempMax;
+
+    @ColumnInfo(name = "mainFeels_like")
+    private final double mainFeels_like;
+
+    @ColumnInfo(name = "windSpeed")
+    private final double windSpeed;
+
+    @ColumnInfo(name = "windDeg")
+    private final int windDeg;
+
+    @ColumnInfo(name = "sysSunrise")
+    private final long sysSunrise;
+
+    @ColumnInfo(name = "sysSunset")
+    private final long sysSunset;
+
+    @ColumnInfo(name = "dt")
+    private final long dt;
+
+    @NonNull
+    @PrimaryKey
+    @ColumnInfo(name = "location")
+    private final String location;
+
+    @ColumnInfo(name = "country")
+    private final String country;
+
+    @ColumnInfo(name = "pressure")
+    private final long pressure;
+
+    @ColumnInfo(name = "airQuality")
+    private String airQuality;
+
+    @ColumnInfo(name = "humidity")
+    private final double humidity;
+
+    public WeatherModel(double lon,
+                        double lat,
+                        int weatherId,
+                        String weatherDescription,
+                        String weatherIcon,
+                        double mainTemp,
+                        double mainTempMin,
+                        double mainTempMax,
+                        double mainFeels_like,
+                        double windSpeed,
+                        int windDeg,
+                        long sysSunrise,
+                        long sysSunset,
+                        long dt,
+                        @NonNull String location,
+                        String country,
+                        long pressure,
+                        double humidity) {
+        this.lon = lon;
+        this.lat = lat;
         this.weatherId = weatherId;
         this.weatherDescription = weatherDescription;
         this.weatherIcon = weatherIcon;
@@ -52,7 +99,7 @@ public class WeatherSnapshot {
         this.sysSunrise = sysSunrise;
         this.sysSunset = sysSunset;
         this.dt = dt;
-        this.address = address;
+        this.location = location;
         this.country = country;
         this.pressure = pressure;
         this.humidity = humidity;
@@ -62,12 +109,12 @@ public class WeatherSnapshot {
         this.airQuality = airQuality;
     }
 
-    public double getCoordLon() {
-        return coordLon;
+    public double getLon() {
+        return lon;
     }
 
-    public double getCoordLat() {
-        return coordLat;
+    public double getLat() {
+        return lat;
     }
 
     public int getWeatherId() {
@@ -118,8 +165,9 @@ public class WeatherSnapshot {
         return dt;
     }
 
-    public String getAddress() {
-        return address;
+    @NonNull
+    public String getLocation() {
+        return location;
     }
 
     public String getCountry() {

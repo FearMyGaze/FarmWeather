@@ -3,15 +3,16 @@ package com.FearMyGaze.FarmWeather.service;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
-import com.FearMyGaze.FarmWeather.model.WeatherSnapshot;
-import com.FearMyGaze.FarmWeather.model.WeatherSnapshotSingletonRequest;
+import com.FearMyGaze.FarmWeather.R;
+import com.FearMyGaze.FarmWeather.model.RequestSingleton;
+import com.FearMyGaze.FarmWeather.model.WeatherModel;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class WeatherSnapshotServiceAPI {
+public class WeatherServiceAPI {
 
 
     private static final String Location_URL ="https://api.openweathermap.org/data/2.5/weather?q=";
@@ -29,25 +30,26 @@ public class WeatherSnapshotServiceAPI {
 
 
     public interface InterfaceWeatherSnapshot {
-        void onResponse(WeatherSnapshot weatherSnapshot);
+        void onResponse(WeatherModel weatherModel);
         void onError(String message);
     }
 
     public static void getWeatherSnapshot(String location ,  String language , Context context , InterfaceWeatherSnapshot interfaceWeatherSnapshotCall) {
-        WeatherSnapshotServiceAPI.context = context;
+        WeatherServiceAPI.context = context;
         String url;
         url = Location_URL + location.trim() + Language_URL + language.trim() + Measurement_URL + Measurement + API_URL + API_KEY;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, response -> {
 
                     try {
-                        WeatherSnapshot weatherSnapshot;
+                        WeatherModel weatherModel;
                         JSONObject coord = response.getJSONObject("coord");
                         JSONObject weather = response.getJSONArray("weather").getJSONObject(0);
                         JSONObject main = response.getJSONObject("main");
                         JSONObject wind = response.getJSONObject("wind");
                         JSONObject sys = response.getJSONObject("sys");
-                        weatherSnapshot = new WeatherSnapshot(
+
+                        weatherModel = new WeatherModel(
                                 coord.getDouble("lon"),
                                 coord.getDouble("lat"),
                                 weather.getInt("id"),
@@ -67,26 +69,23 @@ public class WeatherSnapshotServiceAPI {
                                 main.getLong("pressure"),
                                 main.getDouble("humidity"));
 
-                        AirQualityServiceAPI.getAirQualitySnapshot(weatherSnapshot.getCoordLat(), weatherSnapshot.getCoordLon(), API_KEY, context, new AirQualityServiceAPI.InterfaceAirQualitySnapshot() {
+                        AirQualityServiceAPI.getAirQualitySnapshot(weatherModel.getLat(), weatherModel.getLon(), API_KEY, context, new AirQualityServiceAPI.InterfaceAirQualitySnapshot() {
                             @Override
                             public void onResponse(String result) {
-                                weatherSnapshot.setAirQuality(result);
-                                interfaceWeatherSnapshotCall.onResponse(weatherSnapshot);
+                                weatherModel.setAirQuality(result);
+                                interfaceWeatherSnapshotCall.onResponse(weatherModel);
                             }
-
                             @Override
                             public void onError(String Message) {
                                 interfaceWeatherSnapshotCall.onError(Message);
                             }
                         });
                     } catch (JSONException e) {
-                        interfaceWeatherSnapshotCall.onError(" "+e);
+                        interfaceWeatherSnapshotCall.onError(e.getMessage());
                     }
-                }, error -> {
-                    interfaceWeatherSnapshotCall.onError(" "+error);
-                });
+                }, error -> interfaceWeatherSnapshotCall.onError(context.getString(R.string.cityNotFound)));
 
-        WeatherSnapshotSingletonRequest.getInstance(context).addToRequestQueue(jsonObjectRequest);
+        RequestSingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
 
 }

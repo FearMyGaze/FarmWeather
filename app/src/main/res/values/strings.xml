@@ -1,9 +1,15 @@
 <resources>
     <string name="app_name">FarmWeather</string>
 
+    <!-- Main Activity -->
     <string name="EnterLocation">Enter Location</string>
     <string name="ManageCities">Manage Cities</string>
 
+    <!-- Error messages -->
+    <string name="cityAlreadyExists">City already exists</string>
+    <string name="cityNotFound">Location Not Found</string>
+
+    <!-- Locations Activity -->
     <string name="sunrise">Sunrise</string>
     <string name="sunset">Sunset</string>
     <string name="air">Wind</string>
@@ -15,4 +21,29 @@
     <string name="real_feel">Real feel</string>
     <string name="temp_min">Minimum</string>
     <string name="temp_max">Maximum</string>
+
+    <!-- Icon's by icons8.com -->
+    <string name="icons8Link" translatable="false">All icons by Icons8</string>
+
+    <!-- Air Quality Values -->
+    <string name="airQuality1">Good</string>
+    <string name="airQuality2">Fair</string>
+    <string name="airQuality3">Moderate</string>
+    <string name="airQuality4">Poor</string>
+    <string name="airQuality5">Very Poor</string>
+
+    <!-- Wind Directions -->
+    <string-array name="windDirection">
+        <item>N</item>
+        <item>NE</item>
+        <item>E</item>
+        <item>SE</item>
+        <item>S</item>
+        <item>SW</item>
+        <item>W</item>
+        <item>NW</item>
+        <item>N</item>
+    </string-array>
+
+
 </resources>

@@ -3,7 +3,7 @@ package com.FearMyGaze.FarmWeather.service;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
-import com.FearMyGaze.FarmWeather.model.WeatherSnapshotSingletonRequest;
+import com.FearMyGaze.FarmWeather.model.RequestSingleton;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 
@@ -19,7 +19,6 @@ public class AirQualityServiceAPI {
     private static Context context;
 
     public interface InterfaceAirQualitySnapshot{
-
         void onResponse(String result);
         void onError(String Message);
     }
@@ -32,9 +31,9 @@ public class AirQualityServiceAPI {
             try {
                 interfaceAirQualitySnapshot.onResponse(response.getJSONArray("list").getJSONObject(0).getJSONObject("main").getString("aqi"));
             } catch (JSONException e) {
-                interfaceAirQualitySnapshot.onError(" "+e);
+                interfaceAirQualitySnapshot.onError(e.getMessage());
             }
         }, error -> interfaceAirQualitySnapshot.onError(" "+error));
-        WeatherSnapshotSingletonRequest.getInstance(context).addToRequestQueue(jsonObjectRequest);
+        RequestSingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
 }

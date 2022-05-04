@@ -2,9 +2,15 @@
 <resources>
     <string name="app_name">FarmWeather</string>
 
+    <!-- Main Activity -->
     <string name="EnterLocation">Τοποθέτησε τοποθεσία</string>
     <string name="ManageCities">Διαχείριση πόλεων</string>
 
+    <!-- Error messages -->
+    <string name="cityAlreadyExists">Η πόλη υπάρχει ήδη</string>
+    <string name="cityNotFound">Η τοποθεσία δεν βρέθηκε</string>
+
+    <!-- Locations Activity -->
     <string name="sunrise">Ανατολή</string>
     <string name="sunset">Δύση</string>
     <string name="air">Αέρας</string>
@@ -17,4 +23,23 @@
     <string name="temp_min">Ελάχιστη</string>
     <string name="temp_max">Μέγιστη</string>
 
+    <!-- Air Quality Values -->
+    <string name="airQuality1">Πολύ Καλή</string>
+    <string name="airQuality2">Καλής</string>
+    <string name="airQuality3">Μέτριας</string>
+    <string name="airQuality4">Κακής</string>
+    <string name="airQuality5">Πολύ κακής</string>
+
+    <!-- Wind Directions -->
+    <string-array name="windDirection">
+        <item>Β</item>
+        <item>ΒΑ</item>
+        <item>Α</item>
+        <item>ΝΑ</item>
+        <item>Ν</item>
+        <item>ΝΔ</item>
+        <item>Δ</item>
+        <item>ΒΔ</item>
+        <item>Β</item>
+    </string-array>
 </resources>
