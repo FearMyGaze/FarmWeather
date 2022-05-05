@@ -1,7 +1,12 @@
 package com.FearMyGaze.FarmWeather.view.activities;
 
 import android.annotation.SuppressLint;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +18,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.FearMyGaze.FarmWeather.R;
 import com.FearMyGaze.FarmWeather.model.WeatherModel;
 import com.FearMyGaze.FarmWeather.repository.WeatherSnapshotDatabase;
+import com.FearMyGaze.FarmWeather.service.BackgroundService;
 import com.FearMyGaze.FarmWeather.service.WeatherServiceAPI;
 import com.FearMyGaze.FarmWeather.view.adapter.LocationAdapter;
 
@@ -48,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
             refreshLayout.setRefreshing(false);
         });
 
-        updateWeatherListAdapter(weatherModels, adapter);
+        scheduleJob();
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -98,11 +104,13 @@ public class MainActivity extends AppCompatActivity {
         if (weatherModels.size() > 0) {
             WeatherSnapshotDatabase database = WeatherSnapshotDatabase.getInstance(MainActivity.this);
             for (WeatherModel weatherModel : weatherModels) {
+                System.out.println("Old"+weatherModel.toString());
                 WeatherServiceAPI.getWeatherSnapshot(weatherModel.getLocation(), deviceLocale, this, new WeatherServiceAPI.InterfaceWeatherSnapshot() {
 
                     @Override
                     public void onResponse(WeatherModel weatherModel) {
                         database.weatherDAO().updateWeatherModel(weatherModel);
+                        System.out.println("New"+weatherModel.toString());
                     }
 
                     @Override
@@ -113,6 +121,21 @@ public class MainActivity extends AppCompatActivity {
             }
             adapter.refreshMiniWeatherSnapshotsList();
         }
+    }
+
+    private void scheduleJob(){
+        showToast("Started",1);
+        ComponentName componentName = new ComponentName(this, BackgroundService.class);
+        JobInfo info = new JobInfo.Builder(69420, componentName)
+                .setRequiresCharging(false)
+                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
+                .setPersisted(true)
+                .setPeriodic(300000) //3600000
+                .build();
+        JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+        int resultCode = scheduler.schedule(info);
+        if (resultCode != JobScheduler.RESULT_SUCCESS)
+            Log.d("Job","Failed");
     }
 
     private void showToast(String message, int duration){

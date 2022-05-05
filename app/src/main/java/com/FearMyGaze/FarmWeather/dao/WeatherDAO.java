@@ -19,18 +19,6 @@ public interface WeatherDAO {
     @Query("SELECT * FROM weather WHERE location = :location")
     WeatherModel getWeatherByLocation(String location);
 
-    @Query("SELECT * FROM weather WHERE weatherId = :weatherId")
-    WeatherModel getWeatherByWeatherId(int weatherId);
-
-    @Query("SELECT * FROM weather WHERE mainTemp = :mainTemp")
-    WeatherModel getWeatherByMainTemp(double mainTemp);
-
-    @Query("SELECT * FROM weather WHERE windSpeed = :windSpeed")
-    WeatherModel getWeatherByWindSpeed(double windSpeed);
-
-    @Query("SELECT * FROM weather WHERE dt = :dt")
-    WeatherModel getWeatherByDT(long dt);
-
     @Insert
     void insertWeatherModel(WeatherModel weatherModel);
 

@@ -12,7 +12,7 @@ import com.FearMyGaze.FarmWeather.model.WeatherModel;
 @Database(entities = {WeatherModel.class}, version = 1, exportSchema = false)
 public abstract class WeatherSnapshotDatabase extends RoomDatabase {
 
-    public abstract WeatherDAO weatherDAO(); //TODO: Change it to WeatherDAO
+    public abstract WeatherDAO weatherDAO();
     private static WeatherSnapshotDatabase INSTANCE;
 
     public static WeatherSnapshotDatabase getInstance(Context context) {

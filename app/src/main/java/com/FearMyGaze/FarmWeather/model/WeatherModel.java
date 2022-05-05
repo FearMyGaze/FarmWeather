@@ -185,4 +185,29 @@ public class WeatherModel {
     public double getHumidity() {
         return humidity;
     }
+
+    @Override
+    public String toString() {
+        return "WeatherModel{" +
+                "lon=" + lon +
+                ", lat=" + lat +
+                ", weatherId=" + weatherId +
+                ", weatherDescription='" + weatherDescription + '\'' +
+                ", weatherIcon='" + weatherIcon + '\'' +
+                ", mainTemp=" + mainTemp +
+                ", mainTempMin=" + mainTempMin +
+                ", mainTempMax=" + mainTempMax +
+                ", mainFeels_like=" + mainFeels_like +
+                ", windSpeed=" + windSpeed +
+                ", windDeg=" + windDeg +
+                ", sysSunrise=" + sysSunrise +
+                ", sysSunset=" + sysSunset +
+                ", dt=" + dt +
+                ", location='" + location + '\'' +
+                ", country='" + country + '\'' +
+                ", pressure=" + pressure +
+                ", airQuality='" + airQuality + '\'' +
+                ", humidity=" + humidity +
+                '}';
+    }
 }
